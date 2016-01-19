@@ -1,0 +1,22 @@
+<div class="row ">
+	<div class="col-md-4 col-lg-3 available-services">
+		<div class="profile-panel clearfix">
+			<div class="icon pull-left"><a href="#/account-summary"><img src="images/back-arrow.png"></a></div>
+			<div class="middle">
+				<div class="title">Available Services</div>
+				<div class="sub-title">Choose the most relevant options from <br/>those below.</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="service-item-container" ng-repeat="item in serviceData.services">
+				<div class="service-item" ng-click="serviceData.services[$index].selected = !serviceData.services[$index].selected" ng-class="{'service-item-selected': item.selected}">
+					<div class="text">{{item.name}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8 col-lg-9 text-center" ng-show="dashboard">
+	  <dashboard></dashboard>
+	</div>
+</div>
+

@@ -1,0 +1,25 @@
+<div class="service-info-popup" ng-show="servicePopup.show">
+	<div class="box">
+		<div class="title" ng-style="servicePopup.color"> 
+			<img ng-click="servicePopup.show = !servicePopup.show" class="pull-right" src="images/close.png">
+			<span>{{servicePopup.title}}</span>
+		</div>
+		<div class="content"><p>{{servicePopup.content}}</p></div>
+	</div>
+</div>
+<div class="row ">
+	<div class="col-md-4 col-lg-3 panel-shadow">
+	  	<signinpanel></signinpanel>
+	  	<div class="scroll-frame chat-window" scroll-glue>
+		  	<h1>How can we help you?</h1>
+		  	<h2>We can work through anything.</h2>
+		  	<div class="chat-frame clearfix" id="chat-frame">
+			  	<label class="sr-only chat-input" for="userInput">User input</label>
+		    	<input type="text" class="form-control chat-input" id="userInput" placeholder=". . ." ng-keydown="checkSubmit($event)" ng-model="inputText">
+		  	</div>
+	  	</div>
+	</div>
+	<div class="col-md-8 col-lg-9" ng-show="dashboard">
+	  <dashboard></dashboard>
+	</div>
+</div>

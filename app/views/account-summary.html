@@ -1,0 +1,84 @@
+<div class="row ">
+	<div class="col-md-4 col-lg-3 account-summary">
+		<div class="profile-panel clearfix">
+			<div class="icon pull-left"><a href="#/chat"><img src="images/back-arrow-white.png"></a></div>
+			<div class="middle">
+				<div class="image"><img src="images/camera.png"></div>
+				<div class="name">John Harris<span>Caboolture, QLD</span></div>
+			</div>
+			<div class="edit-white">EDIT</div>
+		</div>
+		<div class="account-padding">
+			<div class="listed-services">
+				<div class="no-services" ng-hide="hasServices">
+					<div>Connected Services</div>
+					<p>You can connect to services so we can help you out faster when you need it.</p>
+					<a href="#/available-survices"><button class="btn btn-default btn-have-look">HAVE A LOOK</button></a>
+				</div>
+				<div class="services" ng-show="hasServices">
+					<div class="service-item clearfix" ng-repeat="item in selectedServices">
+						<div class="title">{{item.name}}</div>
+						<div class="department">{{item.department}}</div>
+					</div>
+					<div class="clearfix" ng-click="connectClick()">
+						<div class="connect-btn">Connect to more <img src="images/chevron-right.png"></div>
+					</div>
+				</div>
+				
+			</div>
+		
+
+			
+			<div class="detail-panel">
+				<div class="detail-panel-padding">
+					<div class="title">Contact details</div>
+					<div class="edit">EDIT</div>
+					<div class="content clearfix">
+						<div class="">
+							<div class="field-name">Email</div>
+							<div class="field-values">john.harris@gmail.com</div>
+						</div>
+						<div>
+							<div class="field-name">Phone</div>
+							<div class="field-values">+61 0407 957 678</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="detail-panel">
+				<div class="detail-panel-padding">
+					<div class="title">Address</div>
+					<div class="edit">EDIT</div>
+					<div class="content">
+						<div>
+							<div class="field-name" style="height:70px">Primary</div>
+							<div class="field-values">Unit 5<br/>123 Moon Cres<br/>Caboolture, 4150</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="detail-panel">
+				<div class="detail-panel-padding">
+					<div class="title">Password</div>
+					<div class="edit">EDIT</div>
+					<div class="content">
+						<div>
+							<div class="field-name">Password</div>
+							<div class="field-values">••••••••••••</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<div class="privacy" ng-show="hasServices">
+				<div class="clearfix" ng-click="privacyClick()">
+					<div class="privacy-btn">Privacy <img src="images/chevron-right.png"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8 col-lg-9 text-center" ng-show="dashboard">
+	  <dashboard></dashboard>
+	</div>
+</div>
+

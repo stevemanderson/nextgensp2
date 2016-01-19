@@ -1,0 +1,27 @@
+<div class="row ">
+	<div class="col-md-4 col-lg-3 available-services">
+		<div class="profile-panel clearfix">
+			<div class="icon pull-left"><a href="#/account-summary"><img src="images/back-arrow.png"></a></div>
+			<div class="middle">
+				<div class="title">Privacy</div>
+				<div class="sub-title">You have complete control over your <br/>digital identity. Manage what services <br/>can see or use.</div>
+			</div>
+		</div>
+		<div class="share-info clearfix">
+			<div>Share my information</div> 
+			<button class="btn privacy-toggle pull-right" ng-click="shareClick()" >
+				<span ng-hide="dataSharingOn">ON</span>
+				<span ng-show="dataSharingOn">OFF</span>
+			</button>
+		</div>
+		<div class="privacy-container">
+			<div class="privacy-item clearfix" ng-repeat="item in selectedServices" ng-click="selectedServices[$index].shareInfo = !selectedServices[$index].shareInfo" ng-class="{'active':selectedServices[$index].shareInfo}">
+				<img src="images/tick.png" ng-show="selectedServices[$index].shareInfo"><span class="title">{{item.name}}</span>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8 col-lg-9" ng-show="dashboard">
+	  <dashboard></dashboard>
+	</div>
+</div>
+
