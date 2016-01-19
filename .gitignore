@@ -3,3 +3,5 @@
 .tmp
 *.sublime-project
 *sublime-workspace
+src/dist
+.vagrant
