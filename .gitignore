@@ -3,6 +3,7 @@
 **/dist
 .tmp
 *.sublime-project
+*.pyc
 *sublime-workspace
 src/dist
 .vagrant
