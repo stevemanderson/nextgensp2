@@ -35,6 +35,16 @@ class Tree:
         for n in node.children:
             self.searchRecur(n, id, result)
 
+    def flattenTree(self):
+        result = []
+        self.flattenTreeRecur(self.root, result)
+        return result
+
+    def flattenTreeRecur(self, node, result):
+        result.append(node)
+        for n in node.children:
+            self.flattenTreeRecur(n, result)
+
 class Node:
     def __init__(self, pid, id, title, type):
         self.parent = None
