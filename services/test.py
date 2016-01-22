@@ -1,4 +1,12 @@
-from api.models import DrupalDataContext
+from api.models import DrupalDataContext, Handler
+import json
+
+h = Handler()
+result = h.submitAnswer(22, 21, '')
+print json.dumps(result)
+
+exit()
+
 from services.settings import DRUPAL_API
 from api.tree import Tree
 import time

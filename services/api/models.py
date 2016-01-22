@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from tree import Node
+from services.settings import DRUPAL_API
 
 import requests
 import json
@@ -57,3 +58,30 @@ class DrupalDataContext:
         r = requests.get(u, data=d)
         DrupalDataContext.responseData = json.loads(r.text)
         return DrupalDataContext.responseData
+
+class Handler:
+    def getFirstQuery(self, answer):
+        for n in answer['children']:
+            if n['type'] == 'query':
+                return n
+        return None
+
+    def submitAnswer(self, id, pid, value):
+        context = DrupalDataContext(DRUPAL_API)
+        answer = context.getById(id)
+        query = self.getFirstQuery(answer)
+        result = {}
+        if query == None: return result
+
+        result['id'] = query['id']
+        result['title'] = query['title']
+        result['children'] = []
+
+        for n in query['children']:
+            obj = {}
+            obj['id'] = n['id']
+            obj['title'] = n['title']
+            obj['type'] = n['type']
+            result['children'].append(obj)
+
+        return result
