@@ -1,17 +1,11 @@
-import json
-from services.settings import DRUPAL_API
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
 from models import DrupalDataContext
+from rest_framework.decorators import api_view
+from rest_framework import status
+from rest_framework.response import Response
 
-def index(request):
-    data = {
-        "title":"Some tree",
-        "answers": [
-            {"title":"some answer"}
-        ]
-    }
-    return JsonResponse(data)
-
+@api_view(['POST'])
 def responses(request):
-    return JsonResponse({'title':'something else'})
+    pid = request.data['pid']
+    id = request.data['id']
+    aid = request.data['aid']
+    return Response('{"pid":'+pid+',"id":'+id+',"aid":'+aid+'}')
