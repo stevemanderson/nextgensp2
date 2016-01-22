@@ -1,7 +1,9 @@
 **/bower_components
 **/node_modules
+**/dist
 .tmp
 *.sublime-project
+*.pyc
 *sublime-workspace
 src/dist
 .vagrant
