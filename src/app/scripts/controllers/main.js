@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name sprintOneApp.controller:MainCtrl
+ * @name nextgensp2.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the sprintOneApp
+ * Controller of the nextgensp2
  */
-angular.module('sprintOneApp')
+angular.module('nextgensp2')
   .controller('MainCtrl', function (appService) {
 
   });

@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name sprintOneApp.controller:AutocompleteCtrl
+ * @name nextgensp2.controller:AutocompleteCtrl
  * @description
  * # AutocompleteCtrl
- * Controller of the sprintOneApp
+ * Controller of the nextgensp2
  */
-angular.module('sprintOneApp')
+angular.module('nextgensp2')
   .controller('AutoCompleteCtrl', function ($timeout, appService) {
     
-    console.log("AutoCompleteCtrl >> "+appService.getServicesData());
+    //console.log("AutoCompleteCtrl >> "+appService.getServicesData());
   });

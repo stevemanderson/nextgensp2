@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name sprintOneApp
+ * @name nextgensp2
  * @description
- * # sprintOneApp
+ * # nextgensp2
  *
  * Main module of the application.
  */
 angular
-  .module('sprintOneApp', [
+  .module('nextgensp2', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
@@ -19,7 +19,9 @@ angular
     'ngMap',
     'slick',
     'luegg.directives',
-    'masonry'
+    'masonry',
+    'angularUUID2',
+    'google.places'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -47,6 +49,10 @@ angular
         templateUrl: 'views/account-privacy.html',
         controller: 'AccountSummaryCtrl',
         controllerAs: 'accountsummary'
+      })
+      .when('/sprint2', {
+        templateUrl: 'views/sprint2.html',
+        controller: 'Sprint2Ctrl'
       })
       
       .otherwise({

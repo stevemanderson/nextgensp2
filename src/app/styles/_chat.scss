@@ -1,0 +1,369 @@
+//Chat styles
+
+.scroll-frame{
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  height: 100%;
+
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+.scroll-frame::-webkit-scrollbar { 
+  display: none; 
+}
+
+//OLD Modules
+// Remove for Sprint 2
+.chat-frame{
+	width:100%;
+	padding:50px 0 0 0;
+
+  	.chat-block{
+	    width: 100%;
+	    clear: both;
+	    margin-top: $chat-margin;
+	    float: left;
+	    &:after {
+	      content: "";
+	      display: table;
+	      clear: both;
+	    }
+  	}
+	.slider-width{
+		width: 170%;
+	}
+
+	.chat-bubble{
+		background-color:$brand-blue-lighter;
+		width:80%;
+		padding:$box-padding;
+		margin-top: $chat-margin;
+		float: left;
+		color:$brand-blue-bright;
+    	border-radius:4px;
+    	font-size:16px;
+	    a{
+	      text-decoration: underline;
+	      font-weight: $weight-bold;
+	    }
+	}
+	.chat-bubble-user{
+		background-color:$brand-lighter;
+		float: right;
+		color:black;
+	}
+	.chat-think{
+		margin-top: $chat-margin;
+		float: left;
+		border-radius: 3px;
+		background-color:white;
+		width:70px;
+	    height:50px;
+	    background-color:$brand-blue-lighter;
+	    border-radius:25px;
+	    padding-top:11px;
+		@extend .box-border;
+	}
+	
+	
+}
+
+
+/////////////////////////////
+//Sprint 2 
+////////////////////////////
+.top-bar{
+	height:40px;
+	text-align:center;
+	padding-top:12px;
+	background-color:black;
+	p{
+		color:white;
+		font-size: 12px;
+	}
+	strong{
+		text-transform: uppercase;
+	}
+	a{
+		color:white;
+		text-decoration: underline;
+	}
+}
+.chat-input{
+	width: 80%;
+	@extend .box-border;
+    background-color:$brand-grey-light;
+    box-shadow:none;
+    font-size:20px;
+    color:$brand-blue;
+    margin: 10px auto;
+    height: 60px;
+}
+
+// Chat Modules
+.chat-module{
+	border-top: 1px solid #f5f5f5; 
+	border-bottom: 1px solid #f5f5f5;
+	font-size:20px;
+	padding-top:40px;
+	padding-bottom:40px;
+
+	.avatar{
+		position:absolute;
+		left:0;
+	}
+	section{
+		margin-left:18px;
+	}
+	a{
+		color:#6c737a;
+		font-size: 12px;
+		font-weight: $weight-bold;
+		text-decoration: underline;
+	}
+	.module-title{
+		font-size: 10px;
+		font-weight: $weight-bold;
+	}
+}
+
+//Chat free text
+.chat-free-text{
+
+}
+
+//Chat single choice
+.chat-single-choice{
+	ul{
+		list-style-type: none;
+		li{
+			border:1px solid #eeeeee;
+			border-radius:3px;
+			float:left;
+			height: 110px;
+			width:140px;
+			padding-top:70px;
+			margin: 5px;
+			text-align: center;
+			font-weight: $weight-bold;
+			font-size: 12px;
+			&:hover,
+			&.active{
+				background-color: #fafafa;
+			}
+
+		}
+
+	}
+}
+
+// Chat location
+.chat-location{
+	.map{
+	  height: 200px;
+	}
+}
+
+// Chat resources
+.chat-resources{
+	ul{
+		padding:0;
+		list-style-type: none;
+		li{
+			float:left;			
+			padding-top:30px;
+			margin: 5px;
+			text-align: left;
+			font-weight: $weight-bold;
+			font-size: 12px;
+			
+			.box{
+				border:1px solid #eeeeee;
+				border-radius:3px;
+				height: 180px;
+				width:210px;
+			}
+			.title{
+				font-size: 16px;
+				font-weight: $weight-normal;
+				color: #1a1a1a;
+			}
+			.type{
+				font-size: 12px;
+				font-weight: $weight-normal;
+				color:#6c737a;
+			}
+		} 
+	}
+}
+
+// Chat multiple choice
+.chat-multiple-choice{
+	ul{
+		padding:0;
+		list-style-type: none;
+		li{
+			float:left;			
+			padding-top:30px;
+			margin: 5px;
+			text-align: center;
+			font-weight: $weight-bold;
+			font-size: 12px;
+			
+			.box{
+				background-color: #d1d1d1;
+				border-radius:3px;
+				height: 32px;
+				width: 32px;
+				margin: 0 auto;
+				margin-bottom:10px;
+			}
+			.title{
+				font-size: 12px;
+				font-weight: $weight-normal;
+				color: #1a1a1a;
+			}
+
+			&:hover,
+			&.active{
+				.box{
+					background-color: #1a1a1a;
+				}
+			}
+		} 
+	}
+}
+
+// Chat multiple choice
+.chat-summary{
+	background-color:black;
+
+}
+
+// Thinking Icon
+@-webkit-keyframes loader {
+    19% {
+        bottom: 0;
+        -webkit-transform: scale(1.25, 0.25);
+        transform: scale(1.25, 0.25)
+    }
+    30% {
+        -webkit-transform: scale(0.8, 1.15);
+        transform: scale(0.8, 1.15)
+    }
+    49% {
+        bottom: 27px
+    }
+    51% {
+        bottom: 25.65px
+    }
+    52% {
+        bottom: 22.95px
+    }
+    60% {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1)
+    }
+    66% {
+        bottom: 0
+    }
+    68% {
+        -webkit-transform: scale(1.5, 0.25);
+        transform: scale(1.5, 0.25)
+    }
+    90% {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1)
+    }
+}
+@keyframes loader {
+    19% {
+        bottom: 0;
+        -webkit-transform: scale(1.25, 0.25);
+        transform: scale(1.25, 0.25)
+    }
+    30% {
+        -webkit-transform: scale(0.8, 1.15);
+        transform: scale(0.8, 1.15)
+    }
+    49% {
+        bottom: 27px
+    }
+    51% {
+        bottom: 25.65px
+    }
+    52% {
+        bottom: 22.95px
+    }
+    60% {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1)
+    }
+    66% {
+        bottom: 0
+    }
+    68% {
+        -webkit-transform: scale(1.5, 0.25);
+        transform: scale(1.5, 0.25)
+    }
+    90% {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1)
+    }
+}
+
+.is-thinking .thinking-icon {
+	opacity: 1;
+}
+
+.thinking-icon {
+	margin: 0 auto;
+	padding:0;
+	width:40px;
+	opacity: 0;
+	-webkit-transition: opacity 400ms cubic-bezier(0.250, 0.460, 0.450, 0.940); 
+       -moz-transition: opacity 400ms cubic-bezier(0.250, 0.460, 0.450, 0.940); 
+           	transition: opacity 400ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+
+    li {
+	    position: relative;
+	    width: 8px;
+	    height: 39px;
+	    display: inline-block;
+	    margin-left: 2px;
+	}
+	li:first-child {
+	    margin-left: 0
+	}
+	li div {
+	    position: absolute;
+	    bottom: 0;
+	    left: 0;
+	    width: 8px;
+	    height: 8px;
+	    background: #333;
+	    -webkit-border-radius: 12px;
+	    -webkit-animation: loader 2s infinite;
+	    animation: loader 2s infinite;
+	    -webkit-transform-origin: 50% bottom;
+	    transform-origin: 50% bottom
+	}
+	li:nth-child(2) div {
+	    -webkit-animation-delay: 0.08s;
+	    animation-delay: 0.08s
+	}
+	li:nth-child(3) div {
+	    -webkit-animation-delay: 0.16s;
+	    animation-delay: 0.16s
+	}
+	li:nth-child(4) div {
+	    -webkit-animation-delay: 0.24s;
+	    animation-delay: 0.24s; 
+	}
+}
+ 	 
+		
+
+
+

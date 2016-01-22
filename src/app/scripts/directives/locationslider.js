@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name sprintOneApp.directive:locationslider
+ * @name nextgensp2.directive:locationslider
  * @description
  * # locationslider
  */
-angular.module('sprintOneApp')
+angular.module('nextgensp2')
   .directive('locationslider', function () {
     return {
 		restrict: 'E',

@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name sprintOneApp.directive:locationbox
+ * @name nextgensp2.directive:locationbox
  * @description
  * # locationbox
  */
-angular.module('sprintOneApp')
+angular.module('nextgensp2')
   .directive('locationbox', function () {
     return {
 		restrict: 'E',

@@ -3,17 +3,34 @@
 
 /**
  * @ngdoc service
- * @name sprintOneApp.appService
+ * @name nextgensp2.appService
  * @description
  * # appService
- * Service in the sprintOneApp.
+ * Service in the nextgensp2.
  */
-angular.module('sprintOneApp')
-  .service('appService', function ($http) {
-    var _currentUser = 0;
+angular.module('nextgensp2')
+  .service('appService', function ($http, $cookies, uuid2) {
+    
+    var _userSession = {};
     var _userData = {};
     var _schemaData ={};
     var _responsesData ={};
+
+
+    //Check for a user session otherwise create a new one
+    if($cookies.get('userSession')){
+      _userSession = JSON.parse($cookies.get('userSession'));
+    }else{
+      _userSession.guid = uuid2.newguid();
+      $cookies.put('userSession', JSON.stringify(_userSession));
+    }
+    console.log(_userSession.guid);
+
+    
+    
+
+
+    
 
   //load User JSON
 	$http.get('data/person.json').success(function(data){
@@ -50,11 +67,11 @@ angular.module('sprintOneApp')
             var dobYear = new Date(_userData[_currentUser].dob);
             age = new Date().getFullYear() - dobYear.getFullYear();
           }
-          console.log(age);
+          //console.log(age);
           return age;
         },
         getWithinServiceRadius: function(lat1,lon1,lat2,lon2){
-          console.log(lat1,lon1,lat2,lon2);
+          //console.log(lat1,lon1,lat2,lon2);
           var r = 6371.009; //KM
           lat1 *= Math.PI / 180;
           lon1 *= Math.PI / 180;

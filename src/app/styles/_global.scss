@@ -1,0 +1,25 @@
+//Global styles 
+h1, h2, h3, h4, h5, h6 {
+    font-family: $brand-font;
+    color: $brand-color;
+}
+h1{  
+	font-size:32px; 
+	font-weight:$weight-black;
+	color:#1a1a1a;
+}
+h2{  font-size:14px; }
+body, p, div {
+    font-family: $brand-font;
+    color: $brand-color;
+}
+
+.box-border{
+	border-radius:4px;
+	border: none;
+	//box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.15);
+}
+
+.invisible{
+	opacity:0;
+}

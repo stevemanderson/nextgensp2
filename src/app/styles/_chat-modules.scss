@@ -1,0 +1,117 @@
+//Chat modules
+
+//Slider
+.slick-slider {
+  margin-bottom: 0;
+}
+
+.slider-item{
+	padding:$box-padding 8px $box-padding 8px ;
+	height: 150px;
+	background-color:white;
+	margin-right: 5px;
+  position:relative;
+  .box-bottom{
+    position: absolute;
+    bottom: 20px;
+    height:52px;
+    clear:both;
+    width: 94%;
+  }
+  .yes-icon{
+    padding-left:5px;
+    width:18%;
+  }
+  .content{
+    color:white;
+    font-size:16px;
+    font-weight:$weight-bold;
+     width:64%;
+     span{
+      font-size:12px;
+      font-weight:$weight-normal;
+     }
+  }
+  .info{
+    width:18%;
+    img{
+      float: right;
+    }
+  }
+}
+
+.slick-prev:before, .slick-next:before {
+    font-family: 'slick';
+    font-size: 20px;
+    line-height: 1;
+    opacity: .75;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: none;
+}
+
+
+//Map styles
+.location-box{
+  background-color:white;
+  border-radius:2px;
+  border: 1px solid $brand-grey-light;
+  .bottom-border{
+    border-bottom:1px solid $brand-grey-light;
+    height:40px;
+  }
+  input{
+    box-shadow:none;
+    font-size:16px;
+    border:none;
+    padding: 30px 20px
+  }
+  .geo-question{
+    p{
+      font-size:16px;
+      font-weight:$weight-bold;
+      color: $brand-blue;
+      padding: 20px 0 10px 0;
+    }
+  }
+}
+
+
+//Contact box
+.contact-boxes{
+  width:252px;
+  float: right;
+  .contactbox{
+    width:80px;
+    height:80px;
+    margin:2px;
+    font-size: 12px;
+    font-weight: bold;
+    
+    text-align: center;
+    padding:20px 0;
+    p{
+      color:white;
+      padding-top:8px;
+    }
+    //box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.15);
+  }
+  .contactbox-left{
+    background-color: #a0cef2;
+    float:left;
+    border-radius: 5px 0 0 5px;
+  }
+  .contactbox-center{
+    background-color: #a0cef2;
+    float:left;
+  }
+  .contactbox-right{
+    background-color: #f69b81;
+    float:left;
+    border-radius: 0 5px 5px 0;
+  }
+  .active{
+    box-shadow: 0px 2px 8px 1px rgba(0,0,0,0.15);
+  }
+}

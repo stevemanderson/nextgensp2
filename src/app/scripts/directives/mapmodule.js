@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name sprintOneApp.directive:mapmodule
+ * @name nextgensp2.directive:mapmodule
  * @description
  * # mapmodule
  */
-angular.module('sprintOneApp')
+angular.module('nextgensp2')
   .directive('mapmodule', function () {
     return {
 		restrict: 'E',

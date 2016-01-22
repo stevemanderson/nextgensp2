@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name sprintOneApp.controller:ChatCtrl
+ * @name nextgensp2.controller:ChatCtrl
  * @description
  * # ChatCtrl
- * Controller of the sprintOneApp
+ * Controller of the nextgensp2
  */
-angular.module('sprintOneApp')
+angular.module('nextgensp2')
   .controller('ChatCtrl', function ($scope, appService, $compile, NgMap, $window) {
     $scope.inputText = "";
     $scope.inputAddress = "";
@@ -27,6 +27,8 @@ angular.module('sprintOneApp')
         "content": "",
         "color":""
     };
+
+
 
     $scope.locationData = {
         "addressShow":true,
@@ -62,7 +64,7 @@ angular.module('sprintOneApp')
     //input
     $scope.checkSubmit = function(e) {
     	if(e.keyCode === 13){
-    		console.log(e.currentTarget.getAttribute('id'));
+    		//console.log(e.currentTarget.getAttribute('id'));
             switch(e.currentTarget.getAttribute('id')){
                 case 'userInput':
                     enterChat();
@@ -93,21 +95,21 @@ angular.module('sprintOneApp')
 
     function keywordSearch(array){
         var currentUserProfile = userData[userID];
-        console.log(currentUserProfile);
+        //console.log(currentUserProfile);
         var colorCounter = 0;
     	// look for keyword in available services
     	for(var i =0;i< array.length;i++){
     		
     		for(var c =0;c< array[i].lifeEvent.length;c++){
     			if($scope.inputText.toLowerCase() === array[i].lifeEvent[c].description.toLowerCase()){
-    				console.log("match Service> id="+ array[i].id + " - service="+ array[i].serviceTitle);
+    				//console.log("match Service> id="+ array[i].id + " - service="+ array[i].serviceTitle);
     				
     				//Check for any special criteria against user profile
     				var  passedCriteria = true;
                     //Check age
     				if(array[i].specialCriteria.eligibility.ageMax !== 0 && array[i].specialCriteria.eligibility.ageMin !==0 && currentUserProfile.dob !=="" ){
                         if((appService.getUserAge() < array[i].specialCriteria.eligibility.ageMax && appService.getUserAge() >= array[i].specialCriteria.eligibility.ageMin) === false ){
-                            console.log("failed age criteria");
+                            //console.log("failed age criteria");
                             passedCriteria = false;
         				}
                     }
@@ -141,7 +143,7 @@ angular.module('sprintOneApp')
                     }*/
 
     				//Check conditions
-                    console.log(passedCriteria);
+                    //console.log(passedCriteria);
                     if(passedCriteria){
                         $scope.availableServices.services.push({ "triggerId": array[i].lifeEvent[c].triggerId,
                                                         "clientFacingTitle": array[i].lifeEvent[c].clientFacingTitle,
@@ -164,7 +166,7 @@ angular.module('sprintOneApp')
     function queResponse(msg,data){
         switch (msg){
             case 'services':
-            console.log($scope.availableServices.services.length );
+            //console.log($scope.availableServices.services.length );
                 if($scope.availableServices.services.length >0){
                     addResponse(responseData[msg].screenPositive);
                     addSlider();
@@ -182,7 +184,6 @@ angular.module('sprintOneApp')
                 }
                 break;
             case 'servicessSelected':
-                console.log("servicessSelected > "+appService.getServiceIndex($scope.availableServices.selectedService));
                 if(appService.getServiceIndex($scope.availableServices.selectedService) !== -1){
                     addResponse(responseData[msg].screenPositive);
                     addLocationBox();
@@ -229,6 +230,9 @@ angular.module('sprintOneApp')
     //Show slider options
     function addSlider(data){
         angular.element(document.getElementById('chat-frame')).append($compile('<div class="chat-block slider-width"><slider></slider></div>')($scope));
+        setTimeout(function(){
+            angular.element("slick").removeClass("invisible");
+        },300);
     }
 
     //Map functions
@@ -246,7 +250,11 @@ angular.module('sprintOneApp')
     //Add locations slider
     function addLocationsSlider(){
         angular.element(document.getElementById('chat-frame')).append($compile('<div class="chat-block slider-width"><locationslider></locationslider></div>')($scope)); 
+        setTimeout(function(){
+            angular.element("slick").removeClass("invisible");
+        },300);
     }
+    
     //Add contactbox
     function addContactBox(){
         angular.element(document.getElementById('chat-frame')).append($compile('<div class="chat-block"><contactbox></contactbox></div>')($scope)); 
@@ -254,8 +262,6 @@ angular.module('sprintOneApp')
 
     function sortMapMarkers(){
         $scope.map.markers = $scope.selectedServiceLocations
-        console.log($scope.map.markers);
-
         //add markers using the Standard gmaps api - ngmap directive markers disappeared?
         NgMap.getMap().then(function(map) {          
             var markers = [];
@@ -337,7 +343,6 @@ angular.module('sprintOneApp')
 
     $scope.getGeoLocation = function(){
         navigator.geolocation.getCurrentPosition(function(position) {
-          //console.log(position.coords.latitude, position.coords.longitude);
           $scope.locationData.selectedLocation.lat = $scope.locationData.selectedLocation.lat; //position.coords.latitude;
           $scope.locationData.selectedLocation.long = $scope.locationData.selectedLocation.long; //position.coords.longitude;
           addMap();

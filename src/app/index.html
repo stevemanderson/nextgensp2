@@ -10,20 +10,23 @@
     <!-- bower:css -->
     <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick.css' />
     <link rel='stylesheet' href='bower_components/slick-carousel/slick/slick-theme.css' />
+    <link rel='stylesheet' href='bower_components/angular-google-places-autocomplete/src/autocomplete.css' />
+    <link rel='stylesheet' href='bower_components/angular-google-places-autocomplete/dist/autocomplete.min.css' />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,900,700' rel='stylesheet' type='text/css'>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
   </head>
-  <body ng-app="sprintOneApp">
+  <body ng-app="nextgensp2">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
+    <div>
       <div ng-view="" ng-cloak></div>
     </div>
 
@@ -42,6 +45,9 @@
     <script src="bower_components/slick-carousel/slick/slick.min.js"></script>
     <script src="bower_components/angular-slick/dist/slick.js"></script>
     <script src="bower_components/angular-scroll-glue/src/scrollglue.js"></script>
+    <script src="bower_components/Angular.uuid2/dist/angular-uuid2.min.js"></script>
+    <script src="bower_components/angular-google-places-autocomplete/src/autocomplete.js"></script>
+    <script src="bower_components/angular-google-places-autocomplete/dist/autocomplete.min.js"></script>
     <!-- endbower -->
     
     <!-- endbuild -->
@@ -49,17 +55,18 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/map.js"></script>
         <script src="scripts/services/appservice.js"></script>
         <script src="scripts/controllers/autocomplete.js"></script>
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/chat.js"></script>
+        <script src="scripts/controllers/sprint2.js"></script>
         <script src="scripts/directives/mapmodule.js"></script>
         <script src="scripts/directives/slider.js"></script>
         <script src="scripts/directives/locationbox.js"></script>
         <script src="scripts/directives/locationslider.js"></script>
         <script src="scripts/directives/contactbox.js"></script>
         <script src="scripts/directives/dashboard.js"></script>
+        <script src="scripts/directives/chat_modules.js"></script>
         <script src="scripts/services/loginservice.js"></script>
         <script src="scripts/directives/signinpanel.js"></script>
         <script src="scripts/controllers/signinpanel.js"></script>

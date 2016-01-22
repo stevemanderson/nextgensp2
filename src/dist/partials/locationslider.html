@@ -1,5 +1,5 @@
 <div class="chat-block">
-	<slick class="location-slider" infinite="true" slides-to-show="2" slides-to-scroll="1">
+	<slick class="slider-location" infinite="true" slides-to-show="2" slides-to-scroll="1">
 		<div ng-repeat="item in selectedServiceLocations" class="slider-item" ng-style="{'background-color':pinColors[$index]}" ng-mousemove="slideMouseMove()" ng-mousedown="sliderMouseDown($event)" ng-click="locationSliderClick($index)">
 			<div class="box-bottom">
 				<div class="yes-icon pull-left"><img src="images/yes.png" alt="tick" ng-show="item.selected"></div>

@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name sprintOneApp.controller:SigninpanelCtrl
+ * @name nextgensp2.controller:SigninpanelCtrl
  * @description
  * # SigninpanelCtrl
- * Controller of the sprintOneApp
+ * Controller of the nextgensp2
  */
-angular.module('sprintOneApp')
+angular.module('nextgensp2')
   .controller('SigninpanelCtrl', function ($scope, $location) {
     $scope.showDash = true;
 

@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name sprintOneApp.directive:dashboard
+ * @name nextgensp2.directive:dashboard
  * @description
  * # dashboard
  */
-angular.module('sprintOneApp')
+angular.module('nextgensp2')
   .directive('dashboard', function () {
     return {
 		restrict: 'E',

@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name sprintOneApp.directive:slider
+ * @name nextgensp2.directive:slider
  * @description
  * # slider
  */
-angular.module('sprintOneApp')
+angular.module('nextgensp2')
   .directive('slider', function ($compile) {
     return {
     restrict: 'E',

@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name sprintOneApp.controller:AccountsummaryCtrl
+ * @name nextgensp2.controller:AccountsummaryCtrl
  * @description
  * # AccountsummaryCtrl
- * Controller of the sprintOneApp
+ * Controller of the nextgensp2
  */
-angular.module('sprintOneApp')
+angular.module('nextgensp2')
   .controller('AccountSummaryCtrl', function ($scope, $location,loginservice) {
     $scope.hasServices= false;
     $scope.dashboard= true;

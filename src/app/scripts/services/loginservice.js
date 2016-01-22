@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name sprintOneApp.loginservice
+ * @name nextgensp2.loginservice
  * @description
  * # loginservice
- * Service in the sprintOneApp.
+ * Service in the nextgensp2.
  */
-angular.module('sprintOneApp')
+angular.module('nextgensp2')
   .service('loginservice', function () {
   	var _loginData ={};
   	var _hasServices = false;

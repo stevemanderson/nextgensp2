@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name sprintOneApp.directive:contactbox
+ * @name nextgensp2.directive:contactbox
  * @description
  * # contactbox
  */
-angular.module('sprintOneApp')
+angular.module('nextgensp2')
   .directive('contactbox', function () {
     return {
 		restrict: 'E',

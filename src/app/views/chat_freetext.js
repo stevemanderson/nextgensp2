@@ -6,7 +6,7 @@
  * @description
  * # signinpanel
  */
-angular.module('nextgensp2')
+angular.module('sprintOneApp')
   .directive('signinpanel', function () {
     return {
 		restrict: 'E',
