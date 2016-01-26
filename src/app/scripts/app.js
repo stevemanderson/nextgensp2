@@ -56,6 +56,6 @@ angular
       })
       
       .otherwise({
-        redirectTo: '/chat'
+        redirectTo: '/sprint2'
       });
   });

@@ -12,6 +12,7 @@ angular.module('nextgensp2')
 		restrict: 'E',
 		replace: true,
 		templateUrl: "partials/chat_free_text.html",
+    controller: "ChatFreeTextCtrl",
     };
   });
 
@@ -26,7 +27,8 @@ angular.module('nextgensp2')
     return {
 		restrict: 'E',
 		replace: true,
-		templateUrl: "partials/chat_location.html",
+    templateUrl: "partials/chat_location.html",
+		controller: "ChatLocationCtrl",
     };
   });
 /**
@@ -41,6 +43,7 @@ angular.module('nextgensp2')
 		restrict: 'E',
 		replace: true,
 		templateUrl: "partials/chat_multiple_choice.html",
+    controller: "ChatMultipleChoiceCtrl",
     };
   });
 /**
@@ -55,6 +58,7 @@ angular.module('nextgensp2')
 		restrict: 'E',
 		replace: true,
 		templateUrl: "partials/chat_resources.html",
+    controller: "ChatResourcesCtrl",
     };
   });
 /**
@@ -69,6 +73,7 @@ angular.module('nextgensp2')
     restrict: 'E',
     replace: true,
     templateUrl: "partials/chat_single_choice.html",
+    controller: "ChatSingleChoiceCtrl",
     };
   });
 /**
@@ -83,6 +88,7 @@ angular.module('nextgensp2')
 		restrict: 'E',
 		replace: true,
 		templateUrl: "partials/chat_loading.html",
+    controller: "ChatLoadingCtrl",
     };
   });
   /**
@@ -97,5 +103,6 @@ angular.module('nextgensp2')
     restrict: 'E',
     replace: true,
     templateUrl: "partials/chat_summary.html",
+    controller: "ChatSummaryCtrl",
     };
   });
