@@ -33,6 +33,7 @@ class DrupalDataContext:
         if n['type'] != None:
             if n['type'] == 'Responses': type = 'response'
             if n['type'] == 'Queries': type = 'query'
+            if n['type'] == 'Services': type = 'service'
 
         node = {
             "pid":pid,
