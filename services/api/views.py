@@ -16,7 +16,7 @@ def responses(request):
     result = h.submitAnswer(int(id), int(pid), value))
     return Response(result)
 
-@api_view(['GET'])
+@api_view(['POST'])
 def queries(request):
     title = request.data['title']
     h = Handler()
