@@ -56,9 +56,9 @@ angular.module('nextgensp2')
     // Answer and jump to next node
     function sendResponse(data){
         var dataVar = {};
-        dataVar.pid = 2;
-        dataVar.id = 21;
-        dataVar.value = "String";
+        dataVar.pid = 0;
+        dataVar.id = 18;
+        dataVar.value = "";
         
         angular.element(document.getElementById('chat-frame')).append($compile('<loading></loading>')($scope));
 
@@ -113,7 +113,7 @@ angular.module('nextgensp2')
         angular.element(document.getElementById('chat-frame')).append('<div class="error"> Sorry there was an error.</div>');
     }
 
-    //sendResponse(responseData);
+    sendResponse(responseData);
         
    
 
