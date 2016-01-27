@@ -13,5 +13,12 @@ def responses(request):
     value = request.data['value']
 
     h = Handler()
-    return Response(h.submitAnswer(int(id), int(pid), value))
-    #return Response(json.dumps(h.submitAnswer(id, pid, value), lambda o : o.__dict__))
+    result = h.submitAnswer(int(id), int(pid), value))
+    return Response(result)
+
+@api_view(['GET'])
+def queries(request):
+    title = request.data['title']
+    h = Handler()
+    result = h.getQuery(title)
+    return Response(result)

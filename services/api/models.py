@@ -20,6 +20,13 @@ class DrupalDataContext:
                 return self.getNode(n)
         return None
 
+    def getByTitle(self, title):
+        r = self.getJsonResponse(self.apiUrl, None)
+        for n in r:
+            if str(n['node_title']).strip(',. ').lower() == title.lower():
+                return self.getNode(n)
+        return None
+
     def getNode(self, n):
         pid = 0
         nid = 0
@@ -67,10 +74,7 @@ class Handler:
                 return n
         return None
 
-    def submitAnswer(self, id, pid, value):
-        context = DrupalDataContext(DRUPAL_API)
-        answer = context.getById(id)
-        query = self.getFirstQuery(answer)
+    def prepareQuery(self, query):
         result = {}
         if query == None: return result
 
@@ -86,3 +90,22 @@ class Handler:
             result['children'].append(obj)
 
         return result
+
+    def getQuery(self, title):
+        context = DrupalDataContext(DRUPAL_API)
+        query = context.getByTitle(title)
+        return self.prepareQuery(query)
+
+    def submitAnswer(self, id, pid, value):
+        context = DrupalDataContext(DRUPAL_API)
+        answer = None
+
+        # check for the tree node submission
+        if id == 0 and pid == 0 and len(value) > 0:
+            answer = context.getByTitle(value)
+            print answer['title'], answer['children']
+        else:
+            answer = context.getById(id)
+
+        query = self.getFirstQuery(answer)
+        return self.prepareQuery(query)
