@@ -4,8 +4,7 @@ from api.tree import Tree
 import json
 
 h = Handler()
-query = h.getQuery('Do you need help getting started?')
-print json.dumps(query)
+print h.submitAnswer(21, 2, "String")
 exit()
 
 from services.settings import DRUPAL_API
