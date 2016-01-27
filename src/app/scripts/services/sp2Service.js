@@ -17,7 +17,7 @@ angular.module('nextgensp2')
     $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
   })
   .service('sp2Service', function ($http, $cookies, uuid2) {
-    
+
     var _userSession = {};
     var _userData = {};
     var _schemaData ={};
@@ -83,4 +83,3 @@ angular.module('nextgensp2')
 
     };
 });
- 

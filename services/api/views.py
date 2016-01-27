@@ -13,7 +13,7 @@ def responses(request):
     value = request.data['value']
 
     h = Handler()
-    result = h.submitAnswer(int(id), int(pid), value))
+    result = h.submitAnswer(int(id), int(pid), value)
     return Response(result)
 
 @api_view(['POST'])
