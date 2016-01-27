@@ -12,13 +12,15 @@ def responses(request):
     pid = request.data['pid']
     value = request.data['value']
 
-    h = Handler()
+    c = DrupalDataContext(DRUPAL_API)
+    h = Handler(c)
     result = h.submitAnswer(int(id), int(pid), value)
     return Response(result)
 
 @api_view(['POST'])
 def queries(request):
     title = request.data['title']
-    h = Handler()
+    c = DrupalDataContext(DRUPAL_API)
+    h = Handler(c)
     result = h.getQuery(title)
     return Response(result)

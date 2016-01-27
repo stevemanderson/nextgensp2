@@ -1,38 +1,38 @@
+import json
+
 class Tree:
-    def __init__(self, id, title, root):
-        self.id = id
-        self.title = title
+    def __init__(self, root):
         self.root = root
 
     def getLeafNodes(self):
         leafs = []
-        for n in self.root.children:
+        for n in self.root['children']:
             self.getLeafNodeRec(n, leafs)
         return leafs
 
     def getLeafNodeRec(self, node, leafs):
-        if(len(node.children) == 0):
+        if(len(node['children']) == 0):
             leafs.append(node)
             return
 
-        for n in node.children:
-            if len(n.children) == 0:
+        for n in node['children']:
+            if 'children' in n and len(n['children']) == 0:
                 leafs.append(n)
             else:
                 self.getLeafNodeRec(n, leafs)
 
     def search(self, node, id):
         result = []
-        if(node.id == id):
+        if(node['id'] == id):
             result.append(node)
-        for n in node.children:
+        for n in node['children']:
             self.searchRecur(n, id, result)
         return result
 
     def searchRecur(self, node, id, result):
-        if(node.id == id):
+        if(node['id'] == id):
             result.append(node)
-        for n in node.children:
+        for n in node['children']:
             self.searchRecur(n, id, result)
 
     def flattenTree(self):
@@ -42,18 +42,15 @@ class Tree:
 
     def flattenTreeRecur(self, node, result):
         result.append(node)
-        for n in node.children:
+        for n in node['children']:
             self.flattenTreeRecur(n, result)
 
 class Node:
-    def __init__(self, pid, id, title, type):
-        self.parent = None
+    def __init__(self, id, title, type):
         self.type = type
-        self.pid = pid
         self.id = id
         self.title = title
         self.children = []
 
     def addNode(self, node):
-        node.parent = self
         self.children.append(node)

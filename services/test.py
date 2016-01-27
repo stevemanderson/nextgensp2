@@ -1,22 +1,18 @@
-from api.models import DrupalDataContext, Handler
-from services.settings import DRUPAL_API
-from api.tree import Tree
+from api.models import *
+from api.tree import *
+from services.settings import *
 import json
 
-h = Handler()
-print h.submitAnswer(21, 2, "String")
-exit()
+result = h.getQuery('What type of business?')
+result = h.submitAnswer(23, 34, '')
+print result
 
-from services.settings import DRUPAL_API
-from api.tree import Tree
-import time
-import json
+n = Node(1, 'Something', 'node')
+n2 = Node(2, 'Something else', 'eh')
+n.addNode(n2)
+t = Tree.withParams(0, 'testing', n)
+output = json.dumps(t, default=lambda o: o.__dict__)
+t2 = Tree()
+t2.__dict__ = json.loads(output)
 
-c = DrupalDataContext(DRUPAL_API)
-t = Tree(1, 'Some Title', c.getById(18))
-
-from pymongo import MongoClient
-
-client = MongoClient('localhost', 27017)
-db = client.test_database
-db.test_collection.insert(t.root)
+print type(t2.root)
