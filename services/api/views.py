@@ -1,4 +1,4 @@
-from models import DrupalDataContext
+from models import *
 from services.settings import DRUPAL_API
 from rest_framework.decorators import api_view
 from rest_framework import status
@@ -13,7 +13,9 @@ def responses(request):
     value = request.data['value']
 
     c = DrupalDataContext(DRUPAL_API)
-    h = Handler(c)
+    mc = UserMongoContext('localhost', 27017)
+    sc = SessionService(mc)
+    h = Handler(c, sc)
     result = h.submitAnswer(int(id), int(pid), value, 1)
     return Response(result)
 
@@ -21,6 +23,8 @@ def responses(request):
 def queries(request):
     title = request.data['title']
     c = DrupalDataContext(DRUPAL_API)
-    h = Handler(c)
+    mc = UserMongoContext('localhost', 27017)
+    sc = SessionService(mc)
+    h = Handler(c, sc)
     result = h.getQuery(title)
     return Response(result)
