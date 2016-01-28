@@ -3,16 +3,24 @@ from api.tree import *
 from services.settings import *
 import json
 
-result = h.getQuery('What type of business?')
-result = h.submitAnswer(23, 34, '')
+c = DrupalDataContext(DRUPAL_API)
+h = Handler(c)
+result = h.submitAnswer(22, 21, '')
 print result
+exit()
+mc = UserMongoContext('localhost', 27017)
 
-n = Node(1, 'Something', 'node')
-n2 = Node(2, 'Something else', 'eh')
-n.addNode(n2)
-t = Tree.withParams(0, 'testing', n)
-output = json.dumps(t, default=lambda o: o.__dict__)
-t2 = Tree()
-t2.__dict__ = json.loads(output)
+session = mc.get(1)
+print 'The session is', session['id']
+t = Tree(session['tree'])
+for l in t.getLeafNodes():
+    print l['id'], l['title'], l['type'], l['format']
+exit()
+session = {
+    'id':1,
+    'tree':c.getById(18)
+}
 
-print type(t2.root)
+mc.save(session)
+
+exit()

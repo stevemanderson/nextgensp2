@@ -44,13 +44,3 @@ class Tree:
         result.append(node)
         for n in node['children']:
             self.flattenTreeRecur(n, result)
-
-class Node:
-    def __init__(self, id, title, type):
-        self.type = type
-        self.id = id
-        self.title = title
-        self.children = []
-
-    def addNode(self, node):
-        self.children.append(node)

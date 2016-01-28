@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 from django.db import models
-from tree import Node
 from services.settings import DRUPAL_API
 
 from pymongo import MongoClient
@@ -36,6 +35,7 @@ class DrupalDataContext:
         nid = 0
         title = ""
         type = ""
+        format = "default"
 
         if n['parent reference'] != None: pid = int(n['parent reference'])
         if n['nid'] != None: nid = int(n['nid'])
@@ -55,6 +55,9 @@ class DrupalDataContext:
                 if n['customer title'] != None:
                     title = n['customer title']
 
+        if n['response format'] != None:
+            format = str(n['response format']).lower()
+
         # Use the node title
         if len(title) == 0:
             if n['node_title'] != None:
@@ -64,13 +67,14 @@ class DrupalDataContext:
             "pid":pid,
             "id":nid,
             "title":title,
-            "type":type
+            "type":type,
+            'format':format
         }
 
         node['children'] = self.getChildren(node['id'])
         return node
 
-    def getChildren(self, pid):
+    def getChildren(self, pid, recursChildren=False):
         r = self.__getJsonResponse__(self.apiUrl, None)
         result = []
         for n in r:
@@ -120,6 +124,7 @@ class Handler:
 
         result['id'] = query['id']
         result['title'] = query['title']
+        result['format'] = query['format']
         result['children'] = []
 
         for n in query['children']:
@@ -127,6 +132,7 @@ class Handler:
             obj['id'] = n['id']
             obj['title'] = n['title']
             obj['type'] = n['type']
+            obj['format'] =n['format']
             result['children'].append(obj)
 
         return result
@@ -144,7 +150,6 @@ class Handler:
         # check for the tree node submission
         if id == 0 and pid == 0 and len(value) > 0:
             answer = self._context.getByTitle(value)
-            print answer['title'], answer['children']
         else:
             answer = self._context.getById(id)
 
