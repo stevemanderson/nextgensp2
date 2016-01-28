@@ -8,8 +8,7 @@ mc = UserMongoContext('localhost', 27017)
 sc = SessionService(mc)
 h = Handler(c, sc)
 
-result = h.submitAnswer(33, 30, '', 1)
-
+result = h.getById(21, 2)
 print result
 
 exit()

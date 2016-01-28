@@ -2,8 +2,9 @@ from __future__ import unicode_literals
 from django.db import models
 from services.settings import DRUPAL_API
 
-from pymongo import MongoClient
+from api.mappers import *
 
+from pymongo import MongoClient
 
 import requests
 import json
@@ -15,11 +16,11 @@ class DrupalDataContext:
     def __init__(self, url):
         self.apiUrl = url
 
-    def getById(self, id):
+    def getById(self, id, childDepth=100):
         r = self.__getJsonResponse__(self.apiUrl, None)
         for n in r:
             if int(n['nid']) == id:
-                return self.getNode(n)
+                return self.getNode(n, childDepth)
         return None
 
     def getByTitle(self, title):
@@ -30,56 +31,23 @@ class DrupalDataContext:
                 return self.getNode(n)
         return None
 
-    def getNode(self, n):
-        pid = 0
-        nid = 0
-        title = ""
-        type = ""
-        format = "default"
+    def getNode(self, n, childLevel=100, currentLevel=0):
+        node = {}
+        DrupalNodeMapper.map(n, node)
 
-        if n['parent reference'] != None: pid = int(n['parent reference'])
-        if n['nid'] != None: nid = int(n['nid'])
-
-        # check the types
-        if n['type'] != None:
-            if n['type'] == 'Responses':
-                type = 'response'
-                if n['responses short'] != None:
-                    title = n['responses short']
-            if n['type'] == 'Queries':
-                type = 'query'
-                if n['query short question'] != None:
-                    title = n['query short question']
-            if n['type'] == 'Services':
-                type = 'service'
-                if n['customer title'] != None:
-                    title = n['customer title']
-
-        if n['response format'] != None:
-            format = str(n['response format']).lower()
-
-        # Use the node title
-        if len(title) == 0:
-            if n['node_title'] != None:
-                title = n['node_title']
-
-        node = {
-            "pid":pid,
-            "id":nid,
-            "title":title,
-            "type":type,
-            'format':format
-        }
-
-        node['children'] = self.getChildren(node['id'])
+        if currentLevel < childLevel:
+            node['children'] = self.getChildren(node['id'], childLevel, currentLevel)
+        else:
+            node['children'] = []
         return node
 
-    def getChildren(self, pid, recursChildren=False):
+    def getChildren(self, pid, childLevel=100, currentLevel=0):
+        currentLevel = currentLevel + 1
         r = self.__getJsonResponse__(self.apiUrl, None)
         result = []
         for n in r:
             if n['parent reference'] != None and n['parent reference'] == str(pid):
-                result.append(self.getNode(n))
+                result.append(self.getNode(n, childLevel, currentLevel))
         return result
 
     def __getJsonResponse__(self, u, d):
@@ -173,9 +141,8 @@ class Handler:
                 if 'children' in c:
                     c.pop('children', None)
 
-    def getById(self, id):
-        result = self._context.getById(id)
-        self.__removeChildLevel__(result)
+    def getById(self, id, childDepth=1):
+        result = self._context.getById(id, childDepth)
         return result
 
     def getQuery(self, title):
