@@ -14,7 +14,7 @@ def responses(request):
 
     c = DrupalDataContext(DRUPAL_API)
     h = Handler(c)
-    result = h.submitAnswer(int(id), int(pid), value)
+    result = h.submitAnswer(int(id), int(pid), value, 1)
     return Response(result)
 
 @api_view(['POST'])

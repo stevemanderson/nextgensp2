@@ -94,23 +94,35 @@ class UserMongoContext:
         self._client = MongoClient(server, port)
         self._db = self._client.nextgensp2
 
-    def get(self, id):
-        return self._db.sessions.find_one({"id":id})
+    def get(self, sessionId):
+        return self._db.sessions.find_one({"sessionId":id})
 
-    def save(self, record):
-        id = record['id']
-        if self.get(id) != None:
-            self._db.sessions.replace_one({"id":id}, record)
+    def save(self, sessionId, tree):
+        record = {
+            'sesisonId':sessionId,
+            'tree':tree
+        }
+        if self.get(sessionId) != None:
+            self._db.sessions.replace_one({"sessionId":sessionId}, record)
             return
         self._db.sessions.insert(record)
 
-class UserService:
+class SessionService:
     def __init__(self, context):
         self._context = context
 
+    def attachToSession(self, sessionId, pathToRoot):
+        session = self._context.get(sessionId)
+
+        if session == None:
+            # create with full path
+            self._context.save(sessionId, pathToRoot)
+
+
 class Handler:
-    def __init__(self, context):
+    def __init__(self, context, sessionService):
         self._context = context
+        self._sessionService = sessionService
 
     def getFirstQuery(self, answer):
         for n in answer['children']:
@@ -137,14 +149,41 @@ class Handler:
 
         return result
 
+    def findRoot(self, id):
+        result = self._context.getById(id)
+        self.__removeChildLevel__(result)
+
+        while result['pid'] != 0:
+            childId = result['id']
+            result = self._context.getById(int(result['pid']))
+
+            # only pop from the children that aren't the original id
+            if 'children' in result:
+                for n in result['children']:
+                    if n['id'] != childId:
+                        self.__removeChildLevel__(n)
+
+        return result
+
+    # levels are not implemented
+    def __removeChildLevel__(self, item, level=1):
+        # only get the first level
+        if 'children' in item:
+            for c in item['children']:
+                if 'children' in c:
+                    c.pop('children', None)
+
     def getById(self, id):
-        return self._context.getById(id)
+        result = self._context.getById(id)
+        self.__removeChildLevel__(result)
+        return result
 
     def getQuery(self, title):
         query = self._context.getByTitle(title)
         return self.__prepareQuery__(query)
 
-    def submitAnswer(self, id, pid, value):
+    # the pid is not set up
+    def submitAnswer(self, id, pid, value, sessionId):
         answer = None
 
         # check for the tree node submission
@@ -152,6 +191,9 @@ class Handler:
             answer = self._context.getByTitle(value)
         else:
             answer = self._context.getById(id)
+
+        # load the user tree or create it
+        #self._sessionService.attachToSession(sessionId, self.findRoot(id))
 
         query = self.getFirstQuery(answer)
         return self.__prepareQuery__(query)
