@@ -1,14 +1,12 @@
 <div class="chat-module chat-location">
-	<span class="module-title">chat location</span>
 	<div class="container">		
 		<div class="col-md-12">					 
 			<div class="avatar">
 				<img src="images/avatar.png" >
 			</div>
 			<section>
-				Sweet, I can’t function without coffee.<br/>
-				Are you going to be mobile or do you have a spot in mind?
-				<input class="chat-input" type="text" g-places-autocomplete force-selection="true" ng-model="autoCompleteVal" ng-blur="autoCompleteBlur($event)" ng-keyup="autoCompleteKeyup($event)"/>
+				{{query.title}}
+				<input class="chat-input" type="text" g-places-autocomplete force-selection="true" ng-model="autoCompleteVal" ng-blur="autoCompleteBlur($event)" ng-keyup="autoCompleteKeyup($event)" placeholder="Type address" />
 			</section>			 
 		</div>
 	</div>

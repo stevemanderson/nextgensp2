@@ -1,20 +1,16 @@
 <div class="chat-module chat-single-choice">
-<span class="module-title">chat single choice</span>
 	<div class="container">		
 		<div class="col-md-12">					 
 			<div class="avatar">
 				<img src="images/avatar.png" >
 			</div>
 			<section>
-				That sounds like a plan<br/>
-				What type of business do you want to open?
+				{{query.title}}
 				<ul class="clearfix">
-					<li class="active">Espresso Bar</li>
-					<li>Construction</li>
-					<li>Delivery Service</li>
-					<li>Nursery</li>
+					<li ng-repeat="answer in query.children" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer.id)">{{answer.title}}</li>
+
 				</ul>
-				<a href="#">OTHER</a>
+				<!-- <a href="#">OTHER</a> -->
 			</section>			 
 		</div>
 	</div>

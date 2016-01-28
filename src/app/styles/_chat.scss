@@ -74,10 +74,12 @@
 //Sprint 2 
 ////////////////////////////
 .top-bar{
-	height:40px;
-	text-align:center;
+	min-height:40px;
+	text-align:left;
 	padding-top:12px;
-	background-color:black;
+	padding-left:30px;
+	padding-right:30px;
+	background-color:#3a7cdc;
 	p{
 		color:white;
 		font-size: 12px;
@@ -89,18 +91,92 @@
 		color:white;
 		text-decoration: underline;
 	}
+	.sign-in{
+		text-align:right;
+		a{
+			text-decoration: none;
+		}
+	}
 }
-.chat-input{
-	width: 80%;
-	@extend .box-border;
-    background-color:$brand-grey-light;
-    box-shadow:none;
-    font-size:20px;
-    color:$brand-blue;
-    margin: 10px auto;
-    height: 60px;
-    padding-left:15px;
+
+.top-progress-bar{
+	background-color:$brand-blue;
+	min-height: 50px;
+ 	.jump-section{
+ 		text-align: center;
+ 		padding-left:6px;
+ 		padding-top:12px;
+ 	}
+ 	.save{
+ 		border-left:1px solid $brand-grey-light;
+ 		border-right:1px solid $brand-grey-light;
+ 		
+ 		text-transform: uppercase;
+ 		padding-top:12px;
+ 		height:50px;
+ 		.center{
+ 			width:85px;
+ 			margin:0 auto;
+ 		}
+ 		span{
+ 			float:left;
+ 			padding-left:8px;
+ 			color:white;
+	 		font-size: 10px;
+	 		line-height: 12px;
+ 		}
+ 		img{
+ 			float:left;
+ 		}
+
+ 	}
+ 	.topic{
+ 		span{
+ 			color:white;
+ 			font-size: 16px;
+ 		}
+ 		p{
+ 			color:white;
+ 		}
+ 	}
+ 	.expand-section{
+ 		text-align: center;
+ 		padding-left:6px;
+ 		padding-top:12px;
+ 	}
 }
+.top-progress-bar-expanded{
+
+}
+
+.initial-module{
+	margin-top:80px;
+	margin-bottom:30px;
+	.initial-input{
+		position:relative;
+		margin-top:30px;
+	}
+	.chat-input{
+		width: 80%;
+		@extend .box-border;
+	    border:1px solid $brand-grey-light;
+	    box-shadow:none;
+	    font-size:20px;
+	    color:$brand-blue;  
+	    margin: 10px auto;
+	    height: 60px;
+	    padding-left:15px;
+	    font-weight: $weight-normal;
+	}
+	.input-instruction{
+		position:absolute;
+		top:20px;
+		right:110px;
+		color:$brand-grey;
+		text-transform:uppercase;
+	}
+}
+
 
 // Chat Modules
 .chat-module{

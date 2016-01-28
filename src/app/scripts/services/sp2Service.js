@@ -45,7 +45,6 @@ angular.module('nextgensp2')
      * @param {jSON} device
      */
     this.postQueries = function (data) {
-        console.log(data);
         return $http({ method  : "POST",
                 url     : apiURL+"queries/",
                 data    : data
@@ -57,7 +56,6 @@ angular.module('nextgensp2')
      * @param {jSON} device
      */
     this.postAnswer = function (data) {
-        console.log(data);
         return $http({ method  : "POST",
                 url     : apiURL+"responses/",
                 data    : data
@@ -70,7 +68,6 @@ angular.module('nextgensp2')
      * @param {jSON} device
      */
     this.sendToAPIAI = function (data) {
-        console.log(data);
         return $http({ method  : "POST",
                 url     : APIAI_baseUrl+ "query/",
                 headers : {

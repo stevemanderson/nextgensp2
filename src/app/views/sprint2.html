@@ -1,21 +1,78 @@
-<div class="top-bar">
-	<p><strong>Service alert</strong> New advice for Queensland residents <a href="#">more</a></p>
+<nav id="myNavmenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation">
+  <a class="navmenu-brand" href="#">Brand</a>
+  <ul class="nav navmenu-nav">
+    <li class="active"><a href="#">Home</a></li>
+    <li><a href="#">Link</a></li>
+    <li><a href="#">Link</a></li>
+  </ul>
+</nav>
+<div class="navbar navbar-default navbar-fixed-top">
+  <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#myNavmenu" data-canvas="body">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
 </div>
-<div class="scroll-frame" >
+
+<div class="top-bar">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-6">
+			<p><strong>Service alert</strong> New advice for Queensland residents <a href="#">more</a></p>
+			</div>
+			<div class="col-xs-6">
+				<p class="sign-in" data-toggle="offcanvas"><strong><a href="#" >Sign In</a></strong></p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="top-progress-bar">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-1">
+				<div class="jump-section" ng-click="jumpSectionClicked">
+					<img src="images/pb_back.png">
+				</div>
+			</div>
+			<div class="col-xs-2">
+				<div class="save" ng-click="saveClicked">
+					<div class="center">
+						<img src="images/pb_save.png">
+						<span>Continue<br/>Later</span>
+					</div>
+				
+				</div>
+			</div>
+			<div class="col-xs-8">
+				<div>
+					<span>Start a Business</span>
+					<p>TOPIC</p>
+				</div>
+			</div>
+			<div class="col-xs-1">
+				<div class="expand-section" ng-click="expandSectionClicked">
+					<img src="images/pb_expand.png">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="scroll-frame">
 	<div class="container">
 		<div class="row ">
-			<div class="col-md-12 text-center panel-shadow">
-			  	<signinpanel></signinpanel>
-				  	<h1>How can we help you?</h1>
-				  	<h2>We can work through anything.</h2>
-				  	<div class="" id="chat-frame">
+			<div class="col-md-12 text-center panel-shadow initial-module">
+				  	<h1>What can we help you with?</h1>
+				  	<div class="initial-input">
 					  	<label class="sr-only chat-input" for="userInput">User input</label>
-				    	<input type="text" class="form-control chat-input" id="userInput" placeholder="I want to start a business" ng-keydown="firstResponse($event)" ng-model="inputText">
+					  	<div class="input-instruction">Press Enter</div>
+					  	<input type="text" class="form-control chat-input" id="userInput" placeholder="I want to start a business" ng-keydown="firstResponse($event)" ng-model="inputText">
+					  	
 				  	</div>
 			</div>
 		</div>
 	</div>
-	<div class="chat-frame" scroll-glue>
+	<div id="chat-frame" >
+	<chatlocation></chatlocation>
 		<!-- <chatfreetext></chatfreetext>
 		<loading></loading>
 		<chatsinglechoice></chatsinglechoice>

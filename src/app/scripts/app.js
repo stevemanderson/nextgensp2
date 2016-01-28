@@ -54,6 +54,9 @@ angular
         templateUrl: 'views/sprint2.html',
         controller: 'Sprint2Ctrl'
       })
+      .when('/apiai', {
+        templateUrl: 'views/apiai.html'
+      })
       
       .otherwise({
         redirectTo: '/sprint2'

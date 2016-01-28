@@ -74,6 +74,7 @@ angular.module('nextgensp2')
     replace: true,
     templateUrl: "partials/chat_single_choice.html",
     controller: "ChatSingleChoiceCtrl",
+    scope:{},
     };
   });
 /**

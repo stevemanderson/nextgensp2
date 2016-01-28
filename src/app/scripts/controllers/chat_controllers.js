@@ -22,7 +22,6 @@ angular.module('nextgensp2')
  */
 angular.module('nextgensp2')
   .controller('ChatLoadingCtrl', function ($scope) {
-    console.log('ChatLoadingCtrl');
 
   });
 
@@ -34,7 +33,7 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatLocationCtrl', function ($scope, $location,loginservice, NgMap, $timeout) {
+  .controller('ChatLocationCtrl', function ($scope,loginservice, NgMap, $timeout) {
     console.log('ChatLocationCtrl');
     $scope.autoCompleteVal={};
     $scope.geolocation = {};
@@ -98,6 +97,24 @@ angular.module('nextgensp2')
 angular.module('nextgensp2')
   .controller('ChatSingleChoiceCtrl', function ($scope, $location,loginservice) {
     console.log('ChatSingleChoiceCtrl');
+    console.log($scope.$parent.moduleData);
+    $scope.query = $scope.$parent.moduleData;
+    
+    function reset(){
+      //reset selection
+      for(var i=0; i<$scope.query.children.length; i++){
+        $scope.query.children[i].isSelected = false;
+      }
+    }
+    reset();
+    $scope.answerClicked = function(index, id){
+      console.log(index, id);
+      reset();
+      $scope.query.children[index].isSelected = true;
+      
+      $scope.$emit("chatModuleEvents", id, "");
+    }
+
 
   });
 
