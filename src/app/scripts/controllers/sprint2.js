@@ -68,7 +68,7 @@ angular.module('nextgensp2')
     function sendMultiResponse(ids, value){
         var dataVar = {};
         dataVar.pid = current_PID;
-        dataVar.id = ids;
+        dataVar.ids = ids.toString();
         dataVar.value = value;
 
         angular.element(document.getElementById('chat-frame')).append($compile('<loading></loading>')($scope));
