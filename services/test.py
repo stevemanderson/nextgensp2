@@ -6,10 +6,11 @@ import json
 c = DrupalDataContext(DRUPAL_API)
 mc = UserMongoContext('localhost', 27017)
 sc = SessionService(mc)
-h = Handler(c, mc)
+h = Handler(c, sc)
 result = h.submitAnswer(33, 30, '', 1)
 print result
 exit()
+
 sc.createSession(1)
 sc.addService(1, {'id':1})
 sc.removeService(1, 1)
