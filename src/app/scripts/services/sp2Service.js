@@ -16,13 +16,13 @@ angular.module('nextgensp2')
     $httpProvider.defaults.headers.common["Accept"] = "application/json";
     $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
   })
-  .service('sp2Service', function ($http, $cookies, uuid2) {
+  .service('sp2Service', function ($http, $cookies, $location, uuid2) {
 
-    var _userSession = ""; 
+    var _userSession = "";
     var _userData = {};
     var _schemaData ={};
     var _responsesData ={};
-    var apiURL = "http://127.0.0.1:9090/api/";
+    var apiURL = "http://"+$location.host()+":9090/api/";
 
     //API.AI
     var APIAI_accessToken = "314a4598924f462bab6b7b97689976b0 ";
