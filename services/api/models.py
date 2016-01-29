@@ -46,8 +46,10 @@ class DrupalDataContext:
         r = self.__getJsonResponse__(self.apiUrl, None)
         result = []
         for n in r:
-            if n['parent reference'] != None and n['parent reference'] == str(pid):
-                result.append(self.getNode(n, childLevel, currentLevel))
+            if n['parent reference'] != None:
+                for parentId in str(n['parent reference']).split(', '):
+                    if parentId == str(pid):
+                        result.append(self.getNode(n, childLevel, currentLevel))
         return result
 
     def __getJsonResponse__(self, u, d):
@@ -63,13 +65,9 @@ class UserMongoContext:
         self._db = self._client.nextgensp2
 
     def get(self, sessionId):
-        return self._db.sessions.find_one({"sessionId":id})
+        return self._db.sessions.find_one({"sessionId":sessionId})
 
-    def save(self, sessionId, tree):
-        record = {
-            'sesisonId':sessionId,
-            'tree':tree
-        }
+    def save(self, sessionId, record):
         if self.get(sessionId) != None:
             self._db.sessions.replace_one({"sessionId":sessionId}, record)
             return
@@ -79,13 +77,74 @@ class SessionService:
     def __init__(self, context):
         self._context = context
 
-    def attachToSession(self, sessionId, pathToRoot):
+    def getSession(self, sessionId):
+        return self._context.get(sessionId)
+
+    def sessionExists(self, sessionId):
+        return self.getSession(sessionId) != None
+
+    def createSession(self, sessionId):
+        if self.sessionExists(sessionId):
+            return
+
+        session = {
+            'sessionId':sessionId
+        }
+        self._context.save(sessionId, session)
+
+    def removeService(self, sessionId, serviceId):
         session = self._context.get(sessionId)
+        if 'services' not in session:
+            return
+        index = -1
+        curr = 0
+        for i in session['services']:
+            if i['id'] == serviceId:
+                index = curr
+                break
+            curr = curr + 1
+        del session['services'][index]
+        self._context.save(sessionId, session)
 
-        if session == None:
-            # create with full path
-            self._context.save(sessionId, pathToRoot)
+    def addService(self, sessionId, service):
+        session = self._context.get(sessionId)
+        if 'services' not in session:
+            session['services'] = []
+        found = False
+        for i in session['services']:
+            if i['id'] == service['id']:
+                found = True
+                break
+        if found != True:
+            session['services'].append(service)
+        self._context.save(sessionId, session)
 
+    def removeStoredResponse(self, sessionId, answerId):
+        session = self._context.get(sessionId)
+        if 'storedResponses' not in session:
+            return
+        index = -1
+        curr = 0
+        for i in session['storedResponses']:
+            if i['id'] == answerId:
+                index = curr
+                break
+            curr = curr + 1
+        del session['storedResponses'][index]
+        self._context.save(sessionId, session)
+
+    def addStoredResponse(self, sessionId, answer):
+        session = self._context.get(sessionId)
+        if 'storedResponses' not in session:
+            session['storedResponses'] = []
+        found = False
+        for i in session['storedResponses']:
+            if i['id'] == answer['id']:
+                found = True
+                break
+        if found != True:
+            session['storedResponses'].append(answer)
+        self._context.save(sessionId, session)
 
 class Handler:
     def __init__(self, context, sessionService):
@@ -117,22 +176,6 @@ class Handler:
 
         return result
 
-    def findRoot(self, id):
-        result = self._context.getById(id)
-        self.__removeChildLevel__(result)
-
-        while result['pid'] != 0:
-            childId = result['id']
-            result = self._context.getById(int(result['pid']))
-
-            # only pop from the children that aren't the original id
-            if 'children' in result:
-                for n in result['children']:
-                    if n['id'] != childId:
-                        self.__removeChildLevel__(n)
-
-        return result
-
     # levels are not implemented
     def __removeChildLevel__(self, item, level=1):
         # only get the first level
@@ -150,7 +193,7 @@ class Handler:
         return self.__prepareQuery__(query)
 
     # the pid is not set up
-    def submitAnswer(self, id, pid, value, sessionId):
+    def submitAnswer(self, id, pid, value, sessionId, storeAnswer=False):
         answer = None
 
         # check for the tree node submission
@@ -159,8 +202,11 @@ class Handler:
         else:
             answer = self._context.getById(id)
 
-        # load the user tree or create it
-        #self._sessionService.attachToSession(sessionId, self.findRoot(id))
-
         query = self.getFirstQuery(answer)
+
+        # check the children and add the services
+        for i in query['children']:
+            if i['type'] == 'service':
+                print 'service'
+
         return self.__prepareQuery__(query)
