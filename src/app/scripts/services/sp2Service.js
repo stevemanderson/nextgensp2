@@ -31,12 +31,12 @@ angular.module('nextgensp2')
 
 
     //Check for a user session otherwise create a new one
-    if($cookies.get('userSession')){
-      _userSession = $cookies.get('userSession');
-    }else{
+    //if($cookies.get('userSession')){
+      //_userSession = $cookies.get('userSession');
+    //}else{
       _userSession = uuid2.newguid();
       $cookies.put('userSession', _userSession);
-    }
+    //}
     console.log("User Session > "+_userSession);
 
 
