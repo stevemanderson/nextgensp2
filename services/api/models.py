@@ -24,11 +24,11 @@ class DrupalDataContext:
                 return self.getNode(n, childDepth)
         return None
 
-    def getByTitle(self, title):
+    def getByTitle(self, title, childDepth=100):
         r = self.__getJsonResponse__(self.apiUrl, None)
         for n in r:
             if str(n['node_title']).strip(',. ').lower() == title.lower():
-                return self.getNode(n)
+                return self.getNode(n, childDepth)
         return None
 
     def getNode(self, n, childLevel=100, currentLevel=0):
@@ -167,28 +167,8 @@ class Handler:
     def getFirstQuery(self, answer):
         for n in answer['children']:
             if n['type'] == 'query':
-                return n
+                return self._context.getById(n['id'], 1)
         return None
-
-    def __prepareQuery__(self, query):
-        result = {}
-        if query == None: return result
-
-        result['id'] = query['id']
-        result['title'] = query['title']
-        result['format'] = query['format']
-        result['children'] = []
-
-        if 'children' in query:
-            for n in query['children']:
-                obj = {}
-                obj['id'] = n['id']
-                obj['title'] = n['title']
-                obj['type'] = n['type']
-                obj['format'] =n['format']
-                result['children'].append(obj)
-
-        return result
 
     # levels are not implemented
     def __removeChildLevel__(self, item):
@@ -203,8 +183,7 @@ class Handler:
         return result
 
     def getQuery(self, title):
-        query = self._context.getByTitle(title)
-        return self.__prepareQuery__(query)
+        return self._context.getByTitle(title, 1)
 
     def getServices(self, sessionId):
         return self._sessionService.getSessionServices(sessionId)
@@ -252,4 +231,6 @@ class Handler:
             # remove from the stored if exists
             self._sessionService.removeStoredResponse(sessionId, answer['id'])
 
-        return self.__prepareQuery__(query)
+        query['storedActions'] = self._sessionService.getStoredResponses(sessionId)
+
+        return query
