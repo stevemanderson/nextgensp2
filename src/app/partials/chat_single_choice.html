@@ -8,7 +8,6 @@
 				{{query.title}}
 				<ul class="clearfix">
 					<li ng-repeat="answer in query.children" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer.id)">{{answer.title}}</li>
-
 				</ul>
 				<!-- <a href="#">OTHER</a> -->
 			</section>			 

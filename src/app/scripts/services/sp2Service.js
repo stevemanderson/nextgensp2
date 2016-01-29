@@ -42,7 +42,7 @@ angular.module('nextgensp2')
 
     /**
      * Get responses for chat
-     * @param {jSON} device
+     * @param {jSON} data
      */
     this.postQueries = function (data) {
         return $http({ method  : "POST",
@@ -53,7 +53,7 @@ angular.module('nextgensp2')
 
     /**
      * Get responses for chat
-     * @param {jSON} device
+     * @param {jSON} data
      */
     this.postAnswer = function (data) {
         return $http({ method  : "POST",
@@ -62,6 +62,27 @@ angular.module('nextgensp2')
                });
     };
 
+    /**
+     * Get multiple response
+     * @param {jSON} data
+     */
+    this.postMultiAnswer = function (data) {
+        return $http({ method  : "POST",
+                url     : apiURL+"multiresponses/",
+                data    : data
+               });
+    };
+
+    /**
+     * Get multiple response
+     * @param {jSON} data
+     */
+    this.getService = function () {
+        return $http({ method  : "GET",
+                url     : apiURL+"service/",
+                data    : data
+               });
+    };
 
     /**
      * Get response from API.AI for first question branch guiding

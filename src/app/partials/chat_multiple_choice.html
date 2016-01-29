@@ -1,22 +1,15 @@
 <div class="chat-module chat-multiple-choice">
-	<span class="module-title">chat multple choice</span>
 	<div class="container">		
 		<div class="col-md-12">					 
 			<div class="avatar">
 				<img src="images/avatar.png" >
 			</div>
 			<section>
-				Most people who start a cafe want to do one or more of the following. This can affect the time and cost to open your business
+				{{query.title}}
 				<ul class="clearfix">
-					<li class="active"><div class="box"></div><div class="title">Play music</div></li>
-					<li><div class="box"></div><div class="title">Dine outside</div></li>
-					<li class="active"><div class="box"></div><div class="title">Change fitout</div></li>
-					<li><div class="box"></div><div class="title">Street Advertising</div></li>
-					<li><div class="box"></div><div class="title">Serve Alcohol</div></li>
-					<li class="active"><div class="box"></div><div class="title">Prepare fresh food</div></li>
-					<li><div class="box"></div><div class="title">Serve packaged food</div></li>
+					<li ng-repeat="answer in query.children" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer.id)"><img src="images/multi-icon.png"><br/>{{answer.title}}</li>
 				</ul>
-				<button class="button btn-proto center-block">OK</button>
+				<button class="button btn-proto center-block" ng-click="okClicked()">OK</button>
 			</section>			 
 		</div>
 	</div>

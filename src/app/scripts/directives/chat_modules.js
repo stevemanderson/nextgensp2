@@ -29,6 +29,7 @@ angular.module('nextgensp2')
 		replace: true,
     templateUrl: "partials/chat_location.html",
 		controller: "ChatLocationCtrl",
+    scope:{},
     };
   });
 /**
@@ -44,6 +45,7 @@ angular.module('nextgensp2')
 		replace: true,
 		templateUrl: "partials/chat_multiple_choice.html",
     controller: "ChatMultipleChoiceCtrl",
+    scope:{},
     };
   });
 /**

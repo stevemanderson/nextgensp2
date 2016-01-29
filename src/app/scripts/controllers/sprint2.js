@@ -64,6 +64,24 @@ angular.module('nextgensp2')
             errorChat();
         });
     }
+    // Answer and jump to next node
+    function sendMultiResponse(ids, value){
+        var dataVar = {};
+        dataVar.pid = current_PID;
+        dataVar.id = ids;
+        dataVar.value = value;
+
+        angular.element(document.getElementById('chat-frame')).append($compile('<loading></loading>')($scope));
+
+        sp2Service.postMultiAnswer(dataVar).then(function(response) {
+            console.log("sendMultiResponse");
+            console.log(response.data);
+            buildChat(response.data);
+        }, function() {
+            console.log("Error");
+            errorChat();
+        });
+    }
 
     function buildChat(data){
         console.log("buildChat");
@@ -72,7 +90,7 @@ angular.module('nextgensp2')
         $scope.moduleData = data;
         var type = "";
 
-        switch (data.moduleType){
+        switch (data.format){
             case "freeText":
                 type = '<chatfreetext ></chatfreetext>';
             break;
@@ -82,7 +100,7 @@ angular.module('nextgensp2')
             case "resources":
                 type = '<chatresources></chatresources>';
             break;
-            case "multipleChoice":
+            case "multiple choice":
                 type = '<chatmultiplechoice></chatmultiplechoice>';
             break;
             case "summary":
@@ -116,6 +134,10 @@ angular.module('nextgensp2')
     //Capture events from Chat modules
     $scope.$on('chatModuleEvents', function (event, id, value){
       sendResponse(id, value);
+    }); 
+    //Capture event from multi choice modules
+    $scope.$on('chatMultiModuleEvents', function (event, ids, value){
+      sendMultiResponse(ids, value);
     }); 
 
 

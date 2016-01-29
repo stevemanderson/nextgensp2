@@ -34,7 +34,8 @@ angular.module('nextgensp2')
  */
 angular.module('nextgensp2')
   .controller('ChatLocationCtrl', function ($scope,loginservice, NgMap, $timeout) {
-    console.log('ChatLocationCtrl');
+    $scope.query = $scope.$parent.moduleData;
+
     $scope.autoCompleteVal={};
     $scope.geolocation = {};
     $scope.showMap = false;
@@ -54,7 +55,8 @@ angular.module('nextgensp2')
       $timeout(function timoutCall(){
         google.maps.event.trigger($scope.map, 'resize');
         $scope.map.setCenter($scope.geolocation.latlngObj);
-        $scope.$broadcast('chatModuleEvents', "ChatLocation has completed");
+        // Hard coded to select BCC option
+        $scope.$emit("chatModuleEvents", $scope.query.children[2].id, "");
       });
     }
   });
@@ -71,6 +73,24 @@ angular.module('nextgensp2')
 angular.module('nextgensp2')
   .controller('ChatMultipleChoiceCtrl', function ($scope, $location,loginservice) {
     console.log('ChatMultipleChoiceCtrl');
+    console.log($scope.$parent.moduleData);
+    $scope.query = $scope.$parent.moduleData;
+    
+    $scope.answerClicked = function(index, id){
+      console.log(index, id);
+      $scope.query.children[index].isSelected = !$scope.query.children[index].isSelected;
+    }
+    $scope.okClicked = function(){
+      //Look through and get selected
+      var ids=[];
+      for(var i=0; i<$scope.query.children; i++){
+        if($scope.query.children[i].isSelected){
+          ids.push($scope.query.children[i].id);
+        }
+      }
+      $scope.$emit("chatMultiModuleEvents", ids, "");
+
+    }
 
   });
 
