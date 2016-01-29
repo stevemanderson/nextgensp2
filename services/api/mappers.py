@@ -1,7 +1,7 @@
 class DrupalNodeMapper:
     @staticmethod
     def map(source, target):
-        if source['parent reference'] != None: target['pid'] = int(source['parent reference'])
+
 
         target['id'] = int(source['nid'])
         target['title'] = ''
@@ -57,5 +57,8 @@ class ResponseMapper:
     @staticmethod
     def map(source, target):
         target['type'] = 'response'
+
+        if source['parent reference'] != None: target['pid'] = int(source['parent reference'])
+
         if source['responses short'] != None:
             target['title'] = source['responses short']
