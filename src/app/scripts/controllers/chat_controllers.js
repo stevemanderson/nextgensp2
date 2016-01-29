@@ -83,11 +83,13 @@ angular.module('nextgensp2')
     $scope.okClicked = function(){
       //Look through and get selected
       var ids=[];
-      for(var i=0; i<$scope.query.children; i++){
+      for(var i=0; i<$scope.query.children.length; i++){
         if($scope.query.children[i].isSelected){
           ids.push($scope.query.children[i].id);
         }
       }
+      console.log("okClicked");
+      console.log(ids);
       $scope.$emit("chatMultiModuleEvents", ids, "");
 
     }
