@@ -68,7 +68,7 @@ angular.module('nextgensp2')
      */
     this.postMultiAnswer = function (data) {
         return $http({ method  : "POST",
-                url     : apiURL+"multiresponses/",
+                url     : apiURL+"multi/",
                 data    : data
                });
     };

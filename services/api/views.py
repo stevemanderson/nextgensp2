@@ -25,9 +25,8 @@ def responses(request):
     return Response(result)
 
 @api_view(['POST'])
-def multiresponses(request):
-    #sessionId = request.COOKIES.get('userSession')
-    return Response({})
+def multi(request):
+    sessionId = request.COOKIES.get('userSession')
 
     pid = request.data['pid']
     ids = request.data['ids']
@@ -37,7 +36,7 @@ def multiresponses(request):
     sc = SessionService(mc)
     h = Handler(c, sc)
 
-    result = h.submitAnswers(ids, int(pid), sessionId)
+    result = h.submitAnswers(ids.split(','), int(pid), sessionId)
 
     return Response(result)
 

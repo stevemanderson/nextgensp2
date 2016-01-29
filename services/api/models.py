@@ -26,7 +26,6 @@ class DrupalDataContext:
 
     def getByTitle(self, title):
         r = self.__getJsonResponse__(self.apiUrl, None)
-        print r
         for n in r:
             if str(n['node_title']).strip(',. ').lower() == title.lower():
                 return self.getNode(n)
@@ -40,6 +39,7 @@ class DrupalDataContext:
             node['children'] = self.getChildren(node['id'], childLevel, currentLevel)
         else:
             node['children'] = []
+
         return node
 
     def getChildren(self, pid, childLevel=100, currentLevel=0):
@@ -210,8 +210,13 @@ class Handler:
         return self._sessionService.getSessionServices(sessionId)
 
     def submitAnswers(self, ids, pid, sessionId):
-        return None
-        
+        query = self.submitAnswer(int(ids[0]), int(pid), '', sessionId, False)
+        if len(ids) > 1:
+            for i in range(1, len(ids)):
+                response = self._context.getById(int(ids[i]), 1)
+                self._sessionService.addStoredResponse(sessionId, response)
+        return query
+
     # the pid is not set up
     def submitAnswer(self, id, pid, value, sessionId, storeResponse=False):
         answer = None
@@ -227,6 +232,9 @@ class Handler:
             answer = self._context.getById(id)
 
         query = self.getFirstQuery(answer)
+
+        if query == None:
+            return {}
 
         # check the children and add the services
         for i in query['children']:

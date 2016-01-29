@@ -1,8 +1,6 @@
 class DrupalNodeMapper:
     @staticmethod
     def map(source, target):
-
-
         target['id'] = int(source['nid'])
         target['title'] = ''
 
