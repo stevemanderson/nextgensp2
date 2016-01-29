@@ -192,11 +192,14 @@ class Handler:
         query = self._context.getByTitle(title)
         return self.__prepareQuery__(query)
 
+    def getServices(self, sessionId):
+        return None
+
     # the pid is not set up
     def submitAnswer(self, id, pid, value, sessionId, storeAnswer=False):
         answer = None
 
-        if self._sessionService.sessionExist(sessionId) != True:
+        if self._sessionService.sessionExists(sessionId) != True:
             self._sessionService.createSession(sessionId)
 
         # check for the tree node submission

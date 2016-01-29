@@ -12,11 +12,14 @@ def responses(request):
     pid = request.data['pid']
     value = request.data['value']
 
+    sessionId = request.COOKIES.get('userSession')
+
     c = DrupalDataContext(DRUPAL_API)
     mc = UserMongoContext('localhost', 27017)
     sc = SessionService(mc)
     h = Handler(c, sc)
-    result = h.submitAnswer(int(id), int(pid), value, 1)
+    result = h.submitAnswer(int(id), int(pid), value, sessionId)
+
     return Response(result)
 
 @api_view(['POST'])
@@ -27,4 +30,14 @@ def queries(request):
     sc = SessionService(mc)
     h = Handler(c, sc)
     result = h.getQuery(title)
+    return Response(result)
+
+@api_view(['GET'])
+def services(request):
+    c = DrupalDataContext(DRUPAL_API)
+    mc = UserMongoContext('localhost', 27017)
+    sc = SessionService(mc)
+    h = Handler(c, sc)
+    sessionId = request.COOKIES.get('userSession')
+    result = h.getServices(sessionId)
     return Response(result)
