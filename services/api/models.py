@@ -196,6 +196,9 @@ class Handler:
     def submitAnswer(self, id, pid, value, sessionId, storeAnswer=False):
         answer = None
 
+        if self._sessionService.sessionExist(sessionId) != True:
+            self._sessionService.createSession(sessionId)
+
         # check for the tree node submission
         if id == 0 and pid == 0 and len(value) > 0:
             answer = self._context.getByTitle(value)
@@ -207,6 +210,6 @@ class Handler:
         # check the children and add the services
         for i in query['children']:
             if i['type'] == 'service':
-                print 'service'
+                self._sessionService.addService(sessionId, i)
 
         return self.__prepareQuery__(query)
