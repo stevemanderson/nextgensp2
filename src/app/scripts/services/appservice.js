@@ -12,25 +12,10 @@ angular.module('nextgensp2')
   .service('appService', function ($http, $cookies, uuid2) {
     
     var _userSession = {};
-    var _userData = {};
+    var _userData = {}; 
     var _schemaData ={};
     var _responsesData ={};
 
-
-    //Check for a user session otherwise create a new one
-    if($cookies.get('userSession')){
-      _userSession = JSON.parse($cookies.get('userSession'));
-    }else{
-      _userSession.guid = uuid2.newguid();
-      $cookies.put('userSession', JSON.stringify(_userSession));
-    }
-    console.log(_userSession.guid);
-
-    
-    
-
-
-    
 
   //load User JSON
 	$http.get('data/person.json').success(function(data){
