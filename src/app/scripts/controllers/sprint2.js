@@ -17,14 +17,16 @@ angular.module('nextgensp2')
     var current_ID = 0;
     var current_answer = 0;
     $scope.moduleData;
+    $scope.sessionStats = {};
 
     $scope.firstResponse = function(e){ 
         if(e.keyCode === 13){
             //clear exisiting chat
             angular.element(document.getElementById('chat-frame')).empty();
             
-            angular.element(document.getElementById('chat-frame')).append($compile('<loading></loading>')($scope));
+            addLoader();
             sp2Service.sendToAPIAI($scope.inputText).then(function(response) {
+                removeLoader();
                 sendQuery(response.data.result.parameters.type);
             }, function() {
                 console.log("Error");
@@ -34,7 +36,7 @@ angular.module('nextgensp2')
 
     // Jump to tree start
     function sendQuery(data){        
-        angular.element(document.getElementById('chat-frame')).append($compile('<loading></loading>')($scope));
+        addLoader();
         
         var dataVar = {};
         dataVar.title = data;
@@ -53,7 +55,7 @@ angular.module('nextgensp2')
         dataVar.id = id;
         dataVar.value = value;
 
-        angular.element(document.getElementById('chat-frame')).append($compile('<loading></loading>')($scope));
+        addLoader();
 
         sp2Service.postAnswer(dataVar).then(function(response) {
             console.log("sendResponse");
@@ -71,7 +73,7 @@ angular.module('nextgensp2')
         dataVar.ids = ids.toString();
         dataVar.value = value;
 
-        angular.element(document.getElementById('chat-frame')).append($compile('<loading></loading>')($scope));
+        addLoader();
 
         sp2Service.postMultiAnswer(dataVar).then(function(response) {
             console.log("sendMultiResponse");
@@ -83,9 +85,22 @@ angular.module('nextgensp2')
         });
     }
 
+    // Get session Services / Stats
+    function getSessionServices(){
+        sp2Service.getServices().then(function(response) {
+            console.log("getSessionServices");
+            console.log(response.data);
+            updateStats(response.data);
+        }, function() {
+        });
+    }
+
     function buildChat(data){
         console.log("buildChat");
-        console.log(data);
+
+        //Update session services
+        //getSessionServices();
+
         current_PID = data.id;
         $scope.moduleData = data;
         var type = "";
@@ -113,11 +128,19 @@ angular.module('nextgensp2')
         }
 
         //Remove loader
-        angular.element(document.getElementsByClassName('chat-loading')).remove();
+        removeLoader();
         
         // Add new module
         angular.element(document.getElementById('chat-frame')).append($compile(type)($scope));
 
+    }
+
+    function addLoader(){
+        angular.element(document.getElementById('chat-frame')).append($compile('<loading></loading>')($scope));
+    }
+
+    function removeLoader(){
+        angular.element(document.getElementsByClassName('chat-loading')).remove();
     }
 
     function errorChat(){
@@ -125,6 +148,12 @@ angular.module('nextgensp2')
         angular.element(document.getElementsByClassName('chat-loading')).remove();
         // Add error module
         angular.element(document.getElementById('chat-frame')).append('<div class="error"> Sorry there was an error.</div>');
+    }
+
+    function updateStats(data){
+        console.log("updateStats");
+        console.log(data);
+        $scope.sessionStats;
     }
 
 

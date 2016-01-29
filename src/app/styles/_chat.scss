@@ -471,7 +471,24 @@
 	    animation-delay: 0.24s; 
 	}
 }
- 	 
+
+
+// Footer
+footer{
+	font-size: 10px;
+	min-height:200px;
+	padding-top:100px;
+	background-color:#fafafa;
+	ul{
+		margin:0;
+		list-style: none;
+		li{
+			padding:0 15px;
+			float: left;
+		}
+	}
+}
+
 		
 
 
