@@ -8,6 +8,7 @@ from pymongo import MongoClient
 
 import requests
 import json
+import copy
 
 # Drupal Context
 class DrupalDataContext:
@@ -92,6 +93,18 @@ class SessionService:
         }
         self._context.save(sessionId, session)
 
+    def getSessionServices(self, sessionId):
+        session = self._context.get(sessionId)
+        if session == None or 'services' not in session:
+            return []
+        return session['services']
+
+    def getStoredResponses(self, sessionId):
+        session = self._context.get(sessionId)
+        if session == None or 'storedResponses' not in session:
+            return []
+        return session['storedResponses']
+
     def removeService(self, sessionId, serviceId):
         session = self._context.get(sessionId)
         if 'services' not in session:
@@ -166,18 +179,19 @@ class Handler:
         result['format'] = query['format']
         result['children'] = []
 
-        for n in query['children']:
-            obj = {}
-            obj['id'] = n['id']
-            obj['title'] = n['title']
-            obj['type'] = n['type']
-            obj['format'] =n['format']
-            result['children'].append(obj)
+        if 'children' in query:
+            for n in query['children']:
+                obj = {}
+                obj['id'] = n['id']
+                obj['title'] = n['title']
+                obj['type'] = n['type']
+                obj['format'] =n['format']
+                result['children'].append(obj)
 
         return result
 
     # levels are not implemented
-    def __removeChildLevel__(self, item, level=1):
+    def __removeChildLevel__(self, item):
         # only get the first level
         if 'children' in item:
             for c in item['children']:
@@ -193,12 +207,16 @@ class Handler:
         return self.__prepareQuery__(query)
 
     def getServices(self, sessionId):
-        return None
+        return self._sessionService.getSessionServices(sessionId)
 
+    def submitAnswers(self, ids, pid, sessionId):
+        return None
+        
     # the pid is not set up
-    def submitAnswer(self, id, pid, value, sessionId, storeAnswer=False):
+    def submitAnswer(self, id, pid, value, sessionId, storeResponse=False):
         answer = None
 
+        # Create if it doesn't exist
         if self._sessionService.sessionExists(sessionId) != True:
             self._sessionService.createSession(sessionId)
 
@@ -214,5 +232,16 @@ class Handler:
         for i in query['children']:
             if i['type'] == 'service':
                 self._sessionService.addService(sessionId, i)
+
+        # store the response
+        if storeResponse:
+            # dont store the children
+            temp = copy.deepcopy(answer)
+            if 'children' in temp:
+                temp.pop('children', None)
+            self._sessionService.addStoredResponse(sessionId, temp)
+        else:
+            # remove from the stored if exists
+            self._sessionService.removeStoredResponse(sessionId, answer['id'])
 
         return self.__prepareQuery__(query)

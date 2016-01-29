@@ -58,7 +58,5 @@ class ResponseMapper:
     def map(source, target):
         target['type'] = 'response'
 
-        if source['parent reference'] != None: target['pid'] = int(source['parent reference'])
-
         if source['responses short'] != None:
             target['title'] = source['responses short']
