@@ -17,21 +17,6 @@ angular.module('nextgensp2')
     var _responsesData ={};
 
 
-    //Check for a user session otherwise create a new one
-    if($cookies.get('userSession')){
-      _userSession = $cookies.get('userSession');
-    }else{
-      _userSession.guid = uuid2.newguid();
-      $cookies.put('userSession', _userSession.guid);
-    }
-    //console.log(_userSession.guid);
-
-    
-    
-
-
-    
-
   //load User JSON
 	$http.get('data/person.json').success(function(data){
 		_userData = data.person; 
