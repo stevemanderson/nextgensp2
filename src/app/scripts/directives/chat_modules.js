@@ -48,6 +48,17 @@ angular.module('nextgensp2')
     scope:{},
     };
   });
+
+angular.module('nextgensp2')
+  .directive('chatoptions', function () {
+    return {
+		restrict: 'E',
+		replace: true,
+		templateUrl: "partials/chat_options.html",
+    controller: "ChatOptionsCtrl",
+    scope:{},
+    };
+  });
 /**
  * @ngdoc directive
  * @name nextgensp2.directive:chatresources

@@ -1,0 +1,10 @@
+<div class="chat-module chat-options">
+	<div class="container">
+		<div class="col-md-12">
+			<h3>Options</h3>
+			<ul class="clearfix">
+				<li ng-repeat="answer in query.storedResponses" ng-click="answerClicked(answer)"><img src="images/multi-icon.png"><br/>{{answer.title}}</li>
+			</ul>
+		</div>
+	</div>
+</div>

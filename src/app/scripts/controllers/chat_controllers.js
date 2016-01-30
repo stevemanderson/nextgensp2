@@ -1,5 +1,16 @@
 'use strict';
 
+function getTypeArray(array, type) {
+  var result = [];
+  for(var i=0; i < array.length; ++i) {
+    var item = array[i];
+    if(item.type == type) {
+      result.push(item);
+    }
+  }
+  return result;
+}
+
 /**
  * @ngdoc function
  * @name nextgensp2.controller:ChatFreeTextCtrl
@@ -10,7 +21,6 @@
 angular.module('nextgensp2')
   .controller('ChatFreeTextCtrl', function ($scope) {
     console.log('ChatFreeTextCtrl');
-
   });
 
 /**
@@ -71,15 +81,20 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatMultipleChoiceCtrl', function ($scope, $location,loginservice) {
+  .controller('ChatMultipleChoiceCtrl', function ($scope, $location, loginservice) {
     console.log('ChatMultipleChoiceCtrl');
     console.log($scope.$parent.moduleData);
+
     $scope.query = $scope.$parent.moduleData;
-    
+
+    $scope.responses = getTypeArray($scope.query.children, 'response');
+    $scope.services = getTypeArray($scope.query.children, 'service');
+
     $scope.answerClicked = function(index, id){
       console.log(index, id);
       $scope.query.children[index].isSelected = !$scope.query.children[index].isSelected;
     }
+
     $scope.okClicked = function(){
       //Look through and get selected
       var ids=[];
@@ -91,9 +106,7 @@ angular.module('nextgensp2')
       console.log("okClicked");
       console.log(ids);
       $scope.$emit("chatMultiModuleEvents", ids, "");
-
     }
-
   });
 
 /**
@@ -109,6 +122,19 @@ angular.module('nextgensp2')
 
   });
 
+
+angular.module('nextgensp2')
+  .controller('ChatOptionsCtrl', function ($scope, $location) {
+    console.log("ChatOptionsCtrl");
+
+    $scope.query = $scope.$parent.moduleData;
+
+    $scope.answerClicked = function(response){
+      $scope.$emit("chatModuleEvents", response.id, "");
+    }
+  });
+
+
 /**
  * @ngdoc function
  * @name nextgensp2.controller:ChatSingleChoiceCtrl
@@ -121,19 +147,22 @@ angular.module('nextgensp2')
     console.log('ChatSingleChoiceCtrl');
     console.log($scope.$parent.moduleData);
     $scope.query = $scope.$parent.moduleData;
-    
+    $scope.responses = getTypeArray($scope.query.children, 'response');
+    $scope.services = getTypeArray($scope.query.children, 'service');
+
     function reset(){
       //reset selection
-      for(var i=0; i<$scope.query.children.length; i++){
-        $scope.query.children[i].isSelected = false;
+      for(var i=0; i<$scope.responses.length; i++){
+        $scope.responses[i].isSelected = false;
       }
     }
+
     reset();
+
     $scope.answerClicked = function(index, id){
       console.log(index, id);
       reset();
-      $scope.query.children[index].isSelected = true;
-      
+      $scope.responses[index].isSelected = true;
       $scope.$emit("chatModuleEvents", id, "");
     }
 

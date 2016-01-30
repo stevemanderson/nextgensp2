@@ -74,6 +74,9 @@ class UserMongoContext:
             return
         self._db.sessions.insert(record)
 
+    def delete(self, sessionId):
+        self._db.sessions.remove({"sessionId":sessionId})
+
 class SessionService:
     def __init__(self, context):
         self._context = context
@@ -83,6 +86,9 @@ class SessionService:
 
     def sessionExists(self, sessionId):
         return self.getSession(sessionId) != None
+
+    def removeSession(self, sessionId):
+        self._context.delete(sessionId)
 
     def createSession(self, sessionId):
         if self.sessionExists(sessionId):
@@ -143,7 +149,8 @@ class SessionService:
                 index = curr
                 break
             curr = curr + 1
-        del session['storedResponses'][index]
+        if index != -1 and index < len(session['storedResponses']):
+            del session['storedResponses'][index]
         self._context.save(sessionId, session)
 
     def addStoredResponse(self, sessionId, answer):
@@ -178,6 +185,12 @@ class Handler:
                 if 'children' in c:
                     c.pop('children', None)
 
+    def getSession(self, sessionId):
+        return self._sessionService.getSession(sessionId)
+
+    def removeSession(self, sessionId):
+        self._sessionService.removeSession(sessionId)
+
     def getById(self, id, childDepth=1):
         result = self._context.getById(id, childDepth)
         return result
@@ -189,11 +202,13 @@ class Handler:
         return self._sessionService.getSessionServices(sessionId)
 
     def submitAnswers(self, ids, pid, sessionId):
-        query = self.submitAnswer(int(ids[0]), int(pid), '', sessionId, False)
+        # store the responses first :|
         if len(ids) > 1:
             for i in range(1, len(ids)):
                 response = self._context.getById(int(ids[i]), 1)
                 self._sessionService.addStoredResponse(sessionId, response)
+
+        query = self.submitAnswer(int(ids[0]), int(pid), '', sessionId, False)
         return query
 
     # the pid is not set up
@@ -231,6 +246,6 @@ class Handler:
             # remove from the stored if exists
             self._sessionService.removeStoredResponse(sessionId, answer['id'])
 
-        query['storedActions'] = self._sessionService.getStoredResponses(sessionId)
+        query['storedResponses'] = self._sessionService.getStoredResponses(sessionId)
 
         return query

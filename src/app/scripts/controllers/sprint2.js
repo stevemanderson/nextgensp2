@@ -9,9 +9,9 @@
  */
 angular.module('nextgensp2')
   .controller('Sprint2Ctrl', function ($scope, sp2Service,  $compile) {
-    
+
   	var responseData = {};
-    responseData.moduleType = "freeText"; 
+    responseData.moduleType = "freeText";
 
     var current_PID = 0;
     var current_ID = 0;
@@ -19,11 +19,11 @@ angular.module('nextgensp2')
     $scope.moduleData;
     $scope.sessionStats = {};
 
-    $scope.firstResponse = function(e){ 
+    $scope.firstResponse = function(e){
         if(e.keyCode === 13){
             //clear exisiting chat
             angular.element(document.getElementById('chat-frame')).empty();
-            
+
             addLoader();
             sp2Service.sendToAPIAI($scope.inputText).then(function(response) {
                 removeLoader();
@@ -35,9 +35,9 @@ angular.module('nextgensp2')
     }
 
     // Jump to tree start
-    function sendQuery(data){        
+    function sendQuery(data){
         addLoader();
-        
+
         var dataVar = {};
         dataVar.title = data;
         console.log(dataVar);
@@ -129,10 +129,12 @@ angular.module('nextgensp2')
 
         //Remove loader
         removeLoader();
-        
+
+        var options = '<chatoptions></chatoptions>';
+
         // Add new module
         angular.element(document.getElementById('chat-frame')).append($compile(type)($scope));
-
+        angular.element(document.getElementById('chat-frame')).append($compile(options)($scope));
     }
 
     function addLoader(){
@@ -159,17 +161,16 @@ angular.module('nextgensp2')
 
 
     //Events
-    
+
     //Capture events from Chat modules
     $scope.$on('chatModuleEvents', function (event, id, value){
       sendResponse(id, value);
-    }); 
+    });
+
     //Capture event from multi choice modules
     $scope.$on('chatMultiModuleEvents', function (event, ids, value){
       sendMultiResponse(ids, value);
-    }); 
-
-
+    });
 
     // Actions
 
@@ -189,4 +190,3 @@ angular.module('nextgensp2')
     };
 
 });
-
