@@ -120,14 +120,19 @@ angular.module('nextgensp2')
 
 
 angular.module('nextgensp2')
-  .controller('ChatOptionsCtrl', function ($scope, $location) {
+  .controller('ChatOptionsCtrl', function ($scope, $location, ngDialog, $rootScope) {
     console.log("ChatOptionsCtrl");
 
     $scope.query = $scope.$parent.moduleData;
     $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response'; })
 
     $scope.summaryClicked = function() {
-
+      $scope.sessionStats = $rootScope.sessionStats;
+      console.log(JSON.stringify($scope.sessionStats));
+      ngDialog.open({
+        template:"partials/chat_summary.html",
+        scope:$scope
+      });
     }
 
     $scope.answerClicked = function(response){

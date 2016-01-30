@@ -8,7 +8,7 @@
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('Sprint2Ctrl', function ($scope, sp2Service,  $compile) {
+  .controller('Sprint2Ctrl', function ($scope, sp2Service,  $compile, $rootScope) {
 
   	var responseData = {};
     responseData.moduleType = "freeText";
@@ -99,7 +99,7 @@ angular.module('nextgensp2')
         console.log("buildChat");
 
         //Update session services
-        //getSessionServices();
+        getSessionServices();
 
         current_PID = data.id;
         $scope.moduleData = data;
@@ -155,7 +155,22 @@ angular.module('nextgensp2')
     function updateStats(data){
         console.log("updateStats");
         console.log(data);
-        $scope.sessionStats;
+
+        var cost_min = 0;
+        var cost_max = 0;
+        for(var i = 0; i < data.length; ++i) {
+          var item = data[i];
+          if(item.cost_min) {
+            cost_min += parseInt(item.cost_min);
+          }
+          if(item.cost_max) {
+            cost_max += parseInt(item.cost_max);
+          }
+        }
+        $rootScope.sessionStats = {
+          cost_min:cost_min,
+          cost_max:cost_max
+        };
     }
 
 
