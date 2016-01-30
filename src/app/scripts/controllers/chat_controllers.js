@@ -1,16 +1,5 @@
 'use strict';
 
-function getTypeArray(array, type) {
-  var result = [];
-  for(var i=0; i < array.length; ++i) {
-    var item = array[i];
-    if(item.type == type) {
-      result.push(item);
-    }
-  }
-  return result;
-}
-
 /**
  * @ngdoc function
  * @name nextgensp2.controller:ChatFreeTextCtrl
@@ -81,14 +70,14 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatMultipleChoiceCtrl', function ($scope, $location, loginservice) {
+  .controller('ChatMultipleChoiceCtrl', ['$scope', '$location', 'loginservice', '$filter', function ($scope, $location, loginservice, $filter) {
     console.log('ChatMultipleChoiceCtrl');
     console.log($scope.$parent.moduleData);
 
     $scope.query = $scope.$parent.moduleData;
 
-    $scope.responses = getTypeArray($scope.query.children, 'response');
-    $scope.services = getTypeArray($scope.query.children, 'service');
+    $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response'; });
+    $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
 
     $scope.answerClicked = function(index, id){
       console.log(index, id);
@@ -107,7 +96,7 @@ angular.module('nextgensp2')
       console.log(ids);
       $scope.$emit("chatMultiModuleEvents", ids, "");
     }
-  });
+  }]);
 
 /**
  * @ngdoc function
@@ -143,12 +132,13 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatSingleChoiceCtrl', function ($scope, $location,loginservice) {
+  .controller('ChatSingleChoiceCtrl', ['$scope', '$location', 'loginservice', '$filter', function ($scope, $location,loginservice, $filter) {
     console.log('ChatSingleChoiceCtrl');
     console.log($scope.$parent.moduleData);
     $scope.query = $scope.$parent.moduleData;
-    $scope.responses = getTypeArray($scope.query.children, 'response');
-    $scope.services = getTypeArray($scope.query.children, 'service');
+
+    $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response'; });
+    $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
 
     function reset(){
       //reset selection
@@ -166,8 +156,7 @@ angular.module('nextgensp2')
       $scope.$emit("chatModuleEvents", id, "");
     }
 
-
-  });
+  }]);
 
 /**
  * @ngdoc function

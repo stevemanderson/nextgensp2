@@ -57,7 +57,7 @@ angular
       .when('/apiai', {
         templateUrl: 'views/apiai.html'
       })
-      
+
       .otherwise({
         redirectTo: '/sprint2'
       });
