@@ -15,6 +15,7 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
+    'ngDialog',
     'ngTouch',
     'ngMap',
     'slick',

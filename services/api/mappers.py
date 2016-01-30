@@ -43,7 +43,6 @@ class ServiceMapper:
         target['processing_time'] = source['processing time']
         target['service_type'] = 'NEEDS TO BE UPDATED'
 
-
 class QueryMapper:
     @staticmethod
     def map(source, target):

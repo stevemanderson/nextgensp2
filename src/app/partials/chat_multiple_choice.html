@@ -9,13 +9,16 @@
 				<ul class="clearfix">
 					<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer.id)"><img src="images/multi-icon.png"><br/>{{answer.title}}</li>
 				</ul>
-				<div class='container__services'>
+
+				<button class="button btn-proto center-block" ng-click="okClicked()" ng-show="{{responses.length > 0}}">OK</button>
+
+				<div class='container__services' ng-show="{{services.length > 0}}">
 					<h3>Services</h3>
 					<ul class="clearfix">
-						<li ng-repeat="answer in services" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer.id)"><img src="images/multi-icon.png"><br/>{{answer.title}}</li>
+						<li ng-repeat="item in services"
+						ng-click="serviceClicked(item)"><img src="images/multi-icon.png"><br/>{{item.title}}</li>
 					</ul>
 				</div>
-				<button class="button btn-proto center-block" ng-click="okClicked()">OK</button>
 			</section>
 		</div>
 	</div>

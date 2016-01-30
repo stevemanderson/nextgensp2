@@ -35,6 +35,15 @@ class DrupalDataContext:
         node = {}
         DrupalNodeMapper.map(n, node)
 
+        if 'hard_dependency_description' in n and n['hard_dependency_description'] != None:
+            node['dependency_description'] = n['hard_dependency_description']
+
+        if 'hard_dependencies' in n and n['hard_dependencies'] != None:
+            result = []
+            for depId in str(n['hard_dependencies']).split(', '):
+                result.append(self.getById(depId, 1))
+            node['dependencies'] = result
+
         if currentLevel < childLevel:
             node['children'] = self.getChildren(node['id'], childLevel, currentLevel)
         else:

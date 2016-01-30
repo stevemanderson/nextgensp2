@@ -70,7 +70,7 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatMultipleChoiceCtrl', ['$scope', '$location', 'loginservice', '$filter', function ($scope, $location, loginservice, $filter) {
+  .controller('ChatMultipleChoiceCtrl', ['$scope', '$location', 'loginservice', 'ngDialog', function ($scope, $location, loginservice, ngDialog) {
     console.log('ChatMultipleChoiceCtrl');
     console.log($scope.$parent.moduleData);
 
@@ -78,6 +78,14 @@ angular.module('nextgensp2')
 
     $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response'; });
     $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
+
+    $scope.serviceClicked = function(service) {
+      $scope.service = service;
+      ngDialog.open({
+        template:"partials/service_information.html",
+        scope:$scope
+      });
+    }
 
     $scope.answerClicked = function(index, id){
       console.log(index, id);
@@ -108,7 +116,6 @@ angular.module('nextgensp2')
 angular.module('nextgensp2')
   .controller('ChatResourcesCtrl', function ($scope, $location,loginservice) {
     console.log('ChatResourcesCtrl');
-
   });
 
 
@@ -117,6 +124,11 @@ angular.module('nextgensp2')
     console.log("ChatOptionsCtrl");
 
     $scope.query = $scope.$parent.moduleData;
+    $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response'; })
+
+    $scope.summaryClicked = function() {
+
+    }
 
     $scope.answerClicked = function(response){
       $scope.$emit("chatModuleEvents", response.id, "");
@@ -132,13 +144,21 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatSingleChoiceCtrl', ['$scope', '$location', 'loginservice', '$filter', function ($scope, $location,loginservice, $filter) {
+  .controller('ChatSingleChoiceCtrl', ['$scope', '$location', 'loginservice', 'ngDialog', function ($scope, $location,loginservice, ngDialog) {
     console.log('ChatSingleChoiceCtrl');
     console.log($scope.$parent.moduleData);
     $scope.query = $scope.$parent.moduleData;
 
     $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response'; });
     $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
+
+    $scope.serviceClicked = function(service) {
+      $scope.service = service;
+      ngDialog.open({
+        template:"partials/service_information.html",
+        scope:$scope
+      });
+    }
 
     function reset(){
       //reset selection

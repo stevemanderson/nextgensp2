@@ -10,10 +10,10 @@
 					<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer.id)">{{answer.title}}</li>
 				</ul>
 			</section>
-			<div class='container__services'>
+			<div class='container__services' ng-show="{{services.length > 0}}">
 				<h3>Services</h3>
 				<ul class="clearfix">
-					<li ng-repeat="answer in services" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer.id)"><img src="images/multi-icon.png"><br/>{{answer.title}}</li>
+					<li ng-repeat="item in services" ng-click="serviceClicked(item)"><img src="images/multi-icon.png"><br/>{{item.title}}</li>
 				</ul>
 			</div>
 		</div>
