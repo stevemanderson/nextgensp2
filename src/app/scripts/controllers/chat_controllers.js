@@ -34,7 +34,8 @@ angular.module('nextgensp2')
 angular.module('nextgensp2')
   .controller('ChatLocationCtrl', function ($scope,loginservice, NgMap, $timeout) {
     $scope.query = $scope.$parent.moduleData;
-
+    $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response'; })
+    
     $scope.autoCompleteVal={};
     $scope.geolocation = {};
     $scope.showMap = false;
@@ -55,9 +56,17 @@ angular.module('nextgensp2')
         google.maps.event.trigger($scope.map, 'resize');
         $scope.map.setCenter($scope.geolocation.latlngObj);
         // Hard coded to select BCC option
-        $scope.$emit("chatModuleEvents", $scope.query.children[2].id, "");
+        //$scope.$emit("chatModuleEvents", $scope.query.children[2].id, "");
       });
     }
+
+    $scope.answerClicked = function(index, id){
+      console.log(index, id);
+      //reset();
+      $scope.responses[index].isSelected = true;
+      $scope.$emit("chatModuleEvents", id, "");
+    }
+
   });
 
 
