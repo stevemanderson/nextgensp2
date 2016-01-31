@@ -176,6 +176,18 @@
 		text-transform:uppercase;
 	}
 }
+.chat-input{
+		width: 80%;
+		@extend .box-border;
+	    border:1px solid $brand-grey-light;
+	    box-shadow:none;
+	    font-size:20px;
+	    color:$brand-blue;  
+	    margin: 10px auto;
+	    height: 60px;
+	    padding-left:15px;
+	    font-weight: $weight-normal;
+	}
 
 
 // Chat Modules
@@ -229,9 +241,7 @@
 			&.active{
 				background-color: #fafafa;
 			}
-
 		}
-
 	} 
 }
 
@@ -240,6 +250,26 @@
 	.map{
 	  height: 200px;
 	}
+	ul{
+		list-style-type: none;
+		margin-top: 10px;
+		li{
+			border:1px solid #eeeeee;
+			border-radius:3px;
+			float:left;
+			height: 110px;
+			width:140px;
+			padding-top:70px;
+			margin: 5px;
+			text-align: center;
+			font-weight: $weight-bold;
+			font-size: 12px;
+			&:hover,
+			&.active{
+				background-color: #fafafa;
+			}
+		}
+	} 
 }
 
 // Chat resources

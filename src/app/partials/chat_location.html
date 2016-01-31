@@ -6,7 +6,7 @@
 			</div>
 			<section>
 				{{query.title}}
-				<input class="chat-input" type="text" g-places-autocomplete force-selection="true" ng-model="autoCompleteVal" ng-blur="autoCompleteBlur($event)" ng-keyup="autoCompleteKeyup($event)" placeholder="Type address" />
+				<input class="form-control chat-input" type="text" g-places-autocomplete force-selection="true" ng-model="autoCompleteVal" ng-blur="autoCompleteBlur($event)" ng-keyup="autoCompleteKeyup($event)" placeholder="Type the address" />
 			</section>			 
 		</div>
 	</div>
@@ -15,5 +15,8 @@
 	      	<marker position="{{geolocation.latlngStr}}" title="Position"></marker>
 	    </ng-map>
 	</div>
+	<ul class="clearfix" ng-show="showMap">
+		<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer.id)">{{answer.title}}</li>
+	</ul>
 </div>
 
