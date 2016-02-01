@@ -12,6 +12,8 @@ class DrupalNodeMapper:
                 QueryMapper.map(source, target)
             if source['type'] == 'Services':
                 ServiceMapper.map(source, target)
+            if source['type'] == 'Linkage':
+                LinkageMapper.map(source, target)
 
         if source['response format'] != None:
             target['format'] = str(source['response format']).lower()
@@ -23,6 +25,13 @@ class DrupalNodeMapper:
         if len(target['title']) == 0:
             if source['node_title'] != None:
                 target['title'] = source['node_title']
+
+class LinkageMapper:
+    @staticmethod
+    def map(source, target):
+        target['type'] = 'linkage'
+        target['queryId'] = source['linkage query']
+
 
 class ServiceMapper:
     @staticmethod

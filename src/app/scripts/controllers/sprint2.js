@@ -27,7 +27,7 @@ angular.module('nextgensp2')
             addLoader();
             sp2Service.sendToAPIAI($scope.inputText).then(function(response) {
                 removeLoader();
-                sendQuery(response.data.result.parameters.type);
+                sendQuery({title:response.data.result.parameters.type});
             }, function() {
                 console.log("Error");
             });
@@ -39,7 +39,9 @@ angular.module('nextgensp2')
         addLoader();
 
         var dataVar = {};
-        dataVar.title = data;
+        if(data.hasOwnProperty('id')) { dataVar.id = data.id; }
+        if(data.hasOwnProperty('title')) { dataVar.title = data.title; }
+
         console.log(dataVar);
         sp2Service.postQueries(dataVar).then(function(response) {
             buildChat(response.data);
@@ -158,6 +160,7 @@ angular.module('nextgensp2')
 
         var cost_min = 0;
         var cost_max = 0;
+
         for(var i = 0; i < data.length; ++i) {
           var item = data[i];
           if(item.cost_min) {
@@ -173,9 +176,10 @@ angular.module('nextgensp2')
         };
     }
 
-
-
     //Events
+    $scope.$on('chatModuleLinkage', function(event, id) {
+        sendQuery({id:id});
+    });
 
     //Capture events from Chat modules
     $scope.$on('chatModuleEvents', function (event, id, value){

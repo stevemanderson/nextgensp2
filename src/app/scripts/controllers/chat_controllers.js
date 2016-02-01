@@ -35,12 +35,10 @@ angular.module('nextgensp2')
   .controller('ChatLocationCtrl', function ($scope,loginservice, NgMap, $timeout) {
     $scope.query = $scope.$parent.moduleData;
     $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response'; })
-    
+
     $scope.autoCompleteVal={};
     $scope.geolocation = {};
     $scope.showMap = false;
-
-
     $scope.$on('g-places-autocomplete:select', function (event, data){
       console.log(data);
       $timeout(function timoutCall(){
@@ -66,7 +64,6 @@ angular.module('nextgensp2')
       $scope.responses[index].isSelected = true;
       $scope.$emit("chatModuleEvents", id, "");
     }
-
   });
 
 
@@ -85,7 +82,7 @@ angular.module('nextgensp2')
 
     $scope.query = $scope.$parent.moduleData;
 
-    $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response'; });
+    $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; });
     $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
 
     $scope.serviceClicked = function(service) {
@@ -96,8 +93,8 @@ angular.module('nextgensp2')
       });
     }
 
-    $scope.answerClicked = function(index, id){
-      console.log(index, id);
+    $scope.answerClicked = function(index, response){
+      console.log(index, response.id);
       $scope.query.children[index].isSelected = !$scope.query.children[index].isSelected;
     }
 
@@ -133,7 +130,7 @@ angular.module('nextgensp2')
     console.log("ChatOptionsCtrl");
 
     $scope.query = $scope.$parent.moduleData;
-    $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response'; })
+    $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; });
 
     $scope.summaryClicked = function() {
       $scope.sessionStats = $rootScope.sessionStats;
@@ -145,7 +142,11 @@ angular.module('nextgensp2')
     }
 
     $scope.answerClicked = function(response){
-      $scope.$emit("chatModuleEvents", response.id, "");
+      if(response.type == 'linkage') {
+        $scope.$emit("chatModuleLinkage", response.queryId);
+      } else {
+        $scope.$emit("chatModuleEvents", response.id, "");
+      }
     }
   });
 
@@ -160,10 +161,11 @@ angular.module('nextgensp2')
 angular.module('nextgensp2')
   .controller('ChatSingleChoiceCtrl', ['$scope', '$location', 'loginservice', 'ngDialog', function ($scope, $location,loginservice, ngDialog) {
     console.log('ChatSingleChoiceCtrl');
-    console.log($scope.$parent.moduleData);
     $scope.query = $scope.$parent.moduleData;
 
-    $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response'; });
+    $scope.test = "testing";
+
+    $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; });
     $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
 
     $scope.serviceClicked = function(service) {
@@ -183,13 +185,18 @@ angular.module('nextgensp2')
 
     reset();
 
-    $scope.answerClicked = function(index, id){
-      console.log(index, id);
+    $scope.answerClicked = function(index, response){
+      console.log(index, response.id);
       reset();
       $scope.responses[index].isSelected = true;
-      $scope.$emit("chatModuleEvents", id, "");
-    }
 
+      if(response.type == 'response') {
+        $scope.$emit("chatModuleEvents", response.id, "");
+      }
+      else if(response.type == 'linkage') {
+        $scope.$emit("chatModuleLinkage", response.queryId);
+      }
+    }
   }]);
 
 /**
