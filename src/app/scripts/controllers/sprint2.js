@@ -200,17 +200,19 @@ angular.module('nextgensp2')
 
     //Capture events from Chat modules
     $scope.$on('chatModuleEvents', function (event, id, value){
-      sendResponse(id, value);
+        console.log("chatModuleEvents");
+        sendResponse(id, value);
     });
 
     //Capture event from multi choice modules
     $scope.$on('chatMultiModuleEvents', function (event, ids, value){
-      sendMultiResponse(ids, value);
+        console.log("chatMultiModuleEvents");
+        sendMultiResponse(ids, value);
     });
 
     //Toggle Side panel
     $scope.$on('chatSidePanelEvent', function (event){
-      sidePanelToggle();
+        sidePanelToggle();
     });
 
     // Actions

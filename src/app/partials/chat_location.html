@@ -15,8 +15,12 @@
 	      	<marker position="{{geolocation.latlngStr}}" title="Position"></marker>
 	    </ng-map>
 	</div>
-	<ul class="clearfix" ng-show="showMap">
-		<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer.id)"><span ng-bind-html="answer.title"></span></li>
-	</ul>
+	<div class="container">		
+		<div class="col-md-12">	
+			<ul class="clearfix" ng-show="showMap">
+				<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer.id)"><span ng-bind-html="answer.title"></span></li>
+		</ul>
+		</div>
+	</div>
 </div>
 

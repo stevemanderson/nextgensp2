@@ -64,7 +64,7 @@ angular.module('nextgensp2')
       console.log(index, id);
       //reset();
       $scope.responses[index].isSelected = true;
-      $scope.$emit("chatModuleEvents", id, "");
+      $scope.$emit("chatModuleEvents", id, "", this);
     }
 
   });
@@ -166,6 +166,8 @@ angular.module('nextgensp2')
     console.log('ChatSingleChoiceCtrl');
     console.log($scope.$parent.moduleData);
     $scope.query = $scope.$parent.moduleData;
+
+
 
     $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response'; });
     $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });

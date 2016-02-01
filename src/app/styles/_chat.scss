@@ -226,6 +226,7 @@
 .chat-single-choice{
 	ul{
 		list-style-type: none;
+
 		li{
       cursor:pointer;
 			border:1px solid #eeeeee;
@@ -233,7 +234,7 @@
 			float:left;
 			height: 110px;
 			width:140px;
-			padding-top:15px;
+			padding:15px 10px;			
 			margin: 5px;
 			text-align: center;
 			font-weight: $weight-bold;
@@ -241,6 +242,7 @@
 			&:hover,
 			&.active{
 				background-color: #fafafa;
+				cursor: pointer;
 			}
 		}
 	}
@@ -260,7 +262,7 @@
 			float:left;
 			height: 110px;
 			width:140px;
-			padding-top:70px;
+			padding:50px 10px 10px 10px;
 			margin: 5px;
 			text-align: center;
 			font-weight: $weight-bold;
@@ -268,6 +270,7 @@
 			&:hover,
 			&.active{
 				background-color: #fafafa;
+				cursor: pointer;
 			}
 		}
 	} 
@@ -332,6 +335,7 @@
 				color:$brand-blue;
 				background-color: #f5f7fa;
 				border:1px solid #eeeeee;
+				cursor: pointer;
 			}
 			&.active{
 				color:$brand-blue;
