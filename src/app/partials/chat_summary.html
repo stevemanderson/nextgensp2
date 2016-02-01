@@ -1,21 +1,22 @@
-<div class="chat-module chat-summary">
-	<h2>You could start your business today.</h2>
+<div class="chat-summary">
+	
 	<div class="container">
-		<div class="col-md-3">
+		<div class="col-md-12"><h2>You could get started today!</h2></div>
+		<div class="col-sm-3">
 			<h3>Business type</h3>
 			<ul>
 				<li>Espresso Bar / Cafe</li>
 			</ul>
 			<h3>Location</h3>
 			<ul>
-				<li>West End, Brisbane</li>
+				<li>{{businessLocation}}</li>
 			</ul>
 			<h3>Zoning</h3>
 			<ul>
 				<li>No change needed</li>
 			</ul>
 		</div>
-		<div class="col-md-3">
+		<div class="col-sm-3">
 			<h3>Creative Licence</h3>
 			<ul>
 				<li>Outside Dinning</li>
@@ -24,26 +25,20 @@
 			</ul>
 			<h3>You will need</h3>
 			<ul>
-				<li>44 premits</li>
-				<li>12 licences</li>
-				<li>2 audits</li>
-				<li>1 application</li>
-				<li>3 approvals</li>
+				<li>2 Permits &amp; Licences</li>
+		
 			</ul>
 		</div>
-		<div class="col-md-3">
-			<h3>Earliest opening time</h3>
-			<ul>
-				<li class="large">93 days</li>
-			</ul>
+		<div class="col-sm-3">
 			<h3>Complete in</h3>
 			<ul>
-				<li class="large">24 steps</li>
+				<li class="large">{{sessionStats.number_steps}} steps</li>
 			</ul>
-		</div>
-		<div class="col-md-3">
-			<h3 class="center">approximate cost</h3>
+			<h3 class="">approximate cost</h3>
 			<p class="cost">${{sessionStats.cost_min}} - ${{sessionStats.cost_max}}</p>
+		</div>
+		<div class="col-sm-3">
+			
 			<button class="button btn-start-app">Start application</button>
 			<button class="button btn-save-later">Save for later</button>
 		</div>

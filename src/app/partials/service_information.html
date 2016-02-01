@@ -7,23 +7,19 @@
 	</div>
 
 	<div ng-show="sidePanelService.cost_description != null">
-		<h2>Cost Description</h2>
-		<p ng-bind-html="sidePanelService.service_customer_description"></p>
+		<h2>Cost Description</h2><p ng-bind-html="sidePanelService.service_customer_description"></p>
 	</div>
 
-	<div ng-show="sidePanelService.cost_min != null">
-		<h2>Cost Min</h2>
-		<p ng-bind-html="sidePanelService.cost_min"></p>
+	<div ng-show="sidePanelService.cost_min != null" class="spacer">
+		<h2>Cost Min: </h2>$<span ng-bind-html="sidePanelService.cost_min"></span><br/>
 	</div>
 
-	<div ng-show="sidePanelService.cost_max != null">
-		<h2>Cost Max</h2>
-		<p ng-bind-html="sidePanelService.cost_max"></p>
+	<div ng-show="sidePanelService.cost_max != null" class="spacer">
+		<h2>Cost Max: </h2>$ <span ng-bind-html="sidePanelService.cost_max"></span><br/>
 	</div>
 
-	<div ng-show="sidePanelService.time_valid != null">
-		<h2>Time Valid</h2>
-		<p ng-bind-html="sidePanelService.time_valid"></p>
+	<div ng-show="sidePanelService.time_valid != null" class="spacer">
+		<h2>Time Valid: </h2> <span ng-bind-html="sidePanelService.time_valid"></span>
 	</div>
 
 	<div ng-show="sidePanelService.service_customer_description != null">
@@ -42,8 +38,8 @@
 	</div>
 
 	<div ng-show="sidePanelService.further_information_link != null">
-		<h2>Further Information</h2>
-		<a href="{{sidePanelService.further_information_link}}" target="_blank">Link</a>
+		<a class="btn-slide center-block" href="{{sidePanelService.further_information_link}}" target="_blank">Further Information <img src="images/external-link.png"></a><br/>
+		<a class="btn-slide-outline center-block" ng-click="closeClicked()" target="_blank">Read Later</a>
 	</div>
 
 	<div ng-show="sidePanelService.dependencies != null">

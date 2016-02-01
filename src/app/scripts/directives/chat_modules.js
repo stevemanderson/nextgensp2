@@ -25,6 +25,11 @@ angular.module('nextgensp2')
 angular.module('nextgensp2')
   .directive('chatlocation', function () {
     return {
+      link: function(scope, element) {
+        scope.$on('chatModuleEvents', function(event, id, value) {
+          element.nextAll('.chat-module').remove();
+        });
+      },
 		restrict: 'E',
 		replace: true,
     templateUrl: "partials/chat_location.html",
@@ -41,6 +46,11 @@ angular.module('nextgensp2')
 angular.module('nextgensp2')
   .directive('chatmultiplechoice', function () {
     return {
+      link: function(scope, element) {
+        scope.$on('chatMultiModuleEvents', function(event, id, value) {
+          element.nextAll('.chat-module').remove();
+        });
+      },
 		restrict: 'E',
 		replace: true,
 		templateUrl: "partials/chat_multiple_choice.html",

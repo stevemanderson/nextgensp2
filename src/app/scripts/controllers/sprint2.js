@@ -8,7 +8,7 @@
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('Sprint2Ctrl', function ($scope, sp2Service,  $compile, $rootScope) {
+  .controller('Sprint2Ctrl', function ($scope, sp2Service,  $compile, $rootScope, ngDialog) {
 
   	var responseData = {};
     responseData.moduleType = "freeText";
@@ -18,7 +18,17 @@ angular.module('nextgensp2')
     var current_answer = 0;
     $scope.moduleData;
     $scope.sessionStats = {};
+    $scope.inputText = "";
 
+    $rootScope.businessLocation = "";
+
+    $scope.topbars = {
+        serviceAlert:true,
+        summary:false
+    };
+    $scope.enterTxt = false;
+
+    console.log($scope.topbars.summary);
     $scope.firstResponse = function(e){
         if(e.keyCode === 13){
             //clear exisiting chat
@@ -27,11 +37,23 @@ angular.module('nextgensp2')
             addLoader();
             sp2Service.sendToAPIAI($scope.inputText).then(function(response) {
                 removeLoader();
+                //Swap Top bars
+                $scope.topbars= {
+                    serviceAlert:false,
+                    summary:true
+                };
                 sendQuery({title:response.data.result.parameters.type});
             }, function() {
                 console.log("Error");
             });
         }
+
+        if($scope.inputText.length > 2){
+            $scope.enterTxt=true;
+        }else{
+            $scope.enterTxt=false;
+        }
+
     }
 
     // Jump to tree start
@@ -160,7 +182,7 @@ angular.module('nextgensp2')
 
         var cost_min = 0;
         var cost_max = 0;
-
+        var steps = data.length;
         for(var i = 0; i < data.length; ++i) {
           var item = data[i];
           if(item.cost_min) {
@@ -172,7 +194,8 @@ angular.module('nextgensp2')
         }
         $rootScope.sessionStats = {
           cost_min:cost_min,
-          cost_max:cost_max
+          cost_max:cost_max,
+          number_steps:steps
         };
     }
     
@@ -188,6 +211,8 @@ angular.module('nextgensp2')
             angular.element(document.getElementsByTagName('body')).removeClass('canvas-slid');
             angular.element(document.getElementsByTagName('body')).removeAttr( 'style' );
 
+            angular.element(document.getElementsByTagName('footer')).css({bottom: '1px'});
+
         }else{
             //open
             angular.element(document.getElementById('myNavmenu')).addClass('in canvas-slid');
@@ -195,6 +220,9 @@ angular.module('nextgensp2')
 
             angular.element(document.getElementsByTagName('body')).addClass('canvas-slid');
             angular.element(document.getElementsByTagName('body')).css({position: 'relative', right: '300px', overflow: 'hidden'});
+
+            angular.element(document.getElementsByTagName('footer')).css({bottom: 'auto'});
+
         }
     }
 
@@ -205,17 +233,26 @@ angular.module('nextgensp2')
 
     //Capture events from Chat modules
     $scope.$on('chatModuleEvents', function (event, id, value){
-      sendResponse(id, value);
+        console.log("chatModuleEvents");
+        sendResponse(id, value);
     });
 
     //Capture event from multi choice modules
     $scope.$on('chatMultiModuleEvents', function (event, ids, value){
-      sendMultiResponse(ids, value);
+        console.log("chatMultiModuleEvents");
+        sendMultiResponse(ids, value);
     });
 
     //Toggle Side panel
     $scope.$on('chatSidePanelEvent', function (event){
-      sidePanelToggle();
+        sidePanelToggle();
+    });
+    // Show summary
+    $scope.$on('summaryPanelEvent', function (event){
+        ngDialog.open({
+        template:"partials/chat_summary.html",
+        scope:$rootScope
+      });
     });
 
     // Actions
@@ -232,7 +269,8 @@ angular.module('nextgensp2')
 
     // Expand section
     $scope.expandSectionClicked = function(){
-
+        console.log("expandSectionClicked");
+        $scope.$emit('summaryPanelEvent');
     };
 
 });
