@@ -38,10 +38,10 @@ class DrupalDataContext:
         if 'hard_dependency_description' in n and n['hard_dependency_description'] != None:
             node['dependency_description'] = n['hard_dependency_description']
 
-        if 'hard_dependencies' in n and n['hard_dependencies'] != None:
+        if 'hard dependencies' in n and n['hard dependencies'] != None:
             result = []
-            for depId in str(n['hard_dependencies']).split(', '):
-                result.append(self.getById(depId, 1))
+            for depId in str(n['hard dependencies']).split(', '):
+                result.append(self.getById(int(depId), 1))
             node['dependencies'] = result
 
         if currentLevel < childLevel:
@@ -61,6 +61,22 @@ class DrupalDataContext:
                     if parentId == str(pid):
                         result.append(self.getNode(n, childLevel, currentLevel))
         return result
+
+    def getQueriesWithResponseAndQueries(self):
+        r = self.__getJsonResponse__(self.apiUrl, None)
+        queries = filter(lambda x: x['type'] == 'Queries', r)
+        results = []
+        for q in queries:
+            hasService = False
+            hasResponse = False
+            for c in self.getChildren(q['nid'], 1):
+                if c['type'] == 'Responses':
+                    hasResponse = True
+                if c['type'] == 'Services':
+                    hasService = True
+            if hasService and hasResponse:
+                results.append(self.getNode(q, 1))
+        return results
 
     def getQueriesWithNoChildren(self):
         r = self.__getJsonResponse__(self.apiUrl, None)
