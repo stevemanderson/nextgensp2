@@ -105,7 +105,7 @@ angular.module('nextgensp2')
     controller: "ChatLoadingCtrl",
     };
   });
-  /**
+/**
  * @ngdoc directive
  * @name nextgensp2.directive:chatsummary
  * @description
@@ -118,5 +118,20 @@ angular.module('nextgensp2')
     replace: true,
     templateUrl: "partials/chat_summary.html",
     controller: "ChatSummaryCtrl",
+    };
+  });
+/**
+ * @ngdoc directive
+ * @name nextgensp2.directive:chatsidepanel
+ * @description
+ * # chatsummary
+ */
+angular.module('nextgensp2')
+  .directive('sidepanel', function () {
+    return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: "partials/service_information.html",
+    controller: "SidePanelCtrl",
     };
   });

@@ -1,59 +1,56 @@
 <div class="service-information">
-	<div class="container">
-		<div class="col-md-12">
-			<h1>{{service.title}}</h1>
-			<div ng-show="{{service.department != null}}">
-				<h2>Department</h2>
-				<p>{{service.department}}</p>
-			</div>
+	<div class="close" ng-click="closeClicked()"><strong>x</strong></div>
+	<h1>{{sidePanelService.title}}</h1>
+	<div ng-show="sidePanelService.department != null">
+		<h2>Department</h2>
+		<p ng-bind-html="sidePanelService.department"></p>
+	</div>
 
-			<div ng-show="{{service.cost_description != null}}">
-				<h2>Cost Description</h2>
-				<p>{{service.service_customer_description}}</p>
-			</div>
+	<div ng-show="sidePanelService.cost_description != null">
+		<h2>Cost Description</h2>
+		<p ng-bind-html="sidePanelService.service_customer_description"></p>
+	</div>
 
-			<div ng-show="{{service.cost_min != null}}">
-				<h2>Cost Min</h2>
-				<p>{{service.cost_min}}</p>
-			</div>
+	<div ng-show="sidePanelService.cost_min != null">
+		<h2>Cost Min</h2>
+		<p ng-bind-html="sidePanelService.cost_min"></p>
+	</div>
 
-			<div ng-show="{{service.cost_max != null}}">
-				<h2>Cost Max</h2>
-				<p>{{service.cost_max}}</p>
-			</div>
+	<div ng-show="sidePanelService.cost_max != null">
+		<h2>Cost Max</h2>
+		<p ng-bind-html="sidePanelService.cost_max"></p>
+	</div>
 
-			<div ng-show="{{service.time_valid != null}}">
-				<h2>Time Valid</h2>
-				<p>{{service.time_valid}}</p>
-			</div>
+	<div ng-show="sidePanelService.time_valid != null">
+		<h2>Time Valid</h2>
+		<p ng-bind-html="sidePanelService.time_valid"></p>
+	</div>
 
-			<div ng-show="{{service.service_customer_description != null}}">
-				<h2>Service Description</h2>
-				<p>{{service.service_customer_description}}</p>
-			</div>
+	<div ng-show="sidePanelService.service_customer_description != null">
+		<h2>Service Description</h2>
+		<p ng-bind-html="sidePanelService.service_customer_description"></p>
+	</div>
 
-			<div ng-show="{{service.processing_time != null}}">
-				<h2>Processing Time</h2>
-				<p>{{service.processing_time}}</p>
-			</div>
+	<div ng-show="sidePanelService.processing_time != null">
+		<h2>Processing Time</h2>
+		<p ng-bind-html="sidePanelService.processing_time"></p>
+	</div>
 
-			<div ng-show="{{service.special_criteria != null}}">
-				<h2>Special Criteria</h2>
-				<p>{{service.special_criteria}}</p>
-			</div>
+	<div ng-show="sidePanelService.special_criteria != null">
+		<h2>Special Criteria</h2>
+		<p ng-bind-html="sidePanelService.special_criteria"></p>
+	</div>
 
-			<div ng-show="{{service.further_information_link != null}}">
-				<h2>Further Information</h2>
-				<a href="{{service.further_information_link}}" target="_blank">Link</a>
-			</div>
+	<div ng-show="sidePanelService.further_information_link != null">
+		<h2>Further Information</h2>
+		<a href="{{sidePanelService.further_information_link}}" target="_blank">Link</a>
+	</div>
 
-			<div ng-show="{{service.dependencies != null}}">
-				<h2>Dependencies</h2>
-				<p>{{dependency_description}}</p>
-				<ul>
-					<li ng-repeat="item in dependencies">{{item.title}}</li>
-				</ul>
-			</div>
-		</div>
+	<div ng-show="sidePanelService.dependencies != null">
+		<h2>Dependencies</h2>
+		<p ng-bind-html="dependency_description"></p>
+		<ul>
+			<li ng-repeat="item in dependencies" ng-bind-html="item.title"></li>
+		</ul>
 	</div>
 </div>

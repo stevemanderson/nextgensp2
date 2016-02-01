@@ -233,7 +233,7 @@
 			float:left;
 			height: 110px;
 			width:140px;
-			padding-top:70px;
+			padding-top:15px;
 			margin: 5px;
 			text-align: center;
 			font-weight: $weight-bold;
@@ -243,12 +243,7 @@
 				background-color: #fafafa;
 			}
 		}
-<<<<<<< HEAD
-
 	}
-=======
-	} 
->>>>>>> f2763a840b2d3928d7147525cc615819841b9e6e
 }
 
 // Chat location
@@ -385,6 +380,21 @@
 		text-align: center;
 	}
 
+}
+
+// Service Information / Side Panel
+.service-information{
+	padding: 10px;
+	.close{
+
+	}
+	h1{
+		font-size: 24px;
+		color: $brand-blue;
+	}
+	h2{
+
+	}
 }
 
 // Thinking Icon

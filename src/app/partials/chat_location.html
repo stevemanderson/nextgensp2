@@ -5,7 +5,7 @@
 				<img src="images/avatar.png" >
 			</div>
 			<section>
-				{{query.title}}
+				<p ng-bind-html="query.title"></p>
 				<input class="form-control chat-input" type="text" g-places-autocomplete force-selection="true" ng-model="autoCompleteVal" ng-blur="autoCompleteBlur($event)" ng-keyup="autoCompleteKeyup($event)" placeholder="Type the address" />
 			</section>			 
 		</div>
@@ -16,7 +16,7 @@
 	    </ng-map>
 	</div>
 	<ul class="clearfix" ng-show="showMap">
-		<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer.id)">{{answer.title}}</li>
+		<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer.id)"><span ng-bind-html="answer.title"></span></li>
 	</ul>
 </div>
 

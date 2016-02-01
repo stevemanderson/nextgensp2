@@ -79,7 +79,7 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatMultipleChoiceCtrl', ['$scope', '$location', 'loginservice', 'ngDialog', function ($scope, $location, loginservice, ngDialog) {
+  .controller('ChatMultipleChoiceCtrl', ['$scope','$rootScope', '$location', 'loginservice', 'ngDialog', function ($scope,$rootScope, $location, loginservice, ngDialog) {
     console.log('ChatMultipleChoiceCtrl');
     console.log($scope.$parent.moduleData);
 
@@ -89,11 +89,15 @@ angular.module('nextgensp2')
     $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
 
     $scope.serviceClicked = function(service) {
-      $scope.service = service;
-      ngDialog.open({
+      $rootScope.sidePanelService = service;
+      
+      //Show side menu
+      $scope.$emit("chatSidePanelEvent");
+
+      /*ngDialog.open({
         template:"partials/service_information.html",
         scope:$scope
-      });
+      });*/
     }
 
     $scope.answerClicked = function(index, id){
@@ -158,7 +162,7 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatSingleChoiceCtrl', ['$scope', '$location', 'loginservice', 'ngDialog', function ($scope, $location,loginservice, ngDialog) {
+  .controller('ChatSingleChoiceCtrl', ['$scope','$rootScope', '$location', 'loginservice', 'ngDialog', function ($scope, $rootScope, $location,loginservice, ngDialog) {
     console.log('ChatSingleChoiceCtrl');
     console.log($scope.$parent.moduleData);
     $scope.query = $scope.$parent.moduleData;
@@ -167,11 +171,16 @@ angular.module('nextgensp2')
     $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
 
     $scope.serviceClicked = function(service) {
-      $scope.service = service;
-      ngDialog.open({
+      $rootScope.sidePanelService = service;
+      
+      //Show side menu
+      $scope.$emit("chatSidePanelEvent");
+      
+
+      /*ngDialog.open({
         template:"partials/service_information.html",
         scope:$scope
-      });
+      });*/
     }
 
     function reset(){
@@ -204,3 +213,20 @@ angular.module('nextgensp2')
     console.log('ChatSummaryCtrl');
 
   });
+/**
+ * @ngdoc function
+ * @name nextgensp2.controller:ChatSummaryCtrl
+ * @description
+ * # ChatSummaryCtrl
+ * Controller of the nextgensp2
+ */
+angular.module('nextgensp2')
+  .controller('SidePanelCtrl', function ($scope) {
+    
+    $scope.closeClicked = function(){
+      $scope.$emit("chatSidePanelEvent");
+    };
+
+  });
+
+
