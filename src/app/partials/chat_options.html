@@ -1,7 +1,8 @@
-<div class="chat-module chat-options" ng-show="{{query.storedResponses.length > 0}}">
-	<button class="button btn-proto center-block" ng-click="summaryClicked()" ng-hide="{{responses.length > 0}}">Summary</button>
+<div class="chat-module chat-options" >
+	<button class="button btn-proto center-block" ng-click="summaryClicked()" ng-show="{{responses.length < 1 && query.storedResponses.length < 1}}">Summary</button>
+	<button class="button btn-proto center-block" ng-click="answerClicked(query.storedResponses[0])" ng-show="{{query.storedResponses.length > 0}}">OK</button>
 
-	<div class="container">
+	<!--<div class="container" ng-show="{{query.storedResponses.length > 0}}">
 		<div class="col-md-12">
 			<h3>More Options</h3>
 			<ul class="clearfix">
@@ -11,5 +12,5 @@
 				</li>
 			</ul>
 		</div>
-	</div>
+	</div>-->
 </div>

@@ -115,6 +115,42 @@
   padding-top:8px;
   text-transform: uppercase;
   min-width: 100%;
-  
+}
+.btn-slide{
+  background-color:$brand-blue-bright;
+  margin-top: 20px;
+  color: white;
+  font-size:12px;
+  border:none;
+  height:38px;
+  padding-top:10px;
+  text-transform: uppercase;
+  min-width: 180px;
+  text-align: center;
+  &:hover{
+    text-decoration: none;
+    color: white;
+  }
+
+  img{
+    position: absolute;
+    right:30px;
+    margin-top: 3px;
+  }
+}
+.btn-slide-outline{
+  background-color:white;
+  border: 1px solid #b2bac4;
+  color: #3f536c;
+  font-size:12px;
+  height:38px;
+  padding-top:10px;
+  text-transform: uppercase;
+  min-width: 180px;
+  text-align: center;
+  &:hover{
+    text-decoration: none;
+    color: #3f536c;
+  }
 }
 

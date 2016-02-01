@@ -1,8 +1,9 @@
 <nav id="myNavmenu" class="navmenu navmenu-default navmenu-fixed-right offcanvas" role="navigation">
 	<sidepanel></sidepanel>
 </nav>
+{{topBars.serviceAlert}}
+<div class="top-bar" ng-show="topbars.serviceAlert" >
 
-<div class="top-bar">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-6">
@@ -14,7 +15,7 @@
 		</div>
 	</div>
 </div>
-<div class="top-progress-bar">
+<div class="top-progress-bar" ng-show="topbars.summary">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-1">
@@ -32,14 +33,14 @@
 				</div>
 			</div>
 			<div class="col-xs-8">
-				<div>
+				<div class="topic">
 					<span>Start a Business</span>
 					<p>TOPIC</p>
 				</div>
 			</div>
 			<div class="col-xs-1">
 				<div class="expand-section" ng-click="expandSectionClicked">
-					<img src="images/pb_expand.png">
+					VIEW
 				</div>
 			</div>
 		</div>
@@ -52,7 +53,7 @@
 				  	<h1>What can we help you with?</h1>
 				  	<div class="initial-input">
 					  	<label class="sr-only chat-input" for="userInput">User input</label>
-					  	<div class="input-instruction">Press Enter</div>
+					  	<div class="input-instruction hidden-xs" ng-show="enterTxt">Press Enter</div>
 					  	<input type="text" class="form-control chat-input" id="userInput" placeholder="I want to start a business" ng-keydown="firstResponse($event)" ng-model="inputText">
 					  	
 				  	</div>

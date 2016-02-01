@@ -58,9 +58,18 @@ angular.module('nextgensp2')
       });
     }
 
+    function reset(){
+      //reset selection
+      for(var i=0; i<$scope.responses.length; i++){
+        $scope.responses[i].isSelected = false;
+      }
+    }
+
+    reset();
+
     $scope.answerClicked = function(index, id){
       console.log(index, id);
-      //reset();
+      reset();
       $scope.responses[index].isSelected = true;
       $scope.$emit("chatModuleEvents", id, "");
     }
@@ -90,11 +99,6 @@ angular.module('nextgensp2')
       
       //Show side menu
       $scope.$emit("chatSidePanelEvent");
-
-      /*ngDialog.open({
-        template:"partials/service_information.html",
-        scope:$scope
-      });*/
     }
 
     $scope.answerClicked = function(index, response){
@@ -146,6 +150,7 @@ angular.module('nextgensp2')
     }
 
     $scope.answerClicked = function(response){
+      console.log("answerClicked");
       if(response.type == 'linkage') {
         $scope.$emit("chatModuleLinkage", response.queryId);
       } else {
@@ -166,23 +171,18 @@ angular.module('nextgensp2')
   .controller('ChatSingleChoiceCtrl', ['$scope','$rootScope', '$location', 'loginservice', 'ngDialog', function ($scope, $rootScope, $location,loginservice, ngDialog) {
     console.log('ChatSingleChoiceCtrl');
     $scope.query = $scope.$parent.moduleData;
-
-    $scope.test = "testing";
+    console.log($scope.services);
 
     $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; });
     $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
-
+    console.log("$scope.services");
+    console.log($scope.services);
+    console.log($scope.query);
     $scope.serviceClicked = function(service) {
       $rootScope.sidePanelService = service;
       
       //Show side menu
       $scope.$emit("chatSidePanelEvent");
-      
-
-      /*ngDialog.open({
-        template:"partials/service_information.html",
-        scope:$scope
-      });*/
     }
 
     function reset(){

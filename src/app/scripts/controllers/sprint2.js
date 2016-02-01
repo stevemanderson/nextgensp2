@@ -18,7 +18,15 @@ angular.module('nextgensp2')
     var current_answer = 0;
     $scope.moduleData;
     $scope.sessionStats = {};
+    $scope.inputText = "";
 
+    $scope.topbars = {
+        serviceAlert:true,
+        summary:false
+    };
+    $scope.enterTxt = false;
+
+    console.log($scope.topbars.summary);
     $scope.firstResponse = function(e){
         if(e.keyCode === 13){
             //clear exisiting chat
@@ -27,11 +35,23 @@ angular.module('nextgensp2')
             addLoader();
             sp2Service.sendToAPIAI($scope.inputText).then(function(response) {
                 removeLoader();
+                //Swap Top bars
+                $scope.topbars= {
+                    serviceAlert:false,
+                    summary:true
+                };
                 sendQuery({title:response.data.result.parameters.type});
             }, function() {
                 console.log("Error");
             });
         }
+
+        if($scope.inputText.length > 2){
+            $scope.enterTxt=true;
+        }else{
+            $scope.enterTxt=false;
+        }
+
     }
 
     // Jump to tree start

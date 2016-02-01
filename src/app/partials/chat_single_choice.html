@@ -11,9 +11,9 @@
 				</ul>
 			</section>
 			<div class='container__services' ng-show="{{services.length > 0}}">
-				<h3>Services</h3>
+				<!--<h3>Services</h3>-->
 				<ul class="clearfix">
-					<li ng-repeat="item in services" ng-click="serviceClicked(item)"><img src="images/multi-icon.png"><br/><span ng-bind-html="item.title"></span></li>
+					<li ng-repeat="item in services" ng-click="serviceClicked(item)"><span ng-bind-html="item.title"></span><span class="read-more">Read more</span></li>
 				</ul>
 			</div>
 		</div>

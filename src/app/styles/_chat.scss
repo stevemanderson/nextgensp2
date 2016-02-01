@@ -101,19 +101,22 @@
 
 .top-progress-bar{
 	background-color:$brand-blue;
-	min-height: 50px;
+	width:100%;
+	min-height: 70px;
+	position: fixed;
+	z-index:999;
  	.jump-section{
  		text-align: center;
  		padding-left:6px;
- 		padding-top:12px;
+ 		padding-top:22px;
  	}
  	.save{
- 		border-left:1px solid $brand-grey-light;
- 		border-right:1px solid $brand-grey-light;
+ 		border-left:1px solid #53657b;
+ 		border-right:1px solid #53657b;
 
  		text-transform: uppercase;
- 		padding-top:12px;
- 		height:50px;
+ 		padding-top:22px;
+ 		height:70px;
  		.center{
  			width:85px;
  			margin:0 auto;
@@ -131,12 +134,16 @@
 
  	}
  	.topic{
+ 		padding-top:18px;
  		span{
  			color:white;
  			font-size: 16px;
+ 			line-height: 10px;
  		}
  		p{
- 			color:white;
+ 			color:#b2bac4;
+ 			line-height: 12px;
+ 			font-size: 10px;
  		}
  	}
  	.expand-section{
@@ -228,7 +235,7 @@
 		list-style-type: none;
 
 		li{
-      cursor:pointer;
+      		cursor:pointer;
 			border:1px solid #eeeeee;
 			border-radius:3px;
 			float:left;
@@ -237,13 +244,44 @@
 			padding:15px 10px;			
 			margin: 5px;
 			text-align: center;
-			font-weight: $weight-bold;
+			font-weight: $weight-normal;
 			font-size: 12px;
+			color:$brand-blue;
 			&:hover,
 			&.active{
 				background-color: #fafafa;
 				cursor: pointer;
 			}
+		}
+	}
+
+	.container__services{
+		ul{
+			list-style-type: none;
+
+			li{
+	      		cursor:pointer;
+				border:1px solid #eeeeee;
+				border-radius:3px;
+				float:left;
+				height: 70px;
+				width:140px;
+				padding:10px;			
+				margin: 5px;
+				text-align: left;
+				font-weight: $weight-normal;
+				font-size: 12px;
+				&:hover,
+				&.active{
+					background-color: #fafafa;
+					cursor: pointer;
+				}
+			}
+		}
+		.read-more{
+			display: block;
+			font-size: 10px;
+			color: #b2bac4;
 		}
 	}
 }
@@ -256,6 +294,7 @@
 	ul{
 		list-style-type: none;
 		margin-top: 10px;
+		padding:0;
 		li{
       cursor:pointer;
 			border:1px solid #eeeeee;
@@ -345,6 +384,35 @@
 			}
 		}
 	}
+	.container__services{
+		ul{
+			list-style-type: none;
+
+			li{
+	      		cursor:pointer;
+				border:1px solid #eeeeee;
+				border-radius:3px;
+				float:left;
+				height: 70px;
+				width:140px;
+				padding:10px;			
+				margin: 5px;
+				text-align: left;
+				font-weight: $weight-normal;
+				font-size: 12px;
+				&:hover,
+				&.active{
+					background-color: #fafafa;
+					cursor: pointer;
+				}
+			}
+		}
+		.read-more{
+			display: block;
+			font-size: 10px;
+			color: #b2bac4;
+		}
+	}
 }
 
 // Chat multiple choice
@@ -388,6 +456,10 @@
 }
 
 // Service Information / Side Panel
+.navmenu-default, .navbar-default .navbar-offcanvas {
+    background-color: #FFFFFF !important;
+    border-color: #e7e7e7;
+}
 .service-information{
 	padding: 10px;
 	.close{
