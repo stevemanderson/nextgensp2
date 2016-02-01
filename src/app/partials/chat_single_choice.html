@@ -7,7 +7,7 @@
 			<section>
 				<p ng-bind-html="query.title"></p>
 				<ul class="clearfix">
-					<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer.id)" ng-bind-html="answer.title"></li>
+					<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer)" ng-bind-html="answer.title"></li>
 				</ul>
 			</section>
 			<div class='container__services' ng-show="{{services.length > 0}}">

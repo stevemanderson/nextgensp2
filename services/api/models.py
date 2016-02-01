@@ -62,6 +62,15 @@ class DrupalDataContext:
                         result.append(self.getNode(n, childLevel, currentLevel))
         return result
 
+    def getQueriesWithNoChildren(self):
+        r = self.__getJsonResponse__(self.apiUrl, None)
+        queries = filter(lambda x: x['type'] == 'Queries', r)
+        results = []
+        for q in queries:
+            if len(self.getChildren(q['nid'], 1)) == 0:
+                results.append(self.getNode(q, 0))
+        return results
+
     def __getJsonResponse__(self, u, d):
         if DrupalDataContext.responseData != None:
             return DrupalDataContext.responseData
@@ -175,6 +184,7 @@ class SessionService:
             session['storedResponses'].append(answer)
         self._context.save(sessionId, session)
 
+# Facade for the contexts
 class Handler:
     def __init__(self, context, sessionService):
         self._context = context
@@ -206,6 +216,9 @@ class Handler:
 
     def getQuery(self, title):
         return self._context.getByTitle(title, 1)
+
+    def getQueryById(self, id):
+        return self._context.getById(id, 1)
 
     def getServices(self, sessionId):
         return self._sessionService.getSessionServices(sessionId)

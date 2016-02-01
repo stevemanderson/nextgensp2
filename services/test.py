@@ -5,15 +5,16 @@ import json
 import pprint
 
 c = DrupalDataContext(DRUPAL_API)
+
+for n in c.getQueriesWithNoChildren():
+    print n['id'], n['title']
+
+exit()
 mc = UserMongoContext('localhost', 27017)
 sc = SessionService(mc)
 h = Handler(c, sc)
-l = "193,68,28,27,25"
 
-result = h.submitAnswers(l.split(','), 23, 1)
+result = h.getById(167, 1)
+#result = h.getById(113, 1)
 
-session = h.getSession(1)
-print session
-
-h.removeSession(1)
-exit()
+print result

@@ -83,6 +83,11 @@ angular.module('nextgensp2')
 angular.module('nextgensp2')
   .directive('chatsinglechoice', function () {
     return {
+      link: function(scope, element) {
+        scope.$on('chatModuleEvents', function(event, id, value) {
+          element.nextAll('.chat-module').remove();
+        });
+      },
     restrict: 'E',
     replace: true,
     templateUrl: "partials/chat_single_choice.html",

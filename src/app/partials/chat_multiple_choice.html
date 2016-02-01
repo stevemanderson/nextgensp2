@@ -7,7 +7,7 @@
 			<section>
 				<p ng-bind-html="query.title"></p>
 				<ul class="clearfix">
-					<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer.id)"><img src="images/multi-icon.png"><br/><span ng-bind-html="answer.title"></span></li>
+					<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer)"><img src="images/multi-icon.png"><br/><span ng-bind-html="answer.title"></span></li>
 				</ul>
 
 				<button class="button btn-proto center-block" ng-click="okClicked()" ng-show="{{responses.length > 0}}">OK</button>

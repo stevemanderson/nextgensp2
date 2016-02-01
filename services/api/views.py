@@ -43,12 +43,18 @@ def multi(request):
 
 @api_view(['POST'])
 def queries(request):
-    title = request.data['title']
+    result = None
     c = DrupalDataContext(DRUPAL_API)
     mc = UserMongoContext('localhost', 27017)
     sc = SessionService(mc)
     h = Handler(c, sc)
-    result = h.getQuery(title)
+
+    if 'id' in request.data:
+        result = h.getQueryById(int(request.data['id']))
+
+    if 'title' in request.data:
+        result = h.getQuery(request.data['title'])
+        
     return Response(result)
 
 @api_view(['GET'])
