@@ -97,24 +97,26 @@
   min-width: 180px;
 }
 .btn-start-app{
-  background-color:#f42535;
-  color: white;
+  background-color:#ebedf0;
+  color: $brand-blue;
   font-size:12px;
   border:none;
   height:38px;
   padding-top:8px;
   text-transform: uppercase;
   width: 100%;
+  margin-top: 50px;
 }
 .btn-save-later{
-  background-color:black;
-  color: white;
+  background-color:$brand-blue;
+  color: #8491a1;
   font-size:12px;
-  border:none;
+  border:1px solid #8491a1;
   height:38px;
   padding-top:8px;
   text-transform: uppercase;
   min-width: 100%;
+  margin-top: 10px;
 }
 .btn-slide{
   background-color:$brand-blue-bright;
@@ -127,7 +129,8 @@
   text-transform: uppercase;
   min-width: 180px;
   text-align: center;
-  &:hover{
+  &:hover,
+  &:focus{
     text-decoration: none;
     color: white;
   }
@@ -148,9 +151,11 @@
   text-transform: uppercase;
   min-width: 180px;
   text-align: center;
-  &:hover{
+  &:hover,
+  &:focus{
     text-decoration: none;
     color: #3f536c;
+    cursor: pointer;
   }
 }
 

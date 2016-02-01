@@ -8,7 +8,7 @@
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('Sprint2Ctrl', function ($scope, sp2Service,  $compile, $rootScope) {
+  .controller('Sprint2Ctrl', function ($scope, sp2Service,  $compile, $rootScope, ngDialog) {
 
   	var responseData = {};
     responseData.moduleType = "freeText";
@@ -19,6 +19,8 @@ angular.module('nextgensp2')
     $scope.moduleData;
     $scope.sessionStats = {};
     $scope.inputText = "";
+
+    $rootScope.businessLocation = "";
 
     $scope.topbars = {
         serviceAlert:true,
@@ -180,7 +182,7 @@ angular.module('nextgensp2')
 
         var cost_min = 0;
         var cost_max = 0;
-
+        var steps = data.length;
         for(var i = 0; i < data.length; ++i) {
           var item = data[i];
           if(item.cost_min) {
@@ -192,7 +194,8 @@ angular.module('nextgensp2')
         }
         $rootScope.sessionStats = {
           cost_min:cost_min,
-          cost_max:cost_max
+          cost_max:cost_max,
+          number_steps:steps
         };
     }
     
@@ -208,6 +211,8 @@ angular.module('nextgensp2')
             angular.element(document.getElementsByTagName('body')).removeClass('canvas-slid');
             angular.element(document.getElementsByTagName('body')).removeAttr( 'style' );
 
+            angular.element(document.getElementsByTagName('footer')).css({bottom: '1px'});
+
         }else{
             //open
             angular.element(document.getElementById('myNavmenu')).addClass('in canvas-slid');
@@ -215,6 +220,9 @@ angular.module('nextgensp2')
 
             angular.element(document.getElementsByTagName('body')).addClass('canvas-slid');
             angular.element(document.getElementsByTagName('body')).css({position: 'relative', right: '300px', overflow: 'hidden'});
+
+            angular.element(document.getElementsByTagName('footer')).css({bottom: 'auto'});
+
         }
     }
 
@@ -239,6 +247,13 @@ angular.module('nextgensp2')
     $scope.$on('chatSidePanelEvent', function (event){
         sidePanelToggle();
     });
+    // Show summary
+    $scope.$on('summaryPanelEvent', function (event){
+        ngDialog.open({
+        template:"partials/chat_summary.html",
+        scope:$rootScope
+      });
+    });
 
     // Actions
 
@@ -254,7 +269,8 @@ angular.module('nextgensp2')
 
     // Expand section
     $scope.expandSectionClicked = function(){
-
+        console.log("expandSectionClicked");
+        $scope.$emit('summaryPanelEvent');
     };
 
 });

@@ -19,7 +19,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,900,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,900,700' rel='stylesheet' type='text/css'>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
   </head>
   <body ng-app="nextgensp2">
@@ -28,9 +28,26 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div>
-      <div ng-view="" ng-cloak></div>
+    <div class="wrap">
+      <div ng-view="" ng-cloak </div>
+      
     </div>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="col-sm-3">
+              © 2016 Queensland Government
+            </div>
+            <div class="col-sm-9">
+                <ul>
+                    <li>Copyright</li>
+                    <li>Disclaimer</li>
+                    <li>Privacy</li>
+                    <li>Accessibility</li>
+                    <li>Right to Information</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
