@@ -233,7 +233,7 @@
 			float:left;
 			height: 110px;
 			width:140px;
-			padding-top:70px;
+			padding-top:15px;
 			margin: 5px;
 			text-align: center;
 			font-weight: $weight-bold;
@@ -381,6 +381,21 @@
 		text-align: center;
 	}
 
+}
+
+// Service Information / Side Panel
+.service-information{
+	padding: 10px;
+	.close{
+
+	}
+	h1{
+		font-size: 24px;
+		color: $brand-blue;
+	}
+	h2{
+
+	}
 }
 
 // Thinking Icon

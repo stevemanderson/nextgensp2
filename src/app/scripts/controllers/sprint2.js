@@ -175,6 +175,28 @@ angular.module('nextgensp2')
           cost_max:cost_max
         };
     }
+    
+    //Show side panel info
+    function sidePanelToggle(){
+        console.log("sidePanelToggle");
+        console.log($rootScope.sidePanelService  );
+
+        if(angular.element(document.getElementById('myNavmenu')).hasClass('canvas-slid')){
+            //close
+            angular.element(document.getElementById('myNavmenu')).removeClass('in canvas-slid');
+            angular.element(document.getElementById('myNavmenu')).removeAttr( 'style' );
+            angular.element(document.getElementsByTagName('body')).removeClass('canvas-slid');
+            angular.element(document.getElementsByTagName('body')).removeAttr( 'style' );
+
+        }else{
+            //open
+            angular.element(document.getElementById('myNavmenu')).addClass('in canvas-slid');
+            angular.element(document.getElementById('myNavmenu')).css({right: '0px'});
+
+            angular.element(document.getElementsByTagName('body')).addClass('canvas-slid');
+            angular.element(document.getElementsByTagName('body')).css({position: 'relative', right: '300px', overflow: 'hidden'});
+        }
+    }
 
     //Events
     $scope.$on('chatModuleLinkage', function(event, id) {
@@ -189,6 +211,11 @@ angular.module('nextgensp2')
     //Capture event from multi choice modules
     $scope.$on('chatMultiModuleEvents', function (event, ids, value){
       sendMultiResponse(ids, value);
+    });
+
+    //Toggle Side panel
+    $scope.$on('chatSidePanelEvent', function (event){
+      sidePanelToggle();
     });
 
     // Actions
