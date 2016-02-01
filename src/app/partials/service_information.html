@@ -46,7 +46,7 @@
 		<h2>Dependencies</h2>
 		<p ng-bind-html="dependency_description"></p>
 		<ul>
-			<li ng-repeat="item in dependencies" ng-bind-html="item.title"></li>
+			<li ng-repeat="item in dependencies"><h2>REQUIRED</h2><span ng-bind-html="item.title"></span></li>
 		</ul>
 	</div>
 </div>
