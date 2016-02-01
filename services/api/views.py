@@ -9,9 +9,14 @@ from api.models import Handler
 @api_view(['POST'])
 def responses(request):
     sessionId = request.COOKIES.get('userSession')
+    pid = 0
 
     id = request.data['id']
-    pid = request.data['pid']
+
+    # TODO: Update to keep track of users
+    if 'pid' in request.data:
+        pid = request.data['pid']
+
     value = request.data['value']
     store = 'store' in request.data and request.data['store'] == '1'
 
@@ -27,8 +32,12 @@ def responses(request):
 @api_view(['POST'])
 def multi(request):
     sessionId = request.COOKIES.get('userSession')
+    pid = 0
 
-    pid = request.data['pid']
+    # TODO: Update to keep track of users
+    if 'pid' in request.data:
+        pid = request.data['pid']
+
     ids = request.data['ids']
 
     c = DrupalDataContext(DRUPAL_API)
@@ -54,7 +63,7 @@ def queries(request):
 
     if 'title' in request.data:
         result = h.getQuery(request.data['title'])
-        
+
     return Response(result)
 
 @api_view(['GET'])
