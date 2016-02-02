@@ -38,11 +38,11 @@ class DrupalDataContext:
         if 'hard dependency description' in n and n['hard dependency description'] != None:
             node['dependency_description'] = n['hard_dependency_description']
 
-        if 'hard dependencies' in n and n['hard dependencies'] != None:
-            result = []
-            for depId in str(n['hard dependencies']).split(', '):
-                result.append(self.getById(int(depId), 1))
-            node['dependencies'] = result
+        # if 'hard dependencies' in n and n['hard dependencies'] != None:
+        #     result = []
+        #     for depId in str(n['hard dependencies']).split(', '):
+        #         result.append(self.getById(int(depId), 1))
+        #     node['dependencies'] = result
 
         if currentLevel < childLevel:
             node['children'] = self.getChildren(node['id'], childLevel, currentLevel)
