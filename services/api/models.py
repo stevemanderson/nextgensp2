@@ -35,7 +35,7 @@ class DrupalDataContext:
         node = {}
         DrupalNodeMapper.map(n, node)
 
-        if 'hard_dependency_description' in n and n['hard_dependency_description'] != None:
+        if 'hard dependency description' in n and n['hard dependency description'] != None:
             node['dependency_description'] = n['hard_dependency_description']
 
         # if 'hard dependencies' in n and n['hard dependencies'] != None:
