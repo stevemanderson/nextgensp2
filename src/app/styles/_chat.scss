@@ -13,62 +13,6 @@
   display: none;
 }
 
-//OLD Modules
-// Remove for Sprint 2
-.chat-frame{
-	width:100%;
-	padding:50px 0 0 0;
-
-  	.chat-block{
-	    width: 100%;
-	    clear: both;
-	    margin-top: $chat-margin;
-	    float: left;
-	    &:after {
-	      content: "";
-	      display: table;
-	      clear: both;
-	    }
-  	}
-	.slider-width{
-		width: 170%;
-	}
-
-	.chat-bubble{
-		background-color:$brand-blue-lighter;
-		width:80%;
-		padding:$box-padding;
-		margin-top: $chat-margin;
-		float: left;
-		color:$brand-blue-bright;
-    	border-radius:4px;
-    	font-size:16px;
-	    a{
-	      text-decoration: underline;
-	      font-weight: $weight-bold;
-	    }
-	}
-	.chat-bubble-user{
-		background-color:$brand-lighter;
-		float: right;
-		color:black;
-	}
-	.chat-think{
-		margin-top: $chat-margin;
-		float: left;
-		border-radius: 3px;
-		background-color:white;
-		width:70px;
-	    height:50px;
-	    background-color:$brand-blue-lighter;
-	    border-radius:25px;
-	    padding-top:11px;
-		@extend .box-border;
-	}
-
-
-}
-
 
 /////////////////////////////
 //Sprint 2

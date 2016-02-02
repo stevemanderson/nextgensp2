@@ -32,7 +32,7 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatLocationCtrl', function ($scope,loginservice, NgMap, $timeout, $rootScope) {
+  .controller('ChatLocationCtrl', function ($scope, NgMap, $timeout, $rootScope) {
     $scope.query = $scope.$parent.moduleData;
     $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response'; })
 
@@ -86,7 +86,7 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatMultipleChoiceCtrl', ['$scope','$rootScope', '$location', 'loginservice', 'ngDialog', function ($scope,$rootScope, $location, loginservice, ngDialog) {
+  .controller('ChatMultipleChoiceCtrl', ['$scope','$rootScope', 'ngDialog', function ($scope,$rootScope, $location, ngDialog) {
 
     $scope.query = $scope.$parent.moduleData;
 
@@ -125,7 +125,7 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatResourcesCtrl', function ($scope, $location,loginservice) {
+  .controller('ChatResourcesCtrl', function ($scope, $location) {
 
   });
 
@@ -164,7 +164,7 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatSingleChoiceCtrl', ['$scope','$rootScope', '$location', 'loginservice', 'ngDialog', function ($scope, $rootScope, $location,loginservice, ngDialog) {
+  .controller('ChatSingleChoiceCtrl', ['$scope','$rootScope', '$location', 'ngDialog', function ($scope, $rootScope, $location, ngDialog) {
 
     $scope.query = $scope.$parent.moduleData;
 
@@ -209,7 +209,7 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatSummaryCtrl', function ($scope, $location,loginservice) {
+  .controller('ChatSummaryCtrl', function ($scope, $location) {
 
   });
 /**

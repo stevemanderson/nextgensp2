@@ -11,8 +11,6 @@
     "angular-sanitize": "1.4.8",
     "angular-touch": "1.4.8",
     "ngmap": "~1.15.1",
-    "angular-slick": "~0.2.1",
-    "angular-scroll-glue": "~2.0.6",
     "Angular.uuid2": "angular-uuid2#*",
     "angular-google-places-autocomplete": "~0.2.7",
     "ng-dialog": "ngDialog#~0.5.6"

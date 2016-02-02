@@ -7,15 +7,9 @@
 @import "global";
 @import "chat";
 @import "chat-modules";
-@import "dashboard";
 @import "buttons";
-@import "popups";
 
-//Views / partials
-@import "view-login";
-@import "partial-sign-in";
-@import "view-account-summary";
-@import "view-available-services";
+
 
 //vendor
 @import "jasny-bootstrap";
