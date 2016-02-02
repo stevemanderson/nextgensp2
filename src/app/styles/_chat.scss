@@ -476,7 +476,10 @@
     border-color: #e7e7e7;
 }
 .service-information{
-	padding: 10px;
+	padding: 15px;
+	p{
+		color:$brand-blue;
+	}
 	.close{
 
 	}
@@ -486,7 +489,7 @@
 	}
 	h2{
 		display: inline;
-
+		color: $brand-blue;
 	}
 	.spacer{
 		margin-bottom: 15px;
@@ -494,10 +497,24 @@
 
 	ul{
 		list-style: none;
-		padding:none;
+		padding:0;
 
 		li{
-			
+			background-color:#fafafa;
+			border: 1px solid #e1e1e1;
+			padding:10px;
+			font-size: 16px;
+			font-weight: $weight-normal;
+			color:$brand-blue;
+			margin-bottom: 15px;
+
+			.title{
+				font-size: 12px;
+				font-weight: $weight-bold;
+				color:$brand-blue;
+
+			}
+
 		}
 	}
 }

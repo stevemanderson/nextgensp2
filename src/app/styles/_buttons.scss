@@ -120,7 +120,7 @@
 }
 .btn-slide{
   background-color:$brand-blue-bright;
-  margin-top: 20px;
+  margin: 20px 0 10px 0;
   color: white;
   font-size:12px;
   border:none;
@@ -129,6 +129,7 @@
   text-transform: uppercase;
   min-width: 180px;
   text-align: center;
+  display:block;
   &:hover,
   &:focus{
     text-decoration: none;
@@ -151,6 +152,7 @@
   text-transform: uppercase;
   min-width: 180px;
   text-align: center;
+  display:block;
   &:hover,
   &:focus{
     text-decoration: none;

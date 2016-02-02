@@ -36,17 +36,18 @@
 		<h2>Special Criteria</h2>
 		<p ng-bind-html="sidePanelService.special_criteria"></p>
 	</div>
+	<div ng-show="sidePanelService.dependencies != null">
+		<p ng-bind-html="dependency_description"></p>
+		<ul>
+			<li ng-repeat="item in sidePanelService.dependencies"><div class="title">REQUIRED</div><span ng-bind-html="item.title"></span></li>
+		</ul>
+	</div>
+
 
 	<div ng-show="sidePanelService.further_information_link != null">
-		<a class="btn-slide center-block" href="{{sidePanelService.further_information_link}}" target="_blank">Further Information <img src="images/external-link.png"></a><br/>
+		<a class="btn-slide center-block" href="{{sidePanelService.further_information_link}}" target="_blank">Further Information <img src="images/external-link.png"></a>
 		<a class="btn-slide-outline center-block" ng-click="closeClicked()" target="_blank">Read Later</a>
 	</div>
 
-	<div ng-show="sidePanelService.dependencies != null">
-		<h2>Dependencies</h2>
-		<p ng-bind-html="dependency_description"></p>
-		<ul>
-			<li ng-repeat="item in sidePanelService.dependencies"><h2>REQUIRED</h2><span ng-bind-html="item.title"></span></li>
-		</ul>
-	</div>
+	
 </div>
