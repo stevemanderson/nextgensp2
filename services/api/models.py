@@ -1,8 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
-from services.settings import DRUPAL_API
 
-from api.mappers import *
+from mappers import *
 
 from pymongo import MongoClient
 
@@ -35,8 +34,8 @@ class DrupalDataContext:
         node = {}
         DrupalNodeMapper.map(n, node)
 
-        if 'hard dependency description' in n and n['hard dependency description'] != None:
-            node['dependency_description'] = n['hard_dependency_description']
+        # if 'hard dependency description' in n and n['hard dependency description'] != None:
+            # node['dependency_description'] = n['hard_dependency_description']
 
         # if 'hard dependencies' in n and n['hard dependencies'] != None:
         #     result = []
@@ -247,6 +246,7 @@ class Handler:
                 self._sessionService.addStoredResponse(sessionId, response)
 
         query = self.submitAnswer(int(ids[0]), int(pid), '', sessionId, False)
+
         return query
 
     # the pid is not set up
