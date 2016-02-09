@@ -1,13 +1,12 @@
 from __future__ import unicode_literals
 from django.db import models
-
 from mappers import *
-
 from pymongo import MongoClient
 
 import requests
 import json
 import copy
+import datetime
 
 # Drupal Context
 class DrupalDataContext:
@@ -58,7 +57,9 @@ class DrupalDataContext:
             if n['parent reference'] != None:
                 for parentId in str(n['parent reference']).split(', '):
                     if parentId == str(pid):
-                        result.append(self.getNode(n, childLevel, currentLevel))
+                        newNode = self.getNode(n, childLevel, currentLevel)
+                        newNode['pid'] = pid
+                        result.append(newNode)
         return result
 
     def getQueriesWithResponseAndQueries(self):
@@ -113,6 +114,27 @@ class UserMongoContext:
 class SessionService:
     def __init__(self, context):
         self._context = context
+
+    def addResponseTracking(self, sessionId, response, parentQuery):
+        session = self.getSession(sessionId)
+        if session == None:
+            raise ValueError("Could not find session")
+        if 'tracking' not in session:
+            session['tracking'] = []
+
+        session['tracking'].append({
+            'date':datetime.datetime.utcnow(),
+            'query':parentQuery,
+            'response':response
+        })
+
+        self._context.save(sessionId, session)
+
+    def getTracking(self, sessionId):
+        session = self.getSession(sessionId)
+        if session == None or 'tracking' not in session:
+            return {}
+        return session['tracking']
 
     def getSession(self, sessionId):
         return self._context.get(sessionId)
@@ -232,8 +254,8 @@ class Handler:
     def getQuery(self, title):
         return self._context.getByTitle(title, 1)
 
-    def getQueryById(self, id):
-        return self._context.getById(id, 1)
+    def getQueryById(self, id, childDepth=1):
+        return self._context.getById(id, childDepth)
 
     def getServices(self, sessionId):
         return self._sessionService.getSessionServices(sessionId)
@@ -252,6 +274,7 @@ class Handler:
     # the pid is not set up
     def submitAnswer(self, id, pid, value, sessionId, storeResponse=False):
         answer = None
+        parentQuery = self.getQueryById(pid, 0)
 
         # Create if it doesn't exist
         if self._sessionService.sessionExists(sessionId) != True:
@@ -262,6 +285,8 @@ class Handler:
             answer = self._context.getByTitle(value)
         else:
             answer = self._context.getById(id)
+
+        self._sessionService.addResponseTracking(sessionId, answer, parentQuery)
 
         query = self.getFirstQuery(answer)
 

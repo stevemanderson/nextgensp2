@@ -21,7 +21,7 @@ angular
     'angularUUID2',
     'google.places'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $httpProvider) {
     $routeProvider
       .when('/sprint2', {
         templateUrl: 'views/sprint2.html',

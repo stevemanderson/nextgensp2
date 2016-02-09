@@ -13,7 +13,6 @@ def responses(request):
 
     id = request.data['id']
 
-    # TODO: Update to keep track of users
     if 'pid' in request.data:
         pid = request.data['pid']
 

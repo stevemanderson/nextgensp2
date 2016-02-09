@@ -16,9 +16,15 @@ class SessionTests(unittest.TestCase):
 
     def test_addResponse(self):
         SessionTests.sc.createSession(1)
-
+        response = {
+            'Id':1
+        }
+        parentQuery = {
+            'Id':2
+        }
+        SessionTests.sc.addResponseTracking(1, response, parentQuery)
+        self.assertTrue(len(SessionTests.sc.getTracking(1)) == 1)
         SessionTests.sc.removeSession(1)
-
 
 if __name__ == '__main__':
     unittest.main()
