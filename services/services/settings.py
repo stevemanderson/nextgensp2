@@ -53,10 +53,10 @@ MIDDLEWARE_CLASSES = [
 ]
 
 CORS_ORIGIN_WHITELIST = (
-    '*',
+    '127.0.0.1:9000',
 )
 
-CORS_ALLOW_CREDENTIALS = False
+CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
