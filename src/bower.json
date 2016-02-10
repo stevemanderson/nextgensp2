@@ -2,7 +2,6 @@
   "name": "nextgensp2",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "1.4.8",
     "bootstrap-sass-official": "^3.2.0",
     "angular-animate": "1.4.8",
     "angular-cookies": "1.4.8",

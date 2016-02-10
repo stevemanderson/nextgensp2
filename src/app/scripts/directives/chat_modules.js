@@ -27,7 +27,7 @@ angular.module('nextgensp2')
     return {
       link: function(scope, element) {
         scope.$on('chatModuleEvents', function(event, id, value) {
-          element.nextAll('.chat-module').remove();
+          angular.element(element).nextAll('.chat-module').remove();
         });
       },
 		restrict: 'E',
@@ -48,7 +48,7 @@ angular.module('nextgensp2')
     return {
       link: function(scope, element) {
         scope.$on('chatMultiModuleEvents', function(event, id, value) {
-          element.nextAll('.chat-module').remove();
+          angular.element(element).nextAll('.chat-module').remove();
         });
       },
 		restrict: 'E',
@@ -64,7 +64,7 @@ angular.module('nextgensp2')
     return {
       link: function(scope, element) {
         scope.$on('chatMultiModuleEvents', function(event, id, value) {
-          element.nextAll('.chat-module').remove();
+          angular.element(element).nextAll('.chat-module').remove();
         });
       },
 		restrict: 'E',
@@ -99,8 +99,8 @@ angular.module('nextgensp2')
   .directive('chatsinglechoice', function () {
     return {
       link: function(scope, element) {
-        scope.$on('chatModuleEvents', function(event, id, value) {
-          element.nextAll('.chat-module').remove();
+        scope.$on('chatModuleEvents', function(event) {
+          angular.element(element).nextAll('.chat-module').remove();
         });
       },
     restrict: 'E',

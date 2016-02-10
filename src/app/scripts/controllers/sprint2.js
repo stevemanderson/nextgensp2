@@ -28,7 +28,6 @@ angular.module('nextgensp2')
     };
     $scope.enterTxt = false;
 
-    console.log($scope.topbars.summary);
     $scope.firstResponse = function(e){
         if(e.keyCode === 13){
             //clear exisiting chat
@@ -36,6 +35,7 @@ angular.module('nextgensp2')
 
             addLoader();
             sp2Service.sendToAPIAI($scope.inputText).then(function(response) {
+                console.log(response);
                 removeLoader();
                 //Swap Top bars
                 $scope.topbars= {
@@ -90,6 +90,7 @@ angular.module('nextgensp2')
             errorChat();
         });
     }
+
     // Answer and jump to next node
     function sendMultiResponse(ids, value){
         var dataVar = {};
@@ -206,22 +207,24 @@ angular.module('nextgensp2')
 
         if(angular.element(document.getElementById('myNavmenu')).hasClass('canvas-slid')){
             //close
-            angular.element(document.getElementById('myNavmenu')).removeClass('in canvas-slid');
-            angular.element(document.getElementById('myNavmenu')).removeAttr( 'style' );
-            angular.element(document.getElementsByTagName('body')).removeClass('canvas-slid');
-            angular.element(document.getElementsByTagName('body')).removeAttr( 'style' );
+            //angular.element(document.getElementById('myNavmenu')).removeClass('in canvas-slid');
+            //angular.element(document.getElementById('myNavmenu')).removeAttr( 'style' );
+            //angular.element(document.getElementsByTagName('body')).removeClass('canvas-slid');
+            //angular.element(document.getElementsByTagName('body')).removeAttr( 'style' );
 
             angular.element(document.getElementsByTagName('footer')).css({bottom: '1px'});
 
         }else{
             //open
-            angular.element(document.getElementById('myNavmenu')).addClass('in canvas-slid');
-            angular.element(document.getElementById('myNavmenu')).css({right: '0px'});
+            //angular.element(document.getElementById('myNavmenu')).addClass('in canvas-slid');
+            //angular.element(document.getElementById('myNavmenu')).css({right: '0px'});
 
-            angular.element(document.getElementsByTagName('body')).addClass('canvas-slid');
-            angular.element(document.getElementsByTagName('body')).css({position: 'relative', right: '300px', overflow: 'hidden'});
+            //angular.element(document.getElementsByTagName('body')).addClass('canvas-sliding');
+            //angular.element(document.getElementsByTagName('body')).css({position: 'relative', right: '300px', overflow: 'hidden'});
 
             angular.element(document.getElementsByTagName('footer')).css({bottom: 'auto'});
+
+            
 
         }
     }
@@ -272,5 +275,11 @@ angular.module('nextgensp2')
         console.log("expandSectionClicked");
         $scope.$emit('summaryPanelEvent');
     };
+
+    //Test the side panel
+    $scope.testPanel =  function(){
+        console.log("testPanel");
+        sidePanelToggle();
+    }
 
 });
