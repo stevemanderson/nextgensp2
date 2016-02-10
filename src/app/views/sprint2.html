@@ -20,12 +20,12 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-xs-2 col-sm-1">
-				<div class="jump-section" ng-click="jumpSectionClicked">
+				<div class="jump-section" ng-click="jumpSectionClicked()">
 					<img src="images/pb_back.png">
 				</div>
 			</div>
 			<div class="col-xs-5 col-sm-2">
-				<div class="save" ng-click="saveClicked">
+				<div class="save" ng-click="saveClicked()">
 					<div class="center">
 						<img src="images/pb_save.png">
 						<span>Continue<br/>Later</span>
@@ -48,6 +48,7 @@
 	</div>
 </div>
 <div class="scroll-frame">
+	<a id="top"></a>
 	<div class="container">
 		<div class="row ">
 			<div class="col-md-12 text-center panel-shadow initial-module">

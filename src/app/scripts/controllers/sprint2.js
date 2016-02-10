@@ -8,7 +8,7 @@
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('Sprint2Ctrl', function ($scope, sp2Service,  $compile, $rootScope, ngDialog) {
+  .controller('Sprint2Ctrl', function ($scope, sp2Service,  $compile, $rootScope, ngDialog, $location, $anchorScroll,smoothScroll,$timeout) {
 
   	var responseData = {};
     responseData.moduleType = "freeText";
@@ -16,6 +16,9 @@ angular.module('nextgensp2')
     var current_PID = 0;
     var current_ID = 0;
     var current_answer = 0;
+    $scope.moduleRef = 0;
+    $scope.currentModuleRef = 0;
+
     $scope.moduleData;
     $scope.sessionStats = {};
     $scope.inputText = "";
@@ -157,9 +160,12 @@ angular.module('nextgensp2')
 
         var options = '<chatoptions></chatoptions>';
 
+        $scope.moduleRef++;
+        $scope.currentModuleRef = $scope.moduleRef;
         // Add new module
         angular.element(document.getElementById('chat-frame')).append($compile(type)($scope));
         angular.element(document.getElementById('chat-frame')).append($compile(options)($scope));
+
     }
 
     function addLoader(){
@@ -257,12 +263,44 @@ angular.module('nextgensp2')
         scope:$rootScope
       });
     });
+    // Show summary
+    $scope.$on('scrollNewModule', function (event, moduleRef){
+        /*
+        var old = $location.hash();
+        $location.hash(moduleRef);
+        $anchorScroll();
+        //reset to old to keep any additional routing logic from kicking in
+        $location.hash(old);
+        */
+        var options = {
+            duration: 700,
+            easing: 'easeInQuad',
+            offset: 100
+        }
+        
+        var element = document.getElementById(moduleRef);
+        smoothScroll(element, options);
+       
+        
+    });
 
     // Actions
 
     // Jump section
     $scope.jumpSectionClicked = function(){
-
+        //jump to the previous section
+        console.log("moduleRef_"+$scope.currentModuleRef);
+        var old = $location.hash();
+        $scope.currentModuleRef--;
+        if($scope.currentModuleRef>0){            
+            $location.hash("moduleRef_"+$scope.currentModuleRef);
+        }else{
+            $scope.currentModuleRef=0;
+            $location.hash("top");
+        }
+        $anchorScroll();
+        //reset to old to keep any additional routing logic from kicking in
+        $location.hash(old);
     };
 
     // Save clicked
