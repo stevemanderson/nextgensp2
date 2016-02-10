@@ -197,7 +197,7 @@ class SessionService:
         found = False
 
         for i in session['services']:
-            if i['id'] == service['id']:
+            if i['id'] == service['id'] and i['pid'] == service['pid']:
                 found = True
                 break
 
@@ -252,6 +252,9 @@ class Handler:
             for c in item['children']:
                 if 'children' in c:
                     c.pop('children', None)
+
+    def getTracking(self, sessionId):
+        return self._sessionService.getTracking(sessionId)
 
     def getSession(self, sessionId):
         return self._sessionService.getSession(sessionId)

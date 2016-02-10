@@ -3,8 +3,17 @@ from services.settings import DRUPAL_API
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
-
 from api.models import Handler
+
+@api_view(['GET'])
+def tracking(request):
+    sessionId = request.COOKIES.get('userSession')
+    c = DrupalDataContext(DRUPAL_API)
+    mc = UserMongoContext('localhost', 27017)
+    sc = SessionService(mc)
+    h = Handler(c, sc)
+    result = h.getTracking(sessionId)
+    return Response(result)
 
 @api_view(['POST'])
 def responses(request):
