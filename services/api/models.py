@@ -115,17 +115,26 @@ class SessionService:
     def __init__(self, context):
         self._context = context
 
-    def addResponseTracking(self, sessionId, response, parentQuery):
+    def addTracking(self, sessionId, selection, parentQuery):
         session = self.getSession(sessionId)
         if session == None:
             raise ValueError("Could not find session")
+
         if 'tracking' not in session:
             session['tracking'] = []
 
+        tempSelection = copy.deepcopy(selection)
+        if 'children' in tempSelection:
+            tempSelection.pop('children', None)
+
+        tempQuery = copy.deepcopy(parentQuery)
+        if 'children' in tempQuery:
+            tempQuery.pop('children', None)
+
         session['tracking'].append({
             'date':datetime.datetime.utcnow(),
-            'query':parentQuery,
-            'response':response
+            'query':tempQuery,
+            'selection':tempSelection
         })
 
         self._context.save(sessionId, session)
@@ -150,6 +159,7 @@ class SessionService:
             return
 
         session = {
+            'date':datetime.datetime.utcnow(),
             'sessionId':sessionId
         }
         self._context.save(sessionId, session)
@@ -185,10 +195,12 @@ class SessionService:
         if 'services' not in session:
             session['services'] = []
         found = False
+
         for i in session['services']:
-            if i['id'] == service['id']:
+            if i['id'] == service['id'] and i['pid'] == service['pid']:
                 found = True
                 break
+
         if found != True:
             session['services'].append(service)
         self._context.save(sessionId, session)
@@ -282,11 +294,12 @@ class Handler:
 
         # check for the tree node submission
         if id == 0 and pid == 0 and len(value) > 0:
-            answer = self._context.getByTitle(value)
+            answer = self._context.getByTitle(value, 1)
         else:
-            answer = self._context.getById(id)
+            answer = self._context.getById(id, 1)
 
-        self._sessionService.addResponseTracking(sessionId, answer, parentQuery)
+        # Track the answer
+        self._sessionService.addTracking(sessionId, answer, parentQuery)
 
         query = self.getFirstQuery(answer)
 
@@ -297,6 +310,7 @@ class Handler:
         for i in query['children']:
             if i['type'] == 'service':
                 self._sessionService.addService(sessionId, i)
+                self._sessionService.addTracking(sessionId, i, query)
 
         # store the response
         if storeResponse:

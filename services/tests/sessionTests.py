@@ -22,7 +22,7 @@ class SessionTests(unittest.TestCase):
         parentQuery = {
             'Id':2
         }
-        SessionTests.sc.addResponseTracking(1, response, parentQuery)
+        SessionTests.sc.addTracking(1, response, parentQuery)
         self.assertTrue(len(SessionTests.sc.getTracking(1)) == 1)
         SessionTests.sc.removeSession(1)
 
