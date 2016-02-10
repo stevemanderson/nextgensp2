@@ -197,7 +197,7 @@ class SessionService:
         found = False
 
         for i in session['services']:
-            if i['id'] == service['id'] and i['pid'] == service['pid']:
+            if i['id'] == service['id']:
                 found = True
                 break
 
