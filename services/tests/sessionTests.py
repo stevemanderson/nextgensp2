@@ -7,7 +7,8 @@ import json
 
 class SessionTests(unittest.TestCase):
     mc = UserMongoContext('localhost', 27017)
-    sc = SessionService(mc)
+    sqlC = SqlDataContext("nextgensp2", "postgres")
+    sc = SessionService(mc, sqlC)
 
     def test_create(self):
         SessionTests.sc.createSession(1)

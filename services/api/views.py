@@ -3,8 +3,28 @@ from services.settings import DRUPAL_API
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
-
 from api.models import Handler
+
+@api_view(['GET'])
+def tree(request):
+    sessionId = request.COOKIES.get('userSession')
+    c = DrupalDataContext(DRUPAL_API)
+    mc = UserMongoContext('localhost', 27017)
+    sqlC = SqlDataContext("nextgensp2", "postgres")
+    sc = SessionService(mc, sqlC)
+    h = Handler(c, sc)
+    return Response(h.getTree())
+
+@api_view(['GET'])
+def tracking(request):
+    sessionId = request.COOKIES.get('userSession')
+    c = DrupalDataContext(DRUPAL_API)
+    mc = UserMongoContext('localhost', 27017)
+    sqlC = SqlDataContext("nextgensp2", "postgres")
+    sc = SessionService(mc, sqlC)
+    h = Handler(c, sc)
+    result = h.getTracking(sessionId)
+    return Response(result)
 
 @api_view(['POST'])
 def responses(request):
@@ -21,7 +41,8 @@ def responses(request):
 
     c = DrupalDataContext(DRUPAL_API)
     mc = UserMongoContext('localhost', 27017)
-    sc = SessionService(mc)
+    sqlC = SqlDataContext("nextgensp2", "postgres")
+    sc = SessionService(mc, sqlC)
     h = Handler(c, sc)
 
     result = h.submitAnswer(int(id), int(pid), value, sessionId, store)
@@ -41,7 +62,8 @@ def multi(request):
 
     c = DrupalDataContext(DRUPAL_API)
     mc = UserMongoContext('localhost', 27017)
-    sc = SessionService(mc)
+    sqlC = SqlDataContext("nextgensp2", "postgres")
+    sc = SessionService(mc, sqlC)
     h = Handler(c, sc)
 
     result = h.submitAnswers(ids.split(','), int(pid), sessionId)
@@ -54,7 +76,8 @@ def queries(request):
     result = None
     c = DrupalDataContext(DRUPAL_API)
     mc = UserMongoContext('localhost', 27017)
-    sc = SessionService(mc)
+    sqlC = SqlDataContext("nextgensp2", "postgres")
+    sc = SessionService(mc, sqlC)
     h = Handler(c, sc)
 
     if 'id' in request.data:
@@ -71,7 +94,8 @@ def services(request):
 
     c = DrupalDataContext(DRUPAL_API)
     mc = UserMongoContext('localhost', 27017)
-    sc = SessionService(mc)
+    sqlC = SqlDataContext("nextgensp2", "postgres")
+    sc = SessionService(mc, sqlC)
     h = Handler(c, sc)
 
     result = h.getServices(sessionId)
