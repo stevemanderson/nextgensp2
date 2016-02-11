@@ -103,7 +103,7 @@ class SqlDataContext:
     def addTracking(self, sessionId, record):
         conn = psycopg2.connect("dbname={0} user={1}".format(self._dbName, self._user))
         cur = conn.cursor()
-        cur.execute("INSERT INTO tracking (sessionId, queryId, selectionId) VALUES (%s, %s, %s);", (sessionId, record['query']['id'], record['selection']['id']))
+        cur.execute("INSERT INTO tracking (sessionId, queryId, selectionId, type, date) VALUES (%s, %s, %s, %s, %s);", (sessionId, record['query']['id'], record['selection']['id'], 'testing', datetime.datetime.utcnow()))
         conn.commit()
         cur.close()
         conn.close()
