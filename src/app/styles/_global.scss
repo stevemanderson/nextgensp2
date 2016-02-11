@@ -23,3 +23,8 @@ body, p, div {
 .invisible{
 	opacity:0;
 }
+
+input::-ms-clear {
+  width : 0;
+  height: 0;
+}
