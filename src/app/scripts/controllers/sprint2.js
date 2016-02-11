@@ -8,7 +8,7 @@
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('Sprint2Ctrl', function ($scope, sp2Service,  $compile, $rootScope, ngDialog, $location, $anchorScroll,smoothScroll,$timeout) {
+  .controller('Sprint2Ctrl', function ($scope, sp2Service,  $compile, $rootScope, ngDialog, $location,smoothScroll,$timeout) {
 
   	var responseData = {};
     responseData.moduleType = "freeText";

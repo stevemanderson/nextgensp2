@@ -30,7 +30,7 @@ angular.module('nextgensp2')
           angular.element(element).nextAll('.chat-module').remove();
         });
         $timeout(function() { 
-            scope.$emit("scrollNewModule", $scope.chatModuleRef);
+            scope.$emit("scrollNewModule", scope.chatModuleRef);
         });
       },
 		restrict: 'E',
@@ -54,7 +54,7 @@ angular.module('nextgensp2')
           angular.element(element).nextAll('.chat-module').remove();
         });
         $timeout(function() { 
-            scope.$emit("scrollNewModule", $scope.chatModuleRef);
+            scope.$emit("scrollNewModule", scope.chatModuleRef);
         });
       },
 		restrict: 'E',
@@ -109,7 +109,7 @@ angular.module('nextgensp2')
           angular.element(element).nextAll('.chat-module').remove();
         });
         $timeout(function() { 
-            scope.$emit("scrollNewModule", $scope.chatModuleRef);
+            scope.$emit("scrollNewModule", scope.chatModuleRef);
         });
       },
     restrict: 'E',

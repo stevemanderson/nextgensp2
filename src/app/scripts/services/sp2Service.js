@@ -48,7 +48,8 @@ angular.module('nextgensp2')
     this.postQueries = function (data) {
         return $http({ method  : "POST",
                 url     : apiURL+"queries/",
-                data    : data
+                data    : data,
+                withCredentials: true
                });
     };
 
@@ -59,7 +60,8 @@ angular.module('nextgensp2')
     this.postAnswer = function (data) {
         return $http({ method  : "POST",
                 url     : apiURL+"responses/",
-                data    : data
+                data    : data,
+                withCredentials: true
                });
     };
 
@@ -70,7 +72,8 @@ angular.module('nextgensp2')
     this.postMultiAnswer = function (data) {
         return $http({ method  : "POST",
                 url     : apiURL+"multi/",
-                data    : data
+                data    : data,
+                withCredentials: true
                });
     };
 
