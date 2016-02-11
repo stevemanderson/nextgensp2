@@ -19,7 +19,8 @@ angular
     'ngTouch',
     'ngMap',
     'angularUUID2',
-    'google.places'
+    'google.places',
+    'smoothScroll'
   ])
   .config(function ($routeProvider, $httpProvider) {
     $routeProvider
