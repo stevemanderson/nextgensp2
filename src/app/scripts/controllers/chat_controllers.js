@@ -21,9 +21,7 @@ angular.module('nextgensp2')
  */
 angular.module('nextgensp2')
   .controller('ChatLoadingCtrl', function ($scope) {
-    $scope.init = function () {
-         $scope.$emit("scrollNewModule", "chat-loading");
-    };
+
   });
 
 /**
@@ -77,9 +75,7 @@ angular.module('nextgensp2')
       $scope.responses[index].isSelected = true;
       $scope.$emit("chatModuleEvents", id, "");
     }
-    $scope.init = function () {
-         $scope.$emit("scrollNewModule", $scope.chatModuleRef);
-    };
+
   });
 
 
@@ -122,10 +118,6 @@ angular.module('nextgensp2')
 
       $scope.$emit("chatMultiModuleEvents", ids, "");
     }
-
-    $scope.init = function () {
-         $scope.$emit("scrollNewModule", $scope.chatModuleRef);
-    };
 
   }]);
 
@@ -183,8 +175,6 @@ angular.module('nextgensp2')
 
     $scope.query = $scope.$parent.moduleData;
     $scope.chatModuleRef = "moduleRef_"+$scope.$parent.moduleRef;
-    console.log('chatsingle - init 1',$scope.chatModuleRef);
-
 
     $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; });
     $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
@@ -216,10 +206,6 @@ angular.module('nextgensp2')
         $scope.$emit("chatModuleLinkage", response.queryId);
       }
     }
-    $scope.init = function () {
-      console.log('chatsingle - init ',$scope.chatModuleRef);
-      $scope.$emit("scrollNewModule", $scope.chatModuleRef);
-    };
   }]);
 
 /**

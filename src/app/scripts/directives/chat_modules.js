@@ -23,11 +23,14 @@ angular.module('nextgensp2')
  * # chatlocation
  */
 angular.module('nextgensp2')
-  .directive('chatlocation', function () {
+  .directive('chatlocation', function ($timeout) {
     return {
       link: function(scope, element) {
         scope.$on('chatModuleEvents', function(event, id, value) {
           angular.element(element).nextAll('.chat-module').remove();
+        });
+        $timeout(function() { 
+            scope.$emit("scrollNewModule", $scope.chatModuleRef);
         });
       },
 		restrict: 'E',
@@ -44,11 +47,14 @@ angular.module('nextgensp2')
  * # chatmultiplechoice
  */
 angular.module('nextgensp2')
-  .directive('chatmultiplechoice', function () {
+  .directive('chatmultiplechoice', function ($timeout) {
     return {
       link: function(scope, element) {
         scope.$on('chatMultiModuleEvents', function(event, id, value) {
           angular.element(element).nextAll('.chat-module').remove();
+        });
+        $timeout(function() { 
+            scope.$emit("scrollNewModule", $scope.chatModuleRef);
         });
       },
 		restrict: 'E',
@@ -96,11 +102,14 @@ angular.module('nextgensp2')
  * # chatsinglechoice
  */
 angular.module('nextgensp2')
-  .directive('chatsinglechoice', function () {
+  .directive('chatsinglechoice', function ($timeout) {
     return {
       link: function(scope, element) {
         scope.$on('chatModuleEvents', function(event) {
           angular.element(element).nextAll('.chat-module').remove();
+        });
+        $timeout(function() { 
+            scope.$emit("scrollNewModule", $scope.chatModuleRef);
         });
       },
     restrict: 'E',
@@ -117,8 +126,13 @@ angular.module('nextgensp2')
  * # loading
  */
 angular.module('nextgensp2')
-  .directive('loading', function () {
+  .directive('loading', function ($timeout) {
     return {
+      link: function(scope, element){
+        $timeout(function() { 
+            scope.$emit("scrollNewModule", 'chat-loading');
+        });
+      },
 		restrict: 'E',
 		replace: true,
 		templateUrl: "partials/chat_loading.html",

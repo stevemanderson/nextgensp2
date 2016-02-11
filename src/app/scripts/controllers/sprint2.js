@@ -45,9 +45,14 @@ angular.module('nextgensp2')
                     serviceAlert:false,
                     summary:true
                 };
-                sendQuery({title:response.data.result.parameters.type});
+                if (response.data.result.action === "input.unknown") {
+                    errorChat('Sorry that input is unknown.');
+                }else{
+                    sendQuery({title:response.data.result.parameters.type});
+                }
+                
             }, function() {
-                console.log("Error");
+                errorChat();
             });
         }
 
@@ -85,11 +90,9 @@ angular.module('nextgensp2')
         addLoader();
 
         sp2Service.postAnswer(dataVar).then(function(response) {
-            console.log("sendResponse");
             console.log(response.data);
             buildChat(response.data);
         }, function() {
-            console.log("Error");
             errorChat();
         });
     }
@@ -124,8 +127,6 @@ angular.module('nextgensp2')
     }
 
     function buildChat(data){
-        console.log("buildChat");
-
         //Update session services
         getSessionServices();
 
@@ -176,17 +177,19 @@ angular.module('nextgensp2')
         angular.element(document.getElementsByClassName('chat-loading')).remove();
     }
 
-    function errorChat(){
+    function errorChat(errorTxt){
         //Remove loader
         angular.element(document.getElementsByClassName('chat-loading')).remove();
         // Add error module
-        angular.element(document.getElementById('chat-frame')).append('<div class="error"> Sorry there was an error.</div>');
+        if(errorTxt === null){
+            angular.element(document.getElementById('chat-frame')).append('<div class="error"> Sorry there was an error.</div>');
+        }else{
+            angular.element(document.getElementById('chat-frame')).append('<div class="error">'+errorTxt+'</div>');
+        }
+        
     }
 
     function updateStats(data){
-        console.log("updateStats");
-        console.log(data);
-
         var cost_min = 0;
         var cost_max = 0;
         var steps = data.length;
@@ -208,29 +211,13 @@ angular.module('nextgensp2')
     
     //Show side panel info
     function sidePanelToggle(){
-        console.log("sidePanelToggle");
-        console.log($rootScope.sidePanelService  );
-
         if(angular.element(document.getElementById('myNavmenu')).hasClass('canvas-slid')){
             //close
-            //angular.element(document.getElementById('myNavmenu')).removeClass('in canvas-slid');
-            //angular.element(document.getElementById('myNavmenu')).removeAttr( 'style' );
-            //angular.element(document.getElementsByTagName('body')).removeClass('canvas-slid');
-            //angular.element(document.getElementsByTagName('body')).removeAttr( 'style' );
-
             angular.element(document.getElementsByTagName('footer')).css({bottom: '1px'});
 
         }else{
             //open
-            //angular.element(document.getElementById('myNavmenu')).addClass('in canvas-slid');
-            //angular.element(document.getElementById('myNavmenu')).css({right: '0px'});
-
-            //angular.element(document.getElementsByTagName('body')).addClass('canvas-sliding');
-            //angular.element(document.getElementsByTagName('body')).css({position: 'relative', right: '300px', overflow: 'hidden'});
-
             angular.element(document.getElementsByTagName('footer')).css({bottom: 'auto'});
-
-            
 
         }
     }
@@ -242,13 +229,11 @@ angular.module('nextgensp2')
 
     //Capture events from Chat modules
     $scope.$on('chatModuleEvents', function (event, id, value){
-        console.log("chatModuleEvents");
         sendResponse(id, value);
     });
 
     //Capture event from multi choice modules
     $scope.$on('chatMultiModuleEvents', function (event, ids, value){
-        console.log("chatMultiModuleEvents");
         sendMultiResponse(ids, value);
     });
 
@@ -259,19 +244,12 @@ angular.module('nextgensp2')
     // Show summary
     $scope.$on('summaryPanelEvent', function (event){
         ngDialog.open({
-        template:"partials/chat_summary.html",
-        scope:$rootScope
-      });
+            template:"partials/chat_summary.html",
+            scope:$rootScope
+          });
     });
     // Show summary
     $scope.$on('scrollNewModule', function (event, moduleRef){
-        /*
-        var old = $location.hash();
-        $location.hash(moduleRef);
-        $anchorScroll();
-        //reset to old to keep any additional routing logic from kicking in
-        $location.hash(old);
-        */
         var options = {
             duration: 700,
             easing: 'easeInQuad',
@@ -280,8 +258,6 @@ angular.module('nextgensp2')
         
         var element = document.getElementById(moduleRef);
         smoothScroll(element, options);
-       
-        
     });
 
     // Actions
@@ -289,18 +265,13 @@ angular.module('nextgensp2')
     // Jump section
     $scope.jumpSectionClicked = function(){
         //jump to the previous section
-        console.log("moduleRef_"+$scope.currentModuleRef);
-        var old = $location.hash();
         $scope.currentModuleRef--;
         if($scope.currentModuleRef>0){            
-            $location.hash("moduleRef_"+$scope.currentModuleRef);
+            $scope.$emit('scrollNewModule', 'moduleRef_'+$scope.currentModuleRef);
         }else{
             $scope.currentModuleRef=0;
-            $location.hash("top");
+            $scope.$emit('scrollNewModule', 'top');
         }
-        $anchorScroll();
-        //reset to old to keep any additional routing logic from kicking in
-        $location.hash(old);
     };
 
     // Save clicked
@@ -310,14 +281,7 @@ angular.module('nextgensp2')
 
     // Expand section
     $scope.expandSectionClicked = function(){
-        console.log("expandSectionClicked");
         $scope.$emit('summaryPanelEvent');
     };
-
-    //Test the side panel
-    $scope.testPanel =  function(){
-        console.log("testPanel");
-        sidePanelToggle();
-    }
 
 });
