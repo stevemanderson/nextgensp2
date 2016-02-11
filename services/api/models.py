@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django.db import models
 from mappers import *
 from pymongo import MongoClient
+import psycopg2
 
 import requests
 import json
@@ -94,6 +95,19 @@ class DrupalDataContext:
         DrupalDataContext.responseData = json.loads(r.text)
         return DrupalDataContext.responseData
 
+class SqlDataContext:
+    def __init__(self, dbName, user):
+        self._dbName = dbName
+        self._user = user
+
+    def addTracking(self, sessionId, record):
+        conn = psycopg2.connect("dbname={0} user={1}".format(self._dbName, self._user))
+        cur = conn.cursor()
+        cur.execute("INSERT INTO tracking (sessionId, queryId, selectionId) VALUES (%s, %s, %s);", (sessionId, record['query']['id'], record['selection']['id']))
+        conn.commit()
+        cur.close()
+        conn.close()
+
 class UserMongoContext:
     def __init__(self, server, port):
         self._client = MongoClient(server, port)
@@ -112,8 +126,9 @@ class UserMongoContext:
         self._db.sessions.remove({"sessionId":sessionId})
 
 class SessionService:
-    def __init__(self, context):
+    def __init__(self, context, sqlContext):
         self._context = context
+        self._sqlContext = sqlContext
 
     def addTracking(self, sessionId, selection, parentQuery):
         session = self.getSession(sessionId)
@@ -131,12 +146,14 @@ class SessionService:
         if 'children' in tempQuery:
             tempQuery.pop('children', None)
 
-        session['tracking'].append({
+        tracking = {
             'date':datetime.datetime.utcnow(),
             'query':tempQuery,
             'selection':tempSelection
-        })
+        }
 
+        session['tracking'].append(tracking)
+        self._sqlContext.addTracking(sessionId, tracking)
         self._context.save(sessionId, session)
 
     def getTracking(self, sessionId):
@@ -252,6 +269,9 @@ class Handler:
             for c in item['children']:
                 if 'children' in c:
                     c.pop('children', None)
+
+    def getTree(self):
+        return self._context.getById(18, 100)
 
     def getTracking(self, sessionId):
         return self._sessionService.getTracking(sessionId)

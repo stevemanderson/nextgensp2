@@ -27,6 +27,10 @@ angular
         templateUrl: 'views/sprint2.html',
         controller: 'Sprint2Ctrl'
       })
+      .when('/graph', {
+        templateUrl: 'views/graph.html',
+        controller: 'GraphController'
+      })
       .when('/apiai', {
         templateUrl: 'views/apiai.html'
       })
