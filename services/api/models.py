@@ -34,15 +34,6 @@ class DrupalDataContext:
         node = {}
         DrupalNodeMapper.map(n, node)
 
-        # if 'hard dependency description' in n and n['hard dependency description'] != None:
-            # node['dependency_description'] = n['hard_dependency_description']
-
-        # if 'hard dependencies' in n and n['hard dependencies'] != None:
-        #     result = []
-        #     for depId in str(n['hard dependencies']).split(', '):
-        #         result.append(self.getById(int(depId), 1))
-        #     node['dependencies'] = result
-
         if currentLevel < childLevel:
             node['children'] = self.getChildren(node['id'], childLevel, currentLevel)
         else:
@@ -100,13 +91,49 @@ class SqlDataContext:
         self._dbName = dbName
         self._user = user
 
+    def mapTrackingAggregate(self, obj):
+        return {
+            'queryId':obj[0],
+            'selectionId':obj[1],
+            'count':obj[2],
+        }
+
     def addTracking(self, sessionId, record):
         conn = psycopg2.connect("dbname={0} user={1}".format(self._dbName, self._user))
         cur = conn.cursor()
-        cur.execute("INSERT INTO tracking (sessionId, queryId, selectionId) VALUES (%s, %s, %s);", (sessionId, record['query']['id'], record['selection']['id']))
+        cur.execute("INSERT INTO tracking (sessionId, queryId, selectionId, type, date) VALUES (%s, %s, %s, %s, %s);", (sessionId, record['query']['id'], record['selection']['id'], record['selection']['type'], datetime.datetime.utcnow()))
         conn.commit()
         cur.close()
         conn.close()
+
+    def getTrackingAggregateQuery(self, where):
+        query = """
+            select queryid, selectionid, count(queryid)
+            from tracking
+            where {0}
+            group by queryid, selectionid
+            order by count(queryid) desc
+        """.format(where)
+        return query
+
+    def getTrackingAggregate(self, type, sessionId=None):
+        query = "type = '{0}'".format(type)
+
+        if sessionId is not None:
+            query = "{0} and sessionId = '{1}'".format(query, sessionId)
+
+        conn = psycopg2.connect("dbname={0} user={1}".format(self._dbName, self._user))
+        cur = conn.cursor()
+        cur.execute(self.getTrackingAggregateQuery(query))
+
+        result = []
+        for i in cur.fetchall():
+            result.append(self.mapTrackingAggregate(i))
+
+        conn.commit()
+        cur.close()
+        conn.close()
+        return result
 
 class UserMongoContext:
     def __init__(self, server, port):
@@ -174,7 +201,6 @@ class SessionService:
     def createSession(self, sessionId):
         if self.sessionExists(sessionId):
             return
-
         session = {
             'date':datetime.datetime.utcnow(),
             'sessionId':sessionId
@@ -293,6 +319,7 @@ class Handler:
         return self._context.getById(id, childDepth)
 
     def getServices(self, sessionId):
+        # return self._sqlContext.getTrackingAggregate('service', sessionId)
         return self._sessionService.getSessionServices(sessionId)
 
     def submitAnswers(self, ids, pid, sessionId):

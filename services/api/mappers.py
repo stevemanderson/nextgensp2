@@ -3,6 +3,7 @@ class DrupalNodeMapper:
     def map(source, target):
         target['id'] = int(source['nid'])
         target['title'] = ''
+        target['free_text_available'] = source['free_text_available']
 
         # check the types
         if source['type'] != None:
@@ -41,6 +42,12 @@ class ServiceMapper:
             target['title'] = source['customer title']
 
         target['service_customer_description'] = source['service customer description']
+        target['service_description_formal'] = source['service_description_formal']
+        target['service_title'] = source['service_title']
+        target['phone_number'] = source['phone_number']
+        target['referral_information'] = source['referral_information']
+        target['service_region'] = source['service_region']
+        target['support_area'] = source['support_area']
         target['further_information_link'] = source['further information link']
         target['application_link'] = source['application link']
         target['special_criteria'] = source['special criteria']
