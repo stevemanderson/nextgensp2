@@ -47,7 +47,7 @@
       .append("g")
         .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-    d3.json("http://127.0.0.1:7070/api/tree", function(error, root) {
+    d3.json("http://127.0.0.1:9090/api/tree", function(error, root) {
       if (error) throw error;
 
       var nodes = tree.nodes(root),
