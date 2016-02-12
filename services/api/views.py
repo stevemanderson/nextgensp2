@@ -9,7 +9,7 @@ def createSessionService():
     mc = UserMongoContext('localhost', 27017)
     sqlC = SqlDataContext("nextgensp2", "postgres")
     return SessionService(mc, sqlC)
-    
+
 def createHandler():
     c = DrupalDataContext(DRUPAL_API)
     return Handler(c, createSessionService())
@@ -45,6 +45,8 @@ def responses(request):
 def multi(request):
     sessionId = request.COOKIES.get('userSession')
     pid = 0
+
+    ids = request.data['ids']
 
     if 'pid' in request.data:
         pid = request.data['pid']
