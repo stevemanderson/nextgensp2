@@ -5,25 +5,24 @@ from rest_framework import status
 from rest_framework.response import Response
 from api.models import Handler
 
+def createSessionService():
+    mc = UserMongoContext('localhost', 27017)
+    sqlC = SqlDataContext("nextgensp2", "postgres")
+    return SessionService(mc, sqlC)
+    
+def createHandler():
+    c = DrupalDataContext(DRUPAL_API)
+    return Handler(c, createSessionService())
+
 @api_view(['GET'])
 def tree(request):
     sessionId = request.COOKIES.get('userSession')
-    c = DrupalDataContext(DRUPAL_API)
-    mc = UserMongoContext('localhost', 27017)
-    sqlC = SqlDataContext("nextgensp2", "postgres")
-    sc = SessionService(mc, sqlC)
-    h = Handler(c, sc)
-    return Response(h.getTree())
+    return Response(createHandler().getTree())
 
 @api_view(['GET'])
 def tracking(request):
     sessionId = request.COOKIES.get('userSession')
-    c = DrupalDataContext(DRUPAL_API)
-    mc = UserMongoContext('localhost', 27017)
-    sqlC = SqlDataContext("nextgensp2", "postgres")
-    sc = SessionService(mc, sqlC)
-    h = Handler(c, sc)
-    result = h.getTracking(sessionId)
+    result = createHandler().getTracking(sessionId)
     return Response(result)
 
 @api_view(['POST'])
@@ -39,14 +38,7 @@ def responses(request):
     value = request.data['value']
     store = 'store' in request.data and request.data['store'] == '1'
 
-    c = DrupalDataContext(DRUPAL_API)
-    mc = UserMongoContext('localhost', 27017)
-    sqlC = SqlDataContext("nextgensp2", "postgres")
-    sc = SessionService(mc, sqlC)
-    h = Handler(c, sc)
-
-    result = h.submitAnswer(int(id), int(pid), value, sessionId, store)
-
+    result = createHandler().submitAnswer(int(id), int(pid), value, sessionId, store)
     return Response(result)
 
 @api_view(['POST'])
@@ -54,31 +46,17 @@ def multi(request):
     sessionId = request.COOKIES.get('userSession')
     pid = 0
 
-    # TODO: Update to keep track of users
     if 'pid' in request.data:
         pid = request.data['pid']
 
-    ids = request.data['ids']
-
-    c = DrupalDataContext(DRUPAL_API)
-    mc = UserMongoContext('localhost', 27017)
-    sqlC = SqlDataContext("nextgensp2", "postgres")
-    sc = SessionService(mc, sqlC)
-    h = Handler(c, sc)
-
-    result = h.submitAnswers(ids.split(','), int(pid), sessionId)
-
+    result = createHandler().submitAnswers(ids.split(','), int(pid), sessionId)
     return Response(result)
 
 
 @api_view(['POST'])
 def queries(request):
     result = None
-    c = DrupalDataContext(DRUPAL_API)
-    mc = UserMongoContext('localhost', 27017)
-    sqlC = SqlDataContext("nextgensp2", "postgres")
-    sc = SessionService(mc, sqlC)
-    h = Handler(c, sc)
+    h = createHandler()
 
     if 'id' in request.data:
         result = h.getQueryById(int(request.data['id']))
@@ -91,13 +69,5 @@ def queries(request):
 @api_view(['GET'])
 def services(request):
     sessionId = request.COOKIES.get('userSession')
-
-    c = DrupalDataContext(DRUPAL_API)
-    mc = UserMongoContext('localhost', 27017)
-    sqlC = SqlDataContext("nextgensp2", "postgres")
-    sc = SessionService(mc, sqlC)
-    h = Handler(c, sc)
-
-    result = h.getServices(sessionId)
-
+    result = createHandler().getServices(sessionId)
     return Response(result)
