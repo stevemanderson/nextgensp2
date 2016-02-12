@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="col-md-12">
 			<div class="avatar">
-				<img src="images/avatar.png" >
+				<img src="images/avatar.svg" >
 			</div>
 			<section>
 				<p ng-bind-html="query.title"></p>
@@ -11,6 +11,8 @@
 					<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer)" ng-bind-html="answer.title"></li>
 				</ul>
 			</section>
+			<div>
+			
 			<div class='container__services' ng-show="{{services.length > 0}}">
 				<!--<h3>Services</h3>-->
 				<ul class="clearfix">
