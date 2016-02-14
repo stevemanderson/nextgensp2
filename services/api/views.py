@@ -73,3 +73,8 @@ def services(request):
     sessionId = request.COOKIES.get('userSession')
     result = createHandler().getServices(sessionId)
     return Response(result)
+
+# @api_view(['GET'])
+# def sessions(request):
+#     sessionId = request.COOKIES.get('userSession')
+#     result = createHandler().get
