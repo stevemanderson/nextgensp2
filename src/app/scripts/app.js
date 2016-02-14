@@ -20,7 +20,11 @@ angular
     'ngMap',
     'angularUUID2',
     'google.places',
-    'smoothScroll'
+    'smoothScroll',
+    'com.2fdevs.videogular',
+    'com.2fdevs.videogular.plugins.controls',
+    'com.2fdevs.videogular.plugins.overlayplay',
+    'com.2fdevs.videogular.plugins.poster'
   ])
   .config(function ($routeProvider, $httpProvider) {
     $routeProvider
@@ -34,6 +38,10 @@ angular
       })
       .when('/apiai', {
         templateUrl: 'views/apiai.html'
+      })
+      .when('/video', {
+        templateUrl: 'views/video.html',
+        controller: 'VideoCtrl'
       })
 
       .otherwise({

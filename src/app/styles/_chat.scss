@@ -133,6 +133,9 @@
 		color:$brand-grey;
 		text-transform:uppercase;
 	}
+	.avatar{
+	    display: none;
+	}
 }
 .chat-input{
 	width: 80%;
@@ -149,6 +152,36 @@
 
 
 // Media querys
+// Mobile
+@media (max-width: 460px){
+	.initial-module{
+		.chat-input{
+			width: 100%;
+		    border:1px solid $brand-grey-light;
+		    font-size:14px;
+		    color:$brand-blue;
+		    margin: 10px auto;
+		    height: 60px;
+		    padding-left:15px;
+		}
+		.avatar{
+			display: inline;
+		    position:absolute;
+		    left:6px;
+		    top:-12px;
+		    img{
+		      width:36px;
+		      height: 36px;
+		    }
+		}
+	}
+}
+
+
+
+
+
+
 
 @media (min-width: 768px){
 	.navbar-toggle {

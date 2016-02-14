@@ -28,3 +28,15 @@ input::-ms-clear {
   width : 0;
   height: 0;
 }
+
+// Media querys
+// Mobile
+@media (max-width: 460px){
+	h1{  
+		font-size:14px; 
+		font-weight:$weight-black;
+		color:$brand-blue;
+	}
+	h2{  font-size:14px; }
+}
+

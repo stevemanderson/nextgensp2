@@ -21,9 +21,11 @@ angular.module('nextgensp2')
 
     $scope.moduleData;
     $scope.sessionStats = {};
-    $scope.inputText = "";
+    $scope.inputText = "i'm concerned about my families health";
 
     $rootScope.businessLocation = "";
+
+    $scope.showCartIcon = false;
 
     $scope.topbars = {
         serviceAlert:true,
