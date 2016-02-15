@@ -16,6 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DRUPAL_API = 'http://mstrong.info/api/views/queries_family_.json'
+GMAIL_CONFIG = '/home/steve/Projects/conf/10td'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/

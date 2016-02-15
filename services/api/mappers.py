@@ -64,6 +64,7 @@ class ServiceMapper:
         target['cost_max'] = source['cost max']
         target['cost_description'] = source['cost description']
         target['processing_time'] = source['processing time']
+        Mapper.getValue(source, 'actionable', target, 'actionable')
 
         target['service_type'] = 'NEEDS TO BE UPDATED'
 
@@ -71,8 +72,8 @@ class QueryMapper:
     @staticmethod
     def map(source, target):
         target['type'] = 'query'
-        if source['query short question'] != None:
-            target['title'] = source['query short question']
+        Mapper.getValue(source 'query_detailed_information', target, 'query_detailed_information')
+        Mapper.getValue(source 'query short question', target, 'title')
 
 class ResponseMapper:
     @staticmethod
