@@ -49,12 +49,12 @@ class ServiceMapper:
             target['title'] = source['customer title']
 
         target['service_customer_description'] = Mapper.getValue(source, 'service customer description')
-        target['service_description_formal'] = Mapper.getValue(source, 'service_description_formal')
-        target['service_title'] = Mapper.getValue(source, 'service_title')
-        target['phone_number'] = Mapper.getValue(source, 'phone_number')
-        target['referral_information'] = Mapper.getValue(source, 'referral_information')
-        target['service_region'] = Mapper.getValue(source, 'service_region')
-        target['support_area'] = Mapper.getValue(source, 'support_area')
+        target['service_description_formal'] = Mapper.getValue(source, 'service description formal')
+        target['service_title'] = Mapper.getValue(source, 'service title')
+        target['phone_number'] = Mapper.getValue(source, 'phone number')
+        target['referral_information'] = Mapper.getValue(source, 'referral information')
+        target['service_region'] = Mapper.getValue(source, 'service region')
+        target['support_area'] = Mapper.getValue(source, 'support area')
         target['further_information_link'] = Mapper.getValue(source, 'further information link')
         target['application_link'] = Mapper.getValue(source, 'application link')
         target['special_criteria'] = Mapper.getValue(source, 'special criteria')
@@ -72,7 +72,7 @@ class QueryMapper:
     @staticmethod
     def map(source, target):
         target['type'] = 'query'
-        target['query_detailed_information'] = Mapper.getValue(source, 'query_detailed_information')
+        target['query_detailed_information'] = Mapper.getValue(source, 'query detailed information')
         target['title'] = Mapper.getValue(source, 'query short question')
 
 class ResponseMapper:
