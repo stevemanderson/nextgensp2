@@ -1,5 +1,4 @@
 <div id="{{chatModuleRef}}" class="chat-module chat-single-choice">
-
 	<div class="container">
 		<div class="col-md-12">
 			<div class="avatar">
@@ -7,10 +6,11 @@
 			</div>
 			<section>
 				<p ng-bind-html="query.title"></p>
-				<ul class="clearfix">
-					<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected}" ng-click="answerClicked($index, answer)" ng-bind-html="answer.title"></li>
-				</ul>
 			</section>
+			<ul class="clearfix">
+				<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected, unactive: answer.isUnSelected}" class="clearfix" ng-click="answerClicked($index, answer)" ><div class="list-indicator">{{listIndicators[$index]}}</div><div ng-bind-html="answer.title" class="answer"></div></li>
+			</ul>
+
 			<div>
 			
 			<div class='container__services' ng-show="{{services.length > 0}}">

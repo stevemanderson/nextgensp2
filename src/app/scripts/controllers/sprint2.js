@@ -19,13 +19,15 @@ angular.module('nextgensp2')
     $scope.moduleRef = 0;
     $scope.currentModuleRef = 0;
 
+    $scope.numCartServices = 0;
+
     $scope.moduleData;
     $scope.sessionStats = {};
     $scope.inputText = "i'm concerned about my families health";
 
     $rootScope.businessLocation = "";
 
-    $scope.showCartIcon = false;
+    $scope.showCartIcon = true;
 
     $scope.topbars = {
         serviceAlert:true,
@@ -135,6 +137,7 @@ angular.module('nextgensp2')
         current_PID = data.id;
         $scope.moduleData = data;
         var type = "";
+        console.log("Build Data ->", $scope.moduleData );
 
         switch (data.format){
             case "freeText":
@@ -151,6 +154,9 @@ angular.module('nextgensp2')
             break;
             case "summary":
                 type = '<chatsummary></chatsummary>';
+            break;
+            case "boolean":
+                type = '<chatbooleanchoice></chatbooleanchoice>';
             break;
             case "singleShoice":
             default:

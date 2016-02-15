@@ -1,0 +1,68 @@
+//Popups
+.ngdialog.ngdialog-theme-default {
+    padding-bottom: 160px;
+    padding-top: 40px;
+}
+.ngdialog.ngdialog-theme-default .ngdialog-content {
+    -webkit-animation: ngdialog-flyin .5s;
+    animation: ngdialog-flyin .5s;
+    background-color:$brand-blue;
+    border-radius: 0;
+    color: #444;
+    font-size: 1.1em;
+    line-height: 1.5em;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 1em;
+    position: relative;
+    width: auto;
+
+    -webkit-box-shadow: -1px 7px 27px -1px rgba(0,0,0,0.75);
+	-moz-box-shadow: -1px 7px 27px -1px rgba(0,0,0,0.75);
+	box-shadow: -1px 7px 27px -1px rgba(0,0,0,0.75);
+}
+
+//Notice
+.ngdialog.ngdialog-theme-notice .ngdialog-content{
+	background-color:white;
+	width:90%;
+	border-radius:4px;
+
+	.popup-notice{
+		width:95%;
+		margin:10px auto;
+
+		.title{
+			font-weight: $weight-bold;
+			font-size: 16px;
+			color:$brand-blue;
+			text-align: center;
+			padding-bottom:15px;
+		}
+		.content{
+			p{
+				font-size: 14px;
+				color:$brand-blue;
+			}
+		}
+	}
+}
+
+// Video
+.ngdialog.ngdialog-theme-video .ngdialog-content{
+	background-color:white;
+	width:90%;
+	border-radius:4px;
+
+	.popup-video{
+		width:95%;
+		margin:10px auto;
+	}
+}
+
+// Media querys
+// Mobile
+@media (max-width: 460px){
+	
+}
+
