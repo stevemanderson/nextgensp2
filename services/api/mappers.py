@@ -72,8 +72,8 @@ class QueryMapper:
     @staticmethod
     def map(source, target):
         target['type'] = 'query'
-        Mapper.getValue(source 'query_detailed_information', target, 'query_detailed_information')
-        Mapper.getValue(source 'query short question', target, 'title')
+        Mapper.getValue(source, 'query_detailed_information', target, 'query_detailed_information')
+        Mapper.getValue(source, 'query short question', target, 'title')
 
 class ResponseMapper:
     @staticmethod
