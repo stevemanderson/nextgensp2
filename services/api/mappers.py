@@ -1,9 +1,17 @@
+class Mapper:
+    @staticmethod
+    def getValue(source, key, target, tKey):
+        if key in source:
+            target[tKey] = source[key]
+        target[tKey] = None
+
 class DrupalNodeMapper:
     @staticmethod
     def map(source, target):
         target['id'] = int(source['nid'])
         target['title'] = ''
-        target['free_text_available'] = source['free_text_available']
+
+        Mapper.getValue(source, 'free_text_available', target, 'free_text_available')
 
         # check the types
         if source['type'] != None:
@@ -31,8 +39,7 @@ class LinkageMapper:
     @staticmethod
     def map(source, target):
         target['type'] = 'linkage'
-        target['queryId'] = source['linkage query']
-
+        Mapper.getValue(source, 'linkage query', target, 'queryId')
 
 class ServiceMapper:
     @staticmethod
@@ -57,14 +64,16 @@ class ServiceMapper:
         target['cost_max'] = source['cost max']
         target['cost_description'] = source['cost description']
         target['processing_time'] = source['processing time']
+        Mapper.getValue(source, 'actionable', target, 'actionable')
+
         target['service_type'] = 'NEEDS TO BE UPDATED'
 
 class QueryMapper:
     @staticmethod
     def map(source, target):
         target['type'] = 'query'
-        if source['query short question'] != None:
-            target['title'] = source['query short question']
+        Mapper.getValue(source 'query_detailed_information', target, 'query_detailed_information')
+        Mapper.getValue(source 'query short question', target, 'title')
 
 class ResponseMapper:
     @staticmethod

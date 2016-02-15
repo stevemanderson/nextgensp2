@@ -101,18 +101,28 @@ class SqlDataContext:
     def addTracking(self, sessionId, record):
         conn = psycopg2.connect("dbname={0} user={1}".format(self._dbName, self._user))
         cur = conn.cursor()
-        cur.execute("INSERT INTO tracking (sessionId, queryId, selectionId, type, date) VALUES (%s, %s, %s, %s, %s);", (sessionId, record['query']['id'], record['selection']['id'], record['selection']['type'], datetime.datetime.utcnow()))
+        cur.execute("""
+            INSERT INTO tracking (session_id, query_id, selection_id, type, date, selection_title, query_title)
+            VALUES (%s, %s, %s, %s, %s, %s, %s);
+            """, (
+            sessionId,
+            record['query']['id'],
+            record['selection']['id'],
+            record['selection']['type'],
+            datetime.datetime.utcnow(),
+            record['selection']['title'],
+            record['query']['title']))
         conn.commit()
         cur.close()
         conn.close()
 
     def getTrackingAggregateQuery(self, where):
         query = """
-            select queryid, selectionid, count(queryid)
+            select query_title, selection_title, query_id, selection_id, count(query_id)
             from tracking
             where {0}
-            group by queryid, selectionid
-            order by count(queryid) desc
+            group by query_id, query_title, selection_id, selection_title
+            order by count(query_id) desc
         """.format(where)
         return query
 

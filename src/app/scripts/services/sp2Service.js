@@ -23,7 +23,7 @@ angular.module('nextgensp2')
     var _userData = {};
     var _schemaData ={};
     var _responsesData ={};
-    var apiURL = "http://"+$location.host()+":9090/api/";
+    var apiURL = "http://"+$location.host()+":9191/api/";
 
     //API.AI
     var APIAI_accessToken = "314a4598924f462bab6b7b97689976b0 ";
