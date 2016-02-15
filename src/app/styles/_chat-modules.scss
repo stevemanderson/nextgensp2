@@ -274,7 +274,7 @@
       list-style-type: none;
 
       li{
-            cursor:pointer;
+        cursor:pointer;
         border:1px solid #eeeeee;
         border-radius:3px;
         float:left;
@@ -296,6 +296,18 @@
       display: block;
       font-size: 10px;
       color: #b2bac4;
+    }
+  }
+
+  .slick-slide {
+    height:200px;
+    border: 1px solid $brand-lighter;
+    .drag{
+      background-color:$brand-blue;
+      height:130px;
+    }
+    .selection-bar{
+
     }
   }
 }

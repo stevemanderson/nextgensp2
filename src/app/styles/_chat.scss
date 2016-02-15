@@ -112,20 +112,6 @@
  			color:$brand-blue;
  			font-weight: $weight-bold;
  		}
- 		.animateChange{
- 			animation-duration: 4s;
- 		}
- 		@keyframes animateChange {
-		  from {
-		    height:1px;
-		    width:1px
-		  }
-		  
-		  to {
-		    height:24px;
-		    width:24px;
-		  }
-		}
 
 		a{
 			text-decoration: none;

@@ -7,8 +7,8 @@
 			<section>
 				<p ng-bind-html="query.title">Test title</p>
 			</section>
-				<button class=" btn-boolean-dark" ng-click="answerClicked(responses[0])">{{responses[0].title}}</button>
-				<button class=" btn-boolean-light" ng-click="answerClicked(responses[1])">{{responses[1].title}}</button>
+				<button ng-repeat="item in responses" ng-class="classes[$index]" ng-click="answerClicked(item)" ng-bind-html="item.title"></button>
+				
 			<div>
 				<div class='container__services' ng-show="{{services.length > 0}}">
 					<!--<h3>Services</h3>-->

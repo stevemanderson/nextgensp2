@@ -112,6 +112,22 @@ angular.module('nextgensp2')
     $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; });
     $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
 
+    $scope.numberLoaded = true;
+    $scope.slickConfig = {
+        enabled: true,
+        autoplay: false,
+        draggable: true, 
+        slidesToShow: 1,
+        slidesToScroll: 1, 
+        method: {},
+        event: {
+            beforeChange: function (event, slick, currentSlide, nextSlide) {
+            },
+            afterChange: function (event, slick, currentSlide, nextSlide) {
+            }
+        }
+    };
+
     $scope.serviceClicked = function(service) {
       $rootScope.sidePanelService = service;
       
@@ -247,7 +263,7 @@ angular.module('nextgensp2')
 
     $scope.query = $scope.$parent.moduleData;
     $scope.chatModuleRef = "moduleRef_"+$scope.$parent.moduleRef;
-
+    $scope.classes = ["btn-boolean-dark","btn-boolean-light"];
 
     $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; });
     $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
@@ -259,7 +275,7 @@ angular.module('nextgensp2')
       $scope.$emit("chatSidePanelEvent");
     }
 
-    $scope.answerClicked = function(index, response){
+    $scope.answerClicked = function(response){
       if(response.type == 'response') {
         $scope.$emit("chatModuleEvents", response.id, "");
       }
