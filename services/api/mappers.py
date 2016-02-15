@@ -11,7 +11,7 @@ class DrupalNodeMapper:
         target['id'] = int(source['nid'])
         target['title'] = ''
 
-        target['free_text_available'] = Mapper.getValue(source, 'free_text_available')
+        target['free_text_available'] = Mapper.getValue(source, 'free text available')
 
         # check the types
         if source['type'] != None:
