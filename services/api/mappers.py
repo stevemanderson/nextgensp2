@@ -16,7 +16,7 @@ class DrupalNodeMapper:
         # check the types
         if source['type'] != None:
             if source['type'] == 'Responses':
-                ResponseMapper.map(source,query_detailed_information target)
+                ResponseMapper.map(source, target)
             if source['type'] == 'Queries':
                 QueryMapper.map(source, target)
             if source['type'] == 'Services':
