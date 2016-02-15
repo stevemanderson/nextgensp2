@@ -1,9 +1,9 @@
 class Mapper:
     @staticmethod
-    def getValue(source, key, target, tKey):
+    def getValue(source, key):
         if key in source:
-            target[tKey] = source[key]
-        target[tKey] = None
+            return source[key]
+        return None
 
 class DrupalNodeMapper:
     @staticmethod
@@ -11,12 +11,12 @@ class DrupalNodeMapper:
         target['id'] = int(source['nid'])
         target['title'] = ''
 
-        Mapper.getValue(source, 'free_text_available', target, 'free_text_available')
+        target['free_text_available'] = Mapper.getValue(source, 'free_text_available')
 
         # check the types
         if source['type'] != None:
             if source['type'] == 'Responses':
-                ResponseMapper.map(source, target)
+                ResponseMapper.map(source,query_detailed_information target)
             if source['type'] == 'Queries':
                 QueryMapper.map(source, target)
             if source['type'] == 'Services':
@@ -39,7 +39,7 @@ class LinkageMapper:
     @staticmethod
     def map(source, target):
         target['type'] = 'linkage'
-        Mapper.getValue(source, 'linkage query', target, 'queryId')
+        target['queryId'] = Mapper.getValue(source, 'linkage query')
 
 class ServiceMapper:
     @staticmethod
@@ -64,7 +64,7 @@ class ServiceMapper:
         target['cost_max'] = source['cost max']
         target['cost_description'] = source['cost description']
         target['processing_time'] = source['processing time']
-        Mapper.getValue(source, 'actionable', target, 'actionable')
+        target['actionable'] = Mapper.getValue(source, 'actionable')
 
         target['service_type'] = 'NEEDS TO BE UPDATED'
 
@@ -72,8 +72,8 @@ class QueryMapper:
     @staticmethod
     def map(source, target):
         target['type'] = 'query'
-        Mapper.getValue(source, 'query_detailed_information', target, 'query_detailed_information')
-        Mapper.getValue(source, 'query short question', target, 'title')
+        target['query_detailed_information'] = Mapper.getValue(source, 'query_detailed_information')
+        target['title'] = Mapper.getValue(source, 'query short question')
 
 class ResponseMapper:
     @staticmethod
