@@ -236,7 +236,7 @@
 
 // Chat multiple choice
 .chat-multiple-choice{
-  ul{
+  .list{
     list-style-type: none;
     li{
       cursor:pointer;
@@ -298,19 +298,64 @@
       color: #b2bac4;
     }
   }
-
+    /* the slides */
+  .slick-slide {
+    margin: 0 10px;
+  }
+  /* the parent */
+  .slick-list {
+    margin: 0 -10px;
+  }
+  .slick-slider {
+      margin-bottom: 30px;
+  }
   .slick-slide {
     height:200px;
+    width:200px;
     border: 1px solid $brand-lighter;
     .drag{
       background-color:$brand-blue;
       height:130px;
+      .title{
+        padding:90px 0 0 20px;
+        color: white;
+        font-size: 16px;
+        font-weight: $weight-medium;
+      }
     }
     .selection-bar{
+      padding:25px 0 20px 20px;
+      color: $question-single;
+      font-size: 16px;
+      font-weight: $weight-normal;
+      .selection-text{
+        float: left;
+      }
+      .info{
+        width:24px;
+        height:24px;
+        margin-right: 20px;
+        float: right;
+        .st0{
+          fill:none;
+        }
+        .st1{
+          fill:#666;
+        }
+      }
+      &:hover{
+        background-color: $question-single;
+        color: white;
+        .st1{
+          fill:white;
+        }
+      }
 
+      
     }
   }
 }
+
 
 // Chat multiple choice
 .chat-summary{

@@ -119,13 +119,8 @@ angular.module('nextgensp2')
         draggable: true, 
         slidesToShow: 1,
         slidesToScroll: 1, 
-        method: {},
-        event: {
-            beforeChange: function (event, slick, currentSlide, nextSlide) {
-            },
-            afterChange: function (event, slick, currentSlide, nextSlide) {
-            }
-        }
+        arrows : false,
+        dots: true
     };
 
     $scope.serviceClicked = function(service) {
