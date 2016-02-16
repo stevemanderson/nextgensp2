@@ -16,8 +16,9 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DRUPAL_API = 'http://mstrong.info/api/views/queries_family_.json'
-GMAIL_CONFIG = '/home/steve/Projects/conf/10td'
+#GMAIL_CONFIG = '/home/steve/Projects/conf/10td'
 SESSION_EMAIL_TEMPLATE  = BASE_DIR+'/templates/session_template.html'
+GMAIL_CONFIG = '/Users/damien/Desktop/nextgen.config'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
