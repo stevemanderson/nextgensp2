@@ -313,6 +313,7 @@
     height:200px;
     width:200px;
     border: 1px solid $brand-lighter;
+    outline: none;
     .drag{
       background-color:$brand-blue;
       height:130px;
@@ -324,35 +325,57 @@
       }
     }
     .selection-bar{
-      padding:25px 0 20px 20px;
+      position:relative;
       color: $question-single;
       font-size: 16px;
       font-weight: $weight-normal;
       .selection-text{
-        float: left;
+        
+        //position:absolute;
+        width:100%;
+        padding:25px 0 22px 20px;
+      }
+      .selection-tick{
+        width:100%;
+        padding:16px 0 16px 0;
+        svg{
+          display: block;
+          margin:0 auto;
+        }
       }
       .info{
-        width:24px;
-        height:24px;
-        margin-right: 20px;
-        float: right;
+        position:absolute;
+        z-index: 900;
+        top:22px;
+        right:20px;
+        svg{
+          width:24px;
+          height:24px;
+        }
         .st0{
           fill:none;
         }
         .st1{
           fill:#666;
         }
+
       }
       &:hover{
         background-color: $question-single;
         color: white;
+        cursor: pointer;
         .st1{
           fill:white;
         }
       }
-
-      
     }
+    .active{
+        background-color: $question-single;
+        color: white;
+        .info .st1 {
+          fill:white;
+        }
+      }
   }
 }
 

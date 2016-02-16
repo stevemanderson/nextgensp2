@@ -104,13 +104,15 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatMultipleChoiceCtrl', ['$scope','$rootScope', 'ngDialog', function ($scope,$rootScope, $location, ngDialog) {
+  .controller('ChatMultipleChoiceCtrl', ['$scope','$rootScope', 'ngDialog', function ($scope,$rootScope, ngDialog) {
 
     $scope.query = $scope.$parent.moduleData;
     $scope.chatModuleRef = "moduleRef_"+$scope.$parent.moduleRef;
 
     $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; });
     $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
+
+    $scope.notice= {};    
 
     $scope.numberLoaded = true;
     $scope.slickConfig = {
@@ -132,6 +134,22 @@ angular.module('nextgensp2')
 
     $scope.answerClicked = function(index, response){
       $scope.query.children[index].isSelected = !$scope.query.children[index].isSelected;
+    }
+
+
+    $scope.infoClicked = function(title, text, $event){
+      //$event.stopPropagation()
+      $scope.notice= {
+        title:title,
+        content:text
+      };
+      console.log("--> ",$scope.notice);
+
+      ngDialog.open({
+            template:"partials/popup_notice.html",
+            scope:$scope,
+            className: 'ngdialog-theme-default ngdialog-theme-notice'
+      });
     }
 
     $scope.okClicked = function(){
