@@ -9,7 +9,6 @@ import json
 import copy
 import datetime
 
-
 # Drupal Context
 class DrupalDataContext:
     responseData = None
@@ -324,7 +323,6 @@ class SessionService:
         if found != True:
             session['storedResponses'].append(answer)
         self._context.save(sessionId, session)
-from ..api.notificationService import *
 
 # Facade for the contexts
 class Handler:
