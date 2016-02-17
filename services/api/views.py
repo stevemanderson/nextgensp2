@@ -1,18 +1,24 @@
 from models import *
-from services.settings import DRUPAL_API
+from services.settings import DRUPAL_API, TEMP_FOLDER
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
 from api.models import Handler
+from api.notificationService import *
 
 def createSessionService():
     mc = UserMongoContext('localhost', 27017)
     sqlC = SqlDataContext("nextgensp2", "postgres")
     return SessionService(mc, sqlC)
 
+def createNotificationService():
+    sender = HTMLFileCreator(TEMP_FOLDER+'/notificationservicetests_test_send.html')
+    return NotificationService(sender)
+
 def createHandler():
     c = DrupalDataContext(DRUPAL_API)
-    return Handler(c, createSessionService())
+    ns = createNotificationService()
+    return Handler(c, createSessionService(), createNotificationService())
 
 @api_view(['GET'])
 def tree(request):
@@ -73,6 +79,11 @@ def services(request):
     sessionId = request.COOKIES.get('userSession')
     result = createHandler().getServices(sessionId)
     return Response(result)
+
+@api_view(['POST'])
+def submitReferral(request):
+    sessionId = request.COOKIES.get('userSession')
+    return Response({})
 
 # @api_view(['GET'])
 # def sessions(request):

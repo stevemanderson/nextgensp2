@@ -15,6 +15,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+DEFAULT_SERVICE_EMAIL = 'sanderson@liquidinteractive.com.au'
 DRUPAL_API = 'http://mstrong.info/api/views/queries_family_.json'
 GMAIL_CONFIG = '/home/steve/Projects/conf/10td'
 SESSION_EMAIL_TEMPLATE  = BASE_DIR+'/templates/session_template.html'
