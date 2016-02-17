@@ -284,7 +284,7 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatBooleanChoiceCtrl', ['$scope','$rootScope', '$location', 'ngDialog', function ($scope, $rootScope, $location, ngDialog) {
+  .controller('ChatBooleanChoiceCtrl', ['$scope','$rootScope', '$location', 'ngDialog', 'sp2Service', function ($scope, $rootScope, $location, ngDialog, sp2Service) {
 
     $scope.query = $scope.$parent.moduleData;
     $scope.chatModuleRef = "moduleRef_"+$scope.$parent.moduleRef;
@@ -293,6 +293,8 @@ angular.module('nextgensp2')
     $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; });
     $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
 
+    //$scope.responses = sp2Service.sortArray($scope.responses, , true);
+    //$scope.services = sp2Service.sortArray($scope.services, , true); 
 
     $scope.serviceClicked = function(service) {
       $rootScope.sidePanelService = service;
@@ -351,9 +353,27 @@ angular.module('nextgensp2')
   .controller('CallbackCtrl', function ($scope) {
     
     $scope.sendClicked = function(){
-      //$scope.$emit("chatSidePanelEvent");
+      console.log("Send it!");
     };
 
   });
 
+/**
+ * @ngdoc function
+ * @name nextgensp2.controller:Sp3SummaryCtrl
+ * @description
+ * # Sp3SummaryCtrl
+ * Controller of the nextgensp2
+ */
+angular.module('nextgensp2')
+  .controller('Sp3SummaryCtrl', function ($scope) {
+    
+    $scope.makeRefClicked = function(){
+      console.log("make reference");
+    };
 
+    $scope.serviceClicked = function(){
+      console.log("service selected");
+    };
+
+  });

@@ -31,7 +31,11 @@ input::-ms-clear {
 
 .input-form{
 	border:none;
-	border-top: 1px solid #222;
+	margin-top:-1px;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	padding:15px 10px 15px 20px;
+	font-size:14px;
 }
 
 // Media querys

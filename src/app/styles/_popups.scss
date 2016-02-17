@@ -92,29 +92,28 @@
 	}
 }
 
-// Snippet
+// Callback
 .ngdialog.ngdialog-theme-callback .ngdialog-content{
 	background-color:white;
 	width:100%;
 	border-radius:0;
-	padding:10px 10px 40px 10px;
+	padding:10px 0 40px 0;
 
 	.popup-snippet{
-		width:95%;
+		width:100%;
 		margin:15px auto 0 auto;
 
 		h1{
 			font-size: 16px;
-			padding:10px 60px 0 60px;
+			padding:10px 0 0 20px;
 			margin:0;
-			text-align: center;
+
 			line-height: 18px;
 		}
 		h2{
 			font-size: 12px;
-			padding:4px 0 0 0;
+			padding:4px 0 10px 20px;
 			margin-top:3px;
-			text-align: center;
 		}
 		p{
 			font-size: 14px;
@@ -122,6 +121,105 @@
 		}
 		input{
 			width:100%;
+		}
+		section{
+			text-align: center;
+		}
+		input[type=button]{
+			width:89%;
+
+		}
+	}
+}
+
+
+// Sp3 Summary
+.ngdialog.ngdialog-theme-summary {
+	padding-top: 2px;
+	.ngdialog-content{
+		background-color:white;
+		width:100%;
+		border-radius:0;
+		padding:10px 0 40px 0;
+
+		.popup-sp3-summary{
+			width:100%;
+			margin:15px auto 0 auto;
+
+			h1{
+				font-size: 14px;
+				padding:10px 0 0 20px;
+				margin:0;
+				font-weight: $weight-medium;
+				line-height: 18px;
+				text-transform: uppercase;
+				text-align: center;
+			}
+			h2{
+				font-size: 14px;
+				padding:4px 20px 10px 20px;
+				font-weight: $weight-normal;
+				margin-top:3px;
+				text-align: center;
+			}
+			h3{
+				font-size: 14px;
+				color: $brand-blue-bright;
+				font-weight: $weight-normal;
+				margin-top: 10px;
+	    		margin-bottom: 5px;
+			}
+			h4{
+				font-size: 12px;
+				font-weight: $weight-normal;
+				color:#1a1a1a;
+				margin-top: 5px;
+	    		margin-bottom: 5px;
+			}
+			.status{
+				font-size: 11px;
+				font-weight: $weight-medium;
+				background-color:#eeeeee;
+				color:#666;
+				padding: 4px;
+				border-radius:3px;
+
+			}
+			p{
+				font-size: 14px;
+				padding-top:12px;
+			}
+			input{
+				width:100%;
+			}
+			section{
+				border-bottom:1px solid #eee;
+				padding:10px 10px 10px 20px; 
+			}
+			input[type=button]{
+				width:60%;
+				margin-top:10px;
+				margin-bottom:40px;
+			}
+			.title-section{
+				text-decoration: uppercase;
+				font-size: 11px;
+				color:#666;
+				background-color: #fafafa;
+				border-top:1px solid #eee;
+				padding-left:20px;
+			}
+			.left{
+				float: left;
+				width: 70%;
+			}
+			.right{
+				float: right;
+				width: 29%;
+				text-align: right;
+				padding-top:24px;
+				padding-right:20px;
+			}
 		}
 	}
 }

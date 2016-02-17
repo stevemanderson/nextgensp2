@@ -318,7 +318,13 @@ angular.module('nextgensp2')
 
     // Expand section
     $scope.expandSectionClicked = function(){
-        $scope.$emit('summaryPanelEvent');
+        //$scope.$emit('summaryPanelEvent');
+        ngDialog.open({
+            template:"partials/popup_sp3_summary.html",
+            scope:$scope,
+            className: 'ngdialog-theme-default ngdialog-theme-summary',
+            controller: 'Sp3SummaryCtrl'
+        });
     };
 
     //Test Video
