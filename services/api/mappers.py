@@ -6,6 +6,15 @@ class Mapper:
         return None
 
 class DrupalNodeMapper:
+
+    @staticmethod
+    def childExistsInNode(childId, node):
+        if 'children' in node:
+            for c in node['children']:
+                if int(c['nid']) == id:
+                    return True
+        return False
+
     @staticmethod
     def map(source, target):
         target['id'] = int(source['nid'])
@@ -15,7 +24,7 @@ class DrupalNodeMapper:
         target['response_details'] = Mapper.getValue(source, 'response details')
 
         # check the types
-        if source['type'] != None:
+        if 'type' in source:
             if source['type'] == 'Responses':
                 ResponseMapper.map(source, target)
             if source['type'] == 'Queries':
@@ -25,7 +34,7 @@ class DrupalNodeMapper:
             if source['type'] == 'Linkage':
                 LinkageMapper.map(source, target)
 
-        if source['response format'] != None:
+        if 'response format' in source:
             target['format'] = str(source['response format']).lower()
 
         if 'format' not in target:
@@ -33,7 +42,7 @@ class DrupalNodeMapper:
 
         # Use the node title
         if len(target['title']) == 0:
-            if source['node_title'] != None:
+            if 'node_title' in source:
                 target['title'] = source['node_title']
 
 class LinkageMapper:
@@ -65,7 +74,10 @@ class ServiceMapper:
         target['cost_max'] = Mapper.getValue(source, 'cost max')
         target['cost_description'] = Mapper.getValue(source, 'cost description')
         target['processing_time'] = Mapper.getValue(source, 'processing time')
-        target['actionable'] = Mapper.getValue(source, 'actionable')
+
+        target['actionable'] = True
+        if 'actionable' in source and source['actionable'] == 'Not actionable':
+            target['actionable'] = False
 
         target['service_type'] = 'NEEDS TO BE UPDATED'
 
@@ -81,3 +93,4 @@ class ResponseMapper:
     def map(source, target):
         target['type'] = 'response'
         target['title'] = Mapper.getValue(source, 'responses short')
+        target['rank'] = Mapper.getValue(source, 'rank')

@@ -35,16 +35,27 @@ class DrupalDataContext:
         DrupalNodeMapper.map(n, node)
 
         if currentLevel < childLevel:
-            node['children'] = self.getChildren(node['id'], childLevel, currentLevel)
+            temp = self.getChildren(node['id'], childLevel, currentLevel)
+            children = []
+            ids = []
+
+            for c in temp:
+                if c['id'] not in ids:
+                    ids.append(c['id'])
+                    children.append(c)
+
+            node['children'] = children
         else:
             node['children'] = []
-
         return node
+
 
     def getChildren(self, pid, childLevel=100, currentLevel=0):
         currentLevel = currentLevel + 1
         r = self.__getJsonResponse__(self.apiUrl, None)
         result = []
+
+        # TODO: update these loops, they are O(n)^2 :|
         for n in r:
             if n['parent reference'] != None:
                 for parentId in str(n['parent reference']).split(', '):
@@ -98,6 +109,12 @@ class SqlDataContext:
             'count':obj[2],
         }
 
+    def mapTracking(self, obj):
+        return {
+            'query_title':obj[0],
+            'selection_title':obj[1]
+        }
+
     def addTracking(self, sessionId, record):
         conn = psycopg2.connect("dbname={0} user={1}".format(self._dbName, self._user))
         cur = conn.cursor()
@@ -115,6 +132,27 @@ class SqlDataContext:
         conn.commit()
         cur.close()
         conn.close()
+
+    def getTracking(self, sessionId):
+        query = """
+            select  query_title, selection_title
+            from    tracking
+            where   type = 'response' and sessionId = '{0}'
+            order by date
+        """.format(sessionId)
+
+        conn = psycopg2.connect("dbname={0} user={1}".format(self._dbName, self._user))
+        cur = conn.cursor()
+        cur.execute(query)
+
+        result = []
+        for i in cur.fetchall():
+            result.append(self.mapTracking(i))
+
+        conn.commit()
+        cur.close()
+        conn.close()
+        return result
 
     def getTrackingAggregateQuery(self, where):
         query = """
@@ -307,7 +345,7 @@ class Handler:
                     c.pop('children', None)
 
     def getTree(self):
-        return self._context.getById(18, 100)
+        return self._context.getById(287, 100)
 
     def getTracking(self, sessionId):
         return self._sessionService.getTracking(sessionId)
@@ -343,7 +381,15 @@ class Handler:
 
         return query
 
-    # the pid is not set up
+    def sendNotification(self, name, phoneNo, referrerName, referrerPhoneNo, sessionId, serviceId):
+        session = self._sessionService.getSession(sessionId)
+        items = self._sqlContext.getTracking(sessionId)
+
+    def addServiceTracking(self, sessionId, service):
+        if i['actionable'] == True:
+            self._sessionService.addService(sessionId, i)
+            self._sessionService.addTracking(sessionId, i, query)
+
     def submitAnswer(self, id, pid, value, sessionId, storeResponse=False):
         answer = None
         parentQuery = self.getQueryById(pid, 0)
@@ -369,8 +415,7 @@ class Handler:
         # check the children and add the services
         for i in query['children']:
             if i['type'] == 'service':
-                self._sessionService.addService(sessionId, i)
-                self._sessionService.addTracking(sessionId, i, query)
+                self.addServiceTracking(sessionId, i)
 
         # store the response
         if storeResponse:

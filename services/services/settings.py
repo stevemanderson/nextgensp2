@@ -16,9 +16,11 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DRUPAL_API = 'http://mstrong.info/api/views/queries_family_.json'
-#GMAIL_CONFIG = '/home/steve/Projects/conf/10td'
+GMAIL_CONFIG = '/home/steve/Projects/conf/10td'
 SESSION_EMAIL_TEMPLATE  = BASE_DIR+'/templates/session_template.html'
-GMAIL_CONFIG = '/Users/damien/Desktop/nextgen.config'
+TEMP_FOLDER  = BASE_DIR+'/temp'
+
+#GMAIL_CONFIG = '/Users/damien/Desktop/nextgen.config'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -58,6 +60,7 @@ MIDDLEWARE_CLASSES = [
 CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:9000',
     '0.0.0.0:9000',
+    '0.0.0.0:8181',
     '52.62.232.13:8181'
 )
 
