@@ -113,6 +113,8 @@
     		margin-left: 12px;
  			color:$brand-blue;
  			font-weight: $weight-bold;
+ 			transform: scale(0.1); /* 1/10 of the original size */
+    		transition: all 1s ease-in-out;	
  		}
 
 		a{

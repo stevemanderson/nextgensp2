@@ -87,7 +87,7 @@
 }
 
 .btn-proto{
-  background-color:$brand-blue-bright;
+  background-color:$question-single;
   color: white;
   font-size:12px;
   border:none;
@@ -95,6 +95,12 @@
   padding-top:8px;
   min-width: 180px;
   margin-top:50px;
+  &:hover,
+  &:focus{
+    text-decoration: none;
+    color: white;
+    background-color:$boolean-dark-over;
+  }
 }
 .btn-start-app{
   background-color:#ebedf0;
@@ -197,6 +203,28 @@
     cursor: pointer;
   }
 }
+.btn-service-action{
+  background-color:white;
+  border: none;
+  color: $brand-blue-bright;
+  font-size:12px;
+  padding:10px;
+  width: 48%;
+  text-align: center;
+  margin-top: 10px;
+  line-height: 14px;
+  svg{
+    width: 30px;
+    height:30px;
+  }
+  &:hover,
+  &:focus{
+    background-color: white;
+    color: $brand-blue-bright;
+    cursor: pointer;
+  }
+}
+
 
 @media (max-width: 460px){
   

@@ -128,11 +128,28 @@ angular.module('nextgensp2')
         dots: true
     };
 
-    $scope.serviceClicked = function(service) {
-      $rootScope.sidePanelService = service;
-      
-      //Show side menu
-      $scope.$emit("chatSidePanelEvent");
+    $scope.serviceClicked = function(index, response) {
+      //Select service
+      var dataVar = {};
+      if($scope.services[index].isSelected){
+        $scope.services[index].isSelected = false;
+        //remove service
+        dataVar = {id:response.id};
+        sp2Service.removeServices(dataVar).then(function(response) {
+            console.log("All Good - removed");
+        }, function() {
+            console.log("Error");
+        });
+      }else{
+        $scope.services[index].isSelected = true;
+        //add service
+        dataVar = {id:response.id,pid:$scope.query.id};
+        sp2Service.submitServices(dataVar).then(function(response) {
+            console.log("All Good - Added");
+        }, function() {
+            console.log("Error");
+        });
+      }
     }
 
     $scope.answerClicked = function(index, response){
@@ -201,7 +218,7 @@ angular.module('nextgensp2')
     
 
     $scope.responses = sp2Service.sortArray($scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; }), 'rank', true);
-    
+
     $scope.summaryClicked = function() {
       $scope.sessionStats = $rootScope.sessionStats;
       $scope.$emit("summaryPanelEvent");
@@ -239,12 +256,42 @@ angular.module('nextgensp2')
     $scope.responses = sp2Service.sortArray($scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; }), 'rank', true);
     $scope.services = sp2Service.sortArray($scope.query.children.filter(function(item) { return item.type == 'service'; }), 'rank', true);
 
+    $scope.numberLoaded = true;
+    $scope.slickConfig = {
+        enabled: true,
+        autoplay: false,
+        draggable: true, 
+        slidesToShow: 1,
+        slidesToScroll: 1, 
+        arrows : false,
+        dots: true
+    };
 
-    $scope.serviceClicked = function(service) {
-      $rootScope.sidePanelService = service;
-      
-      //Show side menu
-      $scope.$emit("chatSidePanelEvent");
+    $scope.serviceClicked = function(index, response) {
+      //Select service
+      var dataVar = {};
+      $scope.$emit("updateServices");
+      if($scope.services[index].isSelected){
+        $scope.services[index].isSelected = false;
+        //remove service
+        dataVar = {id:response.id};
+        sp2Service.removeServices(dataVar).then(function(response) {
+            console.log("All Good - removed");
+            $scope.$emit("updateServices");
+        }, function() {
+            console.log("Error");
+        });
+      }else{
+        $scope.services[index].isSelected = true;
+        //add service
+        dataVar = {id:response.id,pid:$scope.query.id};
+        sp2Service.submitServices(dataVar).then(function(response) {
+            console.log("All Good - Added");
+            $scope.$emit("updateServices");
+        }, function() {
+            console.log("Error");
+        });
+      }
     }
 
     function reset(){
@@ -277,6 +324,23 @@ angular.module('nextgensp2')
         $scope.$emit("chatModuleLinkage", response.queryId);
       }
     }
+
+
+    $scope.infoClicked = function(title, text, $event){
+      //$event.stopPropagation()
+      $scope.notice= {
+        title:title,
+        content:text
+      };
+
+      ngDialog.open({
+            template:"partials/popup_notice.html",
+            scope:$scope,
+            className: 'ngdialog-theme-default ngdialog-theme-notice'
+      });
+    }
+
+
   }]);
 
   /**
@@ -366,14 +430,30 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('Sp3SummaryCtrl', function ($scope) {
-    
+  .controller('Sp3SummaryCtrl', function ($scope, $rootScope,NgMap) {
+    $scope.featuredService=[];
+    $scope.otherService=[];
+    $scope.selectedService = {};
+    for (var i=0; i< $rootScope.sessionStats.data.length; i++) {
+      if(i<3){
+        $scope.featuredService.push($rootScope.sessionStats.data[i]);
+      }else{
+        $scope.otherService.push($rootScope.sessionStats.data[i]);
+      }    
+    }
+
+
+
+    //actions
     $scope.makeRefClicked = function(){
       console.log("make reference");
     };
 
-    $scope.serviceClicked = function(){
-      console.log("service selected");
+    $scope.serviceClicked = function(index){
+      $scope.selectedService = $rootScope.sessionStats.data[index];
+      //Slide in service div
+
     };
+
 
   });

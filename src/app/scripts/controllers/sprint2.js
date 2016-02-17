@@ -19,8 +19,6 @@ angular.module('nextgensp2')
     $scope.moduleRef = 0;
     $scope.currentModuleRef = 0;
 
-    $scope.numCartServices = 0;
-
     $scope.moduleData;
     $scope.sessionStats = {};
     $scope.inputText = "i'm concerned about my families health";
@@ -159,8 +157,6 @@ angular.module('nextgensp2')
     }
 
     function buildChat(data){
-        //Update session services
-        getSessionServices();
 
         current_PID = data.id;
 
@@ -240,10 +236,13 @@ angular.module('nextgensp2')
           }
         }
         $rootScope.sessionStats = {
+          data: data,
           cost_min:cost_min,
           cost_max:cost_max,
           number_steps:steps
         };
+        angular.element(document.getElementsByClassName('number-indicator')).css({transform: 'scale(1)'});
+        console.log("number_steps >> ",$rootScope.sessionStats.number_steps);
     }
     
     //Show side panel info
@@ -296,6 +295,14 @@ angular.module('nextgensp2')
         var element = document.getElementById(moduleRef);
         smoothScroll(element, options);
     });
+    // Show summary
+    $scope.$on('updateServices', function (event){
+        console.log("updateServices");
+        angular.element(document.getElementsByClassName('number-indicator')).css({transform: 'scale(0.1)'});
+        //Update session services
+        getSessionServices();
+    });
+
 
     // Actions
 

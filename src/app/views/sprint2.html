@@ -40,9 +40,9 @@
 				</div>
 			</div>
 			<div class="col-xs-2 col-sm-2 pull-right">
-				<div class="expand-section" ng-click="expandSectionClicked()" ng-show="showCartIcon">
-					<div class="number-indicator animateChange">
-						{{numCartServices}}
+				<div class="expand-section" ng-click="expandSectionClicked()" ng-show="$root.sessionStats.number_steps > 0">
+					<div class="number-indicator open">
+						{{$root.sessionStats.number_steps}}
 					</div>
 					<img src="images/cart-tick.svg" class="pull-left" width="24" height="24">
 				</div>

@@ -158,6 +158,95 @@
       color: #b2bac4;
     }
   }
+  /* the slides */
+  .slick-slide {
+    margin: 0 10px;
+  }
+  /* the parent */
+  .slick-list {
+    margin: 0 -10px;
+  }
+  .slick-slider {
+      margin-bottom: 30px;
+  }
+  .slick-slide {
+    height:200px;
+    width:200px;
+    border: 1px solid $brand-lighter;
+    outline: none;
+    .drag{
+      background-color:$brand-blue;
+      height:130px;
+      .title{
+        padding: 80px 20px 0 20px;
+        color: white;
+        font-size: 16px;
+        font-weight: $weight-medium;
+      }
+    }
+    .selection-bar{
+      position:relative;
+      color: $question-single;
+      font-size: 16px;
+      font-weight: $weight-normal;
+      .selection-text{
+        
+        //position:absolute;
+        width:100%;
+        padding:25px 0 22px 20px;
+      }
+      .selection-tick{
+        width:100%;
+        padding:16px 0 16px 0;
+        svg{
+          display: block;
+          margin:0 auto;
+        }
+      }
+      .info{
+        position:absolute;
+        z-index: 900;
+        top:22px;
+        right:20px;
+        svg{
+          width:24px;
+          height:24px;
+        }
+        .st0{
+          fill:none;
+        }
+        .st1{
+          fill:#666;
+        }
+
+      }
+      &:hover{
+        background-color: $question-single;
+        color: white;
+        cursor: pointer;
+        .st1{
+          fill:white;
+        }
+      }
+    }
+    .active{
+        background-color: $question-single;
+        color: white;
+        .info .st1 {
+          fill:white;
+        }
+    }
+  }
+  .slick-dots li {
+      position: relative;
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin: 0 5px;
+      padding: 0;
+      cursor: pointer;
+      border:none;
+  }
 }
 
 // Chat location
@@ -390,7 +479,7 @@
 }
 
 
-// Chat multiple choice
+// Chat summary
 .chat-summary{
   background-color:$brand-blue;
   padding-bottom:30px;

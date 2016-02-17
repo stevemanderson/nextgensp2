@@ -13,11 +13,44 @@
 			</ul>
 
 			<div>
-				<div class='container__services' ng-show="{{services.length > 0}}">
+				<div ng-show="{{services.length > 0}}">
 					<h3>Services</h3>
-					<ul class="clearfix">
+					<ul class="clearfix hidden-xs container__services">
 						<li ng-repeat="item in services" ng-click="serviceClicked(item)" class="navbar-toggle" data-toggle="offcanvas" data-target="#myNavmenu" data-canvas="body"><span ng-bind-html="item.title"></span><span class="read-more">Read more</span></li>
 					</ul>
+
+					<slick settings="slickConfig" ng-if="numberLoaded" class="clearfix visible-xs">
+						<div ng-repeat="item in services">
+		    				<div class="drag">
+			    				<div class="title" ng-bind-html="item.title"></div>
+		    				</div>
+		    				<div class="selection-bar clearfix" ng-class="{active: item.isSelected}">
+			    				<div ng-click="serviceClicked($index, item)">
+				    				<div class="selection-text" ng-hide="item.isSelected">I'm Interested</div>
+				    				<div class="selection-tick" ng-show="item.isSelected">
+						    			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+												 viewBox="0 0 36 36" width="36" height="36" style="enable-background:new 0 0 36 36;" xml:space="preserve">
+											<style type="text/css">
+												.tick0{fill:#1072B7;}
+												.tick1{fill:none;stroke:#FFFFFF;stroke-width:2;stroke-miterlimit:10;}
+											</style>
+											<circle class="tick0" cx="18" cy="18" r="12"/>
+											<polyline class="tick1" points="25,14 16,23 11,18 "/>
+										</svg>
+				    				</div>
+			    				</div>
+
+			    				<div class="info" ng-click="infoClicked(item.title, item.service_customer_description)">
+								    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+									viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+									<path class="st0" d="M0,0h24v24H0V0z"/>
+									<path class="st1" d="M11,17h2v-6h-2V17z M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10S17.5,2,12,2z M12,20c-4.4,0-8-3.6-8-8
+										s3.6-8,8-8s8,3.6,8,8S16.4,20,12,20z M11,9h2V7h-2V9z"/>
+									</svg>
+								</div>
+		    				</div>
+						</div>
+					</slick>
 				</div>
 			</div>
 		</div>

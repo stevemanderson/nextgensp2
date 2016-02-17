@@ -86,6 +86,28 @@ angular.module('nextgensp2')
                 url     : apiURL+"services/"
                });
     };
+    /**
+     * Submit services
+     * @param {jSON} data
+     */
+    this.submitServices = function (data) {
+        return $http({ method  : "POST",
+                url     : apiURL+"submitServices/",
+                data    : data,
+                withCredentials: true
+               });
+    };
+     /**
+     * Submit services
+     * @param {jSON} data
+     */
+    this.removeServices = function (data) {
+        return $http({ method  : "POST",
+                url     : apiURL+"removeServices/",
+                data    : data,
+                withCredentials: true
+               });
+    };
 
     /**
      * Get response from API.AI for first question branch guiding
