@@ -300,16 +300,18 @@ class SessionService:
 
         for i in range(len(session['services'])-1, -1, -1):
             item = session['services'][i]
-            if item['id'] == serviceId:
+            if item['id'] == serviceId and item['pid'] == queryId:
                 del session['services'][i]
 
         self._context.save(sessionId, session)
 
-    def addService(self, sessionId, service):
+    def addService(self, sessionId, service, query):
         session = self._context.get(sessionId)
         if 'services' not in session:
             session['services'] = []
         found = False
+
+        service['pid'] = query['id']
 
         for i in session['services']:
             if i['id'] == service['id'] and i['pid'] == service['pid']:
@@ -412,7 +414,7 @@ class Handler:
 
     def addServiceTracking(self, sessionId, service, query):
         if service['actionable'] == True:
-            self._sessionService.addService(sessionId, service)
+            self._sessionService.addService(sessionId, service, query)
             self._sessionService.addTracking(sessionId, service, query)
 
     def removeServiceTracking(self, sessionId, serviceId, queryId):

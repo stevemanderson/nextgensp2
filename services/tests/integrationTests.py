@@ -1,7 +1,7 @@
 import unittest
-from ..api.models import *
-from ..api.notificationService import *
-from ..services.settings import *
+from api.models import *
+from api.notificationService import *
+from services.settings import *
 
 def createSessionService():
     mc = UserMongoContext('localhost', 27017)
