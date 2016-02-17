@@ -9,6 +9,7 @@ import json
 import copy
 import datetime
 
+
 # Drupal Context
 class DrupalDataContext:
     responseData = None
@@ -323,12 +324,14 @@ class SessionService:
         if found != True:
             session['storedResponses'].append(answer)
         self._context.save(sessionId, session)
+from ..api.notificationService import *
 
 # Facade for the contexts
 class Handler:
-    def __init__(self, context, sessionService):
+    def __init__(self, context, sessionService, notificationService):
         self._context = context
         self._sessionService = sessionService
+        self._notificationService = notificationService
 
     def getFirstQuery(self, answer):
         for n in answer['children']:
@@ -385,10 +388,10 @@ class Handler:
         session = self._sessionService.getSession(sessionId)
         items = self._sqlContext.getTracking(sessionId)
 
-    def addServiceTracking(self, sessionId, service):
+    def addServiceTracking(self, sessionId, service, query):
         if i['actionable'] == True:
-            self._sessionService.addService(sessionId, i)
-            self._sessionService.addTracking(sessionId, i, query)
+            self._sessionService.addService(sessionId, service)
+            self._sessionService.addTracking(sessionId, service, query)
 
     def submitAnswer(self, id, pid, value, sessionId, storeResponse=False):
         answer = None
@@ -415,7 +418,7 @@ class Handler:
         # check the children and add the services
         for i in query['children']:
             if i['type'] == 'service':
-                self.addServiceTracking(sessionId, i)
+                self.addServiceTracking(sessionId, i, query)
 
         # store the response
         if storeResponse:

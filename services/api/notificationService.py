@@ -61,6 +61,8 @@ class NotificationService:
     def __init__(self, sender):
         self.sender = sender
 
+    # to is an email address
+    # model needs name, phone_no, referrer_name and referrer_phone_no
     def send(self, to, model):
         if 'name' not in model:
             raise ValueError('name is missing from dictionary')
@@ -70,7 +72,7 @@ class NotificationService:
             raise ValueError('referrer name is missing from dictionary')
         if 'referrer_phone_no' not in model:
             raise ValueError('referrer phone no. is missing from dictionary')
-            
+
         # Not sure if this is really needed. The sender would have to be able to handle the html...
         renderer = SessionEmailRenderer(model, SESSION_EMAIL_TEMPLATE)
         self.sender.send(to, "Notification", renderer.render())
