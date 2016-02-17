@@ -62,6 +62,20 @@ def submitService(request):
     h.addServiceTracking(sessionId, service, query)
 
 @api_view(['POST'])
+def removeService(request):
+    sessionId = request.COOKIES.get('userSession')
+    h = createHandler()
+    queryId = None
+    serviceId = None
+
+    if 'id' in request.data:
+        serviceId = int(request.data['id']))
+    if 'pid' in request.data:
+        queryId = int(request.data['pid'])
+
+    h.removeServiceTracking(sessionId, serviceId, queryId)
+
+@api_view(['POST'])
 def multi(request):
     sessionId = request.COOKIES.get('userSession')
     pid = 0

@@ -133,6 +133,16 @@ class SqlDataContext:
         cur.close()
         conn.close()
 
+    def removeTracking(self, sessionId, selectionId, queryId):
+        conn = psycopg2.connect("dbname={0} user={1}".format(self._dbName, self._user))
+        cur = conn.cursor()
+        cur.execute("""
+            DELETE FROM tracking WHERE session_id = '%s' AND query_id = %s AND selection_id = %s;
+            """, (sessionId, queryId, selectionId))
+        conn.commit()
+        cur.close()
+        conn.close()
+
     def getTracking(self, sessionId):
         query = """
             select  query_title, selection_title
@@ -231,6 +241,22 @@ class SessionService:
         self._sqlContext.addTracking(sessionId, tracking)
         self._context.save(sessionId, session)
 
+    def removeTracking(self, sessionId, selectionId, parentQueryId):
+        session = self.getSession(sessionId)
+        if session == None:
+            raise ValueError("Could not find session")
+
+        if 'tracking' not in session:
+            return
+
+        for n in range(len(session['tracking'])-1, -1, -1):
+            item = session['tracking'][n]
+            if int(item['selection']['id']) == selectionId and int(item['query']['id']) == parentQueryId:
+                del session['tracking'][n]
+
+        self._sqlContext.removeTracking(sessionId, selectionId, parentQueryId)
+        self._context.save(sessionId, session)
+
     def getTracking(self, sessionId):
         session = self.getSession(sessionId)
         if session == None or 'tracking' not in session:
@@ -267,18 +293,16 @@ class SessionService:
             return []
         return session['storedResponses']
 
-    def removeService(self, sessionId, serviceId):
+    def removeService(self, sessionId, serviceId, queryId):
         session = self._context.get(sessionId)
         if 'services' not in session:
             return
-        index = -1
-        curr = 0
-        for i in session['services']:
-            if i['id'] == serviceId:
-                index = curr
-                break
-            curr = curr + 1
-        del session['services'][index]
+
+        for i in range(len(session['services'])-1, -1, -1):
+            item = session['services'][i]
+            if item['id'] == serviceId:
+                del session['services'][i]
+
         self._context.save(sessionId, session)
 
     def addService(self, sessionId, service):
@@ -391,13 +415,20 @@ class Handler:
             self._sessionService.addService(sessionId, service)
             self._sessionService.addTracking(sessionId, service, query)
 
+    def removeServiceTracking(self, sessionId, serviceId, queryId):
+        self._sessionService.removeService(sessionId, serviceId, queryId)
+        self._sessionService.removeTracking(sessionId, serviceId, queryId)
+
+    def createSession(self, sessionId):
+        if self._sessionService.sessionExists(sessionId) != True:
+            self._sessionService.createSession(sessionId)
+
     def submitAnswer(self, id, pid, value, sessionId, storeResponse=False):
         answer = None
         parentQuery = self.getQueryById(pid, 0)
 
         # Create if it doesn't exist
-        if self._sessionService.sessionExists(sessionId) != True:
-            self._sessionService.createSession(sessionId)
+        self.createSession(sessionId)
 
         # check for the tree node submission
         if id == 0 and pid == 0 and len(value) > 0:

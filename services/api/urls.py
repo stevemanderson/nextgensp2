@@ -10,4 +10,5 @@ urlpatterns = [
     url('tracking', views.tracking, name='tracking'),
     url('tree', views.tree, name='tree'),
     url('submitService', views.submitService, name='submitService'),
+    url('removeService', views.removeService, name='removeService'),
 ]
