@@ -8,7 +8,7 @@
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('Sprint2Ctrl', function ($scope, sp2Service,  $compile, $rootScope, ngDialog, $location,smoothScroll,$timeout) {
+  .controller('Sprint2Ctrl', function ($scope, sp2Service,  $compile, $rootScope, ngDialog, $location,smoothScroll,$timeout,$sce) {
 
   	var responseData = {};
     responseData.moduleType = "freeText";
@@ -30,10 +30,43 @@ angular.module('nextgensp2')
     $scope.showCartIcon = true;
 
     $scope.topbars = {
-        serviceAlert:true,
-        summary:false
+        serviceAlert:false,
+        summary:true
     };
     $scope.enterTxt = false;
+
+
+
+    $scope.config = {
+                sources: [
+                    {src: $sce.trustAsResourceUrl("images/big-buck-bunny.mp4"), type: "video/mp4"}
+                ],
+                tracks: [
+                    {
+                        src: "http://www.videogular.com/assets/subs/pale-blue-dot.vtt",
+                        kind: "subtitles",
+                        srclang: "en",
+                        label: "English",
+                        default: ""
+                    }
+                ],
+                theme: "bower_components/videogular-themes-default/videogular.css",
+                plugins: {
+                    poster: "images/big-buck-bunny-poster.jpg",
+                    controls: {
+                        autoHide: true,
+                        autoHideTime: 3000
+                    }
+                }
+            };
+
+
+    $scope.snippet={
+        title: "Guide To Talking About Family Violence",
+        subtitle: "2 Minute Read",
+        content: "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p><p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>"
+    };
+
 
     $scope.firstResponse = function(e){
         if(e.keyCode === 13){
@@ -44,11 +77,6 @@ angular.module('nextgensp2')
             sp2Service.sendToAPIAI($scope.inputText).then(function(response) {
                 console.log(response);
                 removeLoader();
-                //Swap Top bars
-                $scope.topbars= {
-                    serviceAlert:false,
-                    summary:true
-                };
                 if (response.data.result.action === "input.unknown") {
                     errorChat('Sorry that input is unknown.');
                 }else{
@@ -85,9 +113,9 @@ angular.module('nextgensp2')
     }
 
     // Answer and jump to next node
-    function sendResponse(id, value){
+    function sendResponse(pid, id, value){
         var dataVar = {};
-        dataVar.pid = current_PID;
+        dataVar.pid = pid;
         dataVar.id = id;
         dataVar.value = value;
 
@@ -102,9 +130,9 @@ angular.module('nextgensp2')
     }
 
     // Answer and jump to next node
-    function sendMultiResponse(ids, value){
+    function sendMultiResponse(pid, ids, value){
         var dataVar = {};
-        dataVar.pid = current_PID;
+        dataVar.pid = pid;
         dataVar.ids = ids.toString();
         dataVar.value = value;
 
@@ -135,9 +163,10 @@ angular.module('nextgensp2')
         getSessionServices();
 
         current_PID = data.id;
+
+        console.log("current_PID",current_PID);
         $scope.moduleData = data;
         var type = "";
-        console.log("Build Data ->", $scope.moduleData );
 
         switch (data.format){
             case "freeText":
@@ -236,13 +265,13 @@ angular.module('nextgensp2')
     });
 
     //Capture events from Chat modules
-    $scope.$on('chatModuleEvents', function (event, id, value){
-        sendResponse(id, value);
+    $scope.$on('chatModuleEvents', function (event, pid, id, value){
+        sendResponse(pid, id, value);
     });
 
     //Capture event from multi choice modules
-    $scope.$on('chatMultiModuleEvents', function (event, ids, value){
-        sendMultiResponse(ids, value);
+    $scope.$on('chatMultiModuleEvents', function (event, pid, ids, value){
+        sendMultiResponse(pid, ids, value);
     });
 
     //Toggle Side panel
@@ -290,6 +319,35 @@ angular.module('nextgensp2')
     // Expand section
     $scope.expandSectionClicked = function(){
         $scope.$emit('summaryPanelEvent');
+    };
+
+    //Test Video
+    $scope.testVideoClicked = function(){
+        ngDialog.open({
+            template:"partials/popup_video.html",
+            scope:$scope,
+            className: 'ngdialog-theme-default ngdialog-theme-video'
+        });
+    };
+    //Test Snippet
+    $scope.testSnippetClicked = function(){
+        ngDialog.open({
+            template:"partials/popup_snippet.html",
+            scope:$scope,
+            className: 'ngdialog-theme-default ngdialog-theme-snippet'
+        });
+    };
+
+    
+    //Test Callback
+    $scope.testCallbackClicked = function(){
+        ngDialog.open({
+            template:"partials/popup_callback.html",
+            scope:$scope,
+            className: 'ngdialog-theme-default ngdialog-theme-callback',
+            controller: 'CallbackCtrl'
+
+        });
     };
 
 });

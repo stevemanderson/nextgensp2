@@ -236,7 +236,7 @@
 
 // Chat multiple choice
 .chat-multiple-choice{
-  ul{
+  .list{
     list-style-type: none;
     li{
       cursor:pointer;
@@ -298,19 +298,87 @@
       color: #b2bac4;
     }
   }
-
+    /* the slides */
+  .slick-slide {
+    margin: 0 10px;
+  }
+  /* the parent */
+  .slick-list {
+    margin: 0 -10px;
+  }
+  .slick-slider {
+      margin-bottom: 30px;
+  }
   .slick-slide {
     height:200px;
+    width:200px;
     border: 1px solid $brand-lighter;
+    outline: none;
     .drag{
       background-color:$brand-blue;
       height:130px;
+      .title{
+        padding:90px 0 0 20px;
+        color: white;
+        font-size: 16px;
+        font-weight: $weight-medium;
+      }
     }
     .selection-bar{
+      position:relative;
+      color: $question-single;
+      font-size: 16px;
+      font-weight: $weight-normal;
+      .selection-text{
+        
+        //position:absolute;
+        width:100%;
+        padding:25px 0 22px 20px;
+      }
+      .selection-tick{
+        width:100%;
+        padding:16px 0 16px 0;
+        svg{
+          display: block;
+          margin:0 auto;
+        }
+      }
+      .info{
+        position:absolute;
+        z-index: 900;
+        top:22px;
+        right:20px;
+        svg{
+          width:24px;
+          height:24px;
+        }
+        .st0{
+          fill:none;
+        }
+        .st1{
+          fill:#666;
+        }
 
+      }
+      &:hover{
+        background-color: $question-single;
+        color: white;
+        cursor: pointer;
+        .st1{
+          fill:white;
+        }
+      }
     }
+    .active{
+        background-color: $question-single;
+        color: white;
+        .info .st1 {
+          fill:white;
+        }
+      }
   }
 }
+
 
 // Chat multiple choice
 .chat-summary{
@@ -538,7 +606,7 @@
 //Video
 .videogular-container {
   width: 100%;
-  height: 320px;
+  height: 300px;
   margin: auto;
   overflow: hidden;
 }
@@ -680,6 +748,58 @@ footer {
           }
           .answer{
             margin-left:30px;
+          }
+        }
+      }
+    }
+  }
+
+  //Chat multiple choice
+  .chat-multiple-choice{
+    ul{
+      list-style-type: none;
+      padding:0;
+      li{
+        border:none;
+        border-bottom: 1px solid #f5f5f5;
+        float:none;
+        height: auto;
+        width:auto;
+        padding:15px 10px 15px 0;      
+        margin: 5px;
+        text-align: left;
+        font-weight: $weight-normal;
+        font-size: 12px;
+        color:$question-single;
+        
+        .list-indicator{
+          display: inline;
+          width: 20px;
+          height: 20px;
+          float:left;
+          padding:0px 5px 5px 5px;
+          margin-right: 10px;
+          font-weight: $weight-bold;
+        }
+        .answer{
+          float:left;
+          width: 80%;
+          padding-top:2px;
+        }
+        &:hover{
+          color: $question-single-active;
+          cursor: pointer;
+        }
+        &.active{
+          color: $question-single;
+          cursor: pointer;
+        }
+        &.unactive{
+          color: $question-single-active;
+          cursor: pointer;
+
+          .answer{
+           
           }
         }
       }

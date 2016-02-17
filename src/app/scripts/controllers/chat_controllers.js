@@ -81,7 +81,7 @@ angular.module('nextgensp2')
 
       reset();
       $scope.responses[index].isSelected = true;
-      $scope.$emit("chatModuleEvents", id, "");
+      $scope.$emit("chatModuleEvents", $scope.query.id, id, "");
     }
 
     $scope.noticeClicked =  function(){
@@ -104,13 +104,17 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatMultipleChoiceCtrl', ['$scope','$rootScope', 'ngDialog', function ($scope,$rootScope, $location, ngDialog) {
+  .controller('ChatMultipleChoiceCtrl', ['$scope','$rootScope', 'ngDialog', function ($scope,$rootScope, ngDialog) {
 
     $scope.query = $scope.$parent.moduleData;
     $scope.chatModuleRef = "moduleRef_"+$scope.$parent.moduleRef;
 
+    console.log("$scope.query --> ",$scope.query.id);
     $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; });
     $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
+
+    $scope.notice= {}; 
+    $scope.showOk =0; 
 
     $scope.numberLoaded = true;
     $scope.slickConfig = {
@@ -119,13 +123,8 @@ angular.module('nextgensp2')
         draggable: true, 
         slidesToShow: 1,
         slidesToScroll: 1, 
-        method: {},
-        event: {
-            beforeChange: function (event, slick, currentSlide, nextSlide) {
-            },
-            afterChange: function (event, slick, currentSlide, nextSlide) {
-            }
-        }
+        arrows : false,
+        dots: true
     };
 
     $scope.serviceClicked = function(service) {
@@ -136,7 +135,31 @@ angular.module('nextgensp2')
     }
 
     $scope.answerClicked = function(index, response){
-      $scope.query.children[index].isSelected = !$scope.query.children[index].isSelected;
+      $scope.responses[index].isSelected = !$scope.responses[index].isSelected;
+      $scope.showOk =0;
+      for(var i=0; i<$scope.responses.length; i++){
+          if($scope.responses[i].isSelected){
+            $scope.showOk++;
+            $scope.responses[i].isUnSelected = false;
+          }else{
+            $scope.responses[i].isUnSelected = true;
+          }
+      }
+    }
+
+
+    $scope.infoClicked = function(title, text, $event){
+      //$event.stopPropagation()
+      $scope.notice= {
+        title:title,
+        content:text
+      };
+
+      ngDialog.open({
+            template:"partials/popup_notice.html",
+            scope:$scope,
+            className: 'ngdialog-theme-default ngdialog-theme-notice'
+      });
     }
 
     $scope.okClicked = function(){
@@ -148,7 +171,7 @@ angular.module('nextgensp2')
         }
       }
 
-      $scope.$emit("chatMultiModuleEvents", ids, "");
+      $scope.$emit("chatMultiModuleEvents",$scope.query.id, ids, "");
     }
 
   }]);
@@ -189,7 +212,7 @@ angular.module('nextgensp2')
       if(response.type == 'linkage') {
         $scope.$emit("chatModuleLinkage", response.queryId);
       } else {
-        $scope.$emit("chatModuleEvents", response.id, "");
+        $scope.$emit("chatModuleEvents", $scope.query.id, response.id, "");
       }
     }
   });
@@ -242,8 +265,10 @@ angular.module('nextgensp2')
 
       $scope.responses[index].isSelected = true;
 
+      console.log("--> ",$scope.query.id);
+
       if(response.type == 'response') {
-        $scope.$emit("chatModuleEvents", response.id, "");
+        $scope.$emit("chatModuleEvents", $scope.query.id, response.id, "");
       }
       else if(response.type == 'linkage') {
         $scope.$emit("chatModuleLinkage", response.queryId);
@@ -277,7 +302,7 @@ angular.module('nextgensp2')
 
     $scope.answerClicked = function(response){
       if(response.type == 'response') {
-        $scope.$emit("chatModuleEvents", response.id, "");
+        $scope.$emit("chatModuleEvents", $scope.query.id, response.id, "");
       }
       else if(response.type == 'linkage') {
         $scope.$emit("chatModuleLinkage", response.queryId);
@@ -311,6 +336,22 @@ angular.module('nextgensp2')
     $scope.closeClicked = function(){
 
       $scope.$emit("chatSidePanelEvent");
+    };
+
+  });
+
+  /**
+ * @ngdoc function
+ * @name nextgensp2.controller:CallbackCtrl
+ * @description
+ * # CallbackCtrl
+ * Controller of the nextgensp2
+ */
+angular.module('nextgensp2')
+  .controller('CallbackCtrl', function ($scope) {
+    
+    $scope.sendClicked = function(){
+      //$scope.$emit("chatSidePanelEvent");
     };
 
   });

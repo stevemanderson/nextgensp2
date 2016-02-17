@@ -61,6 +61,7 @@ CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:9000',
     '0.0.0.0:9000',
     '0.0.0.0:8181',
+    '52.62.232.13:8181'
 )
 
 CORS_ALLOW_CREDENTIALS = True
