@@ -69,7 +69,7 @@ def removeService(request):
     serviceId = None
 
     if 'id' in request.data:
-        serviceId = int(request.data['id']))
+        serviceId = int(request.data['id'])
     if 'pid' in request.data:
         queryId = int(request.data['pid'])
 
