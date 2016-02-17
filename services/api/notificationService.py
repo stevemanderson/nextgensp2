@@ -1,6 +1,6 @@
 import unittest
 import smtplib
-from ..services.settings import SESSION_EMAIL_TEMPLATE
+from services.settings import SESSION_EMAIL_TEMPLATE
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
