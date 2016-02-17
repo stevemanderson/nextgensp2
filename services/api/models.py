@@ -413,11 +413,6 @@ class Handler:
         if query == None:
             return {}
 
-        # check the children and add the services
-        for i in query['children']:
-            if i['type'] == 'service':
-                self.addServiceTracking(sessionId, i, query)
-
         # store the response
         if storeResponse:
             # dont store the children

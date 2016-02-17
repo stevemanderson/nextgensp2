@@ -48,6 +48,20 @@ def responses(request):
     return Response(result)
 
 @api_view(['POST'])
+def submitService(request):
+    sessionId = request.COOKIES.get('userSession')
+    h = createHandler()
+    query = None
+    service = None
+
+    if 'id' in request.data:
+        service = h.getById(int(request.data['id']))
+    if 'pid' in request.data:
+        query = h.getQueryById(int(request.data['pid']))
+
+    h.addServiceTracking(sessionId, service, query)
+
+@api_view(['POST'])
 def multi(request):
     sessionId = request.COOKIES.get('userSession')
     pid = 0
