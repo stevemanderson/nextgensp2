@@ -104,14 +104,15 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatMultipleChoiceCtrl', ['$scope','$rootScope', 'ngDialog', function ($scope,$rootScope, ngDialog) {
+  .controller('ChatMultipleChoiceCtrl', ['$scope','$rootScope', 'ngDialog', 'sp2Service', function ($scope,$rootScope, ngDialog, sp2Service) {
 
     $scope.query = $scope.$parent.moduleData;
     $scope.chatModuleRef = "moduleRef_"+$scope.$parent.moduleRef;
 
     console.log("$scope.query --> ",$scope.query.id);
-    $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; });
-    $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
+       
+    $scope.responses = sp2Service.sortArray($scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; }), 'rank', true);
+    $scope.services = sp2Service.sortArray($scope.query.children.filter(function(item) { return item.type == 'service'; }), 'rank', true);
 
     $scope.notice= {}; 
     $scope.showOk =0; 
@@ -190,15 +191,17 @@ angular.module('nextgensp2')
 
 
 angular.module('nextgensp2')
-  .controller('ChatOptionsCtrl', function ($scope, $location, ngDialog, $rootScope) {
+  .controller('ChatOptionsCtrl', function ($scope, $location, ngDialog, $rootScope, sp2Service) {
 
 
     $scope.query = $scope.$parent.moduleData;
 
     $scope.chatModuleRef = "moduleRef_"+$scope.$parent.moduleRef;
 
-    $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; });
+    
 
+    $scope.responses = sp2Service.sortArray($scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; }), 'rank', true);
+    
     $scope.summaryClicked = function() {
       $scope.sessionStats = $rootScope.sessionStats;
       $scope.$emit("summaryPanelEvent");
@@ -226,15 +229,15 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ChatSingleChoiceCtrl', ['$scope','$rootScope', '$location', 'ngDialog', function ($scope, $rootScope, $location, ngDialog) {
+  .controller('ChatSingleChoiceCtrl', ['$scope','$rootScope', '$location', 'ngDialog','sp2Service', function ($scope, $rootScope, $location, ngDialog, sp2Service) {
 
     $scope.query = $scope.$parent.moduleData;
     $scope.chatModuleRef = "moduleRef_"+$scope.$parent.moduleRef;
 
     $scope.listIndicators = ["A", "B", "C","D","E","F","G","H"];
 
-    $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; });
-    $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
+    $scope.responses = sp2Service.sortArray($scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; }), 'rank', true);
+    $scope.services = sp2Service.sortArray($scope.query.children.filter(function(item) { return item.type == 'service'; }), 'rank', true);
 
 
     $scope.serviceClicked = function(service) {
@@ -290,11 +293,8 @@ angular.module('nextgensp2')
     $scope.chatModuleRef = "moduleRef_"+$scope.$parent.moduleRef;
     $scope.classes = ["btn-boolean-dark","btn-boolean-light"];
 
-    $scope.responses = $scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; });
-    $scope.services = $scope.query.children.filter(function(item) { return item.type == 'service'; });
-
-    //$scope.responses = sp2Service.sortArray($scope.responses, , true);
-    //$scope.services = sp2Service.sortArray($scope.services, , true); 
+    $scope.responses = sp2Service.sortArray($scope.query.children.filter(function(item) { return item.type == 'response' || item.type == 'linkage'; }), 'rank', true);
+    $scope.services = sp2Service.sortArray($scope.query.children.filter(function(item) { return item.type == 'service'; }), 'rank', true);
 
     $scope.serviceClicked = function(service) {
       $rootScope.sidePanelService = service;
