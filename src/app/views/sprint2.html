@@ -33,16 +33,22 @@
 				
 				</div>
 			</div>
-			<div class="col-xs-3 col-sm-8 hidden">
+			<div class="col-xs-10 col-sm-8 ">
 				<div class="topic">
-					<span>Start a Business</span>
-					<p>TOPIC</p>
+					<span>HUSKY</span>
+					<p>Always On Always Off</p>
 				</div>
 			</div>
-			<div class="col-xs-1 col-sm-1">
+			<div class="col-xs-2 col-sm-2 pull-right">
 				<div class="expand-section" ng-click="expandSectionClicked()" ng-show="showCartIcon">
-					VIEW
+					<div class="number-indicator animateChange">
+						{{numCartServices}}
+					</div>
+					<img src="images/cart-tick.svg" class="pull-left" width="24" height="24">
 				</div>
+				<button ng-click="testVideoClicked()">Video</button>
+				<button ng-click="testSnippetClicked()">Snippet</button>
+				<button ng-click="testCallbackClicked()">Callback</button>
 			</div>
 		</div>
 	</div>
@@ -56,7 +62,7 @@
 					<img src="images/avatar.svg" >
 				</div>
 				<section>
-					<h1>What can we help you with?</h1>
+					<h1>Hi! What can I help you with?</h1>
 				  	<div class="initial-input">
 					  	<label class="sr-only chat-input" for="userInput">User input</label>
 					  	<div class="input-instruction hidden-xs" ng-show="enterTxt">Press Enter</div>
@@ -69,8 +75,8 @@
 		</div>
 	</div>
 	<div id="chat-frame" >
-	
-		<!-- <chatfreetext></chatfreetext>
+		<!-- <chatbooleanchoice></chatbooleanchoice>
+		<chatfreetext></chatfreetext>
 		<loading></loading>
 		<chatsinglechoice></chatsinglechoice>
 		<chatlocation></chatlocation>

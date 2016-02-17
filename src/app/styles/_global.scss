@@ -9,7 +9,7 @@ h1{
 	color:$brand-blue;
 }
 h2{  font-size:14px; }
-body, p, div {
+body, p {
     font-family: $brand-font;
     color: $brand-color;
 }
@@ -27,6 +27,11 @@ body, p, div {
 input::-ms-clear {
   width : 0;
   height: 0;
+}
+
+.input-form{
+	border:none;
+	border-top: 1px solid #222;
 }
 
 // Media querys

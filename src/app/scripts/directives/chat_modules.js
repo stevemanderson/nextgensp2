@@ -121,6 +121,30 @@ angular.module('nextgensp2')
   });
 /**
  * @ngdoc directive
+ * @name nextgensp2.directive:chatbooleanchoice
+ * @description
+ * # chatsinglechoice
+ */
+angular.module('nextgensp2')
+  .directive('chatbooleanchoice', function ($timeout) {
+    return {
+      link: function(scope, element) {
+        scope.$on('chatModuleEvents', function(event) {
+          angular.element(element).nextAll('.chat-module').remove();
+        });
+        $timeout(function() { 
+            scope.$emit("scrollNewModule", scope.chatModuleRef);
+        });
+      },
+    restrict: 'E',
+    replace: true,
+    templateUrl: "partials/chat_boolean_choice.html",
+    controller: "ChatBooleanChoiceCtrl",
+    scope:{},
+    };
+  });
+/**
+ * @ngdoc directive
  * @name nextgensp2.directive:loading
  * @description
  * # loading
