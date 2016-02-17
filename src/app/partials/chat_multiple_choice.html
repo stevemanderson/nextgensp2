@@ -13,12 +13,12 @@
 			<ul class="clearfix">
 				<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected, unactive: answer.isUnSelected}" class="clearfix" ng-click="answerClicked($index, answer)" >
 					<div class="list-indicator">
-					<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" 	xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+						<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" 	xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 							 viewBox="0 0 17.7 18.3" style="enable-background:new 0 0 17.7 18.3; width:17.7px;height:18.3px;" xml:space="preserve" ng-show="answer.isSelected">
-						<style type="text/css">
-							.naked-tick{fill:none;stroke:#1072B7;stroke-width:2;stroke-miterlimit:10;}
-						</style>
-						<polyline class="naked-tick" points="12.7,7 7.7,12 4.7,9 "/>
+							<style type="text/css">
+								.naked-tick{fill:none;stroke:#1072B7;stroke-width:2;stroke-miterlimit:10;}
+							</style>
+							<polyline class="naked-tick" points="12.7,7 7.7,12 4.7,9 "/>
 						</svg>
 					 </div>
 					<div ng-bind-html="answer.title" class="answer"></div>
@@ -27,7 +27,7 @@
 
 			
 
-			<button class="button btn-proto center-block" ng-click="okClicked()" ng-show="{{responses.length > 0}}">OK</button>
+			<button class="button btn-proto center-block" ng-click="okClicked()" ng-show="responses.length > 0 && showOk > 0">OK</button>
 
 			<div class='container__services' ng-show="services.length > 0">
 				<h3>Services</h3>

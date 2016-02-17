@@ -788,12 +788,19 @@ footer {
         }
         &:hover{
           color: $question-single-active;
-          background-color: white;
           cursor: pointer;
         }
         &.active{
-          background-color: white;
+          color: $question-single;
           cursor: pointer;
+        }
+        &.unactive{
+          color: $question-single-active;
+          cursor: pointer;
+
+          .answer{
+           
+          }
         }
       }
     }

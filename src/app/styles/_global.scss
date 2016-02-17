@@ -29,6 +29,11 @@ input::-ms-clear {
   height: 0;
 }
 
+.input-form{
+	border:none;
+	border-top: 1px solid #222;
+}
+
 // Media querys
 // Mobile
 @media (max-width: 460px){

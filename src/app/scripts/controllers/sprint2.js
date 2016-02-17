@@ -30,8 +30,8 @@ angular.module('nextgensp2')
     $scope.showCartIcon = true;
 
     $scope.topbars = {
-        serviceAlert:true,
-        summary:false
+        serviceAlert:false,
+        summary:true
     };
     $scope.enterTxt = false;
 
@@ -77,11 +77,6 @@ angular.module('nextgensp2')
             sp2Service.sendToAPIAI($scope.inputText).then(function(response) {
                 console.log(response);
                 removeLoader();
-                //Swap Top bars
-                $scope.topbars= {
-                    serviceAlert:false,
-                    summary:true
-                };
                 if (response.data.result.action === "input.unknown") {
                     errorChat('Sorry that input is unknown.');
                 }else{
@@ -118,9 +113,9 @@ angular.module('nextgensp2')
     }
 
     // Answer and jump to next node
-    function sendResponse(id, value){
+    function sendResponse(pid, id, value){
         var dataVar = {};
-        dataVar.pid = current_PID;
+        dataVar.pid = pid;
         dataVar.id = id;
         dataVar.value = value;
 
@@ -135,9 +130,9 @@ angular.module('nextgensp2')
     }
 
     // Answer and jump to next node
-    function sendMultiResponse(ids, value){
+    function sendMultiResponse(pid, ids, value){
         var dataVar = {};
-        dataVar.pid = current_PID;
+        dataVar.pid = pid;
         dataVar.ids = ids.toString();
         dataVar.value = value;
 
@@ -168,9 +163,10 @@ angular.module('nextgensp2')
         getSessionServices();
 
         current_PID = data.id;
+
+        console.log("current_PID",current_PID);
         $scope.moduleData = data;
         var type = "";
-        console.log("Build Data ->", $scope.moduleData );
 
         switch (data.format){
             case "freeText":
@@ -269,13 +265,13 @@ angular.module('nextgensp2')
     });
 
     //Capture events from Chat modules
-    $scope.$on('chatModuleEvents', function (event, id, value){
-        sendResponse(id, value);
+    $scope.$on('chatModuleEvents', function (event, pid, id, value){
+        sendResponse(pid, id, value);
     });
 
     //Capture event from multi choice modules
-    $scope.$on('chatMultiModuleEvents', function (event, ids, value){
-        sendMultiResponse(ids, value);
+    $scope.$on('chatMultiModuleEvents', function (event, pid, ids, value){
+        sendMultiResponse(pid, ids, value);
     });
 
     //Toggle Side panel
@@ -339,6 +335,18 @@ angular.module('nextgensp2')
             template:"partials/popup_snippet.html",
             scope:$scope,
             className: 'ngdialog-theme-default ngdialog-theme-snippet'
+        });
+    };
+
+    
+    //Test Callback
+    $scope.testCallbackClicked = function(){
+        ngDialog.open({
+            template:"partials/popup_callback.html",
+            scope:$scope,
+            className: 'ngdialog-theme-default ngdialog-theme-callback',
+            controller: 'CallbackCtrl'
+
         });
     };
 
