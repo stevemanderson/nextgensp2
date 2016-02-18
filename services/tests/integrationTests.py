@@ -49,12 +49,16 @@ class integrationTests(unittest.TestCase):
         service = handler.getById(291, 1) 
 
         #remove
-        handler.removeServiceTracking(integrationTests.sessionId, service['id'], query['id'])
+        handler.removeServiceTracking(integrationTests.sessionId, int(service['id']), int(query['id']))
 
     def test_checkNoEntries(self):         
         handler = createHandler()
         result = createHandler().getServices(integrationTests.sessionId)
         self.assertTrue(len(result) == 0)
+
+    def test_getServices(self):
+        handler = createHandler()
+        print handler.getServices(integrationTests.sessionId)
 
 if __name__ == '__main__':
     unittest.main()
