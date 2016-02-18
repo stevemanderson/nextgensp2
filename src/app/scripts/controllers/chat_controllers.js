@@ -131,7 +131,6 @@ angular.module('nextgensp2')
     $scope.serviceClicked = function(index, response) {
       //Select service
       var dataVar = {};
-      $scope.$emit("updateServices");
       if($scope.services[index].isSelected){
         $scope.services[index].isSelected = false;
         //remove service
@@ -273,7 +272,6 @@ angular.module('nextgensp2')
     $scope.serviceClicked = function(index, response) {
       //Select service
       var dataVar = {};
-      $scope.$emit("updateServices");
       if($scope.services[index].isSelected){
         $scope.services[index].isSelected = false;
         //remove service
