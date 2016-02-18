@@ -342,6 +342,17 @@ angular.module('nextgensp2')
             className: 'ngdialog-theme-default ngdialog-theme-video'
         });
     };
+    $scope.$on('showVideo', function (event, url){
+        console.log("showvideo >", url);
+        $scope.config.sources[0] = {src: $sce.trustAsResourceUrl(url), type: "video/mp4"};
+        ngDialog.open({
+            template:"partials/popup_video.html",
+            scope:$scope,
+            className: 'ngdialog-theme-default ngdialog-theme-video'
+        });
+    });
+
+
     //Test Snippet
     $scope.testSnippetClicked = function(){
         ngDialog.open({

@@ -31,6 +31,10 @@
 	.popup-notice{
 		width:95%;
 		margin:10px auto;
+		li{
+			font-size: 14px;
+			color:$brand-blue;
+		}
 
 		.title{
 			font-weight: $weight-bold;
