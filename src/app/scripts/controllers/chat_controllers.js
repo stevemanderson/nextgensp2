@@ -340,6 +340,10 @@ angular.module('nextgensp2')
       });
     }
 
+    $scope.showVideo = function(url){
+        $scope.$emit("showVideo", url);
+    };
+
 
   }]);
 
@@ -434,6 +438,7 @@ angular.module('nextgensp2')
     $scope.featuredService=[];
     $scope.otherService=[];
     $scope.selectedService = {};
+    $scope.showService= false;
     for (var i=0; i< $rootScope.sessionStats.data.length; i++) {
       if(i<3){
         $scope.featuredService.push($rootScope.sessionStats.data[i]);
@@ -452,7 +457,7 @@ angular.module('nextgensp2')
     $scope.serviceClicked = function(index){
       $scope.selectedService = $rootScope.sessionStats.data[index];
       //Slide in service div
-
+      $scope.showService= true;
     };
 
 

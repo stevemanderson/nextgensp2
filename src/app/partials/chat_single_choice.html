@@ -9,7 +9,9 @@
 				<p ng-bind-html="query.query_detailed_information"></p>
 			</section>
 			<ul class="clearfix">
-				<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected, unactive: answer.isUnSelected}" class="clearfix" ng-click="answerClicked($index, answer)" ><div class="list-indicator">{{listIndicators[$index]}}</div><div ng-bind-html="answer.title" class="answer"></div></li>
+				<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected, unactive: answer.isUnSelected}" class="clearfix" ><div class="list-indicator">{{listIndicators[$index]}}</div><div ng-bind-html="answer.title" class="answer" ng-click="answerClicked($index, answer)"></div>
+					<div class="video-link" ng-click="showVideo(answer.videourl)" ng-show="answer.videourl !=null"><img src="images/icon-movie.svg" width="24" height="22"></div>
+				</li>
 			</ul>
 
 			<div>

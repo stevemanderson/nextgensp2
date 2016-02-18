@@ -25,13 +25,15 @@
 	</section>
 </section>
 
-<section class="services clearfix">
+<section class="services clearfix" ng-show="showService">
 	<div class="top">
 		<h1 ng-bind-html="selectedService.title">Goodstart Early Learning</h1>
 		<h2 ng-bind-html=""></h2>
 	</div>
 	<div class="content">
-		<div ng-bind-html="" class="open-time">Open Mon - Fri 6:30am - 6pm</div>
+		<div ng-bind-html="" class="open-time">
+		<img src="images/icon-opening.svg">
+			Open Mon - Fri 6:30am - 6pm</div>
 		<div ng-bind-html="selectedService.address"class="address">61 Shakespeare St Mackay QLD 4740, Australia</div>
 		<div ng-bind-html="selectedService.phone_number"class="phone">+61 1800 222 543</div>
 		<div ng-bind-html="selectedService.further_information_link" class="web"><a href="{{selectedService.further_information_link}}">{{selectedService.further_information_link}}</a> </div>
