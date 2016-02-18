@@ -380,6 +380,9 @@ class Handler:
     def getSession(self, sessionId):
         return self._sessionService.getSession(sessionId)
 
+    def sessionExists(self, sessionId):
+        return self._sessionService.sessionExists(sessionId)
+
     def removeSession(self, sessionId):
         self._sessionService.removeSession(sessionId)
 

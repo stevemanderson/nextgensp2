@@ -18,20 +18,43 @@ def createHandler():
     return Handler(c, createSessionService(), createNotificationService())
 
 class integrationTests(unittest.TestCase):
-    def test(self):
+    sessionId = "b62b8c8d-24b4-4999-34a9-5c79807ad5e1"
+
+    def test_removeSession(self):
+        handler = createHandler()
+        handler.removeSession(integrationTests.sessionId)
+        self.assertFalse(handler.sessionExists(integrationTests.sessionId))
+
+    def test_addService(self):
         handler = createHandler()
 
         #create session
-        #handler.createSession(1)
+        handler.createSession(integrationTests.sessionId)
 
         #get the items
-        # query = handler.getById(290, 1) 
-        # service = handler.getById(291, 1) 
+        query = handler.getById(290, 1) 
+        service = handler.getById(291, 1) 
 
-        #handler.addServiceTracking(1, service, query)
+        handler.addServiceTracking(integrationTests.sessionId, service, query)
+
+    def test_checkOneEntry(self):
+        result = createHandler().getServices(integrationTests.sessionId)
+        self.assertTrue(len(result) == 1)
+
+    def test_removeService(self):
+        handler = createHandler()
+
+        #get the items
+        query = handler.getById(290, 1) 
+        service = handler.getById(291, 1) 
 
         #remove
-        # handler.removeServiceTracking(1, service['id'], query['id'])
+        handler.removeServiceTracking(integrationTests.sessionId, service['id'], query['id'])
+
+    def test_checkNoEntries(self):         
+        handler = createHandler()
+        result = createHandler().getServices(integrationTests.sessionId)
+        self.assertTrue(len(result) == 0)
 
 if __name__ == '__main__':
     unittest.main()
