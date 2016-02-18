@@ -32,8 +32,8 @@ class integrationTests(unittest.TestCase):
         handler.createSession(integrationTests.sessionId)
 
         #get the items
-        query = handler.getById(290, 1) 
-        service = handler.getById(291, 1) 
+        query = handler.getById(375, 1) 
+        service = handler.getById(517, 1) 
 
         handler.addServiceTracking(integrationTests.sessionId, service, query)
 
@@ -44,8 +44,8 @@ class integrationTests(unittest.TestCase):
     def test_removeService(self):
         handler = createHandler()
 
-        qId = "290"
-        sId = "291"
+        qId = "375"
+        sId = "517"
 
         #remove
         handler.removeServiceTracking(integrationTests.sessionId, int(sId), int(qId))
