@@ -416,7 +416,6 @@ class Handler:
         items = self._sqlContext.getTracking(sessionId)
 
     def addServiceTracking(self, sessionId, service, query):
-        print service['actionable']
         if service['actionable'] == True:
             self._sessionService.addService(sessionId, service, query)
             self._sessionService.addTracking(sessionId, service, query)
