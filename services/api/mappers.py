@@ -22,7 +22,10 @@ class DrupalNodeMapper:
 
         target['free_text_available'] = Mapper.getValue(source, 'free text available')
         target['response_details'] = Mapper.getValue(source, 'response details')
+        
         target['videourl'] = Mapper.getValue(source, 'videourl')
+        target['keyvalue'] = Mapper.getValue(source, 'keyvalue')
+        target['keyvalueattribute'] = Mapper.getValue(source, 'keyvalueattribute')
 
         # check the types
         if 'type' in source:

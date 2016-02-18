@@ -25,13 +25,13 @@ class integrationTests(unittest.TestCase):
         #handler.createSession(1)
 
         #get the items
-        query = handler.getById(290, 1) 
-        service = handler.getById(291, 1) 
+        # query = handler.getById(290, 1) 
+        # service = handler.getById(291, 1) 
 
         #handler.addServiceTracking(1, service, query)
 
         #remove
-        handler.removeServiceTracking(1, service['id'], query['id'])
+        # handler.removeServiceTracking(1, service['id'], query['id'])
 
 if __name__ == '__main__':
     unittest.main()
