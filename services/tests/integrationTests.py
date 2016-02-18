@@ -18,7 +18,7 @@ def createHandler():
     return Handler(c, createSessionService(), createNotificationService())
 
 class integrationTests(unittest.TestCase):
-    sessionId = "3910477c-2efa-0b1b-4622-03457c284d4d"
+    sessionId = "f4f251d7-cef7-290f-1cf9-c5e53ffa43d8"
 
     def test_removeSession(self):
         handler = createHandler()
