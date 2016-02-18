@@ -192,6 +192,10 @@ angular.module('nextgensp2')
       $scope.$emit("chatMultiModuleEvents",$scope.query.id, ids, "");
     }
 
+    $scope.showVideo = function(url){
+        $scope.$emit("showVideo", url);
+    };
+
   }]);
 
 /**

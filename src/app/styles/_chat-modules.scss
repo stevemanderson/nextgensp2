@@ -381,12 +381,13 @@
       }
     }
   
-  .read-more{
-    display: block;
-    font-size: 10px;
-    color: #b2bac4;
+    .read-more{
+      display: block;
+      font-size: 10px;
+      color: #b2bac4;
+    }
   }
-  }
+  
   /* the slides */
   .slick-slide {
     margin: 0 10px;
@@ -882,8 +883,11 @@ footer {
         }
         .answer{
           float:left;
-          width: 80%;
+          width: 75%;
           padding-top:2px;
+        }
+        .video-link img{
+          padding-bottom: 0;
         }
         &:hover{
           color: $question-single-active;
