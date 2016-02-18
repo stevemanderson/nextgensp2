@@ -91,8 +91,8 @@ class DrupalDataContext:
         return results
 
     def __getJsonResponse__(self, u, d):
-        if DrupalDataContext.responseData != None:
-            return DrupalDataContext.responseData
+        # if DrupalDataContext.responseData != None:
+        #     return DrupalDataContext.responseData
         r = requests.get(u, data=d)
         DrupalDataContext.responseData = json.loads(r.text)
         return DrupalDataContext.responseData
