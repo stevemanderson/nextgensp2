@@ -91,8 +91,8 @@ class DrupalDataContext:
         return results
 
     def __getJsonResponse__(self, u, d):
-        # if DrupalDataContext.responseData != None:
-        #     return DrupalDataContext.responseData
+        if DrupalDataContext.responseData != None:
+            return DrupalDataContext.responseData
         r = requests.get(u, data=d)
         DrupalDataContext.responseData = json.loads(r.text)
         return DrupalDataContext.responseData
@@ -137,7 +137,7 @@ class SqlDataContext:
         conn = psycopg2.connect("dbname={0} user={1}".format(self._dbName, self._user))
         cur = conn.cursor()
         cur.execute("""
-            DELETE FROM tracking WHERE session_id = '%s' AND query_id = %s AND selection_id = %s;
+            DELETE FROM tracking WHERE session_id = %s AND query_id = %s AND selection_id = %s;
             """, (sessionId, queryId, selectionId))
         conn.commit()
         cur.close()
