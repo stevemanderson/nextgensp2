@@ -229,6 +229,13 @@
         }
       }
     }
+    .norollover{
+        &:hover{
+          .st1{
+            fill:#333;
+          }
+        }
+      }
     .active{
         background-color: $question-single;
         color: white;
@@ -448,7 +455,6 @@
         .st1{
           fill:#666;
         }
-
       }
       &:hover{
         background-color: $question-single;
@@ -456,6 +462,14 @@
         cursor: pointer;
         .st1{
           fill:white;
+        }
+      }
+     
+    }
+    .norollover{
+      &:hover{
+        .st1{
+          fill:#333;
         }
       }
     }

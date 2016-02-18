@@ -131,6 +131,7 @@ angular.module('nextgensp2')
     $scope.serviceClicked = function(index, response) {
       //Select service
       var dataVar = {};
+      console.log('multiplechoice', $scope.services[index].isSelected);
       if($scope.services[index].isSelected){
         $scope.services[index].isSelected = false;
         //remove service
@@ -439,7 +440,7 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('Sp3SummaryCtrl', function ($scope, $rootScope,NgMap) {
+  .controller('Sp3SummaryCtrl', function ($scope, $rootScope,ngDialog) {
     $scope.featuredService=[];
     $scope.otherService=[];
     $scope.selectedService = {};
@@ -455,6 +456,13 @@ angular.module('nextgensp2')
     //actions
     $scope.makeRefClicked = function(){
       console.log("make reference");
+      ngDialog.open({
+            template:"partials/popup_referral.html",
+            scope:$scope,
+            className: 'ngdialog-theme-default ngdialog-theme-referral',
+            controller: 'ReferralCtrl'
+      });
+      $scope.showService= false;
     };
 
     $scope.serviceClicked = function(index){
@@ -462,7 +470,11 @@ angular.module('nextgensp2')
       //Slide in service div
       $scope.showService= true;
     };
-    
+    $scope.closeService = function(){
+      //Slide in service div
+      $scope.showService= false;
+    };
+
     $scope.callback = function(title){
       $scope.$emit("openCallBack", title);
     };
@@ -477,5 +489,11 @@ angular.module('nextgensp2')
  */
 angular.module('nextgensp2')
   .controller('ReferralCtrl', function ($scope) {
-   
+   $scope.isFamily = false;
+
+   $scope.isFamilyClicked = function(){
+    $scope.isFamily = !$scope.isFamily;
+   }
+
+
   });

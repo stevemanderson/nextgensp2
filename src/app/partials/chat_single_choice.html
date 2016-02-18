@@ -26,8 +26,8 @@
 		    				<div class="drag">
 			    				<div class="title" ng-bind-html="item.title"></div>
 		    				</div>
-		    				<div class="selection-bar clearfix" ng-class="{active: item.isSelected}">
-			    				<div ng-click="serviceClicked($index, item)">
+		    				<div class="selection-bar clearfix" ng-class="{active: item.isSelected, norollover: !item.actionable}">
+			    				<div ng-click="serviceClicked($index, item)" ng-show="item.actionable">
 				    				<div class="selection-text" ng-hide="item.isSelected">I'm Interested</div>
 				    				<div class="selection-tick" ng-show="item.isSelected">
 						    			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

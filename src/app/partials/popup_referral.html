@@ -1,5 +1,23 @@
 <section class="popup-referral">
-	<h1>Make a Referral</h1>
-	<div>To</div>
-	<div>Service name, Service name, Service name, Service name</div>
+	<div class="top">
+		<h1>Make a Referral</h1>
+		<div>To</div>
+		<div>Service name, Service name, Service name, Service name</div>
+	</div>
+	<div class="content">
+		<h2>Contact Details</h2>
+		<input type="text" placeholder="Name" ng-model="form.name">
+		<input type="text" placeholder="Phone Number" ng-model="form.number">
+		<div>Is this you or you family?</div>
+		<button class="btn btn-family" ng-show="isFamily" ng-click="isFamilyClicked()">Yes</button>
+		<button class="btn btn-family" ng-hide="isFamily" ng-click="isFamilyClicked()">No</button>
+		<div ng-hide="isFamily">
+			<h2>Your Details</h2>
+			<p>You don’t have to send them but we can offer you support if you do.</p>
+			<input type="text" placeholder="Name" ng-model="form.nameReferrer">
+			<input type="text" placeholder="Phone Number" ng-model="form.numberReferrer">
+		</div>
+	</div>
+	<textarea placeholder="Is there something you want to add?" ng-model="form.notes"> </textarea>
+	<button class="btn btn-proto">Send</button>
 </section>
