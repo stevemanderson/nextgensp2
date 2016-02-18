@@ -3,13 +3,14 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st0{fill:none;stroke:#bababa;stroke-miterlimit:10;}
 	.st1{fill:none;}
+	.st3{stroke:#bababa;fill:#bababa}
 </style>
 <g>
 	<path class="st0" d="M18,21.6c-4,0.3-8,0.3-12,0c-2.8-0.3-5-2.9-5-5.6c0-2.7,0-5.3,0-8c0-2.7,2.2-5.3,5-5.6c4-0.3,8-0.3,12,0
 		c2.8,0.3,5,2.9,5,5.6c0,2.7,0,5.3,0,8C23,18.7,20.8,21.3,18,21.6z"/>
 </g>
 <path class="st1" d="M0,0h24v24H0V0z"/>
-<polygon points="9,12 9,8 12.5,10 16,12 12.5,14 9,16 "/>
+<polygon class="st3" points="9,12 9,8 12.5,10 16,12 12.5,14 9,16 "/>
 </svg>
