@@ -92,7 +92,7 @@ angular.module('nextgensp2')
      */
     this.submitServices = function (data) {
         return $http({ method  : "POST",
-                url     : apiURL+"submitServices/",
+                url     : apiURL+"submitService/",
                 data    : data,
                 withCredentials: true
                });
@@ -103,7 +103,7 @@ angular.module('nextgensp2')
      */
     this.removeServices = function (data) {
         return $http({ method  : "POST",
-                url     : apiURL+"removeServices/",
+                url     : apiURL+"removeService/",
                 data    : data,
                 withCredentials: true
                });
