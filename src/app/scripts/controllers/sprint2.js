@@ -21,7 +21,7 @@ angular.module('nextgensp2')
 
     $scope.moduleData;
     $scope.sessionStats = {};
-    $scope.inputText = "i'm concerned about my families health";
+    $scope.inputText = "i'm concerned about my family's health";
 
     $rootScope.businessLocation = "";
 
