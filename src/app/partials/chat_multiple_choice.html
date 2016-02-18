@@ -11,7 +11,7 @@
 		</div>
 		<div class="col-md-12">
 			<ul class="list clearfix">
-				<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected, unactive: answer.isUnSelected}" class="clearfix" ng-click="answerClicked($index, answer)" >
+				<li ng-repeat="answer in responses" ng-class="{active: answer.isSelected, unactive: answer.isUnSelected}" class="clearfix"  >
 					<div class="list-indicator">
 						<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" 	xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 							 viewBox="0 0 17.7 18.3" style="enable-background:new 0 0 17.7 18.3; width:17.7px;height:18.3px;" xml:space="preserve" ng-show="answer.isSelected">
@@ -21,7 +21,8 @@
 							<polyline class="naked-tick" points="12.7,7 7.7,12 4.7,9 "/>
 						</svg>
 					 </div>
-					<div ng-bind-html="answer.title" class="answer"></div>
+					<div ng-bind-html="answer.title" class="answer" ng-click="answerClicked($index, answer)"></div>
+					<div class="video-link" ng-click="showVideo(answer.videourl)" ng-show="answer.videourl !=null"><img src="images/icon-movie.svg" width="24" height="22"></div>
 				</li>
 			</ul>
 
