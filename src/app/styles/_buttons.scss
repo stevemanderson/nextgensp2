@@ -225,6 +225,55 @@
   }
 }
 
+.btn-family{
+  background-color:$question-single;
+  color: white;
+  font-size:12px;
+  border:none;
+  height:30px;
+  padding-top:7px;
+  min-width: 45px;
+
+  &:hover,
+  &:focus{
+    text-decoration: none;
+    color: white;
+    background-color:$boolean-dark-over;
+  }
+}
+.btn-family-clear{
+  background-color:white;
+  color: #666;
+  border:1px solid #666;
+  font-size:12px;
+  height:30px;
+  padding-top:7px;
+  min-width: 45px;
+
+  &:hover,
+  &:focus{
+    text-decoration: none;
+    color: #666;
+    background-color:white;
+  }
+}
+.btn-referral{
+  background-color:$question-single;
+  color: white;
+  font-size:12px;
+  border:none;
+  border-radius:0;
+  height:38px;
+  padding-top:8px;
+  width:100%;
+  &:hover,
+  &:focus{
+    text-decoration: none;
+    color: white;
+    background-color:$boolean-dark-over;
+  }
+}
+
 
 @media (max-width: 460px){
   

@@ -240,8 +240,14 @@ angular.module('nextgensp2')
           cost_max:cost_max,
           number_steps:steps
         };
-        angular.element(document.getElementsByClassName('number-indicator')).css({transform: 'scale(1)'});
-        console.log("number_steps >> ",$rootScope.sessionStats.number_steps);
+        $timeout(function(){
+            if($rootScope.sessionStats.number_steps>0){
+                angular.element(document.getElementsByClassName('number-indicator')).css({transform: 'scale(1)'});
+            }else{
+                angular.element(document.getElementsByClassName('number-indicator')).css({transform: 'scale(0.1)'});
+            }
+        },100);
+        
     }
     
     //Show side panel info
@@ -299,7 +305,10 @@ angular.module('nextgensp2')
         console.log("updateServices");
         angular.element(document.getElementsByClassName('number-indicator')).css({transform: 'scale(0.1)'});
         //Update session services
-        getSessionServices();
+        $timeout(function(){
+            getSessionServices();
+        },700);
+        
     });
 
     $scope.$on('openCallBack', function(event, serviceTitle){

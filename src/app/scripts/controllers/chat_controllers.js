@@ -488,11 +488,24 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('ReferralCtrl', function ($scope) {
-   $scope.isFamily = false;
-
+  .controller('ReferralCtrl', function ($scope, $rootScope, $timeout) {
+   $scope.isFamily = true;
+   $scope.services = $rootScope.sessionStats.data;
+   $scope.loading = false;
+   $scope.sendButton = true;
+   $scope.showThanks=false;
+   
    $scope.isFamilyClicked = function(){
     $scope.isFamily = !$scope.isFamily;
+   }
+   $scope.sendClicked = function(){
+    $scope.loading = true;
+    $scope.sendButton = false;
+    $timeout(function(){
+        $scope.loading=false;
+        $scope.showThanks=true;
+        
+      },2000);
    }
 
 

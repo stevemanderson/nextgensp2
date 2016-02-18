@@ -315,7 +315,7 @@
 		background-color:white;
 		width:100%;
 		border-radius:0;
-		padding:0 0 40px 0;
+		padding:0;
 
 		.popup-referral{
 			width:100%;
@@ -325,13 +325,35 @@
 				padding-left:20px;
 				padding-right:20px;
 				padding-top: 20px;
+				padding-bottom: 10px;
+				.lead{
+					float:left;
+					width:10%;
+					font-size: 12px;
+					padding-top:14px;
+				}
+				.services{
+					color: $brand-blue-bright;
+					font-size: 14px;
+					float:left;
+					width:70%;
+					padding-top:10px;
+				}
 			}
 			.content{
 				padding-left:20px;
 				padding-right:20px;
+				.family{
+					padding:20px 0;
+					div{
+						padding-top:6px;
+						color: $brand-blue-bright;
+						font-size: 14px;
+					}
+				}
 			}
 			h1{
-				font-size: 14px;
+				font-size: 16px;
 				padding:10px 0 0 0;
 				margin:0;
 				font-weight: $weight-medium;
@@ -340,7 +362,7 @@
 			}
 			h2{
 				font-size: 14px;
-				padding:4px 20px 10px 0;
+				padding:20px 20px 0 0;
 				font-weight: $weight-bold;
 				margin-top:3px;
 				color:#1a1a1a;
@@ -357,6 +379,7 @@
 				border-bottom:1px solid #eee;
 				padding:15px 0 15px 0;
 				font-size: 14px;
+				color: $brand-blue-bright;
 			}
 			textarea{
 				border:none;
@@ -369,8 +392,9 @@
 				resize: none;
 				padding-left:20px;
 				padding-right:20px;
-				padding-top:10px;
+				padding-top:25px;
 				font-size: 14px;
+				outline: none;
 			}
 			
 			.title-section{
@@ -381,8 +405,33 @@
 				border-top:1px solid #eee;
 				padding-left:20px;
 			}
-			
 		}	
+		.thank-you{
+			position:absolute;
+			top:0;
+			height:900px;
+			background-color: rgba(0, 0, 0, 0.4);
+			overflow:hidden;
+			text-align: center;
+			.content{
+				background-color:white;
+				width:90%;
+				margin:110px auto 0 auto;
+				border-radius:4px;
+				.padding{
+					padding:30px;
+				}
+				p{
+					font-size: 14px;
+				}
+				-webkit-box-shadow: -1px 7px 27px -1px rgba(0,0,0,0.75);
+				-moz-box-shadow: -1px 7px 27px -1px rgba(0,0,0,0.75);
+				box-shadow: -1px 7px 27px -1px rgba(0,0,0,0.75);
+			}
+			.btn-referral{
+				border-radius:0 0 4px 4px;
+			}
+		}
 	}
 }
 

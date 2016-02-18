@@ -18,7 +18,7 @@
 				<div ng-show="{{services.length > 0}}">
 					<h3>Services</h3>
 					<ul class="clearfix hidden-xs container__services">
-						<li ng-repeat="item in services" ng-click="serviceClicked(item)" class="navbar-toggle" data-toggle="offcanvas" data-target="#myNavmenu" data-canvas="body"><span ng-bind-html="item.title"></span><span class="read-more">Read more</span></li>
+						<li ng-repeat="item in services" ng-click="serviceClicked($index, item)" class="navbar-toggle" data-toggle="offcanvas" data-target="#myNavmenu" data-canvas="body"><span ng-bind-html="item.title"></span><span class="read-more">Read more</span></li>
 					</ul>
 
 					<slick settings="slickConfig" ng-if="numberLoaded" class="clearfix visible-xs">
