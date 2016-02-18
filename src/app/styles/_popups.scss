@@ -133,6 +133,11 @@
 			width:89%;
 
 		}
+		.thanks{
+			padding:15px 10px 0 10px;
+			font-size: 14px;
+			color: $brand-blue;
+		}
 	}
 }
 
@@ -229,6 +234,23 @@
 			}
 		}
 		.services{
+			.top{
+				padding: 15px 10px 0 10px;
+				background-color:$brand-blue;
+				height: 150px;
+				h1{
+					color: white;
+					font-size: 20px;
+					font-weight: $weight-normal;
+					padding-top:25px;
+
+				}
+				h2{
+					color: #b5dcf7;
+					font-size: 14px;
+					margin-top:10px;
+				}
+			}
 				.left{
 					float: left;
 					width: 49%;

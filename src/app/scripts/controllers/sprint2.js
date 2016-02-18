@@ -149,8 +149,6 @@ angular.module('nextgensp2')
     // Get session Services / Stats
     function getSessionServices(){
         sp2Service.getServices().then(function(response) {
-            console.log("getSessionServices");
-            console.log(response.data);
             updateStats(response.data);
         }, function() {
         });
@@ -223,6 +221,7 @@ angular.module('nextgensp2')
     }
 
     function updateStats(data){
+        console.log("updateStats",data);
         var cost_min = 0;
         var cost_max = 0;
         var steps = data.length;
@@ -303,6 +302,17 @@ angular.module('nextgensp2')
         getSessionServices();
     });
 
+    $scope.$on('openCallBack', function(event, serviceTitle){
+        var data = {serviceTitle:serviceTitle};
+        ngDialog.open({
+            template:"partials/popup_callback.html",
+            scope:$scope,
+            className: 'ngdialog-theme-default ngdialog-theme-callback',
+            controller: 'CallbackCtrl',
+            data: data
+        });
+    });
+
 
     // Actions
 
@@ -336,11 +346,7 @@ angular.module('nextgensp2')
 
     //Test Video
     $scope.testVideoClicked = function(){
-        ngDialog.open({
-            template:"partials/popup_video.html",
-            scope:$scope,
-            className: 'ngdialog-theme-default ngdialog-theme-video'
-        });
+        getSessionServices();
     };
     $scope.$on('showVideo', function (event, url){
         console.log("showvideo >", url);
@@ -370,7 +376,6 @@ angular.module('nextgensp2')
             scope:$scope,
             className: 'ngdialog-theme-default ngdialog-theme-callback',
             controller: 'CallbackCtrl'
-
         });
     };
 

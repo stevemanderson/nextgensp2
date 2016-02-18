@@ -1,9 +1,17 @@
 <section class="popup-snippet">
 	<h1>Request a Callback</h1>
-	<h2>From <span ng-bind-html="callback.service"></span></h2>
+	<h2>From <span ng-bind-html="ngDialogData.serviceTitle"></span></h2>
 	<input type="text" class="input-form" placeholder="Your Name">
 	<input type="email" class="input-form" placeholder="Email">
 	<div style="width:100%; text-align: center;">
-		<input type="button" class="btn btn-proto" value="Send" ng-click="sendClicked()">
+		<input type="button" class="btn btn-proto" value="Send" ng-click="sendClicked()" ng-show="showOK">
+		<div ng-show="showLoader">
+		<loading></loading>
+		</div>
+		<div class="thanks" ng-show="showThanks">
+			Thank you, your Callback has been requested.
+			<input type="button" class="btn btn-proto" value="Close" ng-click="closeThisDialog()" >
+		</div>
+
 	</div>
 </section>

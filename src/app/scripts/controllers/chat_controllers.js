@@ -131,23 +131,22 @@ angular.module('nextgensp2')
     $scope.serviceClicked = function(index, response) {
       //Select service
       var dataVar = {};
+      $scope.$emit("updateServices");
       if($scope.services[index].isSelected){
         $scope.services[index].isSelected = false;
         //remove service
-        dataVar = {id:response.id};
+        dataVar = {id:response.id,pid:$scope.query.id};
         sp2Service.removeServices(dataVar).then(function(response) {
-            console.log("All Good - removed");
+            $scope.$emit("updateServices");
         }, function() {
-            console.log("Error");
         });
       }else{
         $scope.services[index].isSelected = true;
         //add service
         dataVar = {id:response.id,pid:$scope.query.id};
         sp2Service.submitServices(dataVar).then(function(response) {
-            console.log("All Good - Added");
+            $scope.$emit("updateServices");
         }, function() {
-            console.log("Error");
         });
       }
     }
@@ -278,22 +277,18 @@ angular.module('nextgensp2')
       if($scope.services[index].isSelected){
         $scope.services[index].isSelected = false;
         //remove service
-        dataVar = {id:response.id};
+        dataVar = {id:response.id,pid:$scope.query.id};
         sp2Service.removeServices(dataVar).then(function(response) {
-            console.log("All Good - removed");
             $scope.$emit("updateServices");
         }, function() {
-            console.log("Error");
         });
       }else{
         $scope.services[index].isSelected = true;
         //add service
         dataVar = {id:response.id,pid:$scope.query.id};
         sp2Service.submitServices(dataVar).then(function(response) {
-            console.log("All Good - Added");
             $scope.$emit("updateServices");
         }, function() {
-            console.log("Error");
         });
       }
     }
@@ -422,10 +417,18 @@ angular.module('nextgensp2')
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('CallbackCtrl', function ($scope) {
-    
+  .controller('CallbackCtrl', function ($scope,$timeout) {
+    $scope.showOK=true;
+    $scope.showLoader=false;
+    $scope.showThanks=false;
+
     $scope.sendClicked = function(){
-      console.log("Send it!");
+      $scope.showOK=false;
+      $scope.showLoader=true;
+      $timeout(function(){
+        $scope.showLoader=false;
+        $scope.showThanks=true;
+      },2000);
     };
 
   });
@@ -451,8 +454,6 @@ angular.module('nextgensp2')
       }    
     }
 
-
-
     //actions
     $scope.makeRefClicked = function(){
       console.log("make reference");
@@ -463,6 +464,20 @@ angular.module('nextgensp2')
       //Slide in service div
       $scope.showService= true;
     };
+    
+    $scope.callback = function(title){
+      $scope.$emit("openCallBack", title);
+    };
+  });
 
-
+  /**
+ * @ngdoc function
+ * @name nextgensp2.controller:ReferralCtrl
+ * @description
+ * # ReferralCtrl
+ * Controller of the nextgensp2
+ */
+angular.module('nextgensp2')
+  .controller('ReferralCtrl', function ($scope) {
+   
   });
