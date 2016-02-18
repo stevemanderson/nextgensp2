@@ -83,7 +83,8 @@ angular.module('nextgensp2')
      */
     this.getServices = function () {
         return $http({ method  : "GET",
-                url     : apiURL+"services/"
+                url     : apiURL+"services/",
+                withCredentials: true
                });
     };
     /**
