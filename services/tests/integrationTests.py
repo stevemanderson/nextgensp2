@@ -18,7 +18,7 @@ def createHandler():
     return Handler(c, createSessionService(), createNotificationService())
 
 class integrationTests(unittest.TestCase):
-    sessionId = "b62b8c8d-24b4-4999-34a9-5c79807ad5e1"
+    sessionId = "3910477c-2efa-0b1b-4622-03457c284d4d"
 
     def test_removeSession(self):
         handler = createHandler()
@@ -44,12 +44,11 @@ class integrationTests(unittest.TestCase):
     def test_removeService(self):
         handler = createHandler()
 
-        #get the items
-        query = handler.getById(290, 1) 
-        service = handler.getById(291, 1) 
+        qId = "290"
+        sId = "291"
 
         #remove
-        handler.removeServiceTracking(integrationTests.sessionId, int(service['id']), int(query['id']))
+        handler.removeServiceTracking(integrationTests.sessionId, int(sId), int(qId))
 
     def test_checkNoEntries(self):         
         handler = createHandler()

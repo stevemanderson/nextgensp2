@@ -134,7 +134,7 @@ angular.module('nextgensp2')
       if($scope.services[index].isSelected){
         $scope.services[index].isSelected = false;
         //remove service
-        dataVar = {id:response.id};
+        dataVar = {id:response.id,pid:$scope.query.id};
         sp2Service.removeServices(dataVar).then(function(response) {
             console.log("All Good - removed");
         }, function() {
@@ -278,7 +278,7 @@ angular.module('nextgensp2')
       if($scope.services[index].isSelected){
         $scope.services[index].isSelected = false;
         //remove service
-        dataVar = {id:response.id};
+        dataVar = {id:response.id,pid:$scope.query.id};
         sp2Service.removeServices(dataVar).then(function(response) {
             console.log("All Good - removed");
             $scope.$emit("updateServices");
