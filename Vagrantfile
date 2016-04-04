@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "nextgensp2"
+  config.vm.box = "nextgensp5"
   config.vm.network :forwarded_port, guest: 5432, host: 5432
   config.vm.network :forwarded_port, guest: 27017, host: 50003
   config.vm.network :forwarded_port, guest: 80, host: 8181
