@@ -160,14 +160,10 @@ def addUserAgencyField(request):
     if AgencyAllowedField.objects.filter(userId=userId, fieldId=fieldId, agencyId=agencyId).exists() == false:
         return Response('Already Exists', status=409)
 
-    user = User.objects.get(id=userId)
-    field = Field.objects.get(id=fieldId)
-    agency = Agency.objects.get(id=agencyId)
-
     allowedField = AgencyAllowedField()
-    allowedField.user = user
-    allowedField.field = field
-    allowedField.agency = agency
+    allowedField.userId = userId
+    allowedField.fieldId = fieldId
+    allowedField.agencyId = agencyId
 
     allowedField.save()
 
