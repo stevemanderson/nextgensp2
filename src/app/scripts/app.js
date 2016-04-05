@@ -25,7 +25,9 @@ angular
     'com.2fdevs.videogular.plugins.controls',
     'com.2fdevs.videogular.plugins.overlayplay',
     'com.2fdevs.videogular.plugins.poster',
-    'slickCarousel'
+    'slickCarousel',
+    'ngStomp',
+    'masonry'
   ])
   .config(function ($routeProvider, $httpProvider) {
     $routeProvider
@@ -43,6 +45,14 @@ angular
       .when('/video', {
         templateUrl: 'views/video.html',
         controller: 'VideoCtrl'
+      })
+      .when('/dashboard', {
+        templateUrl: 'views/dashboard.html',
+        controller: 'DashboardCtrl'
+      })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
       })
 
       .otherwise({

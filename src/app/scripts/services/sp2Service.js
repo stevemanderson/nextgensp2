@@ -126,6 +126,18 @@ angular.module('nextgensp2')
     };
 
     /**
+     * Login form
+     * @param {jSON} username
+     */
+    this.login = function (data) {
+        return $http({ method  : "POST",
+                url     : apiURL+"login/",
+                data    : data,
+                withCredentials: true
+               });
+    };
+
+    /**
      * sort array
      * @param {Array} arr
      * @param {jSON property} prop
