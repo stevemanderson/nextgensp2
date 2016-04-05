@@ -5,6 +5,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from api.models import Handler
 from api.notificationService import *
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 def createSessionService():
     mc = UserMongoContext('localhost', 27017)
@@ -30,6 +32,21 @@ def tracking(request):
     sessionId = request.COOKIES.get('userSession')
     result = createHandler().getTracking(sessionId)
     return Response(result)
+
+@api_view(['POST'])
+def login(request):
+    if 'username' not in request.data:
+        return Response('User not found', status=404)
+
+    userName = request.data['username']
+    user = None
+
+    try:
+        user = User.objects.get(username=userName)
+    except (ValueError, ObjectDoesNotExist):
+        return Response("User not found", status=404)
+
+    return Response({"userId":user.id})
 
 @api_view(['POST'])
 def responses(request):
@@ -76,7 +93,7 @@ def removeService(request):
         queryId = int(request.data['pid'])
 
     h.removeServiceTracking(sessionId, serviceId, queryId)
-    
+
     return Response({})
 
 @api_view(['POST'])
