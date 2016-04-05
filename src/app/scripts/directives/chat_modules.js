@@ -1,4 +1,19 @@
 'use strict';
+/**
+ * @ngdoc directive
+ * @name nextgensp2.directive:chatsidebar
+ * @description
+ * # chatsidebar
+ */
+angular.module('nextgensp2')
+  .directive('chatsidebar', function () {
+    return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: "partials/chatsidebar.html",
+    controller: "Sprint2Ctrl",
+    };
+  });
 
 /**
  * @ngdoc directive

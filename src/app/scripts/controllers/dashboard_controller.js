@@ -17,16 +17,16 @@ angular.module('nextgensp2')
     // Subscribe to the users dashboard update channel
     // http://127.0.0.1:15674/stomp
 
-    /*$stomp.setDebug(function (args) {
+    $stomp.setDebug(function (args) {
       $log.debug(args)
-    })*/
+    })
 
     $stomp
       .connect('http://localhost:15674/stomp', {login:"test",passcode:"test"} )
 
       // frame = CONNECTED headers
       .then(function (frame) {
-        var subscription = $stomp.subscribe('/topic/user/id', function (payload, headers, res) {
+        var subscription = $stomp.subscribe('/topic/user', function (payload, headers, res) {
           
           outputSTOMP(payload);
         }, {
@@ -37,7 +37,7 @@ angular.module('nextgensp2')
         //subscription.unsubscribe()
 
         // Send message
-        $stomp.send('/topic/user/id', {
+        $stomp.send('/topic/user', {
           message: 'body'
         }, {
           priority: 9,

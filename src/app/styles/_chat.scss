@@ -4,15 +4,15 @@
   overflow-y: scroll;
   overflow-x: hidden;
 
-  height: 100%;
+  height: 400px;
 
-  -ms-overflow-style: none;
-  overflow: -moz-scrollbars-none;
+  //-ms-overflow-style: none;
+  //verflow: -moz-scrollbars-none;
 
   padding-top: 60px;
 }
 .scroll-frame::-webkit-scrollbar {
-  display: none;
+  //display: none;
 }
 
 

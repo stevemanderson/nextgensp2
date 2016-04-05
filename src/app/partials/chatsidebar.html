@@ -1,0 +1,23 @@
+<div class="scroll-frame">
+	<a id="top"></a>	
+		<div class="row ">
+			<div class="col-md-12 text-center panel-shadow initial-module">
+			  	<div class="avatar">
+					<img src="images/avatar.svg" >
+				</div>
+				<section>
+					<h1>Hi! What can I help you with?</h1>
+				  	<div class="initial-input">
+					  	<label class="sr-only chat-input" for="userInput">User input</label>
+					  	<div class="input-instruction hidden-xs" ng-show="enterTxt">Press Enter</div>
+					  	<input type="text" class="form-control chat-input" id="userInput" placeholder="I'm concerned about my families health" ng-keydown="firstResponse($event)" ng-model="inputText">
+					  	
+				  	</div>
+				</section>
+			  	
+			</div>
+		</div>
+	<div id="chat-frame" >
+	
+	</div>
+</div>

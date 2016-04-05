@@ -126,12 +126,12 @@ angular.module('nextgensp2')
     };
 
     /**
-     * Login form
+     * User Login form
      * @param {jSON} username
      */
     this.login = function (data) {
         return $http({ method  : "POST",
-                url     : apiURL+"login/",
+                url     : apiURL+"login",
                 data    : data,
                 withCredentials: true
                });

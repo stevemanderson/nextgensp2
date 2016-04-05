@@ -298,7 +298,7 @@ angular.module('nextgensp2')
         }
         
         var element = document.getElementById(moduleRef);
-        smoothScroll(element, options);
+        //smoothScroll(element, options);
     });
     // Show summary
     $scope.$on('updateServices', function (event){

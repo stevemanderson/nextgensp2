@@ -8,19 +8,23 @@
  * Controller of the nextgensp5
  */
 angular.module('nextgensp2')
-  .controller('LoginCtrl', function ($scope,$log,sp2Service) {
+  .controller('LoginCtrl', function ($scope,$log,sp2Service, $location) {
+  	
   	$scope.login = {
   		username:"",
-  		password:""
+  		password:"",
+  		error:""
   	};
 
   	$scope.loginClick = function(){
-  		$log.debug($scope.login);
+  		$scope.login.error = "";
   		sp2Service.login({username:$scope.login.username}).then(function(response) {
                 
                 $log.debug(response);
+                $location.path('/dashboard');
+                
             }, function() {
-                $log.debug("Login Error");
+                $scope.login.error = "There was an error with your Username/Password combination. Please try again.";
             });
   	}
 });
