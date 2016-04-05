@@ -3,8 +3,11 @@ from services.settings import DRUPAL_API, TEMP_FOLDER
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
-from api.models import Handler
+from api.models import Handler, Field, Agency
 from api.notificationService import *
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+import json
 
 def createSessionService():
     mc = UserMongoContext('localhost', 27017)
@@ -30,6 +33,21 @@ def tracking(request):
     sessionId = request.COOKIES.get('userSession')
     result = createHandler().getTracking(sessionId)
     return Response(result)
+
+@api_view(['POST'])
+def login(request):
+    if 'username' not in request.data:
+        return Response('User not found', status=404)
+
+    userName = request.data['username']
+    user = None
+
+    try:
+        user = User.objects.get(username=userName)
+    except (ValueError, ObjectDoesNotExist):
+        return Response("User not found", status=404)
+
+    return Response({"userId":user.id})
 
 @api_view(['POST'])
 def responses(request):
@@ -76,7 +94,7 @@ def removeService(request):
         queryId = int(request.data['pid'])
 
     h.removeServiceTracking(sessionId, serviceId, queryId)
-    
+
     return Response({})
 
 @api_view(['POST'])
@@ -112,10 +130,38 @@ def services(request):
     result = createHandler().getServices(sessionId)
     return Response(result)
 
+@api_view(['GET'])
+def fields(request):
+    result = []
+    for i in Field.objects.all():
+        result.append({"name":i.name, "id":i.id})
+    return Response(result)
+
+@api_view(['GET'])
+def agencies(request):
+    result = []
+    for i in Agency.objects.all():
+        result.append({"name":i.name, "id":i.id})
+    return Response(result)
+
+@api_view(['POST'])
+def addUserAgencyField(request):
+    if 'userId' not in request.data:
+        return Response('User not found', status=404)
+    if 'agencyId' not in request.data:
+        return Response('Agency not found', status=404)
+    if 'fieldId' not in request.data:
+        return Response('Field not found', status=404)
+    userId = request.data['userId']
+    fieldId = request.data['fieldId']
+    agencyId = request.data['agencyId']
+    return Response({})
+
 @api_view(['POST'])
 def submitReferral(request):
     sessionId = request.COOKIES.get('userSession')
     return Response({})
+
 
 # @api_view(['GET'])
 # def sessions(request):
