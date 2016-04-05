@@ -3,10 +3,11 @@ from services.settings import DRUPAL_API, TEMP_FOLDER
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
-from api.models import Handler
+from api.models import Handler, Field, Agency
 from api.notificationService import *
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+import json
 
 def createSessionService():
     mc = UserMongoContext('localhost', 27017)
@@ -129,10 +130,38 @@ def services(request):
     result = createHandler().getServices(sessionId)
     return Response(result)
 
+@api_view(['GET'])
+def fields(request):
+    result = []
+    for i in Field.objects.all():
+        result.append({"name":i.name, "id":i.id})
+    return Response(result)
+
+@api_view(['GET'])
+def agencies(request):
+    result = []
+    for i in Agency.objects.all():
+        result.append({"name":i.name, "id":i.id})
+    return Response(result)
+
+@api_view(['POST'])
+def addUserAgencyField(request):
+    if 'userId' not in request.data:
+        return Response('User not found', status=404)
+    if 'agencyId' not in request.data:
+        return Response('Agency not found', status=404)
+    if 'fieldId' not in request.data:
+        return Response('Field not found', status=404)
+    userId = request.data['userId']
+    fieldId = request.data['fieldId']
+    agencyId = request.data['agencyId']
+    return Response({})
+
 @api_view(['POST'])
 def submitReferral(request):
     sessionId = request.COOKIES.get('userSession')
     return Response({})
+
 
 # @api_view(['GET'])
 # def sessions(request):

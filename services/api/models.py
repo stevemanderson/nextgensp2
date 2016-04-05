@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django.db import models
 from mappers import *
 from pymongo import MongoClient
+from django.contrib.auth.models import User
 import psycopg2
 
 import requests
@@ -463,3 +464,19 @@ class Handler:
         query['storedResponses'] = self._sessionService.getStoredResponses(sessionId)
 
         return query
+
+
+# DJANGO models
+class Agency(models.Model):
+    name = models.CharField(max_length=30)
+
+class Field(models.Model):
+    name = models.CharField(max_length=30)
+    humanReadable = models.CharField(max_length=30)
+    standardMapping = models.CharField(max_length=30)
+    description = models.CharField(max_length=255, blank=True, null=True)
+
+class AgencyAllowedField(models.Model):
+    user = models.ForeignKey(User)
+    agency = models.ForeignKey(Agency)
+    field = models.ForeignKey(Field)
