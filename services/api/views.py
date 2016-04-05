@@ -3,7 +3,7 @@ from services.settings import DRUPAL_API, TEMP_FOLDER
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
-from api.models import Handler, Field, Agency
+from api.models import Handler, Field, Agency, AgencyAllowedField
 from api.notificationService import *
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -152,9 +152,25 @@ def addUserAgencyField(request):
         return Response('Agency not found', status=404)
     if 'fieldId' not in request.data:
         return Response('Field not found', status=404)
+
     userId = request.data['userId']
     fieldId = request.data['fieldId']
     agencyId = request.data['agencyId']
+
+    if AgencyAllowedField.objects.filter(userId=userId, fieldId=fieldId, agencyId=agencyId).exists() == false:
+        return Response('Already Exists', status=409)
+
+    user = User.objects.get(id=userId)
+    field = Field.objects.get(id=fieldId)
+    agency = Agency.objects.get(id=agencyId)
+
+    allowedField = AgencyAllowedField()
+    allowedField.user = user
+    allowedField.field = field
+    allowedField.agency = agency
+
+    allowedField.save()
+
     return Response({})
 
 @api_view(['POST'])
