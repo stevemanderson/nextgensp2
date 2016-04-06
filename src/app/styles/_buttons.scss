@@ -274,6 +274,58 @@
   }
 }
 
+.btn-login-email-sign{
+  background-color:#eceff1;
+  font-family: $opensans-font;
+  color: #263238;
+  font-size:14px;
+  border:none;
+  border-radius:0;
+  height:38px;
+  padding-top:8px;
+  width:100%;
+  margin-bottom: 10px;
+  &:hover,
+  &:focus{
+    background-color:#d8dbdd;
+  }
+}
+.btn-login-sign-up{
+  background-color:#2196f3;
+  font-family: $opensans-font;
+  color: #fff;
+  font-size:14px;
+  border:none;
+  border-radius:0;
+  height:40px;
+  padding-top:9px;
+  width:100%;
+  margin-bottom: 10px;
+  &:hover,
+  &:focus{
+    background-color:#2286d6;
+    color: #fff;
+  }
+}
+.btn-login{
+  background-color:#eceff1;
+  font-family: $opensans-font;
+  color: #263238;
+  font-size:14px;
+  border:none;
+  border-radius:0;
+  height:40px;
+  padding-top:9px;
+  width:100%;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  &:hover,
+  &:focus{
+    background-color:#dbdee0;
+    color: #263238;
+  }
+}
+
 
 @media (max-width: 460px){
   

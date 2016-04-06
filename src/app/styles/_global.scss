@@ -41,6 +41,37 @@ input{
 	font-size:14px;
 }
 
+//Gov header
+.gov-header{
+	height:80px;
+	background-color:$header-bar;
+	.qgov-logo{
+		max-width: 230px;
+		padding-top: 18px;
+		padding-left: 20px;
+	}
+	.controls{
+		font-family: $opensans-font;
+		font-size: 12px;
+		font-weight: $weight-semibold;
+		padding-top:32px;
+		padding-right: 25px;
+		color: #b0bec5;
+		.sign-up{
+			color: #546e7a;
+			margin-right:5px;
+			cursor: pointer;
+		}
+		.login{
+			color:#263238;
+			margin-left:5px;
+			cursor: pointer;
+		}
+	}
+}
+
+
+
 // Media querys
 // Mobile
 @media (max-width: 460px){

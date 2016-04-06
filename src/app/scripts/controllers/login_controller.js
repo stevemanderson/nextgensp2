@@ -15,6 +15,16 @@ angular.module('nextgensp2')
   		password:"",
   		error:""
   	};
+    $scope.display = {
+      signup:!$scope.ngDialogData.login,
+      signup_email:false,
+      login:$scope.ngDialogData.login,
+      forgot_pass:false
+    };
+
+     
+    console.log($scope.ngDialogData.login);
+    
 
   	$scope.loginClick = function(){
   		$scope.login.error = "";

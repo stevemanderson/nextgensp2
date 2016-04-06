@@ -51,10 +51,15 @@ angular
         controller: 'DashboardCtrl'
       })
       .when('/login', {
-        templateUrl: 'views/login.html',
+        templateUrl: 'partials/popup_login.html',
         controller: 'LoginCtrl'
       })
 
+      .when('/profile', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl',
+        controllerAs: 'profile'
+      })
       .otherwise({
         redirectTo: '/sprint2'
       });

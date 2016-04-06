@@ -17,9 +17,9 @@ angular.module('nextgensp2')
     // Subscribe to the users dashboard update channel
     // http://127.0.0.1:15674/stomp
 
-    $stomp.setDebug(function (args) {
+    /*$stomp.setDebug(function (args) {
       $log.debug(args)
-    })
+    })*/
 
     $stomp
       .connect('http://localhost:15674/stomp', {login:"test",passcode:"test"} )

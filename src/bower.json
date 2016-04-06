@@ -12,7 +12,7 @@
     "ngmap": "~1.15.1",
     "Angular.uuid2": "angular-uuid2#*",
     "angular-google-places-autocomplete": "~0.2.7",
-    "ng-dialog": "ngDialog#~0.5.6",
+    "ng-dialog": "ngDialog#~0.5.9",
     "d3": "^3.5.14",
     "ngSmoothScroll": "~2.0.0",
     "videogular": "~1.4.1",

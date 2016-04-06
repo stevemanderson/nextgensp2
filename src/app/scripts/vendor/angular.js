@@ -10681,7 +10681,7 @@ function $HttpBackendProvider() {
 
 function createHttpBackend($browser, createXhr, $browserDefer, callbacks, rawDocument) {
   // TODO(vojta): fix the signature
-  console.log("Here");
+  //console.log("Here");
   return function(method, url, post, callback, headers, timeout, withCredentials, responseType) {
     $browser.$$incOutstandingRequestCount();
     url = url || $browser.url();
