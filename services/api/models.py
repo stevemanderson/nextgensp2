@@ -485,4 +485,7 @@ class AgencyAllowedField(models.Model):
     agency = models.ForeignKey(Agency)
     field = models.ForeignKey(Field)
 
-
+class UserField(models.Model):
+    user = models.ForeignKey(User)
+    field = models.ForeignKey(Field)
+    value = models.CharField(max_length=255, null=True)
