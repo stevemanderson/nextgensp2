@@ -1,0 +1,1 @@
+pg_dump -d nextgensp2 -U postgres -w > db.bak

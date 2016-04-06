@@ -1,0 +1,90 @@
+from django.test import TestCase
+from django.test import RequestFactory
+from api.views import *
+from api.models import Field, Agency, AgencyAllowedField
+from django.contrib.auth.models import User
+
+from rest_framework.test import APIRequestFactory
+
+import json
+
+class test_views(TestCase):
+	fixtures = ['app.json', 'auth.json']
+
+	def setUp(self):
+		self.factory = RequestFactory()
+
+	def test_agencies(self):
+		request = self.factory.get('/api/agencies')
+		response = agencies(request)
+		response.render()
+
+		self.assertTrue(response.status_code == 200)
+
+		# check the first object
+		contentObj = json.loads(response.content)
+		self.assertTrue(len(contentObj) == 2)
+
+		#check the viewmodel
+		self.assertTrue('id' in contentObj[0])
+		self.assertTrue('name' in contentObj[0])
+
+	def test_fields(self):
+		request = self.factory.get('/api/fields')
+		response = fields(request)
+		response.render()
+
+		self.assertTrue(response.status_code == 200)
+		contentObj = json.loads(response.content)
+
+		#check the viewmodel
+		self.assertTrue('id' in contentObj[0])
+		self.assertTrue('name' in contentObj[0])
+
+		self.assertTrue(len(contentObj) == 18)
+
+	def test_fieldCategories(self):
+		request = self.factory.get('/api/fieldCategories')
+		response = fieldCategories(request)
+		response.render()
+
+		self.assertTrue(response.status_code == 200)
+		contentObj = json.loads(response.content)
+
+		self.assertTrue(len(contentObj) == 5)
+
+		#check the viewmodel
+		self.assertTrue('id' in contentObj[0])
+		self.assertTrue('name' in contentObj[0])
+		self.assertTrue('fields' in contentObj[0])
+
+		#check field
+		field = contentObj[0]['fields'][0]
+		self.assertTrue('id' in field)
+		self.assertTrue('name' in field)
+
+	def test_allowedAgencyFields_NoUserId(self):
+		request = self.factory.get('/api/allowedAgencyFields')
+		response = allowedAgencyFields(request)
+		response.render()
+
+		self.assertTrue(response.status_code == 404)
+
+	def test_allowedAgencyFields(self):
+		user = User.objects.get(id=1)
+		agency = Agency.objects.get(id=1)
+		field = Field.objects.get(id=1)
+		allowed = AgencyAllowedField(user=user, agency=agency, field=field)
+		allowed.save()
+
+		request = self.factory.get('/api/allowedAgencyFields', {"userId":1})
+		response = allowedAgencyFields(request)
+		response.render()
+
+		self.assertTrue(response.status_code == 200)
+
+		objContent = json.loads(response.content)
+
+		self.assertTrue('agency_id' in objContent[0])
+		self.assertTrue('user_id' in objContent[0])
+		self.assertTrue('field_id' in objContent[0])

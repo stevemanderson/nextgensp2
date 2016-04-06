@@ -3,7 +3,7 @@ from services.settings import DRUPAL_API, TEMP_FOLDER
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
-from api.models import Handler, Field, Agency
+from api.models import Handler, Field, Agency, AgencyAllowedField
 from api.notificationService import *
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -144,17 +144,59 @@ def agencies(request):
         result.append({"name":i.name, "id":i.id})
     return Response(result)
 
+@api_view(['GET'])
+def fieldCategories(request):
+    result = []
+    for i in FieldCategory.objects.all():
+        obj = {"name":i.name, "id":i.id, "fields":[]}
+        # add all the fields
+        for f in i.field_set.all():
+            obj['fields'].append({"name":f.name, "id":f.id})
+        result.append(obj)
+    return Response(result)
+
+@api_view(['GET'])
+def allowedAgencyFields(request):
+    if 'userId' not in request.GET:
+        return Response('User not found', status=404)
+
+    userId = request.GET['userId']
+    userAgencyFields = None
+
+    try:
+        userAgencyFields = AgencyAllowedField.objects.filter(user_id=userId)
+    except (ValueError, ObjectDoesNotExist):
+        return Response("Fields not found", status=404)
+
+    result = []
+    for f in userAgencyFields:
+        result.append({"user_id":f.user_id, "field_id":f.field_id, "agency_id":f.agency_id})
+
+    return Response(result)
+
 @api_view(['POST'])
 def addUserAgencyField(request):
-    if 'userId' not in request.data:
+    if 'userId' not in request.GET:
         return Response('User not found', status=404)
-    if 'agencyId' not in request.data:
+    if 'agencyId' not in request.GET:
         return Response('Agency not found', status=404)
-    if 'fieldId' not in request.data:
+    if 'fieldId' not in request.GET:
         return Response('Field not found', status=404)
-    userId = request.data['userId']
-    fieldId = request.data['fieldId']
-    agencyId = request.data['agencyId']
+
+    userId = request.GET['userId']
+    fieldId = request.GET['fieldId']
+    agencyId = request.GET['agencyId']
+
+    if AgencyAllowedField.objects.filter(userId=userId, fieldId=fieldId, agencyId=agencyId).exists() == false:
+        return Response('Already Exists', status=409)
+
+    allowedField = AgencyAllowedField()
+    allowedField.userId = userId
+    allowedField.fieldId = fieldId
+    allowedField.agencyId = agencyId
+
+    allowedField.save()
+
     return Response({})
 
 @api_view(['POST'])

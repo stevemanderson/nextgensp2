@@ -21,6 +21,8 @@ GMAIL_CONFIG = '/home/steve/Projects/conf/10td'
 SESSION_EMAIL_TEMPLATE  = BASE_DIR+'/templates/session_template.html'
 TEMP_FOLDER  = BASE_DIR+'/temp'
 
+FIXTURE_DIRS = (os.path.join(BASE_DIR, 'fixtures'),)
+
 #GMAIL_CONFIG = '/Users/damien/Desktop/nextgen.config'
 
 # Quick-start development settings - unsuitable for production
@@ -70,6 +72,13 @@ CORS_ORIGIN_WHITELIST = (
 CORS_ALLOW_CREDENTIALS = True
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_PERMISSION_CLASSES': [],
+    'TEST_REQUEST_RENDERER_CLASSES': (
+        'rest_framework.renderers.MultiPartRenderer',
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.TemplateHTMLRenderer'
+    )
 }
 
 ROOT_URLCONF = 'services.urls'
