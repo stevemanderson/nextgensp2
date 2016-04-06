@@ -470,13 +470,19 @@ class Handler:
 class Agency(models.Model):
     name = models.CharField(max_length=30)
 
+class FieldCategory(models.Model):
+    name = models.CharField(max_length=30)
+
 class Field(models.Model):
     name = models.CharField(max_length=30)
     humanReadable = models.CharField(max_length=30)
     standardMapping = models.CharField(max_length=30)
     description = models.CharField(max_length=255, blank=True, null=True)
+    category = models.ForeignKey(FieldCategory, null=True)
 
 class AgencyAllowedField(models.Model):
     user = models.ForeignKey(User)
     agency = models.ForeignKey(Agency)
     field = models.ForeignKey(Field)
+
+
