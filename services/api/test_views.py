@@ -86,5 +86,33 @@ class test_views(TestCase):
 		objContent = json.loads(response.content)
 
 		self.assertTrue('agency_id' in objContent[0])
+		self.assertTrue('agencyName' in objContent[0])
 		self.assertTrue('user_id' in objContent[0])
 		self.assertTrue('field_id' in objContent[0])
+		self.assertTrue('fieldName' in objContent[0])
+
+	# def test_userfields_post(self):
+	# 	request = self.factory.post('/api/userfields', {"userId":1, "fields":[{"id":1,"value":"Testing"}, {"id":2,"value":"teiaoighra"}]})
+	# 	response = userfields(request)
+	# 	response.render()
+
+	# 	self.assertTrue(response.status_code == 200)
+
+	# 	user = User.objects.get(id=1)
+	# 	userFields = user.userfield_set.all()
+
+	# 	self.assertTrue(len(userFields) == 2)
+	# 	self.assertTrue(userFields[0].id == 1)
+	# 	self.assertTrue(userFields[0].value == "Testing")
+
+	def test_userfields_get(self):
+		user = User.objects.get(id=1)
+		field = Field.objects.get(id=1)
+		user.userfield_set.create(user=user, field=field, value='Testing')
+
+		request = self.factory.get('/api/userfields', {"userId":1})
+		response = userfields(request)
+		response.render()
+
+		print response.content
+		self.assertTrue(response.status_code == 200)

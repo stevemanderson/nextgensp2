@@ -3,11 +3,12 @@ from services.settings import DRUPAL_API, TEMP_FOLDER
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
-from api.models import Handler, Field, Agency, AgencyAllowedField
+from api.models import Handler, Field, Agency, AgencyAllowedField, UserField
 from api.notificationService import *
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 import json
+import ast
 
 def createSessionService():
     mc = UserMongoContext('localhost', 27017)
@@ -170,7 +171,51 @@ def allowedAgencyFields(request):
 
     result = []
     for f in userAgencyFields:
-        result.append({"user_id":f.user_id, "field_id":f.field_id, "agency_id":f.agency_id})
+        result.append(
+            {"user_id":f.user_id, "field_id":f.field_id, "fieldName":f.field.name, "agency_id":f.agency_id, "agencyName":f.agency.name})
+
+    return Response(result)
+
+@api_view(['POST', 'GET'])
+def userfields(request):
+    if request.method == "POST":
+        return post_userfields(request)
+    else:
+        return get_userfields(request)
+
+def post_userfields(request):
+    if 'userId' not in request.POST:
+        return Response("User not found", status=404)
+    if 'fields' not in request.POST:
+        return Response("Fields not found", status=404)
+
+    userId = request.POST['userId']
+    user = User.objects.get(id=userId)
+
+    fields = request.POST.getlist('fields')
+
+    user.userfield_set.all().delete()
+    user.save()
+
+    for field in fields:
+        fDic = ast.literal_eval(field)
+        fieldModel = Field.objects.get(id=fDic['id'])
+        user.userfield_set.create(user=user, field=fieldModel, value=fDic['value'])
+
+    return Response("User updated")
+
+def get_userfields(request):
+    if 'userId' not in request.GET:
+        return Response("User not found", status=404)
+
+    userId = request.GET.get('userId')
+    user = User.objects.get(id=userId)
+    
+    result = {"userId":user.id, "fields":[]}
+
+    for f in user.userfield_set.all():
+        field = f.field
+        result['fields'].append({"id":field.id, "name":field.name, "value":f.value})
 
     return Response(result)
 
