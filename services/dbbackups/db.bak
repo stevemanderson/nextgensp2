@@ -172,6 +172,41 @@ ALTER SEQUENCE api_fieldcategory_id_seq OWNED BY api_fieldcategory.id;
 
 
 --
+-- Name: api_userfield; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE api_userfield (
+    id integer NOT NULL,
+    field_id integer NOT NULL,
+    user_id integer NOT NULL,
+    value character varying(255)
+);
+
+
+ALTER TABLE api_userfield OWNER TO postgres;
+
+--
+-- Name: api_userfield_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE api_userfield_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE api_userfield_id_seq OWNER TO postgres;
+
+--
+-- Name: api_userfield_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE api_userfield_id_seq OWNED BY api_userfield.id;
+
+
+--
 -- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -555,6 +590,13 @@ ALTER TABLE ONLY api_fieldcategory ALTER COLUMN id SET DEFAULT nextval('api_fiel
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
+ALTER TABLE ONLY api_userfield ALTER COLUMN id SET DEFAULT nextval('api_userfield_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
 ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
 
 
@@ -700,6 +742,21 @@ SELECT pg_catalog.setval('api_fieldcategory_id_seq', 5, true);
 
 
 --
+-- Data for Name: api_userfield; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY api_userfield (id, field_id, user_id, value) FROM stdin;
+\.
+
+
+--
+-- Name: api_userfield_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('api_userfield_id_seq', 1, false);
+
+
+--
 -- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -767,6 +824,9 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 31	Can add field category	11	add_fieldcategory
 32	Can change field category	11	change_fieldcategory
 33	Can delete field category	11	delete_fieldcategory
+34	Can add user field	12	add_userfield
+35	Can change user field	12	change_userfield
+36	Can delete user field	12	delete_userfield
 \.
 
 
@@ -774,7 +834,7 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 -- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('auth_permission_id_seq', 33, true);
+SELECT pg_catalog.setval('auth_permission_id_seq', 36, true);
 
 
 --
@@ -858,6 +918,7 @@ COPY django_content_type (id, app_label, model) FROM stdin;
 9	api	field
 10	api	agencyallowedfield
 11	api	fieldcategory
+12	api	userfield
 \.
 
 
@@ -865,7 +926,7 @@ COPY django_content_type (id, app_label, model) FROM stdin;
 -- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('django_content_type_id_seq', 11, true);
+SELECT pg_catalog.setval('django_content_type_id_seq', 12, true);
 
 
 --
@@ -893,6 +954,8 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 21	api	0006_remove_agency_hash	2016-04-05 04:52:10.928653+00
 22	api	0007_field_category	2016-04-06 00:32:56.209654+00
 23	api	0008_auto_20160406_0411	2016-04-06 04:12:04.793125+00
+24	api	0009_userfield	2016-04-06 05:26:58.364778+00
+25	api	0010_userfield_value	2016-04-06 05:37:59.694743+00
 \.
 
 
@@ -900,7 +963,7 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('django_migrations_id_seq', 23, true);
+SELECT pg_catalog.setval('django_migrations_id_seq', 25, true);
 
 
 --
@@ -950,6 +1013,14 @@ ALTER TABLE ONLY api_field
 
 ALTER TABLE ONLY api_fieldcategory
     ADD CONSTRAINT api_fieldcategory_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: api_userfield_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY api_userfield
+    ADD CONSTRAINT api_userfield_pkey PRIMARY KEY (id);
 
 
 --
@@ -1117,6 +1188,20 @@ CREATE INDEX api_field_category_id_94f0a7af_uniq ON api_field USING btree (categ
 
 
 --
+-- Name: api_userfield_3aabf39f; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX api_userfield_3aabf39f ON api_userfield USING btree (field_id);
+
+
+--
+-- Name: api_userfield_e8701ad4; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX api_userfield_e8701ad4 ON api_userfield USING btree (user_id);
+
+
+--
 -- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1237,6 +1322,22 @@ ALTER TABLE ONLY api_agencyallowedfield
 
 ALTER TABLE ONLY api_field
     ADD CONSTRAINT api_field_category_id_94f0a7af_fk_api_fieldcategory_id FOREIGN KEY (category_id) REFERENCES api_fieldcategory(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: api_userfield_field_id_b19975d6_fk_api_field_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY api_userfield
+    ADD CONSTRAINT api_userfield_field_id_b19975d6_fk_api_field_id FOREIGN KEY (field_id) REFERENCES api_field(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: api_userfield_user_id_21950ed1_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY api_userfield
+    ADD CONSTRAINT api_userfield_user_id_21950ed1_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
