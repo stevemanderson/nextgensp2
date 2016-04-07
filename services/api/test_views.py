@@ -154,3 +154,40 @@ class test_views(TestCase):
 		self.assertTrue(response.status_code == 200)
 		self.assertTrue(len(AgencyAllowedField.objects.all()) == 0)
 
+	def test_useragencies_post(self):
+		request = self.factory.post('/api/useragencies', {"userId":1, "agencies":[1]})
+		response = useragencies(request)
+		response.render()
+
+		self.assertTrue(response.status_code == 200)
+
+		user = User.objects.get(id=1)
+		userAgencies = user.useragency_set.all()
+
+		self.assertTrue(len(userAgencies) == 1)
+		self.assertTrue(userAgencies[0].agency.id == 1)
+
+		user.useragency_set.all().delete()
+		user.save()
+
+	def test_useragencies_get(self):
+		user = User.objects.get(id=1)
+		agency = Agency.objects.get(id=1)
+		user.useragency_set.create(user=user, agency=agency)
+
+		request = self.factory.get('/api/useragencies', {"userId":1})
+		response = useragencies(request)
+		response.render()
+
+		self.assertTrue(response.status_code == 200)
+
+		user = User.objects.get(id=1)
+		userAgencies = user.useragency_set.all()
+
+		self.assertTrue(len(userAgencies) == 1)
+		self.assertTrue(userAgencies[0].agency.id == 1)
+
+		user.useragency_set.all().delete()
+		user.save()
+
+

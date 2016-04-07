@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     url('removeUserAgencyField', views.removeUserAgencyField, name='removeUserAgencyField'),
     url('addUserAgencyField', views.addUserAgencyField, name='addUserAgencyField'),
+    url('useragencies', views.useragencies, name='useragencies'),
     url('agencies', views.agencies, name='agencies'),
     url('fields', views.fields, name='fields'),
     url('login', views.login, name='login'),

@@ -177,6 +177,53 @@ def allowedAgencyFields(request):
     return Response(result)
 
 @api_view(['POST', 'GET'])
+def useragencies(request):
+    if request.method == "POST":
+        return post_useragencies(request)
+    else:
+        return get_useragencies(request)
+
+def post_useragencies(request):
+    if 'userId' not in request.POST:
+        return Response("User not found", status=404)
+    if 'agencies' not in request.POST:
+        return Response("Agencies not found", status=404)
+
+    userId = request.POST['userId']
+    user = User.objects.get(id=userId)
+
+    agencies = request.POST.getlist('agencies')
+
+    user.useragency_set.all().delete()
+    user.save()
+
+    for agency in agencies:
+        # delete the agency
+        user.useragency_set.filter(agency_id=agency).delete()
+        user.save()
+
+        # create the agency
+        agencyModel = Agency.objects.get(id=agency)
+        user.useragency_set.create(user=user, agency=agencyModel)
+
+    return Response("User Agencies updated")
+
+def get_useragencies(request):
+    if 'userId' not in request.GET:
+        return Response("User not found", status=404)
+
+    userId = request.GET.get('userId')
+    user = User.objects.get(id=userId)
+    
+    result = {"userId":user.id, "agencies":[]}
+
+    for a in user.useragency_set.all():
+        agency = a.agency
+        result['agencies'].append({"id":agency.id, "name":agency.name})
+
+    return Response(result)
+
+@api_view(['POST', 'GET'])
 def userfields(request):
     if request.method == "POST":
         return post_userfields(request)

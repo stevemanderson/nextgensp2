@@ -489,3 +489,7 @@ class UserField(models.Model):
     user = models.ForeignKey(User)
     field = models.ForeignKey(Field)
     value = models.CharField(max_length=255, null=True)
+
+class UserAgency(models.Model):
+    user = models.ForeignKey(User)    
+    agency = models.ForeignKey(Agency)
