@@ -184,24 +184,20 @@ def useragencies(request):
         return get_useragencies(request)
 
 def post_useragencies(request):
-    if 'userId' not in request.POST:
+    if 'userId' not in request.data:
         return Response("User not found", status=404)
-    if 'agencies' not in request.POST:
+    if 'agencies' not in request.data:
         return Response("Agencies not found", status=404)
 
-    userId = request.POST['userId']
+    userId = request.data['userId']
     user = User.objects.get(id=userId)
 
-    agencies = request.POST.getlist('agencies')
+    agencies = request.data['agencies']
 
     user.useragency_set.all().delete()
     user.save()
 
     for agency in agencies:
-        # delete the agency
-        user.useragency_set.filter(agency_id=agency).delete()
-        user.save()
-
         # create the agency
         agencyModel = Agency.objects.get(id=agency)
         user.useragency_set.create(user=user, agency=agencyModel)
@@ -231,15 +227,15 @@ def userfields(request):
         return get_userfields(request)
 
 def post_userfields(request):
-    if 'userId' not in request.POST:
+    if 'userId' not in request.data:
         return Response("User not found", status=404)
-    if 'fields' not in request.POST:
+    if 'fields' not in request.data:
         return Response("Fields not found", status=404)
 
-    userId = request.POST['userId']
+    userId = request.data['userId']
     user = User.objects.get(id=userId)
 
-    fields = request.POST.getlist('fields')
+    fields = request.data.getlist('fields')
 
     user.userfield_set.all().delete()
     user.save()
@@ -274,16 +270,16 @@ def get_userfields(request):
 
 @api_view(['POST'])
 def removeUserAgencyField(request):
-    if 'userId' not in request.POST:
+    if 'userId' not in request.data:
         return Response('User not found', status=404)
-    if 'agencyId' not in request.POST:
+    if 'agencyId' not in request.data:
         return Response('Agency not found', status=404)
-    if 'fieldId' not in request.POST:
+    if 'fieldId' not in request.data:
         return Response('Field not found', status=404)
 
-    userId = request.POST.get('userId')
-    agencyId = request.POST.get('agencyId')
-    fieldId = request.POST.get('fieldId')
+    userId = request.data.get('userId')
+    agencyId = request.data.get('agencyId')
+    fieldId = request.data.get('fieldId')
 
     AgencyAllowedField.objects.get(user_id=userId, agency_id=agencyId, field_id=fieldId).delete()
 
