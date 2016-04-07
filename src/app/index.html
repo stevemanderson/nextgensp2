@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,900,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600' rel='stylesheet' type='text/css'>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
   </head>
   <body ng-app="nextgensp2">
@@ -71,6 +72,10 @@
     <script src="bower_components/videogular-buffering/vg-buffering.js"></script>
     <script src="bower_components/slick-carousel/slick/slick.js"></script>
     <script src="bower_components/angular-slick-carousel/dist/angular-slick.min.js"></script>
+    <script src="bower_components/ng-stomp/dist/ng-stomp.standalone.min.js"></script>
+    <script src="scripts/vendor/masonry.pkgd.min.js"></script>
+    <script src="scripts/vendor/angular-masonry.js"></script>
+    <script src="scripts/vendor/angular-masonry-directive.js"></script>
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         
@@ -80,9 +85,14 @@
         <script src="scripts/controllers/graph_controller.js"></script>
         <script src="scripts/controllers/chat_controllers.js"></script>
         <script src="scripts/controllers/video_controller.js"></script>
+        <script src="scripts/controllers/dashboard_controller.js"></script>
+        <script src="scripts/controllers/login_controller.js"></script>
         <script src="scripts/directives/chat_modules.js"></script>
         <script src="scripts/vendor/jasny-bootstrap.min.js"></script>
         
+        <script src="scripts/controllers/profile_controller.js"></script>
+        <script src="scripts/controllers/govheader_controller.js"></script>
+        <script src="scripts/directives/global.js"></script>
         <!-- endbuild -->
 
 </body>

@@ -1,0 +1,76 @@
+<div class="login-popup">
+	<div class="row sign-up" ng-show="display.signup">
+		<div class="logos">
+			<div class="google clearfix" ng-click="">
+				<div class="icon"><img src="images/icon-google.svg"></div>
+				<div class="title">Sign Up with Google</div>
+			</div>
+			<div class="microsoft clearfix" ng-click="">
+				<div class="icon"><img src="images/icon-microsoft.svg"></div>
+				<div class="title">Sign Up with Microsoft</div>
+			</div>
+		</div>
+		<div class="or-break">
+			<div class="break"></div>
+			<div class="or">OR</div>
+		</div>
+		<button class="btn btn-login-email-sign">Sign Up with Email</button>
+		<div class="one-line-txt">Have an account? <a href="#" >Log In</a></div>
+	</div>
+
+	<div class="row sign-up-email" ng-show="display.signup_email">
+		<form>
+			<div class="one-line-txt">Sign Up with <a href="#" >Google</a> or <a href="#" >Microsoft</a> </div>
+			<div class="or-break">
+				<div class="break"></div>
+				<div class="or">OR</div>
+			</div>
+			<input class="email" type="text" placeholder="Email" ng-model="login.username">
+			<input class="password" type="password" placeholder="Password" ng-model="login.password"><br/>
+			{{login.error}}<br/>
+			<label><input type="checkbox"> Remember me</label>
+			<button class="btn btn-login-sign-up" ng-click="loginClick()">Sign Up</button>
+			<div class="one-line-txt">Have an account? <a href="#" >Log In</a></div>
+		</form>
+	</div>
+
+	<div class="row login" ng-show="display.login">
+		<form>
+			<div class="logos">
+				<div class="google clearfix" ng-click="">
+					<div class="icon"><img src="images/icon-google.svg"></div>
+					<div class="title">Log In with Google</div>
+				</div>
+				<div class="microsoft clearfix" ng-click="">
+					<div class="icon"><img src="images/icon-microsoft.svg"></div>
+					<div class="title">Log In with Microsoft</div>
+				</div>
+			</div>
+			<div class="or-break">
+				<div class="break"></div>
+				<div class="or">OR</div>
+			</div>
+			<input class="email" type="text" placeholder="Email" ng-model="login.username">
+			<input class="password" type="password" placeholder="Password" ng-model="login.password"><br/>
+			{{login.error}}
+			<label><input type="checkbox"> Remember me</label>
+			<div class="one-line-txt pull-right"><a href="#" >Forgot Password</a></div>
+			<button class="btn btn-login" ng-click="loginClick()">Log In</button>
+			<div class="one-line-txt">Don't have an account? <a href="#" >Sign Up</a></div>
+		</form>
+	</div>
+
+	<div class="row forgot-password" ng-show="display.forgot_password">
+		<form>
+			<input type="text" placeholder="Email" ng-model="login.username">
+			<br/>
+			{{login.error}}<br/>
+			<button class="btn btn-login-sign-up" ng-click="loginClick()">Send Instructions</button>
+			<div class="one-line-txt">Don't have an account? <a href="#" >Sign Up</a></div>
+			<div class="or-break">
+				<div class="break"></div>
+			</div>
+			<div class="one-line-txt"><a href="#" >Remembered password?</a></div>
+		</form>
+	</div>
+</div>

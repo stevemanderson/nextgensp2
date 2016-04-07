@@ -1,0 +1,123 @@
+// Login popup CSS
+
+.login-popup{
+	padding:50px;
+
+	.logos{
+		.icon{
+			float:left;
+			width: 48px;
+			padding:8px;
+		}
+		.title{
+			float:left;
+			padding: 14px 0 0 10px;
+			font-family: $opensans-font;
+			font-weight: $weight-normal;
+			color: #fff;
+		}
+		.google{
+			margin-bottom: 10px;
+			background-color:#ff7043;
+			.icon{
+				background-color:#e64a19;
+			}
+			&:hover{
+				background-color:#e64a19;
+			}
+		}
+		.microsoft{
+			background-color:#2196f3;
+			.icon{
+				background-color:#1976d2;
+			}
+			&:hover{
+				background-color:#1976d2;
+			}
+		}
+	}
+	.or-break{
+		margin-top:30px;
+		margin-bottom:10px;
+		.or{
+			width:30px;
+			height:30px;
+			background-color:#fff;
+			margin:-10px auto 0 auto;
+			text-align: center;
+			font-family: $opensans-font;
+			color:#b0bec5;
+			font-size: 12px;
+		}
+		.break{
+			border-top:1px solid #eceff1;
+			width: 100%;
+		}
+	}
+	.one-line-txt{
+		font-family: $opensans-font;
+		text-align: center;
+		a{
+			text-decoration: underline;
+			color: #263238;
+			&:hover{
+				text-decoration: none;
+
+			}
+		}
+	}
+
+	input[type=text],input[type=password]{
+		border:1px solid #eceff1;
+		padding: 10px;
+		margin-bottom: 10px;
+		width: 100%;
+	}
+	input[type=checkbox]{
+		border:1px solid #eceff1;
+		padding: 10px;		
+	}
+	label{
+		font-family: $opensans-font;
+		font-size: 14px;
+		font-weight: $weight-normal;
+		color:#546e7a;
+
+	}
+
+	.sign-up{
+
+	}
+
+	.sign-up-email{
+
+	}
+
+	.login{
+
+	}
+
+	.forgot-password{
+		.or-break{
+			margin-top:25px;
+			margin-bottom:25px;
+		}
+		.one-line-txt{
+			padding-top:10px;
+		}
+	}
+
+}
+
+
+// NgDialog css
+
+.ngdialog.ngdialog-login .ngdialog-content{
+	.ngdialog-content{
+		background-color: #fff;
+	}
+}
+.ngdialog.ngdialog-login .ngdialog-content {
+    background-color: #FFFFFF;
+    width: 415px;
+}

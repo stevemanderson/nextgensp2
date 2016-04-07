@@ -1,0 +1,103 @@
+<div>
+	<govheader></govheader>
+	<div class="container">
+		<div class="row"> 
+			<div class="col-md-3">
+				<h1>Chat window</h1>
+				<chatsidebar class="chat-sidebar"></chatsidebar>
+			</div>
+			<div class="col-md-9">
+				<h1>Dashboard</h1>
+				<dashboardcards class="dashboard" >					
+					<div masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".masonry-brick"}' >
+						<div  class="card card1 masonry-brick">
+							<div class="padding-wrapper">
+								<div class="icon"><img src="images/alert.png"></div>
+								<div class="content">
+									<span class="sub-title">Expiring Soon</span>
+									<span class="title">White Card</span>
+								</div>
+							
+							<button class="btn btn-card-red">RENEW NOW</button>
+							</div>
+							<div class="date"><span>Renew before the 29 Jan 2016</span></div>
+						</div>
+
+						<div class="card card2 masonry-brick">
+							<div class="padding-wrapper">
+								<div class="sub-title">Will you be eligable?</div>
+								<div class="title">Job Commitment Bonus for Young Australians</div>
+								<button class="btn btn-green">READ MORE</button>
+							</div>
+						</div>
+
+						<div class="card card3 masonry-brick">
+							<div class="padding-wrapper">
+								<div class="title">9 New job matches</div>
+								<div class="sub-title">Updated 2m ago</div>
+							</div>
+						</div>
+
+						<div class="card card4 masonry-brick">
+							<div class="padding-wrapper">
+							<div class="title">2 Local skills courses are starting soon</div>
+							</div>
+							<div class="course">
+								<div class="padding-wrapper">
+									<div class="title">Certificate II in Hospitality</div>
+									<div class="time">Free 12 Months</div>
+								</div>
+							</div>
+							<div class="course">
+								<div class="padding-wrapper">
+									<div class="title">Certificate II in Retail Services</div>
+									<div class="time">Free 12 Months</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="card card5 masonry-brick">
+							<div class="padding-wrapper">
+								<div class="title">Create a Resume</div>
+								<div class="sub-title">Attach it to your job applications</div>
+							</div>
+							<div class="content">
+								<div class="padding-wrapper">
+									<div class="title">Need help?</div>
+									<div class="link">Join Readiness For Work</div>
+									<div class="date">Free | 6 - 8 Weeks</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="card card6 masonry-brick">
+							<div class="top">
+								<div class="left"></div>
+								<div class="right"></div>
+							</div>
+							<div class="padding-wrapper">
+								<div class="title">5 Job applications to go</div>
+								<div class="sub-title">For your Newstart payment</div>
+								<button class="btn btn-blue">APPLY</button>
+							</div>
+						</div>
+
+						<!--<div class="card card7 masonry-brick">
+							<div class="padding-wrapper">
+								<div class="title">Your class starts in <span>2h</span></div>
+								<div class="sub-title">Leave in <strong>35min</strong> to make it on time.</div>
+							</div>
+							<div class="map"><img src="images/map.png"></div>
+							<button class="btn btn-map"><img src="images/gmap-blue-arrow.png"><span>Open in Google maps</span></button>
+							<button class="btn btn-cal"><img src="images/calendar.png"><span>Can’t make it</span></button>
+						</div>-->
+						
+					</div>					
+				</dashboardcards>
+			</div>
+		</div>
+	</div>
+
+	Output from RABBITMQ: {{stompMsgCount}}
+	<div id="nodeoutput">{{stompdata}}</div>
+</div>

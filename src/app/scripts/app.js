@@ -25,7 +25,9 @@ angular
     'com.2fdevs.videogular.plugins.controls',
     'com.2fdevs.videogular.plugins.overlayplay',
     'com.2fdevs.videogular.plugins.poster',
-    'slickCarousel'
+    'slickCarousel',
+    'ngStomp',
+    'masonry'
   ])
   .config(function ($routeProvider, $httpProvider) {
     $routeProvider
@@ -44,7 +46,20 @@ angular
         templateUrl: 'views/video.html',
         controller: 'VideoCtrl'
       })
+      .when('/dashboard', {
+        templateUrl: 'views/dashboard.html',
+        controller: 'DashboardCtrl'
+      })
+      .when('/login', {
+        templateUrl: 'partials/popup_login.html',
+        controller: 'LoginCtrl'
+      })
 
+      .when('/profile', {
+        templateUrl: 'views/profile.html',
+        controller: 'ProfileCtrl',
+        controllerAs: 'profile'
+      })
       .otherwise({
         redirectTo: '/sprint2'
       });
