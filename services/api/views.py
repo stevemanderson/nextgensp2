@@ -199,6 +199,12 @@ def post_userfields(request):
 
     for field in fields:
         fDic = ast.literal_eval(field)
+
+        # delete the field
+        user.userfield_set.filter(field_id=fDic['id']).delete()
+        user.save()
+
+        # create the field
         fieldModel = Field.objects.get(id=fDic['id'])
         user.userfield_set.create(user=user, field=fieldModel, value=fDic['value'])
 
@@ -218,6 +224,23 @@ def get_userfields(request):
         result['fields'].append({"id":field.id, "name":field.name, "value":f.value})
 
     return Response(result)
+
+@api_view(['POST'])
+def removeUserAgencyField(request):
+    if 'userId' not in request.POST:
+        return Response('User not found', status=404)
+    if 'agencyId' not in request.POST:
+        return Response('Agency not found', status=404)
+    if 'fieldId' not in request.POST:
+        return Response('Field not found', status=404)
+
+    userId = request.POST.get('userId')
+    agencyId = request.POST.get('agencyId')
+    fieldId = request.POST.get('fieldId')
+
+    AgencyAllowedField.objects.get(user_id=userId, agency_id=agencyId, field_id=fieldId).delete()
+
+    return Response("UserAgencyField Removed")
 
 @api_view(['POST'])
 def addUserAgencyField(request):

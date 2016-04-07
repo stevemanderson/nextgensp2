@@ -91,28 +91,66 @@ class test_views(TestCase):
 		self.assertTrue('field_id' in objContent[0])
 		self.assertTrue('fieldName' in objContent[0])
 
-	# def test_userfields_post(self):
-	# 	request = self.factory.post('/api/userfields', {"userId":1, "fields":[{"id":1,"value":"Testing"}, {"id":2,"value":"teiaoighra"}]})
-	# 	response = userfields(request)
-	# 	response.render()
+	def test_userfields_post(self):
+		user = User.objects.get(id=1)
+		field = Field.objects.get(id=1)
+		user.userfield_set.create(user=user, field=field, value="Testing")
 
-	# 	self.assertTrue(response.status_code == 200)
+		request = self.factory.post('/api/userfields', {"userId":1, "fields":[{"id":1,"value":"Testings"}, {"id":2,"value":"teiaoighra"}]})
+		response = userfields(request)
+		response.render()
 
-	# 	user = User.objects.get(id=1)
-	# 	userFields = user.userfield_set.all()
+		self.assertTrue(response.status_code == 200)
 
-	# 	self.assertTrue(len(userFields) == 2)
-	# 	self.assertTrue(userFields[0].id == 1)
-	# 	self.assertTrue(userFields[0].value == "Testing")
+		user = User.objects.get(id=1)
+		userFields = user.userfield_set.all()
+
+		self.assertTrue(len(userFields) == 2)
+		self.assertTrue(userFields[0].field.id == 1)
+		self.assertTrue(userFields[0].value == "Testings")
+
+		user.userfield_set.all().delete()
+		user.save()
 
 	def test_userfields_get(self):
 		user = User.objects.get(id=1)
 		field = Field.objects.get(id=1)
-		user.userfield_set.create(user=user, field=field, value='Testing')
+		user.userfield_set.create(user=user, field=field, value="Testing")
 
 		request = self.factory.get('/api/userfields', {"userId":1})
 		response = userfields(request)
 		response.render()
 
-		print response.content
 		self.assertTrue(response.status_code == 200)
+
+		userFields = user.userfield_set.all()
+		self.assertTrue(len(userFields) == 1)
+
+		user.userfield_set.all().delete()
+		user.save()
+
+	def test_removeAllowedAgencyField_404TestUserId(self):
+		user = User.objects.get(id=1)
+		field = Field.objects.get(id=1)
+		agency = Agency.objects.get(id=1)
+		AgencyAllowedField.objects.create(user=user, field=field, agency=agency)
+
+		request = self.factory.post('/api/removeUserAgencyField', {"agencyId":1, "fieldId":1})
+		response = removeUserAgencyField(request)
+		response.render()
+
+		self.assertTrue(response.status_code == 404)
+
+	def test_removeAllowedAgencyField(self):
+		user = User.objects.get(id=1)
+		field = Field.objects.get(id=1)
+		agency = Agency.objects.get(id=1)
+		AgencyAllowedField.objects.create(user=user, field=field, agency=agency)
+
+		request = self.factory.post('/api/removeUserAgencyField', {"userId":1, "agencyId":1, "fieldId":1})
+		response = removeUserAgencyField(request)
+		response.render()
+
+		self.assertTrue(response.status_code == 200)
+		self.assertTrue(len(AgencyAllowedField.objects.all()) == 0)
+
