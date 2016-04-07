@@ -17,10 +17,14 @@ angular.module('nextgensp2')
     $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
 
   })
-  .service('sp2Service', function ($http, $cookies, $location, uuid2) {
+  .service('sp2Service', function ($http, $cookies, $location, uuid2, $rootScope) {
 
     var _userSession = "";
-    var _userData = {};
+
+    var _userData = {
+        _userID:null,
+        _userName:null
+    };
     var _schemaData ={};
     var _responsesData ={};
     var apiURL = "http://"+$location.host()+":9191/api/";
@@ -31,13 +35,14 @@ angular.module('nextgensp2')
     var APIAI_baseUrl = "https://api.api.ai/v1/";
 
 
-    //Check for a user session otherwise create a new one
-    //if($cookies.get('userSession')){
-      //_userSession = $cookies.get('userSession');
-    //}else{
-      _userSession = uuid2.newguid();
-      $cookies.put('userSession', _userSession);
-    //}
+    //Check for a userID otherwise create a new one
+    if($cookies.get('userData')){
+      _userData = JSON.parse($cookies.get('userData'));
+    }
+
+    //Generate a new session each reload
+    _userSession = uuid2.newguid();
+    $cookies.put('userSession', _userSession);
     console.log("User Session > "+_userSession);
 
 
@@ -137,8 +142,43 @@ angular.module('nextgensp2')
                });
     };
 
+    /**
+     * Update var to show user is logged in
+     * @param {jSON} userID
+     */
+    this.userLoggedIn = function (userID,userName) {
+        _userData._userID= userID; 
+        _userData._userName= userName; 
+        //update cookie
+        $cookies.put('userData', JSON.stringify(_userData));
+        $rootScope.$emit('UserLoggedIn', true);
+    };
 
+    /**
+     * User Login status
+     * 
+     */
+    this.getLoginStatus = function () {        
+            return (_userData._userID == null)? false : true;
+    };
 
+    /**
+     * User Login data
+     * 
+     */
+    this.getLoginData = function () {        
+            return _userData;
+    };
+
+    /**
+     * Logout user 
+     * 
+     */
+    this.logout = function () {        
+        $cookies.remove('userData');
+        $rootScope.$emit('UserLoggedIn', false);
+        return false;
+    };
 
     /**
      * sort array

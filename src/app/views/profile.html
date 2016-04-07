@@ -1,1 +1,68 @@
-<p>This is the profile view.</p>
+<div class="profile-header clearfix">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="header-links" ng-click="dashboardClicked()">Dashboard</div>
+				<h1 class="title">My Digital ID</h1>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<a href="">ACCOUNT</a> <a href="">MY SERVICES</a>	
+		</div>
+	</div>
+</div>
+<div class="break"></div>
+<div class="filters">
+	<a class="">CONNECTED</a> |	<a class="">ALL</a>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="service">
+				<div class="header clearfix">
+					<div class="icon"></div> 
+					<div class="title">
+						<h2>Service name</h2>
+						<h3>Not Connected</h3>
+					</div>
+					<button class="btn-profile">Connect</button>
+				</div>
+				<div class="permissions">
+					<div ng-show="">Choose what information you want to share</div>
+					<div ng-hide="">Safely share your information with this service to save time and do more online.</div>
+
+					<ul>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">		
+			<h1>Profile</h1>
+			<p>List of fields</p>
+			<li  ng-repeat="item in fields"> {{item.name}}</li>
+			
+			<p>List of agencies</p>
+			<li  ng-repeat="item in agencies"> {{item.name}}</li>
+			<p>List of fieldCategories</p>
+			<li  ng-repeat="item in fieldCategories"> {{item.name}}</li>
+			<p>List of allowed agencies</p>
+			<li  ng-repeat="item in allowedAgencyFields"> {{item.name}}</li>
+			<p>List of allowed userAgencies</p>
+			<li  ng-repeat="item in userAgencies"> {{item.name}} {{item.id}}</li>
+		</div>
+	</div>
+</div>

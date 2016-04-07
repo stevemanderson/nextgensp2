@@ -8,8 +8,11 @@
  * Controller of the nextgensp2
  */
 angular.module('nextgensp2')
-  .controller('GovheaderCtrl', function ($scope,ngDialog) {
-    
+  .controller('GovheaderCtrl', function ($scope,$rootScope,ngDialog, $location,sp2Service) {
+    $scope.userLoggedIn = sp2Service.getLoginStatus();
+    $scope.userData = sp2Service.getLoginData();
+    console.log($scope.userData );
+
   	$scope.signUpClicked =  function(){
   		ngDialog.open({
             template:"partials/popup_login.html",
@@ -28,6 +31,23 @@ angular.module('nextgensp2')
             data: {login:true}
           });
   	}
+
+  $scope.profileClicked = function(){
+    $location.path('/profile');
+  }
+
+  $scope.logoutClicked = function(){
+    $scope.userLoggedIn = sp2Service.logout();
+  }
+
+  //Close window
+  $rootScope.$on('closeDialog', function(event) { 
+    ngDialog.close();
+  });
+
+  $rootScope.$on('UserLoggedIn', function(event) { 
+    $scope.userLoggedIn = true; 
+  });
 
 
   });

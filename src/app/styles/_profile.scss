@@ -1,0 +1,60 @@
+//Profile styles
+.profile-header{
+	background-color:#25323c;
+	height:255px;
+
+	.header-links{
+		text-align: right;
+		margin-top: 25px;
+		margin-right: 50px;
+		color:#fff;
+		font-weight: $weight-bold;
+		text-transform: uppercase;
+	}
+	.title{
+		font-size: 32px;
+		color: #fff;
+		margin-top: 140px;
+		font-weight: $weight-normal;
+	}
+}
+
+.filters{
+	text-align:center;
+}
+
+.service{
+	background-color:#fff;
+	.header{
+		.icon{
+			width:50px;
+			height:50px;
+			background-color:#546e7a;
+			border-radius: 25px;
+			float:left;
+		}
+		.title{
+			float:left;
+			margin-top: 4px;
+			margin-left: 10px
+		}
+		h2{
+			font-size: 18px;
+			color: #25323c;
+			margin:0;
+			font-weight: $weight-normal;
+		}
+		h3{
+			font-size: 14px;
+			color: #90a4ae;
+			margin:5px 0 0 0;
+			font-weight: $weight-normal;
+		}
+	}
+	.permissions{
+
+	}
+}
+.service-open{
+	background-color:#fafafa;
+}

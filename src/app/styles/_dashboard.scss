@@ -6,7 +6,7 @@
     border-radius:4px;
     margin:0 15px;
     background-color:white;
-    width:240px;
+    width:25%;
     margin:10px;
     box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.15);
   }
@@ -234,3 +234,48 @@
     }
   }
 }
+
+
+//Media queries
+@media (max-width: 460px){
+  .dashboard{
+    .card{
+      width:80%;
+    }
+  }
+}
+@media (min-width: 461px){
+  .dashboard{
+    .card{
+      width:45%;
+    }
+  }
+}
+
+@media (min-width: 768px){
+  .dashboard{
+    .card{
+      width:45%;
+    }
+  }
+}
+
+@media (min-width: 992px){
+  .dashboard{
+    .card{
+      width:29%;
+    }
+  }
+}
+@media (min-width: 1200px){
+  .dashboard{
+    .card{
+      width:22%;
+    }
+  }
+}
+
+
+
+
+
