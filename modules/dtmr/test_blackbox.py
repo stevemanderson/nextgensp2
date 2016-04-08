@@ -51,9 +51,8 @@ class blackboxTests(unittest.TestCase):
 
 	def test_anonymous(self):
 		service = UserService('anonymous')
-		box = BlackBox(blackboxTests.apiUrl, UserService('anonymous'))
-		content = box.getContent()
-
+		box = BlackBox(blackboxTests.apiUrl, service)
+		box.getServices("I want Renew drivers licence")
 
 if __name__ == '__main__':
     unittest.main()
