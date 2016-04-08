@@ -309,7 +309,7 @@ def removeUserAgencyField(request):
 
     AgencyAllowedField.objects.get(user_id=userId, agency_id=agencyId, field_id=fieldId).delete()
 
-    return Response("UserAgencyField Removed")
+    return Response("UserAgencyField removed")
 
 @api_view(['POST'])
 def addUserAgencyField(request):
@@ -324,17 +324,12 @@ def addUserAgencyField(request):
     fieldId = request.data.get('fieldId')
     agencyId = request.data.get('agencyId')
 
-    if AgencyAllowedField.objects.filter(userId=userId, fieldId=fieldId, agencyId=agencyId).exists() == false:
+    if AgencyAllowedField.objects.filter(user_id=userId, field_id=fieldId, agency_id=agencyId).exists() == True:
         return Response('Already Exists', status=409)
 
-    allowedField = AgencyAllowedField()
-    allowedField.userId = userId
-    allowedField.fieldId = fieldId
-    allowedField.agencyId = agencyId
+    AgencyAllowedField.objects.create(user_id=userId, field_id=fieldId, agency_id=agencyId)
 
-    allowedField.save()
-
-    return Response({})
+    return Response("User Agency Field created")
 
 @api_view(['POST'])
 def submitReferral(request):

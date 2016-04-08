@@ -224,3 +224,24 @@ class test_views(TestCase):
 		item = json.loads(response.content)
 		self.assertTrue(len(item['fields']) == 0)
 
+	def test_addUserAgencyField(self):
+		request = self.factory.post('/api/addUserAgencyField', {"userId":1, "agencyId":2, "fieldId":1})
+		response = addUserAgencyField(request)
+		response.render()
+
+		self.assertTrue(response.status_code == 200)
+
+	def test_addUserAgencyField(self):
+		user = User.objects.get(id=1)
+		field = Field.objects.get(id=1)
+		agency = Agency.objects.get(id=1)
+
+		AgencyAllowedField.objects.create(user=user, field=field, agency=agency)
+		UserField.objects.create(user=user, field=field, value="testing this out")
+
+		request = self.factory.post('/api/removeUserAgencyField', {"userId":1, "agencyId":2, "fieldId":1})
+		response = addUserAgencyField(request)
+		response.render()
+
+		self.assertTrue(response.status_code == 200)
+
