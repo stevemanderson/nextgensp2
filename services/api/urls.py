@@ -3,6 +3,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
+    url('useragencyfields', views.useragencyfields, name='useragencyfields'),
     url('removeUserAgencyField', views.removeUserAgencyField, name='removeUserAgencyField'),
     url('addUserAgencyField', views.addUserAgencyField, name='addUserAgencyField'),
     url('useragencies', views.useragencies, name='useragencies'),
@@ -16,7 +17,7 @@ urlpatterns = [
     url('allowedAgencyFields', views.allowedAgencyFields, name='allowedAgencyFields'),
     url('multi', views.multi, name='multi'),
     url('userfields', views.userfields, name='userfields'),
-    url('get_userfields', views.get_userfields, name='userfields'),
+    url('get_userfields', views.get_userfields, name='get_userfields'),
     url('tracking', views.tracking, name='tracking'),
     url('tree', views.tree, name='tree'),
     url('submitService', views.submitService, name='submitService'),

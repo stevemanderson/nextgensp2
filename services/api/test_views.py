@@ -190,4 +190,37 @@ class test_views(TestCase):
 		user.useragency_set.all().delete()
 		user.save()
 
+	def test_useragencyfields_correctAgency(self):
+		user = User.objects.get(id=1)
+		field = Field.objects.get(id=1)
+		agency = Agency.objects.get(id=1)
+
+		AgencyAllowedField.objects.create(user=user, field=field, agency=agency)
+		UserField.objects.create(user=user, field=field, value="testing this out")
+
+		request = self.factory.get('/api/useragencyfields', {"userId":1, "agencyId":1})
+		response = useragencyfields(request)
+		response.render()
+
+		self.assertTrue(response.status_code == 200)
+
+		item = json.loads(response.content)
+		self.assertTrue(len(item['fields']) == 1)
+
+	def test_useragencyfields_incorrectAgency(self):
+		user = User.objects.get(id=1)
+		field = Field.objects.get(id=1)
+		agency = Agency.objects.get(id=1)
+
+		AgencyAllowedField.objects.create(user=user, field=field, agency=agency)
+		UserField.objects.create(user=user, field=field, value="testing this out")
+
+		request = self.factory.get('/api/useragencyfields', {"userId":1, "agencyId":2})
+		response = useragencyfields(request)
+		response.render()
+
+		self.assertTrue(response.status_code == 200)
+
+		item = json.loads(response.content)
+		self.assertTrue(len(item['fields']) == 0)
 

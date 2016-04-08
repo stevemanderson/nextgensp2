@@ -176,6 +176,32 @@ def allowedAgencyFields(request):
 
     return Response(result)
 
+@api_view(['GET'])
+def useragencyfields(request):
+    if 'userId' not in request.GET:
+        return Response('User not found', status=404)
+    if 'agencyId' not in request.GET:
+        return Response('Agency not found', status=404)
+
+    userId = request.GET['userId']
+    agencyId = request.GET['agencyId']
+
+    user = User.objects.get(id=userId)
+    allowedFields = user.agencyallowedfield_set.filter(agency_id=agencyId)
+
+    result = {"userId":userId, "fields":[]}
+
+    for allowedField in allowedFields:
+        field = allowedField.field
+        userField = user.userfield_set.get(field_id=field.id)
+        result['fields'].append({
+                'id':field.id,
+                'name':field.standardMapping,
+                'value':userField.value
+            })
+
+    return Response(result)
+
 @api_view(['POST', 'GET'])
 def useragencies(request):
     if request.method == "POST":
@@ -287,16 +313,16 @@ def removeUserAgencyField(request):
 
 @api_view(['POST'])
 def addUserAgencyField(request):
-    if 'userId' not in request.GET:
+    if 'userId' not in request.data:
         return Response('User not found', status=404)
-    if 'agencyId' not in request.GET:
+    if 'agencyId' not in request.data:
         return Response('Agency not found', status=404)
-    if 'fieldId' not in request.GET:
+    if 'fieldId' not in request.data:
         return Response('Field not found', status=404)
 
-    userId = request.GET['userId']
-    fieldId = request.GET['fieldId']
-    agencyId = request.GET['agencyId']
+    userId = request.data.get('userId')
+    fieldId = request.data('fieldId')
+    agencyId = request.data('agencyId')
 
     if AgencyAllowedField.objects.filter(userId=userId, fieldId=fieldId, agencyId=agencyId).exists() == false:
         return Response('Already Exists', status=409)

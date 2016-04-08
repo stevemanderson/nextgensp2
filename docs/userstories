@@ -1,0 +1,18 @@
+as an anonymous user
+I want to have a blank dashboard when I first arrive on the site
+
+as an anonymous user
+I want to use the search for a search term
+
+as an anonymous user
+when I search for something, agencies can use that data to send me services
+
+as an anonymous user
+I want to be able to register for an account
+
+as a level 1 registered user
+I want to be able to view the agency services for agencies that I have signed up for
+
+as a level 1 registered user
+I can change into a level 2 user by adding my drivers licence, passport number, medicare number or TFN
+
