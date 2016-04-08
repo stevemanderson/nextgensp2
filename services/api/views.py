@@ -321,8 +321,8 @@ def addUserAgencyField(request):
         return Response('Field not found', status=404)
 
     userId = request.data.get('userId')
-    fieldId = request.data('fieldId')
-    agencyId = request.data('agencyId')
+    fieldId = request.data.get('fieldId')
+    agencyId = request.data.get('agencyId')
 
     if AgencyAllowedField.objects.filter(userId=userId, fieldId=fieldId, agencyId=agencyId).exists() == false:
         return Response('Already Exists', status=409)
