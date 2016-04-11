@@ -176,7 +176,12 @@ angular.module('nextgensp2')
      */
     this.logout = function () {        
         $cookies.remove('userData');
+        _userData = {
+            _userID:null,
+            _userName:null
+        };
         $rootScope.$emit('UserLoggedIn', false);
+
         return false;
     };
 

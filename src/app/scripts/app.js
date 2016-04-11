@@ -27,7 +27,10 @@ angular
     'com.2fdevs.videogular.plugins.poster',
     'slickCarousel',
     'ngStomp',
-    'masonry'
+    'masonry',
+    'ngMaterial', 
+    'ngMessages', 
+    'material.svgAssetsCache'
   ])
   .config(function ($routeProvider, $httpProvider) {
     $routeProvider
@@ -61,6 +64,6 @@ angular
         controllerAs: 'profile'
       })
       .otherwise({
-        redirectTo: '/sprint2'
+        redirectTo: '/dashboard'
       });
   });

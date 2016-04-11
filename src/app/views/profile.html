@@ -1,3 +1,4 @@
+<govheader></govheader>
 <div class="profile-header clearfix">
 	<div class="container">
 		<div class="row">
@@ -8,61 +9,69 @@
 		</div>
 	</div>
 </div>
-
+<!--
 <div class="container">
 	<div class="row">
-		<div class="col-md-12">
-			<a href="">ACCOUNT</a> <a href="">MY SERVICES</a>	
+		<div class="col-md-12 nav">
+			<a ng-repeat="item in nav" ng-click="tabClicked($index)" ng-class="{'nav-selected':item.selected}" href="">{{item.name}}</a>
 		</div>
 	</div>
 </div>
 <div class="break"></div>
-<div class="filters">
-	<a class="">CONNECTED</a> |	<a class="">ALL</a>
-</div>
-
+-->
 <div class="container">
-	<div class="row">
-		<div class="col-sm-6">
-			<div class="service">
-				<div class="header clearfix">
-					<div class="icon"></div> 
-					<div class="title">
-						<h2>Service name</h2>
-						<h3>Not Connected</h3>
-					</div>
-					<button class="btn-profile">Connect</button>
-				</div>
-				<div class="permissions">
-					<div ng-show="">Choose what information you want to share</div>
-					<div ng-hide="">Safely share your information with this service to save time and do more online.</div>
-
-					<ul>
-						<li></li>
-					</ul>
-				</div>
+<div class="row">
+		<div class="col-md-12 ">
+<md-content class="clearfix">
+    <md-tabs md-dynamic-height="" md-border-bottom="" >
+      <md-tab label="ACCOUNT">
+        <md-content class="md-padding">
+          Account
+        </md-content>
+      </md-tab>
+      <md-tab label="MY SERVICES">
+        <md-content class="md-padding">
+          	<div class="filters">
+				<a ng-class="{'filter-selected':!disableFilter}" ng-click="filterServicesClicked(false)">CONNECTED</a> |	<a ng-class="{'filter-selected':disableFilter}" ng-click="filterServicesClicked(true)">ALL</a>
 			</div>
-		</div>
-	</div>
-</div>
 
-
-
-<div class="container">
-	<div class="row">
-		<div class="col-md-12">		
-			<h1>Profile</h1>
-			<p>List of fields</p>
-			<li  ng-repeat="item in fields"> {{item.name}}</li>
 			
-			<p>List of agencies</p>
-			<li  ng-repeat="item in agencies"> {{item.name}}</li>
-			<p>List of fieldCategories</p>
-			<li  ng-repeat="item in fieldCategories"> {{item.name}}</li>
-			<p>List of allowed agencies</p>
-			<li  ng-repeat="item in allowedAgencyFields"> {{item.name}}</li>
-			<p>List of allowed userAgencies</p>
-			<li  ng-repeat="item in userAgencies"> {{item.name}} {{item.id}}</li>
-		</div>
-	</div>
+					<div class="col-sm-6" ng-repeat="item in agencyData | filter: (!disableFilter || '') && {connected: true}">
+						<div class="service" ng-class="{'service-open':item.panelOpen}">
+							<div class="header clearfix" ng-click="openPanel($index)">
+								<div class="icon" ></div> 
+								<div class="title" >
+									<h2>{{item.name}}</h2>
+									<h3><span ng-show="item.connected"><span ng-repeat="category in item.categories | filter: { enabled: true }">{{category.name}}{{$last ? '' : ', '}} </span></span><span ng-hide="item.connected">Not Connected </span></h3>
+								</div>
+								<button class="btn-profile" ng-click="connectToAgencyClicked($event,$index)" ng-class="{'btn-profile-connected':item.connected}"><span ng-show="item.connected">ON</span><span ng-hide="item.connected">CONNECT</span></button>
+							</div>
+							<div class="permissions" ng-show="item.panelOpen">
+								<h4 ng-show="item.connected">Choose what information you want to share</h4>
+								<h4 ng-hide="item.connected">Safely share your information with this service to save time and do more online.</h4>
+
+								<ul ng-show="item.connected">
+									<li ng-repeat="category in item.categories"><label><input type="checkbox" ng-checked="category.enabled" ng-click="toggleCategoryClicked(item.id,category.id,[$parent.$index,$index])"> {{category.name}} </label></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+			
+			
+        </md-content>
+      </md-tab>
+      <md-tab label="TRANSACTIONS">
+        <md-content class="md-padding">
+          Transactions
+          
+        </md-content>
+      </md-tab>
+    </md-tabs>
+</md-content>
 </div>
+</div>
+	</div>
+
+
+
+

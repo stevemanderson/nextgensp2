@@ -11,6 +11,9 @@ angular.module('nextgensp2')
   .controller('GovheaderCtrl', function ($scope,$rootScope,ngDialog, $location,sp2Service) {
     $scope.userLoggedIn = sp2Service.getLoginStatus();
     $scope.userData = sp2Service.getLoginData();
+    $scope.headerNav = "";
+
+    console.log($location.path());
     console.log($scope.userData );
 
   	$scope.signUpClicked =  function(){
@@ -38,6 +41,7 @@ angular.module('nextgensp2')
 
   $scope.logoutClicked = function(){
     $scope.userLoggedIn = sp2Service.logout();
+    $location.path('/dashboard');
   }
 
   //Close window

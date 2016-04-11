@@ -2,7 +2,8 @@
 .profile-header{
 	background-color:#25323c;
 	height:255px;
-
+	width:100%;
+	margin:0;
 	.header-links{
 		text-align: right;
 		margin-top: 25px;
@@ -18,14 +19,83 @@
 		font-weight: $weight-normal;
 	}
 }
+.nav{
+	padding:30px 0 30px 0;
+	a{
+		color:#a8adb1;
+		font-size: 14px;
+		font-weight: $weight-bold;
+		margin-right:20px;
+		text-decoration: none;
+		padding-bottom:32px;
+		border-bottom:none;
+		&:hover{
+			text-decoration: none;
+			color: #25323c;
+			border-bottom:2px solid #25323c;
+		}
+		&.nav-selected{
+			color:#25323c;
+			border-bottom:2px solid #25323c;
+			&:hover{
+				color: #25323c;
+				border-bottom:2px solid #25323c;
+			}
+		}
+	
+	}
+	
+}
 
 .filters{
 	text-align:center;
+	a{
+		cursor: pointer;
+		color:#a8adb1;
+		font-size: 14px;
+		font-weight: $weight-bold;
+		text-decoration: none;
+		border-bottom:none;
+		&:hover{
+			text-decoration: none;
+			color: #25323c;
+			text-decoration: none;
+			border-bottom:none;
+		}
+		&.filter-selected{
+			color:#25323c;
+			border-bottom:none;
+			&:hover{
+				color: #25323c;
+				border-bottom:none;
+			}
+		}
+	}
 }
 
 .service{
+	padding:25px;
 	background-color:#fff;
+	h2{
+		font-size: 18px;
+		color: #25323c;
+		margin:0;
+		font-weight: $weight-normal;
+	}
+	h3{
+		font-size: 14px;
+		color: #90a4ae;
+		margin:5px 0 0 0;
+		font-weight: $weight-normal;
+	}
+	h4{
+		font-size: 16px;
+		color: #abb0b4;
+		font-weight: $weight-normal;
+		padding-left: 60px;
+	}
 	.header{
+		cursor: pointer;
 		.icon{
 			width:50px;
 			height:50px;
@@ -36,25 +106,74 @@
 		.title{
 			float:left;
 			margin-top: 4px;
-			margin-left: 10px
+			margin-left: 10px;
+			width:65%;
 		}
-		h2{
-			font-size: 18px;
-			color: #25323c;
-			margin:0;
-			font-weight: $weight-normal;
-		}
-		h3{
-			font-size: 14px;
-			color: #90a4ae;
-			margin:5px 0 0 0;
-			font-weight: $weight-normal;
-		}
+		
 	}
 	.permissions{
-
+		width:80%;
+		ul{
+			padding:0;
+		}
+		li{
+			list-style: none;
+			padding-left:10px;
+			padding-right:20px;
+		}
+		label{
+			color: #25323c;
+			font-size: 16px;
+			font-weight: $weight-normal;
+		}
+		input[type=checkbox]{
+			margin-left: 6px;
+			margin-right: 25px;
+		}
 	}
 }
 .service-open{
 	background-color:#fafafa;
+}
+
+
+// MD Tab Styles
+md-tabs.md-default-theme .md-tab.md-active, md-tabs .md-tab.md-active, md-tabs.md-default-theme .md-tab.md-active md-icon, md-tabs .md-tab.md-active md-icon, md-tabs.md-default-theme .md-tab.md-focused, md-tabs .md-tab.md-focused, md-tabs.md-default-theme .md-tab.md-focused md-icon, md-tabs .md-tab.md-focused md-icon{
+	color: rgb(37,50,60);
+	font-weight:$weight-bold;
+	font-size: 13px;
+}
+
+.md-tab {
+    font-size: 13px;
+    text-align: center;
+    line-height: 24px;
+    padding: 12px 14px;
+    transition: background-color 0.35s cubic-bezier(0.35, 0, 0.25, 1);
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    text-transform: uppercase;
+    float: left;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+md-tabs.md-default-theme .md-tab .md-ripple-container, md-tabs .md-tab .md-ripple-container {
+    color: rgb(148, 150, 249);
+}
+md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
+    color: rgb(37,50,60);
+    background: rgb(37,50,60);
+}
+
+
+
+
+@media (min-width: 1440px){
+	.profile-header{
+		width:1440px;
+		margin:0 auto;
+	}
+  
 }

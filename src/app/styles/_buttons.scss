@@ -344,6 +344,24 @@
     border:1px solid #80deea;
   }
 }
+.btn-profile-connected{
+  float: right;
+  background-color:#fff;
+  color: #80deea;
+  font-size:12px;
+  border:1px solid #80deea;
+  border-radius:0;
+  height:25px;
+  padding-top:4px;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  &:hover,
+  &:focus{
+    background-color:#fff;    
+    color: #b0bec5;
+    border:1px solid #b0bec5;
+  }
+}
 
 
 @media (max-width: 460px){

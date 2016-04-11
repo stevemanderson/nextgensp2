@@ -87,6 +87,32 @@ angular.module('nextgensp2')
                 withCredentials: true
                });
     };
+    /**
+     *  addUserAgencyField 
+     *  this is for each field, loop over to completly tick a category of fields
+     */
+    this.profile_addUserAgencyField = function (userId, agencyId, fieldId) {
+        //userId, agencies
 
+        return $http({ method  : "POST",
+                url     : apiURL+"addUserAgencyField",
+                data: {userId:userId,agencyId:agencyId,fieldId:fieldId},
+                withCredentials: true
+               });
+    };
+
+    /**
+     *  removeUserAgencyField 
+     *  this is for each field, loop over to completly untick a category of fields
+     */
+    this.profile_removeUserAgencyField = function (userId, agencyId, fieldId) {
+        //userId, agencies
+
+        return $http({ method  : "POST",
+                url     : apiURL+"removeUserAgencyField",
+                data: {userId:userId,agencyId:agencyId,fieldId:fieldId},
+                withCredentials: true
+               });
+    };
 
 });
