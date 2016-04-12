@@ -189,7 +189,7 @@ def useragencyfields(request):
     user = User.objects.get(id=userId)
     allowedFields = user.agencyallowedfield_set.filter(agency_id=agencyId)
 
-    result = {"userId":userId, "fields":[]}
+    result = {"userId":int(userId), "fields":[]}
 
     for allowedField in allowedFields:
         field = allowedField.field

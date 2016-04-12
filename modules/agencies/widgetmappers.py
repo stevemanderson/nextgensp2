@@ -21,16 +21,20 @@ class ServiceWidgetMapper:
 
 	def getWidget(self, service):
 		user = self.userService.getUser()
+
 		customFields = []
 		as4590Fields = []
 
 		if 'required application data (custom)' in service:
-			customFields = map(lambda x: x.strip().lower(), service["required application data (custom)"].split(','))
+			custom = service['required application data (custom)'] if service['required application data (custom)'] != None else ""
+			customFields = map(lambda x: x.strip().lower(), custom.split(','))
+			
 		if 'required application data (as4590)' in service:
-			as4590Fields = map(lambda x: x.strip().lower(), service["required application data (as4590)"].split(','))
+			as4590 = service['required application data (as4590)'] if service['required application data (as4590)'] != None else ""
+			as4590Fields = map(lambda x: x.strip().lower(), as4590.split(','))
 
 		fields = customFields + as4590Fields
-		userFields = map(lambda x: x.strip().lower(), json.loads(user)['fields'])
+		userFields = map(lambda x: x.strip().lower(), user['fields'])
 
 		missing = filter(lambda x: x.strip().lower() not in userFields, fields)
 
@@ -38,11 +42,11 @@ class ServiceWidgetMapper:
 			"WidgetType":"Service",
 			"WidgetID":0,
 			"Data":{
-				"Title": service['title'] or "", 
+				"Title": service['title'] if 'title' in service else "", 
 				"SubTitle": "",
 				"ButtonText":"RENEW NOW",
-				"Footer": service['suggested_action_statement'] or "",
-				"Url": service['url_for_application'] or '',
+				"Footer": service['suggested action statement'] if 'suggested action statement' in service else "",
+				"Url": service['url for application'] if 'url for application' in service else '',
 				"AgencyID":"1",
 				"ReplyToQueue":"",
 				"RequiredFields":fields,
