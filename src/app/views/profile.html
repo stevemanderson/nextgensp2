@@ -3,22 +3,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="header-links" ng-click="dashboardClicked()">Dashboard</div>
 				<h1 class="title">My Digital ID</h1>
 			</div>
 		</div>
 	</div>
 </div>
-<!--
-<div class="container">
-	<div class="row">
-		<div class="col-md-12 nav">
-			<a ng-repeat="item in nav" ng-click="tabClicked($index)" ng-class="{'nav-selected':item.selected}" href="">{{item.name}}</a>
-		</div>
-	</div>
-</div>
-<div class="break"></div>
--->
+
 <div class="container">
 <div class="row">
 		<div class="col-md-12 ">
@@ -26,7 +16,8 @@
     <md-tabs md-dynamic-height="" md-border-bottom="" >
       <md-tab label="ACCOUNT">
         <md-content class="md-padding">
-          Account
+        <div class="col-sm-6">Left</div>
+        <div class="col-sm-6">Right</div>
         </md-content>
       </md-tab>
       <md-tab label="MY SERVICES">
@@ -61,8 +52,62 @@
         </md-content>
       </md-tab>
       <md-tab label="TRANSACTIONS">
-        <md-content class="md-padding">
-          Transactions
+        <md-content class="md-padding transactions">
+          <table>
+          	<tr>
+          		<td colspan="4" class="title">This Month</td>
+          	</tr>
+          	<tr>
+          		<td class="agency">Agriculture and Fisheries</td>
+          		<td class="transaction">Stocked Impoundment Permit <span class="description">1 Year</span> <span class="type">Concession</span></td>
+          		<td class="price">$36.00</td>
+          		<td class="date">11 Apr</td>
+          	</tr>
+          	<tr class="spacer">
+          		<td colspan="4" ></td>
+          	</tr>
+         
+          	<tr>
+          		<td colspan="4" class="title">Last Month</td>
+          	</tr>
+          	<tr>
+          		<td class="agency">National Parks, Sport and Racing</td>
+          		<td class="transaction">Camping Permit <span class="description">3 Nights - One Family</span> <span class="type"></span></td>
+          		<td class="price">$71.40</td>
+          		<td class="date">28 Mar</td>
+          	</tr>
+          	<tr class="row-border">
+          		<td class="agency">Transport and Main Roads</td>
+          		<td class="transaction">Registration Renewel <span class="description"></span> <span class="type"></span></td>
+          		<td class="price">$219.00</td>
+          		<td class="date">17 Mar</td>
+          	</tr>
+          	<tr class="row-border">
+          		<td class="agency">Justice and Attorney General</td>
+          		<td class="transaction">Birth Certificate <span class="description"></span> <span class="type"></span></td>
+          		<td class="price">$43.50</td>
+          		<td class="date">03 Mar</td>
+          	</tr>
+        	<tr class="spacer">
+          		<td colspan="4" ></td>
+          	</tr>
+          	<tr>
+          		<td colspan="4" class="title">February 2016</td>
+          	</tr>
+          	<tr >
+          		<td class="agency">Natural Resource Management</td>
+          		<td class="transaction">Historical title search <span class="description"></span> <span class="type"></span></td>
+          		<td class="price">$25.80</td>
+          		<td class="date">15 Feb</td>
+          	</tr>
+          	<tr class="row-border">
+          		<td class="agency">Transport and Main Roads</td>
+          		<td class="transaction">Replacement Drivers Licence <span class="description"></span> <span class="type"></span></td>
+          		<td class="price">$68.25</td>
+          		<td class="date">01 Feb</td>
+          	</tr>
+          </table>
+
           
         </md-content>
       </md-tab>

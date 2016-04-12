@@ -49,6 +49,7 @@
 
 .filters{
 	text-align:center;
+	margin-bottom:20px;
 	a{
 		cursor: pointer;
 		color:#a8adb1;
@@ -136,16 +137,72 @@
 	background-color:#fafafa;
 }
 
+// Transactions
+.transactions{
+	font-size:16px;
+	padding-bottom:60px;
+	table{
+		width: 100%;
+		margin-top: 30px;
+		tr{
+			height: 50px;
+		}
+		td{
+			padding:10px;
+		}
+	}
+	.title{
+		font-size:14px;
+		color: #90a4ae;
+	}
+	.agency{
+		color: #687178;
+	}
+	.transaction{
+		color: #25323c;
+		font-weight: $weight-medium;
+		padding-right:10px;
+	}
+	.description{
+		color: #858c91;
+		padding-left:10px;
+		padding-right:10px;
+	}
+	.type{
+		color: #7c848a;
+		font-style: italic;
+	}
+	.price{
+		color: #25323c;
+	}
+	.date{
+		color: #858c92;
+	}
+	.spacer{
+		height: 30px;
+	}
+	.row-border{
+		border-top: 1px solid #e1e1e1;
+	}
+}
+
+// Account
+
+
+
+
+
+
 
 // MD Tab Styles
 md-tabs.md-default-theme .md-tab.md-active, md-tabs .md-tab.md-active, md-tabs.md-default-theme .md-tab.md-active md-icon, md-tabs .md-tab.md-active md-icon, md-tabs.md-default-theme .md-tab.md-focused, md-tabs .md-tab.md-focused, md-tabs.md-default-theme .md-tab.md-focused md-icon, md-tabs .md-tab.md-focused md-icon{
 	color: rgb(37,50,60);
-	font-weight:$weight-bold;
-	font-size: 13px;
+	font-weight:$weight-medium;
+	font-size: 14px;
 }
 
 .md-tab {
-    font-size: 13px;
+    font-size: 14px;
     text-align: center;
     line-height: 24px;
     padding: 12px 14px;
@@ -166,6 +223,7 @@ md-tabs.md-default-theme md-ink-bar, md-tabs md-ink-bar {
     color: rgb(37,50,60);
     background: rgb(37,50,60);
 }
+
 
 
 
