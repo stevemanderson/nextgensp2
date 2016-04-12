@@ -5,12 +5,12 @@ class AlertWidgetMapper:
 		return {
 			"WidgetType":"Alert",
 			"WidgetID":0,
+			"AgencyID":0,
 			"Data": {
 				"Title":"9 New Job Matches",
 				"SubTitle":"Updated 2m ago"	,
 				"ButtonText":"",
 				"Footer":"",
-				"AgencyID":"1",
 				"ReplyToQueue":""
 			}
 		}
@@ -41,13 +41,13 @@ class ServiceWidgetMapper:
 		return {
 			"WidgetType":"Service",
 			"WidgetID":0,
+			"AgencyID":0,
 			"Data":{
 				"Title": service['title'] if 'title' in service else "", 
 				"SubTitle": "",
 				"ButtonText":"RENEW NOW",
 				"Footer": service['suggested action statement'] if 'suggested action statement' in service else "",
 				"Url": service['url for application'] if 'url for application' in service else '',
-				"AgencyID":"1",
 				"ReplyToQueue":"",
 				"RequiredFields":fields,
 				"MissingFields":missing,

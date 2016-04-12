@@ -26,7 +26,10 @@ channel.queue_bind(exchange='services',
 
 def getServices(body, userId):
     box = BlackBox(serviceApi, userServiceApi+"?format=json&agencyId="+agencyId+"&userId="+str(userId))
-    result = json.dumps(box.getWidgets(body))
+    services = box.getWidgets(body)
+    for service in services:
+        service["AgencyID"] = agencyId
+    result = json.dumps(services)
     return result
 
 def reply(ch, method, props, body):
