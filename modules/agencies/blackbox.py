@@ -35,10 +35,7 @@ class BlackBox:
 
 	def getWidgets(self, content):
 		widgets = []
-		alertMapper = AlertWidgetMapper()
-
-		widgets.append(alertMapper.getWidget())	
-
+		
 		#get all the services
 		serviceMapper = ServiceWidgetMapper(UserService(self.userServiceApi))
 		for service in self.getServices(content):
