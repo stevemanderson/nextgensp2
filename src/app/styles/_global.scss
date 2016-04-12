@@ -57,7 +57,7 @@ input{
 	.controls{
 		font-family: $opensans-font;
 		font-size: 12px;
-		font-weight: $weight-semibold;
+		font-weight: $weight-bold;
 		padding-top:32px;
 		padding-right: 25px;
 		color: #b0bec5;
@@ -70,6 +70,13 @@ input{
 			color:#263238;
 			margin-left:5px;
 			cursor: pointer;
+		}
+		img{
+			width: 38px;
+			height: 38px;
+		}
+		.header-nav{
+			margin-right: 15px;
 		}
 	}
 }
@@ -86,11 +93,12 @@ input{
 -------------------------------------------------- */
 html {
   position: relative;
-  min-height: 100%;
+  height:auto;
+  //min-height: 100%;
 }
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 200px;
+  //margin-bottom: 200px;
 }
 footer {
   //position: absolute;

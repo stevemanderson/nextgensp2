@@ -21,7 +21,7 @@ angular.module('nextgensp2')
 
     $scope.moduleData;
     $scope.sessionStats = {};
-    $scope.inputText = "i'm concerned about my family's health";
+    $scope.inputText = "";
 
     $rootScope.businessLocation = "";
 
@@ -71,8 +71,12 @@ angular.module('nextgensp2')
             //clear exisiting chat
             angular.element(document.getElementById('chat-frame')).empty();
 
-            addLoader();
-            sp2Service.sendToAPIAI($scope.inputText).then(function(response) {
+            //addLoader();
+            //Post Seach text to msg queue
+            $scope.$emit("searchText", $scope.inputText);
+
+
+            /*sp2Service.sendToAPIAI($scope.inputText).then(function(response) {
                 console.log(response);
                 removeLoader();
                 if (response.data.result.action === "input.unknown") {
@@ -83,7 +87,7 @@ angular.module('nextgensp2')
                 
             }, function() {
                 errorChat();
-            });
+            });*/
         }
 
         if($scope.inputText.length > 2){

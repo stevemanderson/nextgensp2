@@ -9,6 +9,7 @@
  */
 angular.module('nextgensp2')
   .controller('ProfileCtrl', function ($scope,sp2Service, sp2Profile, $location) {
+    $scope.userData = sp2Service.getLoginData();
     $scope.agencyData = [];
     $scope.nav = [
       {name:"ACCOUNT", selected:true},

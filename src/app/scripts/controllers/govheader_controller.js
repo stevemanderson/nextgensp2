@@ -15,6 +15,11 @@ angular.module('nextgensp2')
 
     console.log($location.path());
     console.log($scope.userData );
+    if($location.path() === "/profile"){
+      $scope.headerNav = "DASHBOARD";
+    }else{
+      $scope.headerNav = "";
+    }
 
   	$scope.signUpClicked =  function(){
   		ngDialog.open({
@@ -43,6 +48,15 @@ angular.module('nextgensp2')
     $scope.userLoggedIn = sp2Service.logout();
     $location.path('/dashboard');
   }
+  $scope.topNavClicked = function(){
+    if($location.path() === "/profile"){
+      $location.path('/dashboard');
+    }else{
+      $location.path('/profile');
+    }
+  }
+
+
 
   //Close window
   $rootScope.$on('closeDialog', function(event) { 
