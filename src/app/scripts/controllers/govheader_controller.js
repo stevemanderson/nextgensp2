@@ -18,7 +18,7 @@ angular.module('nextgensp2')
     if($location.path() === "/profile"){
       $scope.headerNav = "DASHBOARD";
     }else{
-      $scope.headerNav = "PROFILE";
+      $scope.headerNav = "";
     }
 
   	$scope.signUpClicked =  function(){

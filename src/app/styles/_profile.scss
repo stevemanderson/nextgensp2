@@ -187,7 +187,85 @@
 }
 
 // Account
+.account{
+	.spotlight1{
+		padding:20px;
+		height: 170px;
+		background-color:#fafafa;
+		p{
+			color: #25323c;
+		}
+		strong{
+			font-weight: $weight-bold;
+		}
+	}
+	.spotlight2{
+		padding:20px;
+		height: 170px;
+		background-color:#cfd8dc;
+		p{
+			color: #25323c;
+		}
+		strong{
+			font-weight: $weight-bold;
+		}
+	}
 
+	section{
+		margin-top:0px;
+		padding-top:30px;
+		margin-bottom:30px;
+		border-top:1px solid #fafafa;
+	}
+	.spacer{
+		margin-top: 12px;
+	}
+	.section-title{
+		font-size: 20px;
+		color: #25323c;
+	}
+	.title{
+		font-size: 14px;
+		color: #90a4ae;
+		display: block;
+	}
+	.content{
+		font-size: 18px;
+		color: #25323c;
+		display: block;
+	}
+	.family{
+		float: left;
+		height:60px;
+		padding-right:10px;
+		img{
+			padding-top:5px;
+		}
+	}
+	.link{
+		font-size: 18px;
+		color: #25323c;
+		display: block;
+		text-decoration: underline;
+	}
+	.note{
+		font-size: 14px;
+		color: #25323c;
+		display: block;
+		padding-top:15px;
+	}
+	a{
+		font-size: 14px;
+		color: #25323c;
+		text-decoration: underline;
+		&:hover{
+			font-size: 14px;
+			color: #25323c;
+			text-decoration: none;
+		}
+
+	}
+}
 
 
 

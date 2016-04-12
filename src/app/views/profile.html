@@ -15,12 +15,110 @@
 <md-content class="clearfix">
     <md-tabs md-dynamic-height="" md-border-bottom="" >
       <md-tab label="ACCOUNT">
-        <md-content class="md-padding">
-        <div class="col-sm-6">Left</div>
-        <div class="col-sm-6">Right</div>
+        <md-content class="md-padding account">
+        <div class="row">
+          <div class="col-sm-6 spotlight1">
+            <p><strong>Do more,</strong> simply easily and securely online</p>
+            <img src="images/icon-info.svg" width="20"/>
+            <input type="text" placeholder="Add Your Drivers Licence Number">
+          </div>
+          <div class="col-sm-6 spotlight2">
+            <p>Morgan Strong invited you to join <strong>Acme Inc.</strong> as an Executive Assistant.</p>
+            <button>Join Business</button>
+            <a href="#">What does this mean?</a>
+          </div>
+        </div>
+        <div class="row">
+          <section class="clearfix">
+            <div class="col-sm-3 section-title">Personal</div>
+            <div class="col-sm-3">
+              <span class="title">Name</span>
+              <span class="content">Matthew Neal</span>
+              <div class="spacer"></div>
+              <span class="title">Birthday</span>
+              <span class="content">08 October 1982 (age 33)</span>
+            </div>
+            <div class="col-sm-5">
+              <img ng-src="images/profile_{{userData._userID}}.png" alt="user image" />
+            </div>
+            <div class="col-sm-1"><a href="">Edit</a></div>
+          </section>
+        </div>
+        <div class="row">
+          <section class="clearfix">
+            <div class="col-sm-3 section-title">Contact</div>
+            <div class="col-sm-3">
+              <span class="title">Phone</span>
+              <span class="content">+61 0431 557 678</span>
+            </div>
+            <div class="col-sm-5">
+              <span class="title">Email</span>
+              <span class="content">matt@liquidinteractive.com.au</span>
+            </div>
+            <div class="col-sm-1"><a href="">Edit</a></div>
+          </section>
+        </div>
+        <div class="row">
+          <section class="clearfix">
+            <div class="col-sm-3 section-title">Address</div>
+            <div class="col-sm-3">
+              <span class="title">Home</span>
+              <span class="content">5/19 - 21 Gordon Street<br/>Greenslopes<br/>QLD 4120</span>
+            </div>
+            <div class="col-sm-5">
+              <span class="title">Post Box</span>
+              <span class="content">PO BOX 346<br/>Fortitude Valley <br/>QLD 4120</span>
+            </div>
+            <div class="col-sm-1"><a href="">Edit</a></div>
+          </section>
+        </div>
+        <div class="row">
+          <section class="clearfix">
+            <div class="col-sm-3 section-title">Family &amp; <br/>Relationships</div>
+            <div class="col-sm-3">
+              <div class="family">
+                <img  src="images/family.png">
+              </div>
+              <span class="content">In a relationship since 2009</span>
+              <span class="title">Lana Kane</span>
+              
+            </div>
+            <div class="col-sm-5">
+              
+            </div>
+            <div class="col-sm-1"><a href="">Edit</a></div>
+          </section>
+        </div>
+        <div class="row">
+          <section class="clearfix">
+            <div class="col-sm-3 section-title">Payment</div>
+            <div class="col-sm-8">
+              <img src="images/payment.png">
+            </div>
+            <div class="col-sm-1"><a href="">Edit</a></div>
+          </section>
+        </div>
+        <div class="row">
+          <section class="clearfix">
+            <div class="col-sm-3 section-title">Security</div>
+            <div class="col-sm-3">
+              <span class="title">Password</span>
+              <span class="link">Change Password</span>
+              <span class="note">Manage your QGov password for logging in to My Account.</span>
+            </div>
+            <div class="col-sm-3">
+              <span class="title">Two-Step Verification</span>
+              <span class="link">Enable</span>
+              <span class="note">Manage your QGov password for logging in to My Account.</span>
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-1"><a href="">Edit</a></div>
+          </section>
+        </div>
+
         </md-content>
       </md-tab>
-      <md-tab label="MY SERVICES">
+      <md-tab label="AGENCIES">
         <md-content class="md-padding">
           	<div class="filters">
 				<a ng-class="{'filter-selected':!disableFilter}" ng-click="filterServicesClicked(false)">CONNECTED</a> |	<a ng-class="{'filter-selected':disableFilter}" ng-click="filterServicesClicked(true)">ALL</a>

@@ -1,9 +1,49 @@
 //Dashboard
 
+.dashboard-header{
+  background-color:#25323c;
+  height:255px;
+  width:100%;
+  margin:0;
+  .header-links{
+    text-align: right;
+    margin-top: 25px;
+    margin-right: 50px;
+    color:#fff;
+    font-weight: $weight-bold;
+    text-transform: uppercase;
+  }
+  h1{
+    font-size: 32px;
+    color: #fff;
+    margin-top: 125px;
+    font-weight: $weight-normal;
+  }
+  h2{
+    font-size: 20px;
+    color: #fff;
+    margin-top: 5px;
+    font-weight: $weight-normal;
+  }
+}
+.widget-wrapper{
+  background-color:#f1f1f1;
+  padding-bottom:60px;
+  .filter{
+    color:#838a8f;
+    font-size: 14px;
+    margin-top: 10px;
+    span{
+      color: #25323c;
+      padding-left:10px;
+    }
+  }
+}
 .dashboard{
   background-color:#fafafa;
-	.card{
-    border-radius:4px;
+//widgets
+	.widget{
+    border-radius:0;
     margin:0 15px;
     background-color:white;
     width:25%;
@@ -62,15 +102,37 @@
     }
   }
 
-  .card1{
-    
+
+
+  .Alert{   
+    background-color:#d24242; 
+    height:200px;
     .icon{
-      float:left;
-      padding-right:15px;
+      float:right;
+      width:60px;
+      height:60px;
     }
     .content{
       float:left;
     }
+    .title{
+      font-size:20px;
+      font-weight:$weight-normal;
+      display:block;
+      color:#FFF;
+      padding-top:3px;
+    }
+    .sub-title{
+      font-size:14px;
+      color:#FFF;
+      display:block;
+      padding-top:3px;
+    }
+  }
+
+  .Service{    
+   height:auto;
+
     .title{
       font-size:18px;
       font-weight:$weight-bold;
@@ -84,177 +146,66 @@
       display:block;
       padding-top:3px;
     }
-    .date{
-      border-top:1px solid $brand-grey-light;
-      font-size:12px;
-      color:#b0bec5;
-      span{
-        display:block;
-        padding:15px;
+    .message{
+      display: block;
+      margin-top: 20px;
+    }
+    .submitted{
+      font-size: 12px;
+      padding:5px;
+      .processing{
+        color:#25323c;
+        border: 2px solid #25323c;
+        padding:6px;
+        margin:10px;
+        text-align: center;
+        float: left;
       }
-    }
-  }
-
-  .card2{
-    background-color:#7edd94;
-    text-align:left;
-    .sub-title{
-      font-size:14px;
-      color:white;
-      display:block;
-      padding-top:10px;
-    }
-    .title{
-      font-size:24px;
-      color:white;
-      font-weight:$weight-bold;
-      line-height:28px;
-      padding-top:5px;
-    }
-    
-  }
-
-  .card3{
-    background-color:#5094e3;
-    text-align:left;
-    padding:10px 0;
-    .sub-title{
-      font-size:12px;
-      color:white;
-      display:block;
-    }
-    .title{
-      font-size:18px;
-      color:white;
-      font-weight:$weight-bold;
-    }
-    
-  }
-
-  .card4{
-    background-color:white;
-    text-align:left;
-    padding:10px 0 0 0;
-    .title{
-      font-size:18px;
-      color:#455a64;
-      font-weight:$weight-bold;
-    }
-    .course{
-      border-top:1px solid $brand-grey-light;
-      .title{
-        font-size:14px;
-        color:#5094e3;
-      }
-      .time{
-        font-size:14px;
-        color:#b0bec5;
-      }
-    }    
-  }
-
-  .card5{
-    background-color:white;
-    text-align:left;
-    padding:10px 0 0 0;
-    .title{
-      font-size:18px;
-      color:#455a64;
-      font-weight:$weight-bold;
-    }
-    .sub-title{
-      font-size:12px;
-    }
-    .content{
-      border-top:1px solid $brand-grey-light;
-      .title{
-        font-size:14px;
-        color:#455a64;
-        font-weight:$weight-normal;
-      }
-      .link{
-        font-size:14px;
-        color:#5094e3;
-      }
-      .date{
-        font-size:14px;
-        color:#b0bec5;
-      }
-    }    
-  }
-
-  .card6{
-    background-color:white;
-    text-align:left;
-    padding:0;
-    .top{
-      .left{
-        background-color:#4a90e2;
-        height:8px;
-        float:left;
-        width:30%;
-        border-radius:4px 0 0 0;
-      }
-      .right{
-        height:8px;
-        background-color:#e2f0fb;
+      .status{
         float:right;
-        width:70%;
-        border-radius:0 4px 0 0;
+        color: #b0bec5;        
+        width:60%;
+        padding-top:8px;
       }
     }
-    .title{
-      font-size:18px;
-      color:#455a64;
-      font-weight:$weight-bold;
-      padding-top:10px;
-    }
-    .sub-title{
-      font-size:12px;
-    }
-  }
-  
-  .card7{
-    background-color:white;
-    text-align:left;
-    padding:10px 0 0 0;
-    .title{
-      font-size:18px;
-      color:#455a64;
-      font-weight:$weight-bold;
-      span{
-        color:#f69b81;
+    .action{
+      padding:5px;
+      button{
+        margin:10px;
+        background-color:#25323c;
+        color: #fff;
+        border:none;
+        padding:10px 15px;
+        font-size: 14px;
       }
     }
-    .sub-title{
-      font-size:12px;
-    }
-    .map{
-      height:120px;
-    }
+    
   }
-}
 
+}
+.marketing-img{
+  width: 100%;
+}
 
 //Media queries
 @media (max-width: 460px){
   .dashboard{
-    .card{
-      width:80%;
+    .widget{
+      width:98%;
     }
   }
 }
 @media (min-width: 461px){
   .dashboard{
-    .card{
-      width:45%;
+    .widget{
+      width:98%;
     }
   }
 }
 
 @media (min-width: 768px){
   .dashboard{
-    .card{
+    .widget{
       width:45%;
     }
   }
@@ -262,15 +213,15 @@
 
 @media (min-width: 992px){
   .dashboard{
-    .card{
-      width:29%;
+    .widget{
+      width:31%;
     }
   }
 }
 @media (min-width: 1200px){
   .dashboard{
-    .card{
-      width:22%;
+    .widget{
+      width:31%;
     }
   }
 }
