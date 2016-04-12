@@ -1,14 +1,15 @@
 import requests
 import json
+from services import *
 from widgetmappers import *
 
 # This is the blackbox for police agency
 class BlackBox:
-	apiUrl = ""
 	responseData = None
 
-	def __init__(self, apiUrl):
+	def __init__(self, apiUrl, userServiceApi):
 		self.apiUrl = apiUrl
+		self.userServiceApi = userServiceApi
 		self.responseData = None
 
 	def getServices(self, content):
@@ -37,6 +38,11 @@ class BlackBox:
 		alertMapper = AlertWidgetMapper()
 
 		widgets.append(alertMapper.getWidget())	
+
+		#get all the services
+		serviceMapper = ServiceWidgetMapper(UserService(self.userServiceApi))
+		for service in self.getServices(content):
+			widgets.append(serviceMapper.getWidget(service))
 
 		return widgets
 

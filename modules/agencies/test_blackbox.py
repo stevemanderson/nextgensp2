@@ -47,7 +47,7 @@ class blackboxTests(unittest.TestCase):
 	apiUrl = "http://mstrong.info/api/views/dtmr_personalised_service.json"
 
 	def test_apiConnection(self):
-		box = BlackBox(blackboxTests.apiUrl)
+		box = BlackBox(blackboxTests.apiUrl, '')
 		content = box.getContent()
 		self.assertTrue(len(content) > 0)
 
@@ -57,7 +57,7 @@ class blackboxTests(unittest.TestCase):
 		self.assertTrue(len(services) == 1)
 
 	def test_singleSearchOnServiceLowercase(self):
-		box = BlackBox(blackboxTests.apiUrl)
+		box = BlackBox(blackboxTests.apiUrl, '')
 		services = box.getServices("application")
 		self.assertTrue(len(services) == 1)
 
@@ -75,21 +75,21 @@ class blackboxTests(unittest.TestCase):
 	# }
 	def test_serviceWidgetMapper(self):
 		userService = UserService('anonymous')
-		box = BlackBox(blackboxTests.apiUrl)
+		box = BlackBox(blackboxTests.apiUrl, '')
 		service = box.getServices("application")[0]
 		mapper = ServiceWidgetMapper(userService)
 		result = mapper.getWidget(service)
 
 	def test_serviceWidgetMapperSomeFields(self):
 		userService = UserService('somefields')
-		box = BlackBox(blackboxTests.apiUrl)
+		box = BlackBox(blackboxTests.apiUrl, '')
 		service = box.getServices("application")[0]
 		mapper = ServiceWidgetMapper(userService)
 		result = mapper.getWidget(service)
 
 	def test_serviceWidgetMapperAllFields(self):
 		userService = UserService('allfields')
-		box = BlackBox(blackboxTests.apiUrl)
+		box = BlackBox(blackboxTests.apiUrl, '')
 		service = box.getServices("application")[0]
 		mapper = ServiceWidgetMapper(userService)
 		result = mapper.getWidget(service)
