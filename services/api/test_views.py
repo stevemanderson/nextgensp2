@@ -190,6 +190,13 @@ class test_views(TestCase):
 		user.useragency_set.all().delete()
 		user.save()
 
+	def test_useragencyfields_nouser(self):
+		request = self.factory.get('/api/useragencyfields', {"userId":0, "agencyId":1})
+		response = useragencyfields(request)
+		response.render()
+
+		self.assertTrue(response.status_code == 200)
+
 	def test_useragencyfields_correctAgency(self):
 		user = User.objects.get(id=1)
 		field = Field.objects.get(id=1)
