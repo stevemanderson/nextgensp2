@@ -186,7 +186,16 @@ def useragencyfields(request):
     userId = request.GET['userId']
     agencyId = request.GET['agencyId']
 
-    user = User.objects.get(id=userId)
+    user = None
+
+    try:
+        user = User.objects.get(id=userId)
+    except ObjectDoesNotExist:
+        return Response({
+            "userId":0,
+            "fields":[]
+        })
+
     allowedFields = user.agencyallowedfield_set.filter(agency_id=agencyId)
 
     result = {"userId":int(userId), "fields":[]}

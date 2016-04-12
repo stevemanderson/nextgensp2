@@ -26,7 +26,10 @@ channel.queue_bind(exchange='services',
 
 def getServices(body, userId):
     box = BlackBox(serviceApi, userServiceApi+"?format=json&agencyId="+agencyId+"&userId="+str(userId))
-    result = json.dumps(box.getWidgets(body))
+    services = box.getWidgets(body)
+    for service in services:
+        service["AgencyID"] = agencyId
+    result = json.dumps(services)
     return result
 
 def reply(ch, method, props, body):
@@ -38,7 +41,11 @@ def reply(ch, method, props, body):
     print(" [x] Replied to message")
 
 def on_request(ch, method, props, body):
-    response = getServices(body, 1)
+    user_id = props.headers['user_id'] if 'user_id' in props.headers else 0
+
+    print(" [x] User ID %r" % int(user_id))
+
+    response = getServices(body, user_id)
 
     # REPLY BACK TO THE CLIENT
     if len(response) > 0:
