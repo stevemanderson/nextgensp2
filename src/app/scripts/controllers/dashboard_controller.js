@@ -72,7 +72,6 @@ angular.module('nextgensp2')
         msgData[i].loading = false;
         $scope.widgetData.unshift(msgData[i]);
       }
-
     }
 
 
@@ -102,7 +101,7 @@ angular.module('nextgensp2')
         })
     });
 
-    $scope.widgetButtonClicked = function(widgetIndex, url){
+    $scope.widgetActionButtonClicked = function(widgetIndex, url){
       //Check level
       //if($scope.userData._userLevel === 2){
         //Mockup change auto submit
@@ -119,6 +118,12 @@ angular.module('nextgensp2')
         // open link in new window
         //$window.open(url, '_blank');
       //}
+
+    }
+    $scope.widgetReadButtonClicked = function(widgetIndex, url){
+        // open link in new window
+        $window.open(url, '_blank');
+     
 
     }
 

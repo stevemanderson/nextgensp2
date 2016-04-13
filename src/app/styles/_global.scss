@@ -23,10 +23,13 @@ body, p {
 .invisible{
 	opacity:0;
 }
-
+button, select, html, textarea, input {
+    font-family: $brand-font;
+}
 input::-ms-clear {
   width : 0;
   height: 0;
+  
 }
 input{
 	outline:none;

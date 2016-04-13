@@ -128,17 +128,12 @@
 
 .initial-module{
 	margin: 20px auto;
-	width: 50%;
-	background-color:#eceff1;
-	.initial-input{
-		position:relative;
-		margin-top:10px;
-	}
+	width: 60%;
+
 }
 .chat-input{
-	width: 100%;
 	background-color:transparent;
-    border:none;
+    border:1px solid #e1e1e1;
     box-shadow:none;
     font-size:20px;
     color:#25323c;
@@ -146,19 +141,19 @@
     height: 60px;
     padding-left:15px;
     font-weight: $weight-normal;
-    text-align: center;
+    text-align: left;
+    border-radius:0;
 
-    &::-webkit-input-placeholder {
-	   color:#25323c;
-	}
 
-	&::-moz-placeholder {  /* Firefox 19+ */
-	   color:#25323c;
-	}
 
-	&:-ms-input-placeholder {  
-	   color:#25323c;
-	}
+}
+.search-icon{
+	position:relative;
+	float:right;
+	width:30px;
+	height:30px;
+	margin-top: -54px;
+    margin-right: 10px;
 }
 
 

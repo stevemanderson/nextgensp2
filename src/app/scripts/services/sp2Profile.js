@@ -33,6 +33,16 @@ angular.module('nextgensp2')
                 withCredentials: true
                });
     };
+    /**
+     * POST user fields for a profile
+     * 
+     */
+    this.profile_getUserFields = function () {
+        return $http({ method  : "GET",
+                url     : apiURL+"userfields",
+                withCredentials: true
+               });
+    };
 
     /**
      * Get all agencies
