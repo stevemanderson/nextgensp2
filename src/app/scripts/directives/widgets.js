@@ -2,6 +2,7 @@ angular.module('nextgensp2').directive('widgetItem', function ($compile,$templat
     
     var linker = function(scope, element, attrs) {
         var url="";
+        
         switch(scope.content.WidgetType) {
             case 'Alert':
                 url = "partials/widget-alert.html";

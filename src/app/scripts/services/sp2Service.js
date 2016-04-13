@@ -17,14 +17,16 @@ angular.module('nextgensp2')
     $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
 
   })
-  .service('sp2Service', function ($http, $cookies, $location, uuid2, $rootScope) {
+  .service('sp2Service', function ($http, $cookies, $location, uuid2, $rootScope, sp2Profile) {
 
     var _userSession = "";
 
     var _userData = {
         _userID:null,
-        _userName:null
+        _userName:null,
+        _userLevel:0
     };
+
     var _schemaData ={};
     var _responsesData ={};
     var apiURL = "http://"+$location.host()+":9191/api/";
@@ -149,9 +151,33 @@ angular.module('nextgensp2')
     this.userLoggedIn = function (userID,userName) {
         _userData._userID= userID; 
         _userData._userName= userName; 
-        //update cookie
-        $cookies.put('userData', JSON.stringify(_userData));
-        $rootScope.$emit('UserLoggedIn', true);
+        
+        //Workout user level
+        sp2Profile.profile_getUserFields(userID).then(function(response) {
+                var fields = response.data;
+                var requiredFields = 0;
+                //Key field ids 
+                // 16 passport
+                // 15 Medicare
+                // 14 drivers licence
+                // 13 taxfile number
+                for(var i=0;i<fields.length;i++){
+                    if(fields[i].id == 16 ||fields[i].id == 15 ||fields[i].id == 14 ||fields[i].id == 13){
+                        if(fields[i].value != "" ){
+                           requiredFields++; 
+                        }
+                    }
+                }
+                _userData._userLevel= (requiredFields>0)?2:1; 
+
+                //update cookie
+                $cookies.put('userData', JSON.stringify(_userData));
+                $rootScope.$emit('UserLoggedIn', true);
+
+            }, function() {
+                console.log("error getting fields");
+            });
+        
     };
 
     /**

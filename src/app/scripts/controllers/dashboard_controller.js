@@ -8,8 +8,8 @@
  * Controller of the nextgensp5
  */
 angular.module('nextgensp2')
-  .controller('DashboardCtrl', function ($scope, $stomp, $log, sp2Profile) {
-
+  .controller('DashboardCtrl', function ($scope, $stomp, $log, sp2Service, sp2Profile, $window,$timeout) {
+    $scope.userData = sp2Service.getLoginData();
   	$scope.widgetData = [];
     $scope.stompMsgCount = 0;
     $scope.stompdata = {};
@@ -67,19 +67,23 @@ angular.module('nextgensp2')
       //$scope.widgetData;
       //Check array and split out individual widgets
       for(var i =0; i<msgData.length;i++){
+        msgData[i].processed = false;
+        msgData[i].showAction = true;
+        msgData[i].loading = false;
         $scope.widgetData.unshift(msgData[i]);
       }
 
-      //Add agency names
     }
 
 
 
     //function return agency name
-    function getAgencyName(agencyId){
+    $scope.getAgencyName =  function(agencyId){
       name="";
       for(var i=0; i< $scope.agencies.length; i++){
-
+          if(agencyId == $scope.agencies[i].id){
+            name = $scope.agencies[i].name;
+          }
       }
       return name; 
     }
@@ -97,6 +101,26 @@ angular.module('nextgensp2')
           'reply-to':'123456'
         })
     });
+
+    $scope.widgetButtonClicked = function(widgetIndex, url){
+      //Check level
+      //if($scope.userData._userLevel === 2){
+        //Mockup change auto submit
+
+        $scope.widgetData[widgetIndex].showAction = false;
+        $scope.widgetData[widgetIndex].loading = true;
+        $timeout(function() {
+          $scope.widgetData[widgetIndex].processed = true;
+          $scope.widgetData[widgetIndex].loading = false;
+        }, 3000);
+
+        
+      //}else{
+        // open link in new window
+        //$window.open(url, '_blank');
+      //}
+
+    }
 
 
     function outputSTOMP(data){

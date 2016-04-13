@@ -59,7 +59,7 @@ input{
 		font-family: $opensans-font;
 		font-size: 12px;
 		font-weight: $weight-bold;
-		padding-top:20px;
+		padding-top:32px;
 		padding-right: 25px;
 		color: #b0bec5;
 		.sign-up{
@@ -79,6 +79,9 @@ input{
 		.header-nav{
 			margin-right: 15px;
 		}
+	}
+	.controls-logged{
+		padding-top:20px;
 	}
 }
 

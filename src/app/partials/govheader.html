@@ -10,7 +10,7 @@
 				</div>
 			</div>
 			<div class="col-xs-6" ng-show="userLoggedIn">
-				<div class="controls pull-right">
+				<div class=" controls controls-logged pull-right">
 					<span class="sign-up" ng-click="topNavClicked()">{{headerNav}}</span>
 					<span class="login" ng-click="profileClicked()"> {{userData._userName | uppercase}} <img ng-src="images/profile_{{userData._userID}}.png" alt="user image" /></span><span class="login" ng-click="logoutClicked()">(LOG OUT)</span>
 				</div>

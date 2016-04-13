@@ -79,11 +79,14 @@
 .service{
 	padding:25px;
 	background-color:#fff;
+	height:120px;
 	h2{
 		font-size: 18px;
 		color: #25323c;
 		margin:0;
+		line-height: 21px;
 		font-weight: $weight-normal;
+		padding-right:5px;
 	}
 	h3{
 		font-size: 14px;
@@ -138,6 +141,7 @@
 
 .service-open{
 	background-color:#fafafa;
+	height:auto;
 }
 
 // Transactions

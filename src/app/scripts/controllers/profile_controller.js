@@ -11,11 +11,7 @@ angular.module('nextgensp2')
   .controller('ProfileCtrl', function ($scope,sp2Service, sp2Profile, $location) {
     $scope.userData = sp2Service.getLoginData();
     $scope.agencyData = [];
-    $scope.nav = [
-      {name:"ACCOUNT", selected:true},
-      {name:"MY SERVICE", selected:false},
-      {name:"TRANSACTIONS", selected:false}
-    ]
+
 
     $scope.disableFilter= true;
 
@@ -166,13 +162,15 @@ angular.module('nextgensp2')
     }
 
     
-    /*
+    
     //Get a list of all the fields
     sp2Profile.profile_getFields().then(function(response) {
                 $scope.fields = response.data;
+                console.log("all fields");
+                console.log($scope.fields);
             }, function() {
                 console.log("error getting fields");
-            });*/
+            });
 
   	//
   	/*sp2Profile.profile_updateUserAgencies(sp2Service.getLoginData()._userID, [1]).then(function(response) {
