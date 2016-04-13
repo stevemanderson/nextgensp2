@@ -270,13 +270,10 @@ def post_userfields(request):
     userId = request.data['userId']
     user = User.objects.get(id=userId)
 
-    fields = request.data.getlist('fields')
-
-    user.userfield_set.all().delete()
-    user.save()
+    fields = request.data['fields']
 
     for field in fields:
-        fDic = ast.literal_eval(field)
+        fDic = field
 
         # delete the field
         user.userfield_set.filter(field_id=fDic['id']).delete()
