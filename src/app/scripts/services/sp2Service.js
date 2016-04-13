@@ -45,7 +45,6 @@ angular.module('nextgensp2')
     //Generate a new session each reload
     _userSession = uuid2.newguid();
     $cookies.put('userSession', _userSession);
-    console.log("User Session > "+_userSession);
 
 
     /**
@@ -154,20 +153,23 @@ angular.module('nextgensp2')
         
         //Workout user level
         sp2Profile.profile_getUserFields(userID).then(function(response) {
-                var fields = response.data;
+                var fields = response.data.fields;
                 var requiredFields = 0;
                 //Key field ids 
                 // 16 passport
                 // 15 Medicare
                 // 14 drivers licence
                 // 13 taxfile number
+
                 for(var i=0;i<fields.length;i++){
+                    
                     if(fields[i].id == 16 ||fields[i].id == 15 ||fields[i].id == 14 ||fields[i].id == 13){
                         if(fields[i].value != "" ){
                            requiredFields++; 
                         }
                     }
                 }
+
                 _userData._userLevel= (requiredFields>0)?2:1; 
 
                 //update cookie

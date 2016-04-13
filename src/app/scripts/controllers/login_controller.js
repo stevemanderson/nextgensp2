@@ -32,4 +32,28 @@ angular.module('nextgensp2')
                 $scope.login.error = "There was an error with your Username/Password combination. Please try again.";
             });
   	}
+    $scope.forgotClick = function(){
+      $scope.display = {
+        signup:false,
+        signup_email:false,
+        login:false,
+        forgot_pass:true
+      };
+    }
+    $scope.signupClick = function(){
+      $scope.display = {
+        signup:true,
+        signup_email:false,
+        login:false,
+        forgot_pass:false
+      };
+    }
+    $scope.loginViewClick = function(){
+      $scope.display = {
+        signup:false,
+        signup_email:false,
+        login:true,
+        forgot_pass:false
+      };
+    }
 });

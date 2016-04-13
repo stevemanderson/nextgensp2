@@ -35,11 +35,12 @@ angular.module('nextgensp2')
     };
     /**
      * POST user fields for a profile
-     * 
+     * This is hard coded to recieve the Data
      */
-    this.profile_getUserFields = function () {
-        return $http({ method  : "GET",
+    this.profile_postUserFields = function (data) {
+        return $http({ method  : "POST",
                 url     : apiURL+"userfields",
+                data: data,
                 withCredentials: true
                });
     };

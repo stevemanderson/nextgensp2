@@ -110,7 +110,6 @@ angular.module('nextgensp2')
                             }
                           }
                           //check if all are selected
-                          console.log($scope.agencyData[i].name);
                           if($scope.agencyData[i].categories[c].fields[d].enabled){
                             totalFieldsSelected++;
                           }
@@ -188,7 +187,7 @@ angular.module('nextgensp2')
       }
       
       sp2Profile.profile_updateUserAgencies(sp2Service.getLoginData()._userID, agencyIdArr).then(function(response) {
-                console.log(response);
+               
             }, function() {
                 console.log("error getting updateUserAgencies");
             });
@@ -197,12 +196,22 @@ angular.module('nextgensp2')
 
     $scope.filterServicesClicked = function(disableFilter){
       $scope.disableFilter= disableFilter;
-      console.log($scope.disableFilter);
+      
     }
 
-    $scope.tabClicked = function(tabId){
+
+
+    $scope.addLicenceClicked = function(){
+      var data = {"userId":$scope.userData._userID,"fields":[{"id":14,"value": $scope.licenceNumber}]};
+      sp2Profile.profile_postUserFields(data).then(function(response) {
+                
+                sp2Service.userLoggedIn($scope.userData._userID, $scope.userData._userName);
+               
+                
+            }, function() {
+                console.log("error getting updateUserAgencies");
+            });
       
-      console.log("tabClicked " +tabId);
     }
 
     $scope.openPanel = function(item){

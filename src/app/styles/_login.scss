@@ -1,13 +1,18 @@
 // Login popup CSS
 
 .login-popup{
-	padding:50px;
+	padding:0 50px 20px 50px;
 
 	.logos{
+		text-align: center;
+		p{
+			color: #263238;
+			font-size: 20px;
+			margin-bottom:15px;
+		}
 		.icon{
-			float:left;
-			width: 48px;
-			padding:8px;
+			text-align: center;
+			padding:10px 0;
 		}
 		.title{
 			float:left;
@@ -18,22 +23,12 @@
 		}
 		.google{
 			margin-bottom: 10px;
-			background-color:#ff7043;
-			.icon{
-				background-color:#e64a19;
-			}
-			&:hover{
-				background-color:#e64a19;
-			}
+			background-color:#fff;
+			border:1px solid #e1e1e1;
 		}
 		.microsoft{
-			background-color:#2196f3;
-			.icon{
-				background-color:#1976d2;
-			}
-			&:hover{
-				background-color:#1976d2;
-			}
+			background-color:#fff;
+			border:1px solid #e1e1e1;
 		}
 	}
 	.or-break{

@@ -19,7 +19,6 @@ angular.module('nextgensp2')
     //Get a list of all agencies
     sp2Profile.profile_getAgencies().then(function(response) {
                 $scope.agencies = response.data;
-                console.log($scope.agencies);
             }, function() {
                 console.log("error getting agencies");
             });
@@ -103,7 +102,8 @@ angular.module('nextgensp2')
 
     $scope.widgetActionButtonClicked = function(widgetIndex, url){
       //Check level
-      //if($scope.userData._userLevel === 2){
+      var user = sp2Service.getLoginData();
+      if(user._userLevel === 2){
         //Mockup change auto submit
 
         $scope.widgetData[widgetIndex].showAction = false;
@@ -112,12 +112,11 @@ angular.module('nextgensp2')
           $scope.widgetData[widgetIndex].processed = true;
           $scope.widgetData[widgetIndex].loading = false;
         }, 3000);
-
         
-      //}else{
+      }else{
         // open link in new window
-        //$window.open(url, '_blank');
-      //}
+        $window.open(url, '_blank');
+      }
 
     }
     $scope.widgetReadButtonClicked = function(widgetIndex, url){

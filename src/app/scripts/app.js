@@ -16,7 +16,6 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngDialog',
-    'ngTouch',
     'ngMap',
     'angularUUID2',
     'google.places',

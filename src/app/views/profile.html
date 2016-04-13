@@ -20,8 +20,9 @@
           <div class="col-sm-6 spotlight1">
           <img src="images/icon-info.svg" width="20"/>
             <p><strong>Do more,</strong> simply easily and securely online</p>
-            
-            <input type="text" placeholder="Add Your Drivers Licence Number">
+            <button class="btn-add" ng-show="showAdd" ng-click="addLicenceClicked()">Add</button>
+            <input type="text" ng-click="showAdd=true" placeholder="Add Your Drivers Licence Number" ng-model="licenceNumber">
+
           </div>
           <div class="col-sm-6 spotlight2">
             <p>Morgan Strong invited you to join <strong>Acme Inc.</strong> as an Executive Assistant.</p>
