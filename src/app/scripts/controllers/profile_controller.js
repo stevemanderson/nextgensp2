@@ -12,13 +12,15 @@ angular.module('nextgensp2')
     $scope.userData = sp2Service.getLoginData();
     $scope.agencyData = [];
 
+    $scope.agencyView = [[],[]];
+
+    $scope.nav = [
+      {name:"ACCOUNT", selected:true},
+      {name:"MY SERVICE", selected:false},
+      {name:"TRANSACTIONS", selected:false}
+    ]
 
     $scope.disableFilter= true;
-
-
-
-
-
    
     // Get a list of all the agencies
   	sp2Profile.profile_getAgencies().then(function(response) {
@@ -43,6 +45,15 @@ angular.module('nextgensp2')
                     }
                   }
                 }
+
+                if($scope.agencyData.length > 0) {
+                  var len = $scope.agencyData.length;
+                  var mid = parseInt(len / 2);
+
+                  $scope.agencyView[0] = $scope.agencyData.slice(0, mid);
+                  $scope.agencyView[1] = $scope.agencyData.slice(mid, len);
+                }
+
                 populateCategories();
             }, function() {
                 console.log("error getting UserAgencies");
@@ -118,42 +129,25 @@ angular.module('nextgensp2')
             });
     }
 
-    $scope.toggleCategoryClicked = function(agencyId,categoryId, indexsArr){
-      //find current state
-      console.log("userID"+sp2Service.getLoginData()._userID);
-
-      var agencyIndex = indexsArr[0];
-      var categoryIndex = indexsArr[1];
-      console.log($scope.agencyData[agencyIndex].name);
-      console.log($scope.agencyData[agencyIndex].categories[categoryIndex].name);
-
-
-      if($scope.agencyData[agencyIndex].categories[categoryIndex].enabled){
-        $scope.agencyData[agencyIndex].categories[categoryIndex].enabled = false;
+    $scope.toggleCategoryClicked = function(agency, category){
+      if(category.enabled){
+        category.enabled = false;
         var fieldId = "";
-        //Turn off all fields in category
-        console.log("Categories off " +$scope.agencyData[agencyIndex].name +$scope.agencyData[agencyIndex].categories[categoryIndex].name);
-        for(var i=0;i<$scope.agencyData[agencyIndex].categories[categoryIndex].fields.length;i++){
-          fieldId=$scope.agencyData[agencyIndex].categories[categoryIndex].fields[i].id;
-          //Should be set after call back
-          $scope.agencyData[agencyIndex].categories[categoryIndex].fields[i].enabled = false;
-          sp2Profile.profile_removeUserAgencyField(sp2Service.getLoginData()._userID,agencyId,fieldId).then(function(response) {
-                
+        for(var i=0;i<category.fields.length;i++){
+          fieldId=category.fields[i].id;
+          category.fields[i].enabled = false;
+          sp2Profile.profile_removeUserAgencyField(sp2Service.getLoginData()._userID, agency.id,fieldId).then(function(response) {
             }, function() {
                 console.log("error getting removeUserAgencyField");
             });
         }
       }else{
-        $scope.agencyData[agencyIndex].categories[categoryIndex].enabled = true;
-
+        category.enabled = true;
         var fieldId = "";
-        //Turn on all fields in category
-        console.log("Categories on " +$scope.agencyData[agencyIndex].name +$scope.agencyData[agencyIndex].categories[categoryIndex].name);
-        for(var i=0;i<$scope.agencyData[agencyIndex].categories[categoryIndex].fields.length;i++){
-          fieldId=$scope.agencyData[agencyIndex].categories[categoryIndex].fields[i].id;
-          $scope.agencyData[agencyIndex].categories[categoryIndex].fields[i].enabled = true;
-          sp2Profile.profile_addUserAgencyField(sp2Service.getLoginData()._userID,agencyId,fieldId).then(function(response) {
-                
+        for(var i=0;i<category.fields.length;i++){
+          fieldId=category.fields[i].id;
+          category.fields[i].enabled = true;
+          sp2Profile.profile_addUserAgencyField(sp2Service.getLoginData()._userID,agency.id,fieldId).then(function(response) {
             }, function() {
                 console.log("error getting addUserAgencyField");
             });
@@ -162,15 +156,13 @@ angular.module('nextgensp2')
     }
 
     
-    
+    /*
     //Get a list of all the fields
     sp2Profile.profile_getFields().then(function(response) {
                 $scope.fields = response.data;
-                console.log("all fields");
-                console.log($scope.fields);
             }, function() {
                 console.log("error getting fields");
-            });
+            });*/
 
   	//
   	/*sp2Profile.profile_updateUserAgencies(sp2Service.getLoginData()._userID, [1]).then(function(response) {
@@ -182,18 +174,16 @@ angular.module('nextgensp2')
   	
 
     //Click Events
-    $scope.connectToAgencyClicked = function($event,index){
+    $scope.connectToAgencyClicked = function($event, item, list){
       $event.stopPropagation();
-      console.log("connectToAgencyClicked"+index);
       //send all enabled agencies to update
-      $scope.agencyData[index].connected = !$scope.agencyData[index].connected;
+      item.connected = !item.connected;
 
       var agencyIdArr = [];
 
-      for(var i=0;i<$scope.agencyData.length;i++){
-        console.log($scope.agencyData[i].connected);
-        if($scope.agencyData[i].connected){          
-          agencyIdArr.push($scope.agencyData[i].id);
+      for(var i=0;i<list.length;i++){
+        if(list[i].connected){          
+          agencyIdArr.push(list[i].id);
         }
       }
       
@@ -215,8 +205,8 @@ angular.module('nextgensp2')
       console.log("tabClicked " +tabId);
     }
 
-    $scope.openPanel = function(index){
-      $scope.agencyData[index].panelOpen =!$scope.agencyData[index].panelOpen;
+    $scope.openPanel = function(item){
+      item.panelOpen =!item.panelOpen;
     }
 
   	$scope.dashboardClicked = function(){

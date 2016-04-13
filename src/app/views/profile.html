@@ -125,32 +125,29 @@
 				<a ng-class="{'filter-selected':!disableFilter}" ng-click="filterServicesClicked(false)">CONNECTED</a> |	<a ng-class="{'filter-selected':disableFilter}" ng-click="filterServicesClicked(true)">ALL</a>
 			</div>
 
-      <div class="col-sm-6">
-        <div ng-repeat="item in agencyData | filter: (!disableFilter || '') && {connected: true}">
-            <div class="service" ng-class="{'service-open':item.panelOpen}">
-              <div class="header clearfix" ng-click="openPanel($index)">
-                <div class="icon" ></div> 
-                <div class="title" >
-                  <h2>{{item.name}}</h2>
-                  <h3><span ng-show="item.connected"><span ng-repeat="category in item.categories | filter: { enabled: true }">{{category.name}}{{$last ? '' : ', '}} </span></span><span ng-hide="item.connected">Not Connected </span></h3>
-                </div>
-                <button class="btn-profile" ng-click="connectToAgencyClicked($event,$index)" ng-class="{'btn-profile-connected':item.connected}"><span ng-show="item.connected">ON</span><span ng-hide="item.connected">CONNECT</span></button>
-              </div>
-              <div class="permissions" ng-show="item.panelOpen">
-                <h4 ng-show="item.connected">Choose what information you want to share</h4>
-                <h4 ng-hide="item.connected">Safely share your information with this service to save time and do more online.</h4>
+          <div class="col-sm-6" ng-repeat="agencyList in agencyView">
+					<div ng-repeat="item in agencyList | filter: (!disableFilter || '') && {connected: true}">
+						<div class="service" ng-class="{'service-open':item.panelOpen}">
+							<div class="header clearfix" ng-click="openPanel(item)">
+								<div class="icon" ></div> 
+								<div class="title" >
+									<h2>{{item.name}}</h2>
+									<h3><span ng-show="item.connected"><span ng-repeat="category in item.categories | filter: { enabled: true }">{{category.name}}{{$last ? '' : ', '}} </span></span><span ng-hide="item.connected">Not Connected </span></h3>
+								</div>
+								<button class="btn-profile" ng-click="connectToAgencyClicked($event, item, agencyList)" ng-class="{'btn-profile-connected':item.connected}"><span ng-show="item.connected">ON</span><span ng-hide="item.connected">CONNECT</span></button>
+							</div>
+							<div class="permissions" ng-show="item.panelOpen">
+								<h4 ng-show="item.connected">Choose what information you want to share</h4>
+								<h4 ng-hide="item.connected">Safely share your information with this service to save time and do more online.</h4>
 
-                <ul ng-show="item.connected">
-                  <li ng-repeat="category in item.categories"><label><input type="checkbox" ng-checked="category.enabled" ng-click="toggleCategoryClicked(item.id,category.id,[$parent.$index,$index])"> {{category.name}} </label></li>
-                </ul>
-              </div>
-            </div>
+								<ul ng-show="item.connected">
+									<li ng-repeat="category in item.categories"><label><input type="checkbox" ng-checked="category.enabled" ng-click="toggleCategoryClicked(item, category)"> {{category.name}} </label></li>
+								</ul>
+							</div>
+						</div>
+					</div>
           </div>
-      </div>
-      
-
-
-					
+			
 			
         </md-content>
       </md-tab>
