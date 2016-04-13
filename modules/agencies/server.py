@@ -27,8 +27,8 @@ channel.queue_bind(exchange='services',
 
 def getServices(body, userId):
     userService = UserService(userServiceApi+"?format=json&agencyId="+agencyId+"&userId="+str(userId))
+    
     print(" [x] Loading user service "+userServiceApi+"?format=json&agencyId="+agencyId+"&userId="+str(userId))
-
     box = BlackBox(serviceApi, userService)
     services = box.getWidgets(body)
     for service in services:
