@@ -1,0 +1,17 @@
+<div>
+	<div class="padding-wrapper">
+		<div class="content">
+			<span class="title" ng-bind-html="content.Data.Title">Vehicle Registration Renewel</span>
+			<span class="sub-title" ng-bind-html="content.Data.Title" >Transport and Main Roads</span>
+			<span class="message" ng-bind-html="content.Data.Footer" >The registration renewel for your private vehicle, Ford Focus (2009), was submitted <strong>successfully</strong>.</span>
+		</div>
+	</div>
+	<div class="break"></div>
+	<div class="action">
+		<button ng-bind-html="content.Data.ButtonText">Renew Now</button>
+	</div>
+	<div class="submitted clearfix" ng-show="content.state">
+		<div class="processing">Processing</div>
+		<div class="status">This can take up to three (3) business days to complete.</div>
+	</div>
+</div> 

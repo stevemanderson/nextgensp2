@@ -1,26 +1,21 @@
-angular.module('nextgensp2').directive('widgetItem', function ($compile) {
-    var alertTemplate = '<div class="padding-wrapper"><div class="content"><span class="title" ng-bind-html="content.Data.Title"></span><span class="sub-title" ng-bind-html="content.Data.SubTitle"></span></div><div class="icon"><img src="images/widget-alert.svg"></div></div>';
-
-    var serviceTemplate = '<div class="padding-wrapper"><div class="icon"><img src="images/alert.png"></div><div class="content"><span class="sub-title" ng-bind-html="content.Data.SubTitle"></span><span class="title" ng-bind-html="content.Data.Title"></span></div></div>';
-
-    var getTemplate = function(contentType) {
-        var template = '';
-        console.log("contentType > "+contentType);
-        switch(contentType) {
+angular.module('nextgensp2').directive('widgetItem', function ($compile,$templateRequest) {
+    
+    var linker = function(scope, element, attrs) {
+        var url="";
+        switch(scope.content.WidgetType) {
             case 'Alert':
-                template = alertTemplate;
+                url = "partials/widget-alert.html";
                 break;
             case 'Service':
-                template = serviceTemplate;
+                url = "partials/widget-service.html";
                 break;
         }
+        $templateRequest(url)
+        .then(function(templateContainer) {
+            element.html(templateContainer).show();
+            $compile(element.contents())(scope);
+        })
 
-        return template;
-    }
-
-    var linker = function(scope, element, attrs) {
-        element.html(getTemplate(scope.content.WidgetType)).show();
-        $compile(element.contents())(scope);
     }
 
     return {

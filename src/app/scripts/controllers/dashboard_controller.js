@@ -8,12 +8,21 @@
  * Controller of the nextgensp5
  */
 angular.module('nextgensp2')
-  .controller('DashboardCtrl', function ($scope, $stomp, $log) {
+  .controller('DashboardCtrl', function ($scope, $stomp, $log, sp2Profile) {
 
   	$scope.widgetData = [];
     $scope.stompMsgCount = 0;
     $scope.stompdata = {};
+    $scope.agencies =[];
 
+
+    //Get a list of all agencies
+    sp2Profile.profile_getAgencies().then(function(response) {
+                $scope.agencies = response.data;
+                console.log($scope.agencies);
+            }, function() {
+                console.log("error getting agencies");
+            });
 
 
     // Subscribe to the users dashboard update channel
@@ -32,7 +41,6 @@ angular.module('nextgensp2')
           processWidgetData(payload);
           outputSTOMP(payload);
         }, {
-          'headers': 'are awesome'
         })
 
         // Unsubscribe
@@ -58,15 +66,23 @@ angular.module('nextgensp2')
     function processWidgetData(msgData){
       //$scope.widgetData;
       //Check array and split out individual widgets
-      console.log(msgData);
       for(var i =0; i<msgData.length;i++){
         $scope.widgetData.unshift(msgData[i]);
       }
+
+      //Add agency names
     }
 
 
 
+    //function return agency name
+    function getAgencyName(agencyId){
+      name="";
+      for(var i=0; i< $scope.agencies.length; i++){
 
+      }
+      return name; 
+    }
 
 
     //Events
