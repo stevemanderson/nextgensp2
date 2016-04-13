@@ -37,7 +37,7 @@ class BlackBox:
 		widgets = []
 		
 		#get all the services
-		serviceMapper = ServiceWidgetMapper(userService)
+		serviceMapper = ServiceWidgetMapper(self.userService)
 		for service in self.getServices(content):
 			widgets.append(serviceMapper.getWidget(service))
 

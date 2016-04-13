@@ -27,6 +27,8 @@ channel.queue_bind(exchange='services',
 
 def getServices(body, userId):
     userService = UserService(userServiceApi+"?format=json&agencyId="+agencyId+"&userId="+str(userId))
+    print(" [x] Loading user service "+userServiceApi+"?format=json&agencyId="+agencyId+"&userId="+str(userId))
+
     box = BlackBox(serviceApi, userService)
     services = box.getWidgets(body)
     for service in services:
@@ -45,12 +47,12 @@ def reply(ch, method, props, body):
 def on_request(ch, method, props, body):
     user_id = props.headers['user_id'] if 'user_id' in props.headers else 0
 
+    msg = json.loads(body)['message'] 
+
+    print(" [x] Message %r" % msg)
     print(" [x] User ID %r" % int(user_id))
 
-    if body == "!special_keyword!":
-        response = ""
-    else:
-        response = getServices(body, user_id)
+    response = getServices(msg, user_id)
 
     # REPLY BACK TO THE CLIENT
     if len(response) > 0:
