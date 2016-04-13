@@ -272,11 +272,8 @@ def post_userfields(request):
 
     fields = request.data['fields']
 
-    user.userfield_set.all().delete()
-    user.save()
-
     for field in fields:
-        fDic = ast.literal_eval(field)
+        fDic = field
 
         # delete the field
         user.userfield_set.filter(field_id=fDic['id']).delete()
