@@ -270,7 +270,7 @@ def post_userfields(request):
     userId = request.data['userId']
     user = User.objects.get(id=userId)
 
-    fields = request.data.getlist('fields')
+    fields = request.data['fields']
 
     user.userfield_set.all().delete()
     user.save()
