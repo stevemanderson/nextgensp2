@@ -19,9 +19,9 @@ angular.module('nextgensp2')
     // Subscribe to the users dashboard update channel
     // http://127.0.0.1:15674/stomp
 
-    $stomp.setDebug(function (args) {
+    /*$stomp.setDebug(function (args) {
       $log.debug(args)
-    })
+    })*/
 
     $stomp
       .connect('http://localhost:15674/stomp', {login:"test",passcode:"test"} )
@@ -73,19 +73,14 @@ angular.module('nextgensp2')
 
     //Send the search text msg to the queue
     $scope.$on('searchText', function(event, text) {
-        console.log("Send > "+text);
-        $stomp.send('/exchange/services', text
-        , {
+        $stomp.send('/exchange/services', {
+          message: text
+        }, {
           priority: 9,
           custom: 42, // Custom Headers
           'reply-to':'123456'
         })
     });
-
-
-    "!special_keyword!"
-
-
 
 
     function outputSTOMP(data){
