@@ -39,7 +39,8 @@ SET default_with_oids = false;
 
 CREATE TABLE api_agency (
     id integer NOT NULL,
-    name character varying(30) NOT NULL
+    name character varying(60) NOT NULL,
+    abbr character varying(30)
 );
 
 
@@ -701,16 +702,17 @@ ALTER TABLE ONLY django_migrations ALTER COLUMN id SET DEFAULT nextval('django_m
 -- Data for Name: api_agency; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY api_agency (id, name) FROM stdin;
-1	DTMR
-2	QPS
-3	DAF
-4	DCCSDS
-5	DNSPR
-6	DJAG
-7	DNRM
-8	DHPW
-9	QT
+COPY api_agency (id, name, abbr) FROM stdin;
+1	Transport and main roads	DTMR
+2	Queensland Police Service	QPS
+3	Department of Agriculture and Food	DAF
+4	Department of Communities	DCCSDS
+5	Department of National Parks, Sports and Recreation	DNSPR
+6	DJAGDepartment of Justice and Attorney General	DJAG
+7	Department of Education	DJAG
+8	Department of Natural Resource Management	DNRM
+9	Queensland Treasury	QT
+10	Department of Housing and Public Works	DHPW
 \.
 
 
@@ -718,7 +720,7 @@ COPY api_agency (id, name) FROM stdin;
 -- Name: api_agency_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('api_agency_id_seq', 9, true);
+SELECT pg_catalog.setval('api_agency_id_seq', 10, true);
 
 
 --
@@ -1024,6 +1026,8 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 24	api	0009_userfield	2016-04-06 05:26:58.364778+00
 25	api	0010_userfield_value	2016-04-06 05:37:59.694743+00
 26	api	0011_useragency	2016-04-07 03:49:06.549969+00
+27	api	0012_agency_abbr	2016-04-13 01:59:52.019658+00
+28	api	0013_auto_20160413_0202	2016-04-13 02:02:47.669163+00
 \.
 
 
@@ -1031,7 +1035,7 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('django_migrations_id_seq', 26, true);
+SELECT pg_catalog.setval('django_migrations_id_seq', 28, true);
 
 
 --

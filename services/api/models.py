@@ -468,7 +468,8 @@ class Handler:
 
 # DJANGO models
 class Agency(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=60)
+    abbr = models.CharField(max_length=30, null=True)
 
 class FieldCategory(models.Model):
     name = models.CharField(max_length=30)
