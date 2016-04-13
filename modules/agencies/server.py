@@ -4,6 +4,7 @@ import sys
 import time
 import json
 from blackbox import BlackBox
+from services import UserService
 
 url = sys.argv[1:4] or ''
 
@@ -25,7 +26,8 @@ channel.queue_bind(exchange='services',
                    queue=result.method.queue)
 
 def getServices(body, userId):
-    box = BlackBox(serviceApi, userServiceApi+"?format=json&agencyId="+agencyId+"&userId="+str(userId))
+    userService = UserService(userServiceApi+"?format=json&agencyId="+agencyId+"&userId="+str(userId))
+    box = BlackBox(serviceApi, userService)
     services = box.getWidgets(body)
     for service in services:
         service["AgencyID"] = agencyId

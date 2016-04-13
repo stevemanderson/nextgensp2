@@ -34,6 +34,7 @@ class ServiceWidgetMapper:
 			as4590Fields = map(lambda x: x.strip().lower(), as4590.split(','))
 
 		fields = customFields + as4590Fields
+
 		userFields = map(lambda x: x.strip().lower(), user['fields'])
 
 		missing = filter(lambda x: x.strip().lower() not in userFields, fields)

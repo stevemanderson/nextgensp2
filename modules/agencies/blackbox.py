@@ -5,11 +5,9 @@ from widgetmappers import *
 
 # This is the blackbox for police agency
 class BlackBox:
-	responseData = None
-
-	def __init__(self, apiUrl, userServiceApi):
+	def __init__(self, apiUrl, userService):
 		self.apiUrl = apiUrl
-		self.userServiceApi = userServiceApi
+		self.userService = userService
 		self.responseData = None
 
 	def getServices(self, content):
@@ -24,6 +22,8 @@ class BlackBox:
 
 		services = []
 
+		print("[x] Loading services for %r" %self.apiUrl)
+
 		for i in self.getContent():
 			triggers = map(lambda x: x.strip().lower(), i['triggers'].split(','))
 			related = filter(lambda x: x in triggers, words)
@@ -37,7 +37,7 @@ class BlackBox:
 		widgets = []
 		
 		#get all the services
-		serviceMapper = ServiceWidgetMapper(UserService(self.userServiceApi))
+		serviceMapper = ServiceWidgetMapper(userService)
 		for service in self.getServices(content):
 			widgets.append(serviceMapper.getWidget(service))
 
@@ -47,11 +47,11 @@ class BlackBox:
 		return self.__getJsonResponse__(self.apiUrl, '')
 
 	def setResponseData(self, content):
-		BlackBox.responseData = json.loads(content)
+		self.responseData = json.loads(content)
 
 	def __getJsonResponse__(self, u, d):
-		if BlackBox.responseData != None:
-			return BlackBox.responseData
+		if self.responseData != None:
+			return self.responseData
 		r = requests.get(u, data=d)
 		self.setResponseData(r.text)
-		return BlackBox.responseData
+		return self.responseData
