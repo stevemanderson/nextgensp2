@@ -702,8 +702,15 @@ ALTER TABLE ONLY django_migrations ALTER COLUMN id SET DEFAULT nextval('django_m
 --
 
 COPY api_agency (id, name) FROM stdin;
-1	Police
-2	TMR
+1	DTMR
+2	QPS
+3	DAF
+4	DCCSDS
+5	DNSPR
+6	DJAG
+7	DNRM
+8	DHPW
+9	QT
 \.
 
 
@@ -711,7 +718,7 @@ COPY api_agency (id, name) FROM stdin;
 -- Name: api_agency_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('api_agency_id_seq', 2, true);
+SELECT pg_catalog.setval('api_agency_id_seq', 9, true);
 
 
 --
