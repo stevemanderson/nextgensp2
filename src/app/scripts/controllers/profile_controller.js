@@ -205,8 +205,8 @@ angular.module('nextgensp2')
       var data = {"userId":$scope.userData._userID,"fields":[{"id":14,"value": $scope.licenceNumber}]};
       sp2Profile.profile_postUserFields(data).then(function(response) {
                 
-                sp2Service.userLoggedIn($scope.userData._userID, $scope.userData._userName);
-               
+              sp2Service.userLoggedIn($scope.userData._userID, $scope.userData._userName);
+               $scope.showAdd=false;
                 
             }, function() {
                 console.log("error getting updateUserAgencies");

@@ -69,6 +69,12 @@ angular.module('nextgensp2')
         msgData[i].processed = false;
         msgData[i].showAction = true;
         msgData[i].loading = false;
+
+        //Check if "Apply"
+        var title = msgData[i].Data.Title;
+        if(title.indexOf("Apply")>-1){
+          msgData[i].Data.ButtonText="Apply";
+        }
         $scope.widgetData.unshift(msgData[i]);
       }
     }
