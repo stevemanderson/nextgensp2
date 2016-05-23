@@ -45,7 +45,7 @@ class TestUserService:
 			return ""
 
 class blackboxTests(unittest.TestCase):
-	apiUrl = "http://mstrong.info/api/views/dtmr_personalised_service.json"
+	apiUrl = "http://54.206.25.141/api/views/dtmr_personalised_service.json"
 
 	def test_apiConnection(self):
 		box = BlackBox(blackboxTests.apiUrl, TestUserService('anonymous'))
@@ -97,7 +97,7 @@ class blackboxTests(unittest.TestCase):
 
 	def test_testWithCamping(self):
 		userService = TestUserService('allfields')
-		box = BlackBox("http://mstrong.info/api/views/dnspr.json", userService)
+		box = BlackBox("http://54.206.25.141/api/views/dnspr.json", userService)
 		services = box.getServices("camping")
 
 if __name__ == '__main__':
