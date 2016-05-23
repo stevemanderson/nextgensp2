@@ -16,7 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DEFAULT_SERVICE_EMAIL = 'sanderson@liquidinteractive.com.au'
-DRUPAL_API = 'http://54.206.25.141/api/views/queries_family_.json'
+DRUPAL_API = 'http://54.206.52.78/api/views/queries_family_.json'
 GMAIL_CONFIG = '/home/steve/Projects/conf/10td'
 SESSION_EMAIL_TEMPLATE  = BASE_DIR+'/templates/session_template.html'
 TEMP_FOLDER  = BASE_DIR+'/temp'
